@@ -2,6 +2,11 @@ import { useState } from 'react';
 import validateRegister from '../validators/validateRegister';
 import InputErrorMessage from './InputErrorMessage';
 import RegisterInput from './RegisterInput';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { registerAsync } from '../slice/authSlice';
+
+// import useAuth from
 
 const initialInput = {
     firstName: '',
@@ -15,15 +20,25 @@ export default function RegisterForm() {
     const [input, setInput] = useState(initialInput);
     const [error, setError] = useState({});
 
+    const dispatch = useDispatch();
+
     const handleChangeInput = (e) =>
         setInput({ ...input, [e.target.name]: e.target.value });
 
-    const handleSubmitForm = (e) => {
-        e.preventDefault();
-        const result = validateRegister(input); // ปั้นจาก validateRegister.js ไห้ส่งแค่ error เมื่อมี
-        // console.log(result);
-        if (result) {
-            return setError(result);
+    const handleSubmitForm = async (e) => {
+        try {
+            e.preventDefault();
+            const result = validateRegister(input); // ปั้นจาก validateRegister.js ไห้ส่งแค่ error เมื่อมี
+            console.log(input);
+            if (result) {
+                return setError(result);
+            }
+            setError({});
+            await dispatch(registerAsync(input)).unwrap(); // รอทำเส็จค่อยทำข้างล่างต่อ
+            toast.success('register successfully');
+            onSuccess();
+        } catch (err) {
+            toast.error('Error');
         }
     };
 
