@@ -14,13 +14,26 @@ export default function Button() {
                     <h3 className="text-lg font-bold">Create your Event</h3>
                     <form className="flex flex-col gap-5">
                         <div>
+                            <h1>Title</h1>
                             <input type="text" />
                         </div>
-                        <input type="text" />
-                        <input type="text" />
-                        <input type="text" />
-                        <input type="text" />
-                        <input type="text" />
+                        <div>
+                            <h1>Description</h1>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <h1>Location</h1>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <input type="text" />
+                        </div>
                     </form>
                 </div>
                 <label className="modal-backdrop" htmlFor="my_modal_7">
