@@ -25,8 +25,8 @@ export default function EventBar({ event }) {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    {event.map((el) => (
-                        <li>
+                    {event.map((el, index) => (
+                        <li key={index}>
                             <a>{el}</a>
                         </li>
                     ))}
