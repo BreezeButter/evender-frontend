@@ -1,4 +1,4 @@
-import createClasses from '../../../utils/create-classes';
+import createClasses from '../../../utils/createClasses';
 
 export default function RegisterInput({
     placeholder,

@@ -1,5 +1,5 @@
-import backgroundImage from '../assets/people-2557396_1280.jpg';
-import backgroundImage01 from '../assets/people-2295052_1280.jpg';
+import backgroundImage from '../assets/photo-1607962837359-5e7e89f86776.avif';
+import backgroundImage01 from '../assets/photo-1540539234-c14a20fb7c7b.avif';
 import RegisterForm from '../features/auth/components/RegisterForm';
 
 export default function RegisterPage() {
@@ -9,36 +9,10 @@ export default function RegisterPage() {
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
             <div className="flex justify-between  p-0 border-0 text-xl w-2/4 bg-white rounded-lg mx-auto overflow-hidden">
-                <div className="p-10">
-                    <div className="flex flex-col font-bold p-4">
-                        Create new account.
-                    </div>
-                    <div className="flex flex-col font-light text-xs p-2">
-                        Already A Member?
-                    </div>
-                    <div className=" grid grid-cols-2">
-                        <div className="p-1">
-                            <RegisterForm />
-                        </div>
-                        <div className="p-1">
-                            <RegisterForm />
-                        </div>
-                    </div>
-                    <div className="p-1">
-                        <RegisterForm />
-                    </div>
-                    <div className="p-1">
-                        <RegisterForm />
-                    </div>
-                    <div className="p-3 text-center">
-                        <button className="btn btn-neutral p-3 rounded-3xl">
-                            Create account
-                        </button>
-                    </div>
-                </div>
+                <RegisterForm />
 
                 <div
-                    className=" w-3/6 bg-cover"
+                    className=" w-3/6 bg-cover bg-center"
                     style={{ backgroundImage: `url(${backgroundImage01})` }}
                 ></div>
             </div>
