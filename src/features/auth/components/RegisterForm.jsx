@@ -5,6 +5,8 @@ import RegisterInput from './RegisterInput';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { registerAsync } from '../slice/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // import useAuth from
 
@@ -35,6 +37,7 @@ export default function RegisterForm() {
             }
             setError({});
             await dispatch(registerAsync(input)).unwrap(); // รอทำเส็จค่อยทำข้างล่างต่อ
+            navigate('/home');
             toast.success('register successfully');
             onSuccess();
         } catch (err) {
@@ -49,7 +52,7 @@ export default function RegisterForm() {
                     Create new account.
                 </div>
                 <div className="flex flex-col font-light text-xs p-2">
-                    Already A Member?
+                    <Link to="/home">Already A Member?</Link>
                 </div>
                 <div className=" grid grid-cols-2">
                     <div className="p-1">
@@ -72,7 +75,7 @@ export default function RegisterForm() {
                             onchange={handleChangeInput}
                             isInvalid={error.lastName}
                         />
-                        {error.firstName && (
+                        {error.lastName && (
                             <InputErrorMessage message={error.lastName} />
                         )}
                     </div>
@@ -85,9 +88,7 @@ export default function RegisterForm() {
                         onchange={handleChangeInput}
                         isInvalid={error.email}
                     />
-                    {error.firstName && (
-                        <InputErrorMessage message={error.email} />
-                    )}
+                    {error.email && <InputErrorMessage message={error.email} />}
                 </div>
                 <div className="p-1">
                     <RegisterInput
@@ -97,7 +98,7 @@ export default function RegisterForm() {
                         onchange={handleChangeInput}
                         isInvalid={error.password}
                     />
-                    {error.firstName && (
+                    {error.password && (
                         <InputErrorMessage message={error.password} />
                     )}
                 </div>
@@ -109,7 +110,7 @@ export default function RegisterForm() {
                         onchange={handleChangeInput}
                         isInvalid={error.confirmPassword}
                     />
-                    {error.firstName && (
+                    {error.confirmPassword && (
                         <InputErrorMessage message={error.confirmPassword} />
                     )}
                 </div>
