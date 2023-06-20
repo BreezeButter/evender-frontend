@@ -11,9 +11,9 @@ import SearchContainer from "../features/searchEvent/components/SearchContainer"
 export default function SearchPage() {
 
   const dispatch = useDispatch()
-  const eventCategory = [{ name: "all", id: 1 },{ name: " bar", id: 2 },{name:"sport", id:3 },{name:"restaurant", id:4 },{ name:"cafe", id:5 },{name:"lifestyle", id:6} ]
+  const eventCategory = [{ name: "all", id: 1 }, { name: " bar", id: 2 }, { name: "sport", id: 3 }, { name: "restaurant", id: 4 }, { name: "cafe", id: 5 }, { name: "lifestyle", id: 6 }]
   const categoryEvent = useSelector(state => state.search.event)
-  console.log(categoryEvent)
+  console.log('--->', categoryEvent)
 
   const initialValue = 1
 
@@ -31,10 +31,18 @@ export default function SearchPage() {
     <div>
       <EventBar event={eventCategory} setSelected={setSelected} />
       <div className="flex flex-col gap-5 ">
-        <SearchContainer/>
-        <SearchContainer />
-        <SearchContainer />
-        <SearchContainer />
+        {categoryEvent.map((el) => {
+          console.log(el.JoinEventUsers)
+          return <SearchContainer
+            key={el.id}
+            title={el.title}
+            location={el.location}
+            image1={el.image1}
+            description={el.description}
+            dateStart={el.dateStart}
+            joinEventUsers={el.JoinEventUsers}
+          />
+        })}
       </div>
     </div>
   )
