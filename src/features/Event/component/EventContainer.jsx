@@ -18,7 +18,7 @@ export default function EventContainer({
                 <h1 className="text-xl font-semibold">{title}</h1>
                 <div className="flex gap-5">
                     <div className="flex">
-                        {joinEventUser.map((el) => (
+                        {joinEventUser?.map((el) => (
                             <img
                                 key={el.id}
                                 src={el.User.image}

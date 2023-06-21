@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Container from '../layouts/Container';
 import Landing from '../page/Landing';
 import EventPage from '../page/EventPage';
+import Chat from '../components/Chat';
 
 const router = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <EventPage />,
+            },
+            {
+                path: '/chat',
+                element: <Chat />,
             },
         ],
     },
