@@ -9,7 +9,8 @@ export default {
                 'darkbluecute': '#111441',
                 'redcute': '#FF5050',
                 'orangecute': '#FF9840',
-                'violetcute': '#A200FF'
+                'violetcute': '#A200FF',
+                'whitebg': '#f0f2f5'
             },
         },
     },

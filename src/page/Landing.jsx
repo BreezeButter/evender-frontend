@@ -1,11 +1,11 @@
-import landingbg from '../assets/landingbg.jpg';
-import landingsection3 from '../assets/landingsection3.png';
+import landingbg from "../assets/landingbg.jpg";
+import landingsection3 from "../assets/landingsection3.png";
 
 export default function Landing() {
     return (
         <div>
             {/* Section 1 */}
-            <div className='w-full relative"'>
+            <div className="w-full relative   border-t-2 border-lightbluecute">
                 <img
                     src={landingbg}
                     alt=""
