@@ -2,7 +2,17 @@
 export default {
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'darkgraycute': '#1e2022',
+                'lightbluecute': '#004DFF',
+                'darkbluecute': '#111441',
+                'redcute': '#FF5050',
+                'orangecute': '#FF9840',
+                'violetcute': '#A200FF',
+                'whitebg': '#f0f2f5'
+            },
+        },
     },
     daisyui: {
         themes: [
