@@ -8,6 +8,11 @@ import ProfileUser from "../page/ProfileUser";
 // import EventPage from '../page/EventPage';
 // import { Search } from 'react-router-dom';
 import SearchPage from "../page/SearchPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Container from "../layouts/Container";
+// import Landing from '../page/Landing';
+import RegisterPage from "../page/RegisterPage";
+import LoginPage from "../page/LoginPage";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +34,16 @@ const router = createBrowserRouter([
             {
                 path: "/landing",
                 element: <Landing />,
+                path: "/",
+                element: <RegisterPage />,
+            },
+            {
+                path: "/login",
+                element: (
+                    // <RedirectIfLogin>
+                    <LoginPage />
+                    // </RedirectIfLogin>
+                ),
             },
         ],
     },
