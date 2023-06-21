@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import CreateNewEventContainer from '../features/Event/component/CreateNewEventContainer';
-import EventBar from '../features/Event/component/EventBar';
+// import EventBar from '../features/Event/component/EventBar';
 import EventContainer from '../features/Event/component/EventContainer';
 import Header from '../features/Event/component/Header';
 import NextEventContainer from '../features/Event/component/NextEventContainer';
