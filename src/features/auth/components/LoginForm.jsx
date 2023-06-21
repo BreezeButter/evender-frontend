@@ -6,11 +6,10 @@ import { toast } from 'react-toastify';
 import { login } from '../slice/authSlice';
 import useForm from '../../../hooks/useForm';
 import RegisterInput from './RegisterInput';
-import { useNavigate } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 
 export default function LoginForm() {
-    const navigate = useNavigate();
     const { input, handleChangeInput, error, handleSubmitForm } = useForm(
         {
             email: '',
@@ -24,8 +23,6 @@ export default function LoginForm() {
     const onSubmit = async (data) => {
         try {
             await dispatch(login(data)).unwrap();
-            navigate('/home');
-            // toast.success('login success');
         } catch (err) {
             toast.error('invalid email');
         }

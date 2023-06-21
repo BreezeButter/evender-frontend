@@ -1,6 +1,8 @@
 import {createSlice ,createAsyncThunk} from '@reduxjs/toolkit'
 import * as authService from '../../../api/auth-api'
 import { removeAccessToken, setAccessToken } from '../../../utils/localstorage';
+import { toast } from 'react-toastify';
+// import { useNavigate } from 'react-router-dom';
 
 const initialState = {
     isAuthenticated: false,
@@ -9,6 +11,7 @@ const initialState = {
     user:null,
     initialLoading:false
 };
+// const navigate = useNavigate();
 
 export const registerAsync = createAsyncThunk(
     'auth/registerAsync', 
@@ -37,6 +40,7 @@ export const login = createAsyncThunk('auth/login',async (input,thunkApi) =>{
 
     }catch(err){
 
+        return thunkApi.rejectWithValue(err.response.data.message);
     }
 })
 
@@ -85,11 +89,17 @@ const authSlice = createSlice({
     .addCase(login.fulfilled, (state,action) =>{
         state.isAuthenticated = true;
         state.user = action.payload;
+        toast.success('login success');
+            // navigate('/home');
+           
+
     }).addCase(fetchMe.fulfilled,(state,action) => {
     
         state.isAuthenticated = true;
         state.user = action.payload;
         state.initialLoading = false
+        
+
     }).addCase(fetchMe.rejected,(state,action)=>{
 
         state.error = action.payload;
