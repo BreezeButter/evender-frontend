@@ -1,34 +1,35 @@
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3000');
-
+const socket = io.connect('http://localhost:8888');
 export default function Chat() {
-    const eventId = 1;
-    const joinUserId = [1, 2, 3];
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const [currentRoom, setCurrentRoom] = useState('room1'); // Set the initial room
+    const [currentRoom, setCurrentRoom] = useState(''); // Set the initial room
 
     useEffect(() => {
+        socket.auth = { id: 'user01' };
+
+        socket.connect();
         // Listen for incoming messages
-        socket.on('chat message', (message) => {
+
+        socket.on('receiveMessage', (message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
         });
-
         // Clean up the socket connection on unmount
         return () => {
             socket.disconnect();
         };
     }, []);
-
     const joinRoom = (room) => {
         setCurrentRoom(room);
-        socket.emit('join room', room);
+        socket.emit('join_room', room);
     };
 
     const sendMessage = () => {
-        socket.emit('chat message', { room: currentRoom, message });
+        socket.emit('sendMessage', { room: currentRoom, message });
+        setMessages((prevMessages) => [...prevMessages, message]);
+
         setMessage('');
     };
 
@@ -37,7 +38,6 @@ export default function Chat() {
             <h1>Current Room: {currentRoom}</h1>
             <button onClick={() => joinRoom('room1')}>Join Room 1</button>
             <button onClick={() => joinRoom('room2')}>Join Room 2</button>
-            <button>Addroom</button>
 
             <ul>
                 {messages.map((msg, index) => (
