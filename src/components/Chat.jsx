@@ -4,7 +4,8 @@ import { io } from 'socket.io-client';
 const socket = io('http://localhost:3000');
 
 export default function Chat() {
-    const id = 1;
+    const eventId = 1;
+    const joinUserId = [1, 2, 3];
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [currentRoom, setCurrentRoom] = useState('room1'); // Set the initial room
