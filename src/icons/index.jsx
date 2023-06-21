@@ -79,6 +79,26 @@ export function LocationPin(props) {
         </svg>
     );
 }
+export function SearchIcon2(props) {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+            width="22px"
+            height="22px"
+        >
+            <path
+                d="M15 15l6 6m-11-4a7 7 0 110-14 7 7 0 010 14z"
+                stroke="#111441"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+}
 
 export function ClockIcon(props) {
     return (
@@ -89,15 +109,78 @@ export function ClockIcon(props) {
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >
+            <g fill="none" stroke="#757575"></g>
+        </svg>
+    );
+}
+export function UserIcon2(props) {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+            width="24px"
+            height="24px"
+        >
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M8 9a4 4 0 118 0 4 4 0 01-8 0zm7.824 4.623a6 6 0 10-7.649 0C4.986 14.746 3 17.247 3 20a1 1 0 102 0c0-2.27 2.355-5 7-5s7 2.73 7 5a1 1 0 102 0c0-2.753-1.984-5.254-5.176-6.377z"
+                fill="#111441"
+            />
+        </svg>
+    );
+}
+
+export function MessageIcon2(props) {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            transform="scale(-1 1)"
+            {...props}
+            width="21px"
+            height="21px"
+        >
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M4 3a1 1 0 00-1 1v11a1 1 0 001 1h3a1 1 0 011 1v2.865l4.36-3.633A1 1 0 0113 16h7a1 1 0 001-1V4a1 1 0 00-1-1H4zM1 4a3 3 0 013-3h16a3 3 0 013 3v11a3 3 0 01-3 3h-6.638L7.64 22.768A1 1 0 016 22v-4H4a3 3 0 01-3-3V4z"
+                fill="#111441"
+            />
+        </svg>
+    );
+}
+
+export function SignOutIcon(props) {
+    return (
+        <svg
+            fill="#000"
+            viewBox="0 0 24 24"
+            data-name="Flat Line"
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon flat-line"
+            {...props}
+            width="17px"
+            height="17px"
+        >
             <g
                 fill="none"
-                stroke="#757575"
+                stroke="#000"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
             >
                 <path d="M11.9 5.9L11.9 11.9 12 12 14.1 14.1" />
                 <circle cx={12} cy={12} data-name="Circle" r={10} />
+                <path d="M18 9L21 12 18 15" />
+                <path data-name="primary" d="M21 12L7 12" />
+                <path
+                    data-name="primary"
+                    d="M14 16v3a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h9a1 1 0 011 1v3"
+                />
             </g>
         </svg>
     );
