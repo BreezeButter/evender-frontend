@@ -1,5 +1,6 @@
 import landingbg from "../assets/landingbg.jpg";
 import landingsection3 from "../assets/landingsection3.png";
+import { Link } from "react-router-dom";
 
 export default function Landing() {
     return (
@@ -31,9 +32,11 @@ export default function Landing() {
                         <p className="text-lg font-semibold text-gray-100 mt-10">
                             —sign up to join the fun.
                         </p>
-                        <button className="w-40 py-3.5 rounded-full font-medium text-lg text-white bg-lightbluecute hover:bg-white hover:text-lightbluecute mt-16">
-                            Get started
-                        </button>
+                        <Link to="/register">
+                            <button className="w-40 py-3.5 rounded-full font-medium text-lg text-white bg-lightbluecute hover:bg-white hover:text-lightbluecute mt-16">
+                                Get started
+                            </button>
+                        </Link>
                     </div>
                 </div>
 
