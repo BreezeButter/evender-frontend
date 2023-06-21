@@ -1,3 +1,3 @@
 import axios from './axios'
 
-export const updateProfileUser = (id, input) => axios.patch('/profileuser', input, id)
+export const updateProfileUser = (input) => axios.patch('/profileuser', input)
