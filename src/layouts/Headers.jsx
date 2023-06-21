@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { SearchIcon2, UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
 export default function Headers() {
     return (
-        <div className="navbar  text-textnav ">
+        <div className="navbar text-darkbluecute">
             <div className="navbar-start">
                 <Link
                     to="/"
