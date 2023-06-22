@@ -44,9 +44,9 @@ const router = createBrowserRouter([
     {
         path: "/evender",
         element: (
-            <ProtectedRoute>
-                <Container />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <Container />
+            // </ProtectedRoute>
         ),
         children: [
             {
@@ -73,20 +73,20 @@ const router = createBrowserRouter([
                 path: "search",
                 element: <SearchPage />,
             },
-            {
-                path: "admin",
-                element: (
-                    <ProtectedRoute>
-                        <AdminPage />
-                    </ProtectedRoute>
-                ),
-                // children: [
-                //     {
-                //         path: "manageuser",
-                //         // element: <AdminManageUser/>,
-                //     },
-                // ],
-            },
+            // {
+            //     path: "admin",
+            //     element: (
+            //         <ProtectedRoute>
+            //             <AdminPage />
+            //         </ProtectedRoute>
+            //     ),
+            //     children: [
+            //         {
+            //             path: "manageuser",
+            //             // element: <AdminManageUser/>,
+            //         },
+            //     ],
+            // },
         ],
     },
 ]);
