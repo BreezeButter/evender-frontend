@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import CreateNewEventContainer from '../features/Event/component/CreateNewEventContainer';
-import EventBar from '../features/Event/component/EventBar';
-import EventContainer from '../features/Event/component/EventContainer';
-import Header from '../features/Event/component/Header';
-import NextEventContainer from '../features/Event/component/NextEventContainer';
-import { useEffect } from 'react';
-import { getAllEventsAsync } from '../features/Event/slice/eventSlice';
+import { useDispatch, useSelector } from "react-redux";
+import CreateNewEventContainer from "../features/Event/component/CreateNewEventContainer";
+// import EventBar from '../features/Event/component/EventBar';
+import EventContainer from "../features/Event/component/EventContainer";
+import Header from "../features/Event/component/Header";
+import NextEventContainer from "../features/Event/component/NextEventContainer";
+import { useEffect } from "react";
+import { getAllEventsAsync } from "../features/Event/slice/eventSlice";
 
 export default function EventPage() {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function EventPage() {
     useEffect(() => {
         dispatch(getAllEventsAsync());
     }, []);
-    console.log(events);
+    // console.log(events);
     return (
         <>
             <Header title="Events" />

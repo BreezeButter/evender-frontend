@@ -1,4 +1,4 @@
-export default function EventBar({ event }) {
+export default function EventBar({ event, setSelected }) {
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -25,9 +25,9 @@ export default function EventBar({ event }) {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    {event.map((el, index) => (
-                        <li key={index}>
-                            <a>{el}</a>
+                    {event.map((el,idx) => (
+                        <li key={idx} >
+                            <a onClick={()=> setSelected(el.id)}>{el.name}</a>
                         </li>
                     ))}
 

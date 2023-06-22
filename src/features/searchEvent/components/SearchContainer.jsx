@@ -1,14 +1,19 @@
-import { convertDate } from "../../../utils/dateUtil";
-export default function EventContainer({
+import {convertDate} from '../../../utils/dateUtil'
+
+export default function SearchContainer({
     title,
     location,
     image1,
     description,
-    joinEventUser,
+    joinEventUsers,
     dateStart,
 }) {
     const [date, time] = convertDate(dateStart);
 
+    console.log(
+        joinEventUsers
+        )
+    
     return (
         <div className="flex max-w-[800px] border border-blue-800 rounded-md p-3 gap-4">
             <div className="flex flex-col gap-3">
@@ -18,14 +23,14 @@ export default function EventContainer({
                 <h1 className="text-xl font-semibold">{title}</h1>
                 <div className="flex gap-5">
                     <div className="flex">
-                        {joinEventUser?.map((el) => (
+                        {/* {joinEventUsers.map((el) => (
                             <img
                                 key={el.id}
                                 src={el.User.image}
                                 alt=""
                                 className="w-10 h-10 bg-slate-500 rounded-full -mr-2"
                             />
-                        ))}
+                        ))} */}
                     </div>
                     <div className="border border-black h-fit my-auto rounded-md">
                         43/53
