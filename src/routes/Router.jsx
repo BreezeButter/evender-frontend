@@ -57,10 +57,10 @@ const router = createBrowserRouter([
                 path: "eventdetails/:id",
                 // element: <EventDetails />,
             },
-            {
-                path: "chat",
-                element: <Chat />,
-            },
+            // {
+            //     path: "chat",
+            //     element: <Chat />,
+            // },
             {
                 path: "profile/:id",
                 element: <ProfileUser />,
