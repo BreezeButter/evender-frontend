@@ -4,6 +4,8 @@ import RegisterPage from "../page/RegisterPage";
 // import RedirectIfAuthenticated from "../features/auth/components/RedirectIfAuthenticated";
 import ProtectedRoute from "../features/auth/components/ProtectedRoute";
 import Container from "../layouts/Container";
+// import Container from "../layouts/Container";
+import EditProfile from "../page/EditProfile";
 import Landing from "../page/Landing";
 import EventPage from "../page/EventPage";
 import SearchPage from "../page/SearchPage";
@@ -13,6 +15,11 @@ import EditProfile from "../page/EditProfile";
 import AdminPage from "../page/AdminPage";
 import HeadersGuest from "../layouts/HeadersGuest";
 import Footer from "../layouts/Footer";
+// import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Container from "../layouts/Container";
+// import Landing from '../page/Landing';
+import RegisterPage from "../page/RegisterPage";
+import LoginPage from "../page/LoginPage";
 
 const router = createBrowserRouter([
     {

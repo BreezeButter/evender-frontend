@@ -1,19 +1,22 @@
-import InputErrorMessage from './InputErrorMessage';
-import { useDispatch } from 'react-redux';
+import InputErrorMessage from "./InputErrorMessage";
+import { useDispatch } from "react-redux";
 // import { useState } from 'react';
-import validateLogin from '../validators/validateLogin';
-import { toast } from 'react-toastify';
-import { login } from '../slice/authSlice';
-import useForm from '../../../hooks/useForm';
-import RegisterInput from './RegisterInput';
+import validateLogin from "../validators/validateLogin";
+import { toast } from "react-toastify";
+import { login, loginGoogle } from "../slice/authSlice";
+import useForm from "../../../hooks/useForm";
+import RegisterInput from "./RegisterInput";
+import Google from "../../../assets/Google_2015_logo.svg.png";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle } from "reactjs-social-login";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
     const { input, handleChangeInput, error, handleSubmitForm } = useForm(
         {
-            email: '',
-            password: '',
+            email: "",
+            password: "",
         },
         validateLogin
     );
@@ -24,9 +27,17 @@ export default function LoginForm() {
         try {
             await dispatch(login(data)).unwrap();
         } catch (err) {
-            toast.error('invalid email');
+            toast.error("invalid email");
         }
     };
+    // const onSubmitGoogle = async (googleData) => {
+    //     try {
+    //         console.log(googleData);
+    //         // await dispatch(login()).unwrap();
+    //     } catch (err) {
+    //         // toast.error("invalid email");
+    //     }
+    // };
 
     return (
         <form onSubmit={handleSubmitForm(onSubmit)}>
@@ -63,6 +74,35 @@ export default function LoginForm() {
                     <button className="btn btn-neutral p-3 rounded-3xl">
                         Log in
                     </button>
+                    <hr className="p-4 mt-4" />
+                    {/* <div
+                        className="bg-white border border-black w-4/5 h-10 rounded-full"
+                        role="button"
+                    >
+                        <img
+                            src={Google}
+                            alt=""
+                            className="bg-cover p-4  h-10 m-auto"
+                        />
+                    </div> */}
+                    <div>
+                        <LoginSocialGoogle
+                            client_id={
+                                "825684636726-i1p3qeu0pjlh1na0nngj5fqitg0h35ou.apps.googleusercontent.com"
+                            }
+                            scope="openid profile email"
+                            discoveryDocs="claims_supported"
+                            access_type="offline"
+                            onResolve={({ provider, data }) => {
+                                dispatch(loginGoogle(data)).unwrap();
+                            }}
+                            onReject={(err) => {
+                                console.log(err);
+                            }}
+                        >
+                            <GoogleLoginButton />
+                        </LoginSocialGoogle>
+                    </div>
                 </div>
             </div>
         </form>

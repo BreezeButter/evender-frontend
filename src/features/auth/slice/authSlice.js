@@ -31,8 +31,22 @@ export const registerAsync = createAsyncThunk(
 
 export const login = createAsyncThunk('auth/login',async (input,thunkApi) =>{
     try{
-        // console.log('--->',input)
+        // console.log('GGGG--->',input)
         const res = await authService.login(input);
+        setAccessToken(res.data.accessToken);
+        const resFetchMe = await authService.fetchMe()
+        console.log('ssadsadasd',resFetchMe)
+        return resFetchMe.data.user
+
+    }catch(err){
+
+        return thunkApi.rejectWithValue(err.response.data.message);
+    }
+})
+export const loginGoogle = createAsyncThunk('auth/loginGoogle',async (input,thunkApi) =>{
+    try{
+        console.log('GGGG--->',input)
+        const res = await authService.loginGoogle({ email:input.email, firstName:input.given_name,lastName:input.family_name,image:input.picture });
         setAccessToken(res.data.accessToken);
         const resFetchMe = await authService.fetchMe()
         console.log('ssadsadasd',resFetchMe)
@@ -107,7 +121,24 @@ const authSlice = createSlice({
     })
     .addCase(fetchMe.pending,state=>{
         state.initialLoading = true
-    })
+    }).
+addCase(loginGoogle.fulfilled,(state,action) => {
+    
+    state.isAuthenticated = true;
+    state.user = action.payload;
+    state.initialLoading = false
+    
+
+}).addCase(loginGoogle.rejected,(state,action)=>{
+
+    state.error = action.payload;
+    state.initialLoading = false
+})
+.addCase(loginGoogle.pending,state=>{
+    state.initialLoading = true
+})
+    
+
 })
 
 export default authSlice.reducer;
