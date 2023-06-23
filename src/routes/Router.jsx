@@ -13,6 +13,7 @@ import EditProfile from "../page/EditProfile";
 import AdminPage from "../page/AdminPage";
 import HeadersGuest from "../layouts/HeadersGuest";
 import Footer from "../layouts/Footer";
+import EventDetailPage from "../page/EventDetailPage";
 
 const router = createBrowserRouter([
     {
@@ -44,9 +45,9 @@ const router = createBrowserRouter([
     {
         path: "/evender",
         element: (
-            <ProtectedRoute>
-                <Container />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <Container />
+            // </ProtectedRoute>
         ),
         children: [
             {
@@ -54,8 +55,8 @@ const router = createBrowserRouter([
                 element: <EventPage />,
             },
             {
-                path: "eventdetails/:id",
-                // element: <EventDetails />,
+                path: "eventdetail/:id",
+                element: <EventDetailPage />,
             },
             {
                 path: "chat",
@@ -73,20 +74,20 @@ const router = createBrowserRouter([
                 path: "search",
                 element: <SearchPage />,
             },
-            {
-                path: "admin",
-                element: (
-                    <ProtectedRoute>
-                        <AdminPage />
-                    </ProtectedRoute>
-                ),
-                // children: [
-                //     {
-                //         path: "manageuser",
-                //         // element: <AdminManageUser/>,
-                //     },
-                // ],
-            },
+            // {
+            //     path: "admin",
+            //     element: (
+            //         <ProtectedRoute>
+            //             <AdminPage />
+            //         </ProtectedRoute>
+            //     ),
+            //     // children: [
+            //     //     {
+            //     //         path: "manageuser",
+            //     //         // element: <AdminManageUser/>,
+            //     //     },
+            //     // ],
+            // },
         ],
     },
 ]);

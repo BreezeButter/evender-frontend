@@ -24,7 +24,7 @@ export default function CarouselDetail({ eventDetail }) {
                         />
                     </div>
                     <div
-                        id="item2"
+                        id="item3"
                         className="carousel-item w-[1000px] rounded-2xl"
                     >
                         <img
@@ -42,7 +42,7 @@ export default function CarouselDetail({ eventDetail }) {
                     <a href="#item2" className="btn btn-xs">
                         2
                     </a>
-                    <a href="#item2" className="btn btn-xs">
+                    <a href="#item3" className="btn btn-xs">
                         3
                     </a>
                 </div>

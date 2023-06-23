@@ -1,22 +1,21 @@
-import { useParams } from 'react-router-dom';
-import CardMemberEvent from '../features/DetailEvent/component/CardMemberEvent';
-import CarouselDetail from '../features/DetailEvent/component/CarouselDetail';
-import DetailEvent from '../features/DetailEvent/component/DetailEvent';
-import HostDetailEvent from '../features/DetailEvent/component/HostDetailEvent';
-import LocationDetailEvent from '../features/DetailEvent/component/LocationDetailEvent';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
+import CardMemberEvent from "../features/DetailEvent/component/CardMemberEvent";
+import CarouselDetail from "../features/DetailEvent/component/CarouselDetail";
+import DetailEvent from "../features/DetailEvent/component/DetailEvent";
+import HostDetailEvent from "../features/DetailEvent/component/HostDetailEvent";
+import LocationDetailEvent from "../features/DetailEvent/component/LocationDetailEvent";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
     getEventUserDetail,
     getUserHostEvent,
-} from '../features/DetailEvent/slice/eventDetailSlice';
+} from "../features/DetailEvent/slice/eventDetailSlice";
 
 export default function EventDetailPage() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const eventDetail = useSelector((state) => state.eventDetail.event);
     const hostDetail = useSelector((state) => state.eventDetail.hostEvent);
-    console.log(eventDetail, 'hellooooooooooooooooooo', id);
 
     useEffect(() => {
         console.log(id);
@@ -49,7 +48,7 @@ export default function EventDetailPage() {
 
                     <CardMemberEvent eventDetail={eventDetail} />
                 </div>
-                <LocationDetailEvent />
+                <LocationDetailEvent eventDetail={eventDetail} />
             </div>
         </div>
     );

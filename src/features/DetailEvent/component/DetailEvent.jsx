@@ -2,7 +2,7 @@ export default function DetailEvent({ eventDetail }) {
     return (
         <>
             <div>
-                <h1 className="font-semibold text-3xl">Details</h1>
+                <h1 className="font-semibold text-3xl">{eventDetail.title}</h1>
             </div>
 
             <div>

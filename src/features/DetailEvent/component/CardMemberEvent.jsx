@@ -1,9 +1,9 @@
-import ModalUserEvent from './ModalUserEvent';
+import ModalUserEvent from "./ModalUserEvent";
 
 export default function CardMemberEvent({ eventDetail }) {
     // console.log(eventDetail);
     const joinEventUsersFourPeople = eventDetail.JoinEventUsers?.slice(0, 4);
-    console.log(joinEventUsersFourPeople, 'aaaaaaaaaaaaaaaaaaaaaa');
+
     return (
         <>
             <div className="border-2 rounded-xl p-4  flex flex-col gap-4 mt-10">
@@ -15,7 +15,7 @@ export default function CardMemberEvent({ eventDetail }) {
                         role="button"
                         className="hover:text-[#004DFF]"
                     >
-                        View all{'>'}
+                        View all{">"}
                     </label>
                     <ModalUserEvent eventDetail={eventDetail} />
                 </div>
