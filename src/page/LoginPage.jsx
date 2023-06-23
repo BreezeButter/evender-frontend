@@ -2,9 +2,6 @@ import backgroundImage from "../assets/photo-1607962837359-5e7e89f86776.avif";
 import backgroundImage01 from "../assets/photo-1540539234-c14a20fb7c7b.avif";
 // import RegisterForm from '../features/auth/components/RegisterForm';
 import LoginForm from "../features/auth/components/LoginForm";
-import { useEffect, useState } from "react";
-import jwt_decode from "jwt-decode";
-import { GoogleLogin } from "react-google-login";
 
 export default function LoginPage() {
     return (

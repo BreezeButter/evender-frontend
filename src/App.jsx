@@ -6,7 +6,7 @@ function App() {
         <div>
             <Router />
             <ToastContainer
-                position="Right-center"
+                position="top-right"
                 theme="dark"
                 autoClose={3000}
             />
