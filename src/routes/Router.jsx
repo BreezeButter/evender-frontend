@@ -20,6 +20,7 @@ import Container from "../layouts/Container";
 // import Landing from '../page/Landing';
 import RegisterPage from "../page/RegisterPage";
 import LoginPage from "../page/LoginPage";
+import EventDetailPage from "../page/EventDetailPage";
 
 const router = createBrowserRouter([
     {
@@ -61,8 +62,8 @@ const router = createBrowserRouter([
                 element: <EventPage />,
             },
             {
-                path: "eventdetails/:id",
-                // element: <EventDetails />,
+                path: "eventdetail/:id",
+                element: <EventDetailPage />,
             },
             {
                 path: "chat",
@@ -87,12 +88,12 @@ const router = createBrowserRouter([
             //             <AdminPage />
             //         </ProtectedRoute>
             //     ),
-            //     children: [
-            //         {
-            //             path: "manageuser",
-            //             // element: <AdminManageUser/>,
-            //         },
-            //     ],
+            //     // children: [
+            //     //     {
+            //     //         path: "manageuser",
+            //     //         // element: <AdminManageUser/>,
+            //     //     },
+            //     // ],
             // },
         ],
     },
