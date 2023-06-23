@@ -103,7 +103,6 @@ const router = createBrowserRouter([
         ),
         children: [
             {
-<<<<<<< HEAD
                 path: "dashboardmanagement",
                 element: <Dashboardmanagement />,
             },
@@ -118,20 +117,6 @@ const router = createBrowserRouter([
             {
                 path: "purchasemanagement",
                 element: <Purchasecoinsmanagement />,
-=======
-                path: "admin",
-                element: (
-                    // <ProtectedRoute>
-                    <AdminPage />
-                    // </ProtectedRoute>
-                ),
-                // children: [
-                //     {
-                //         path: "manageuser",
-                //         // element: <AdminManageUser/>,
-                //     },
-                // ],
->>>>>>> develop
             },
         ],
     },
