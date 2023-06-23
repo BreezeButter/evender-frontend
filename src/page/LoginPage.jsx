@@ -1,7 +1,7 @@
-import backgroundImage from '../assets/photo-1607962837359-5e7e89f86776.avif';
-import backgroundImage01 from '../assets/photo-1540539234-c14a20fb7c7b.avif';
+import backgroundImage from "../assets/photo-1607962837359-5e7e89f86776.avif";
+import backgroundImage01 from "../assets/photo-1540539234-c14a20fb7c7b.avif";
 // import RegisterForm from '../features/auth/components/RegisterForm';
-import LoginForm from '../features/auth/components/LoginForm';
+import LoginForm from "../features/auth/components/LoginForm";
 
 export default function LoginPage() {
     return (

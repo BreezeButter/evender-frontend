@@ -14,39 +14,31 @@ export default function Dashboardmanagement() {
                     <div className="flex flex-col w-full gap-4 mt-4 pl-8 pr-8">
                         <button
                             className="btn btn-active btn-base-200 rounded-full"
-                            onClick={() => navigate("/")}
+                            onClick={() =>
+                                navigate("/admin/dashboardmanagement")
+                            }
                         >
                             Dashboard
                         </button>
                         <button
                             className="btn btn-active btn-base-200 rounded-full"
-                            onClick={() => navigate("/managementevent")}
+                            onClick={() => navigate("/admin/eventmanagement")}
                         >
                             Event
                         </button>
                         <button
                             className="btn btn-active btn-base-200 rounded-full"
-                            onClick={() => navigate("/managementuser")}
+                            onClick={() => navigate("/admin/usermanagement")}
                         >
                             User
                         </button>
                         <button
                             className="btn btn-active btn-base-200 rounded-full"
-                            onClick={() => navigate("/managementsample1")}
+                            onClick={() =>
+                                navigate("/admin/purchasemanagement")
+                            }
                         >
-                            Sample-1
-                        </button>
-                        <button
-                            className="btn btn-active btn-base-200 rounded-full"
-                            onClick={() => navigate("/managementsample2")}
-                        >
-                            Sample-2
-                        </button>
-                        <button
-                            className="btn btn-active btn-base-200 rounded-full"
-                            onClick={() => navigate("/adminlogin")}
-                        >
-                            Logout
+                            Purchase
                         </button>
                     </div>
                     <div>

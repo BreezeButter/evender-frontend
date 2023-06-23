@@ -16,6 +16,7 @@ import Usermanagement from "../page/Manageuserpage";
 import Eventmanagement from "../page/Manageeventpage";
 import Dashboardmanagement from "../page/Managedashboard";
 import { Outlet } from "react-router-dom/dist";
+import Purchasecoinsmanagement from "../page/Managepurchasecoinspage";
 
 const router = createBrowserRouter([
     {
@@ -77,18 +78,16 @@ const router = createBrowserRouter([
                 element: <SearchPage />,
             },
             // {
-            //     path: "admin",
-            //     element: (
-            //         <ProtectedRoute>
-            //             <Dashboardmanagement />
-            //         </ProtectedRoute>
-            //     ),
-            // children: [
-            //     {
-            //         path: "manageuser",
-            //         // element: <AdminManageUser/>,
-            //     },
-            // ],
+            //     path: "dashboardmanagement",
+            //     element: <Dashboardmanagement />,
+            // },
+            // {
+            //     path: "usermanagement",
+            //     element: <Usermanagement />,
+            // },
+            // {
+            //     path: "eventmanagement",
+            //     element: <Eventmanagement />,
             // },
         ],
     },
@@ -96,9 +95,9 @@ const router = createBrowserRouter([
         path: "/admin",
         element: (
             <>
-                <HeadersGuest />
-                <Outlet />
-                <Footer />
+                {/* <HeadersGuest /> */}
+                <Container />
+                {/* <Footer /> */}
             </>
         ),
         children: [
@@ -113,6 +112,10 @@ const router = createBrowserRouter([
             {
                 path: "eventmanagement",
                 element: <Eventmanagement />,
+            },
+            {
+                path: "purchasemanagement",
+                element: <Purchasecoinsmanagement />,
             },
         ],
     },
