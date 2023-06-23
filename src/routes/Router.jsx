@@ -44,9 +44,9 @@ const router = createBrowserRouter([
     {
         path: "/evender",
         element: (
-            <ProtectedRoute>
-                <Container />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            // </ProtectedRoute>
+            <Container />
         ),
         children: [
             {
@@ -57,10 +57,10 @@ const router = createBrowserRouter([
                 path: "eventdetails/:id",
                 // element: <EventDetails />,
             },
-            // {
-            //     path: "chat",
-            //     element: <Chat />,
-            // },
+            {
+                path: "chat/:id",
+                element: <Chat />,
+            },
             {
                 path: "profile/:id",
                 element: <ProfileUser />,
@@ -76,9 +76,9 @@ const router = createBrowserRouter([
             {
                 path: "admin",
                 element: (
-                    <ProtectedRoute>
-                        <AdminPage />
-                    </ProtectedRoute>
+                    // <ProtectedRoute>
+                    <AdminPage />
+                    // </ProtectedRoute>
                 ),
                 // children: [
                 //     {

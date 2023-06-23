@@ -14,8 +14,8 @@ export const editProfileUser = createAsyncThunk(
     "user/editProfileUser",
     async (input, thunkApi) => {
         try {
-            await profileUserService.editProfileUser(input)
-            return input;
+            const res = await profileUserService.updateUser(input)
+            return res.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data)
         }
@@ -26,17 +26,20 @@ export const editProfileUser = createAsyncThunk(
 const userSlice = createSlice({
     name: "profileUser",
     initialState,
+    reducers: {
+        updateProfileImage: (state, action) => {
+            state.user.profileImage = action.payload
+        }
+    },
     extraReducers: (builder) =>
         builder
-            .addCase(editProfileUser.fulfilled, (state, action) => {
-                const idx = state.data.findIndex((el) => el.id === action.payload.id)
-                state.data[idx] = action.payload
-                state.loading = false
-            })
             .addCase(editProfileUser.pending, (state) => {
-                state.error = null
                 state.loading = true
+            })
+            .addCase(editProfileUser.fulfilled, (state, action) => {
+                state.loading = false
             })
 })
 
 export default userSlice.reducer
+export const { updateProfileImage } = userSlice.actions
