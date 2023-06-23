@@ -1,6 +1,43 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMe } from "../features/auth/slice/authSlice";
 
 export default function ProfileUser() {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
+
+    useEffect(() => {
+        let isCancel = false;
+        dispatch(fetchMe())
+            .unwrap()
+            .catch((err) => {
+                if (!isCancel) toast.error(err.message);
+            });
+        return () => {
+            isCancel = true;
+        };
+    }, []);
+
+    function calculateAge(birthdate) {
+        console.log(birthdate);
+        const today = new Date();
+        const birthdateObj = new Date(birthdate);
+
+        let age = today.getFullYear() - birthdateObj.getFullYear();
+
+        if (
+            today.getMonth() < birthdateObj.getMonth() ||
+            (today.getMonth() === birthdateObj.getMonth() &&
+                today.getDate() < birthdateObj.getDate())
+        ) {
+            age -= 1;
+        }
+
+        return age;
+    }
+
     return (
         <div className="flex justify-center mt-10">
             <div className="w-[65%] ">
@@ -13,30 +50,34 @@ export default function ProfileUser() {
                 <div className="flex flex-row justify-between mb-28">
                     {/* Left */}
                     <div className="avatar">
-                        <div className="w-72 rounded-full">
-                            <img
-                                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80"
-                                className=""
-                            />
+                        <div className="w-72 h-72 rounded-full">
+                            <img src={user?.image} className="" />
                         </div>
                     </div>
 
                     {/* Right */}
                     <div className="w-[63%] pl-28 border-l border-gray-300 pt-6">
                         <div className="flex flex-row">
-                            <p className="pr-10 font-semibold text-4xl">
-                                Lorem Ipsum
+                            <p className="pr-4 font-semibold text-4xl">
+                                {user?.firstName} {user?.lastName}
                             </p>
                             <p className="pt-3 ml-8 text-gray-400">#Username</p>
                         </div>
                         <p className="w-[70%] mt-8 font-light">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            {user?.aboutMe}
                         </p>
-                        <p className="mt-14 text-lg font-medium">Female</p>
+                        <p className="mt-14 text-lg font-medium">
+                            {user?.gender}
+                        </p>
                         <div className="flex flex-row justify-between mt-4">
-                            <p className="text-lg font-medium">24 years old</p>
-                            <Link to="/editprofile">
+                            {user?.bdate ? (
+                                <p className="text-lg font-medium">
+                                    {calculateAge(user?.bdate)}
+                                </p>
+                            ) : (
+                                <p></p>
+                            )}
+                            <Link to={`/evender/editprofile/${user?.id}`}>
                                 <p className="underline cursor-pointer font-normal text-gray-500 hover:text-darkgraycute pr-10">
                                     Edit
                                 </p>

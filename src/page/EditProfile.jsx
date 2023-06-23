@@ -1,6 +1,71 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editProfileUser } from "../features/ProfileUser/slice/profileUserSlice";
+// import { toast } from "react-toastify";
+import { fetchMe } from "../features/auth/slice/authSlice";
+// import { updateProfileImage as updateProfile } from "../features/ProfileUser/slice/profileUserSlice";
+// import * as userService from "../api/profileUserApi";
 
 export default function EditProfile() {
+    const [image, setImage] = useState(null);
+    const [showImage, setShowImage] = useState(null);
+    // const [isLoading, setIsLoading] = useState(false);
+    const user = useSelector((state) => state.auth.user);
+
+    console.log(user);
+
+    const initialInput = {
+        firstName: "",
+        lastName: "",
+        gender: "",
+        bdate: "",
+        aboutMe: "",
+    };
+    // const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [input, setInput] = useState(initialInput);
+
+    const hdlUpdate = async (e) => {
+        try {
+            e.preventDefault();
+            console.log(input, image);
+            const formData = new FormData();
+            for (let key in input) {
+                formData.append(key, input[key]);
+            }
+            if (image) {
+                formData.append("image", image);
+            }
+
+            dispatch(editProfileUser(formData));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        dispatch(fetchMe());
+    }, []);
+    useEffect(() => {
+        console.log(user);
+        if (user) {
+            setInput({
+                firstName: user?.firstName,
+                lastName: user?.lastName,
+                gender: user?.gender,
+                bdate: user?.bdate,
+                aboutMe: user?.aboutMe,
+            });
+            setShowImage(user?.image);
+        }
+    }, [user]);
+
+    // useEffect(() => {
+    //     setInput(user);
+    // }, [user]);
+
     return (
         <div className="flex justify-center mt-10">
             <div className="w-[65%] ">
@@ -12,16 +77,31 @@ export default function EditProfile() {
                 </div>
 
                 {/* User */}
-                <form>
+                <form onSubmit={hdlUpdate}>
                     <div className="flex flex-row justify-between mb-28">
                         {/* Left */}
-                        <div className="avatar">
-                            <div className="w-72 h-72 rounded-full">
-                                <img
-                                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80"
-                                    className=""
-                                />
-                            </div>
+
+                        <div className="w-72 h-72 rounded-full">
+                            <img
+                                src={showImage}
+                                // onChange={(e) =>
+                                //     setInput({
+                                //         ...input,
+                                //         image: e.target.value,
+                                //     })
+                                // }
+                                className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                            />
+                            <input
+                                type="file"
+                                className="w-72 mt-8 opacity-75"
+                                onChange={(e) => {
+                                    setImage(e.target.files[0]);
+                                    setShowImage(
+                                        URL.createObjectURL(e.target.files[0])
+                                    );
+                                }}
+                            />
                         </div>
 
                         {/* Right */}
@@ -38,6 +118,13 @@ export default function EditProfile() {
                                             type="text"
                                             placeholder="First Name"
                                             className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
+                                            value={input?.firstName}
+                                            onChange={(e) =>
+                                                setInput({
+                                                    ...input,
+                                                    firstName: e.target.value,
+                                                })
+                                            }
                                         />
                                     </div>
                                     <div className="form-control w-full max-w-xs">
@@ -49,11 +136,20 @@ export default function EditProfile() {
                                         <select
                                             id="gender"
                                             className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
+                                            value={input?.gender}
+                                            onChange={(e) =>
+                                                setInput({
+                                                    ...input,
+                                                    gender: e.target.value,
+                                                })
+                                            }
                                         >
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                            <option value="3">Other</option>
-                                            <option value="4">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">
+                                                Female
+                                            </option>
+                                            <option value="Other">Other</option>
+                                            <option value="Not Specified">
                                                 Not Specified
                                             </option>
                                         </select>
@@ -68,6 +164,13 @@ export default function EditProfile() {
                                             type="text"
                                             placeholder="Last Name"
                                             className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
+                                            value={input?.lastName}
+                                            onChange={(e) =>
+                                                setInput({
+                                                    ...input,
+                                                    lastName: e.target.value,
+                                                })
+                                            }
                                         />
                                     </div>
                                     <div className="form-control w-full max-w-xs">
@@ -78,8 +181,16 @@ export default function EditProfile() {
                                         </label>
                                         <input
                                             type="date"
-                                            placeholder="First Name"
+                                            placeholder="Birthday"
                                             className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
+                                            value={input?.bdate}
+                                            onChange={(e) => {
+                                                console.log(e.target.value);
+                                                return setInput({
+                                                    ...input,
+                                                    bdate: e.target.value,
+                                                });
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -94,17 +205,24 @@ export default function EditProfile() {
                                         rows="5"
                                         name="description"
                                         placeholder="About me..."
+                                        value={input?.aboutMe}
+                                        onChange={(e) =>
+                                            setInput({
+                                                ...input,
+                                                aboutMe: e.target.value,
+                                            })
+                                        }
                                     />
                                 </div>
                                 <div className="flex justify-center gap-4 mt-16">
-                                    <Link to="/profile">
-                                        <button
-                                            type="submit"
-                                            className="w-32 py-2 rounded-full bg-transparent border-lightbluecute border-2 font-medium text-base text-lightbluecute"
-                                        >
-                                            Save
-                                        </button>
-                                    </Link>
+                                    <button
+                                        // onClick={hdlUpdate}
+                                        type="submit"
+                                        className="w-32 py-2 rounded-full bg-transparent border-lightbluecute border-2 font-medium text-base text-lightbluecute"
+                                    >
+                                        Save
+                                    </button>
+
                                     <Link to="/profile">
                                         <button className="w-32 py-2 rounded-full font-medium text-base text-white bg-lightbluecute border-2 border-lightbluecute hover:border-lightbluecute hover:bg-transparent hover:text-lightbluecute">
                                             Cancel
@@ -119,191 +237,3 @@ export default function EditProfile() {
         </div>
     );
 }
-
-// import { useState, useRef, useEffect } from "react";
-// import RegisterInput from "../../auth/components/RegisterInput";
-// import { useDispatch } from "react-redux";
-// import { toast } from 'react-toastify';
-// import { createProduct } from '../../product/components/slice/product-slice'
-// import { useSelector } from "react-redux";
-
-// export default function AdminProduct() {
-
-//     const [input, setInput] = useState('');
-//     const [file, setFile] = useState(null)
-
-// const imageUrl = URL.createObjectURL(file)
-// const defaultImage = '/src/assets/cat-card.jpg'
-// const imgElement = document.createElement('img');
-// if (imageUrl) {
-//     imgElement.src = imageUrl;
-//   } else {
-//     imgElement.src = defaultImage;
-//   }
-//     const inputRef = useRef("")
-
-//     console.log(file)
-
-//     const dispatch = useDispatch();
-
-//     const handleChangeInput = (e) => {
-//         setInput({ ...input, [e.target.name]: e.target.value });
-
-//     };
-
-//     console.log(input)
-
-//     const hdlCreateProduct = async (e) => {
-
-//         e.preventDefault();
-
-//         const formData = new FormData();
-//         if (file) {
-//             formData.append("image1", file);
-//         }
-//         if (input.productName) {
-//             formData.append("productName", input.productName);
-//         }
-//         if (input.brand) {
-//             formData.append("brand", input.brand);
-//         }
-//         if (input.price) {
-//             formData.append("price", input.price);
-//         }
-//         if (input.productWeight) {
-//             formData.append("productWeight", input.productWeight);
-//         }
-//         if (input.petAge) {
-//             formData.append("petAge", input.petAge);
-//         }
-//         if (input.detail) {
-//             formData.append("detail", input.detail);
-//         }
-//         if (input.petType) {
-//             formData.append("petType", input.petType);
-//         }
-//         if (input.foodType) {
-//             formData.append("foodType", input.foodType);
-//         }
-//         if (input.productType) {
-//             formData.append("productType", input.productType);
-//         }
-
-//         try {
-//             dispatch(createProduct(formData));
-
-//         } catch (err) {
-//             toast.error('Payment Error')
-//         }
-//     }
-
-//     return (
-//         <div className="grid grid-cols-1">
-//             <div>
-//                 <form onSubmit={hdlCreateProduct}>
-//                     <div>
-//                         <div>
-//                             <div className="avatar">
-//                                 {/* <div className="w-[400px] rounded-xl"> */}
-//                                 {/* <img src={  imageUrl || defaultImage  } /> */}
-//                                 {/* </div> */}
-//                             </div>
-//                         </div>
-//                     </div>
-//                     <div className="grid grid-cols-2 gap-5">
-//                         <RegisterInput
-//                             name="productName"
-//                             placeholder="productName"
-//                             value={input.productName}
-//                             onChange={handleChangeInput}
-
-//                         // isInvalid={error.userName}
-//                         />
-//                         <RegisterInput
-//                             name="brand"
-//                             placeholder="brand"
-//                             value={input.brand}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.firstName}
-//                         />
-//                         <RegisterInput
-//                             name="price"
-//                             placeholder="price"
-//                             value={input.price}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.lastName}
-//                         />
-//                         <RegisterInput
-//                             name="productType"
-//                             placeholder="productType"
-//                             value={input.productType}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.email}
-//                         />
-//                         <RegisterInput
-//                             name="productWeight"
-//                             placeholder="productWeight"
-//                             value={input.productWeight}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.password }
-//                         />
-//                         <RegisterInput
-//                             name="petAge"
-//                             placeholder="petAge"
-//                             value={input.petAge}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.userName}
-//                         />
-//                         <RegisterInput
-//                             name="detail"
-//                             placeholder="detail"
-//                             value={input.detail}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.firstName}
-//                         />
-//                         <RegisterInput
-//                             name="petType"
-//                             placeholder="petType"
-//                             value={input.petType}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.firstName}
-//                         />
-//                         <RegisterInput
-//                             name="foodType"
-//                             placeholder="foodType"
-//                             value={input.foodType}
-//                             onChange={handleChangeInput}
-//                         // isInvalid={error.firstName}
-//                         />
-//                     </div>
-//                     <div>
-//                         <div className="avatar m-12">
-//                             <label className="block">
-//                                 <span className="sr-only">Choose photo</span>
-//                                 <input type="file"
-//                                     ref={inputRef}
-//                                     onChange={e => {
-//                                         if (e.target.files[0]) {
-//                                             setFile(e.target.files[0])
-//                                         }
-//                                     }}
-
-//                                     className="block w-full text-sm text-slate-500
-//                                               file:mr-4 file:py-2 file:px-4
-//                                              file:rounded-full file:border-0
-//                                             file:text-sm file:font-semibold
-//                                              file:bg-violet-50 file:text-violet-700
-//                                                  hover:file:bg-violet-100
-//                                                 "
-//                                 />
-//                             </label>
-//                         </div>
-//                     </div>
-//                     <div>
-//                         <button type="submit" className="btn btn-primary flex items-center mx-auto">Create Product</button>
-//                     </div>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// }
