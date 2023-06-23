@@ -1,15 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-    body {
-        background-color: #f0f2f5;
-        font-family: "Work Sans", sans-serif;
-    }
-}
 
 .App {
     text-align: center;

@@ -2,8 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "../page/LoginPage";
 import RegisterPage from "../page/RegisterPage";
 // import RedirectIfAuthenticated from "../features/auth/components/RedirectIfAuthenticated";
-import ProtectedRoute from "../features/auth/components/ProtectedRoute";
 import Container from "../layouts/Container";
+// import Container from "../layouts/Container";
+import EditProfile from "../page/EditProfile";
 import Landing from "../page/Landing";
 import EventPage from "../page/EventPage";
 import SearchPage from "../page/SearchPage";
@@ -48,9 +49,9 @@ const router = createBrowserRouter([
     {
         path: "/evender",
         element: (
-            <ProtectedRoute>
-                <Container />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            // </ProtectedRoute>
+            <Container />
         ),
         children: [
             {
@@ -58,11 +59,11 @@ const router = createBrowserRouter([
                 element: <EventPage />,
             },
             {
-                path: "eventdetails/:id",
-                // element: <EventDetails />,
+                path: "eventdetail/:id",
+                element: <EventDetailPage />,
             },
             {
-                path: "chat",
+                path: "chat/:id",
                 element: <Chat />,
             },
             {
@@ -102,6 +103,7 @@ const router = createBrowserRouter([
         ),
         children: [
             {
+<<<<<<< HEAD
                 path: "dashboardmanagement",
                 element: <Dashboardmanagement />,
             },
@@ -116,6 +118,20 @@ const router = createBrowserRouter([
             {
                 path: "purchasemanagement",
                 element: <Purchasecoinsmanagement />,
+=======
+                path: "admin",
+                element: (
+                    // <ProtectedRoute>
+                    <AdminPage />
+                    // </ProtectedRoute>
+                ),
+                // children: [
+                //     {
+                //         path: "manageuser",
+                //         // element: <AdminManageUser/>,
+                //     },
+                // ],
+>>>>>>> develop
             },
         ],
     },
