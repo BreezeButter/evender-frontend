@@ -1,5 +1,5 @@
 import { LeftIcon } from "../icons";
-import Footer from "../layouts/Footer";
+// import Footer from "../layouts/Footer";
 import Headers from "../layouts/Headers";
 
 export default function Chat() {

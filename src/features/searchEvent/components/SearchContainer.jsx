@@ -1,4 +1,4 @@
-import {convertDate} from '../../../utils/dateUtil'
+import { convertDate } from '../../../utils/dateUtil'
 
 export default function SearchContainer({
     title,
@@ -10,10 +10,7 @@ export default function SearchContainer({
 }) {
     const [date, time] = convertDate(dateStart);
 
-    console.log(
-        joinEventUsers
-        )
-    
+
     return (
         <div className="flex max-w-[800px] border border-blue-800 rounded-md p-3 gap-4">
             <div className="flex flex-col gap-3">

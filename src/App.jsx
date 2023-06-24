@@ -6,9 +6,16 @@ function App() {
         <div>
             <Router />
             <ToastContainer
-                position="top-right"
-                theme="dark"
-                autoClose={3000}
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
             />
         </div>
     );
