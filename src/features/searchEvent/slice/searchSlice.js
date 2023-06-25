@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as eventSearchService from "../../../api/searchApi";
 
 const initialState = {
-    event: [],
     placeLoad: [],
     eventFilter: [],
     loading: false,
@@ -25,7 +24,12 @@ export const syncEventSearch = createAsyncThunk(
     "search/syncEventAll",
     async (input, thunkApi) => {
         try {
-            const res = await eventSearchService.getSearchAll(input);
+            const modifiedInput =
+                input.placeProvince === "All"
+                    ? { ...input, placeProvince: undefined }
+                    : input;
+
+            const res = await eventSearchService.getSearchAll(modifiedInput);
             return res.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data);
@@ -43,7 +47,8 @@ const searchSlice = createSlice({
             })
             .addCase(syncEventSearch.fulfilled, (state, action) => {
                 state.loading = false;
-                state.event = action.payload;
+                state.eventFilter = action.payload;
+                console.log(action.payload, "action.payload");
             })
             .addCase(syncEventSearch.rejected, (state, action) => {
                 state.error = action.payload;

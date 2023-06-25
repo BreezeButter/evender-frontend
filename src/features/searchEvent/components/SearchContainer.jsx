@@ -9,8 +9,6 @@ export default function SearchContainer({
     dateStart,
 }) {
     const [date, time] = convertDate(dateStart);
-
-
     return (
         <div className="flex max-w-[800px] border border-blue-800 rounded-md p-3 gap-4">
             <div className="flex flex-col gap-3">
