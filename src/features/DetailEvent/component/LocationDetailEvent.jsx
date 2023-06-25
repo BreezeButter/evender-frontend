@@ -12,7 +12,7 @@ export default function LocationDetailEvent({ eventDetail }) {
     const handleJointEvent = () => {
         try {
             dispatch(createJointEvent(id));
-            navigate("/evender/chat");
+            navigate(`/evender/chat/${id}`);
         } catch {
             toast.error("Room is Full");
         }
