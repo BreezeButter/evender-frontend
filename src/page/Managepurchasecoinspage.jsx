@@ -21,50 +21,55 @@ export default function Purchasecoinsmanagement() {
                                 <div>
                                     <p>35 COINS</p>
                                 </div>
-
-                                <button className="btn btn-success">
-                                    $0.99
-                                </button>
+                                <a href="https://buy.stripe.com/test_3cs6qp8TL1F63Ys3ce">
+                                    <button className="btn btn-success">
+                                        $0.99
+                                    </button>
+                                </a>
                             </div>
                             {/* 69 */}
                             <div className="flex justify-between w-72">
                                 <div>
                                     <p>69 COINS</p>
                                 </div>
-
-                                <button className="btn btn-success">
-                                    $1.99
-                                </button>
+                                <a href="https://buy.stripe.com/test_bIY6qpfi9abC9iMbIL">
+                                    <button className="btn btn-success">
+                                        $1.99
+                                    </button>
+                                </a>
                             </div>
                             {/* 99 */}
                             <div className="flex justify-between w-72">
                                 <div>
                                     <p>99 COINS</p>
                                 </div>
-
-                                <button className="btn btn-success">
-                                    $2.99
-                                </button>
+                                <a href="https://buy.stripe.com/test_aEUeWV9XPbfG9iM7sw">
+                                    <button className="btn btn-success">
+                                        $2.99
+                                    </button>
+                                </a>
                             </div>
                             {/* 149 */}
                             <div className="flex justify-between w-72">
                                 <div>
                                     <p>149 COINS</p>
                                 </div>
-
-                                <button className="btn btn-success">
-                                    $3.99
-                                </button>
+                                <a href="https://buy.stripe.com/test_9AQ9CBda1abC8eIeUZ">
+                                    <button className="btn btn-success">
+                                        $3.99
+                                    </button>
+                                </a>
                             </div>
                             {/* 349 */}
                             <div className="flex justify-between w-72">
                                 <div>
                                     <p>349 COINS</p>
                                 </div>
-
-                                <button className="btn btn-success">
-                                    $7.99
-                                </button>
+                                <a href="https://buy.stripe.com/test_cN29CB4DvfvW8eI28e">
+                                    <button className="btn btn-success">
+                                        $7.99
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>

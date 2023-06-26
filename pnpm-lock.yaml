@@ -8,6 +8,12 @@ dependencies:
   '@reduxjs/toolkit':
     specifier: ^1.9.5
     version: 1.9.5(react-redux@8.1.0)(react@18.2.0)
+  '@stripe/react-stripe-js':
+    specifier: ^2.1.1
+    version: 2.1.1(@stripe/stripe-js@1.54.1)(react-dom@18.2.0)(react@18.2.0)
+  '@stripe/stripe-js':
+    specifier: ^1.54.1
+    version: 1.54.1
   axios:
     specifier: ^1.4.0
     version: 1.4.0
@@ -698,6 +704,23 @@ packages:
 
   /@sideway/pinpoint@2.0.0:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
+    dev: false
+
+  /@stripe/react-stripe-js@2.1.1(@stripe/stripe-js@1.54.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-aHm6cWOqmOyq3eKKlR42hgvrcZhzc9ijL+BeXJ5H3uaWUKKcooSsBys0tiKl0gLxYQHUjUCvrRSX8fYaPBmAKg==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.44.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@stripe/stripe-js': 1.54.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@stripe/stripe-js@1.54.1:
+    resolution: {integrity: sha512-smEXPu1GKMcAj9g2luT16+oXfg2jAwyc68t2Dm5wdtYl3p8PqQaZEiI8tQmboaQAjgF8pIGma6byz1T1vgmpbA==}
     dev: false
 
   /@types/hoist-non-react-statics@3.3.1:
