@@ -19,7 +19,7 @@ export default function SearchPage() {
                         <SearchContainer
                             key={el.id}
                             title={el.title}
-                            location={el.location}
+                            placeProvince={el.placeProvince}
                             image1={el.image1}
                             description={el.description}
                             dateStart={el.dateStart}

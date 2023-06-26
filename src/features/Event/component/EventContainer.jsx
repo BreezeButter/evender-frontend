@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function EventContainer({
     title,
-    location,
+    placeProvince,
     image1,
     description,
     joinEventUser,
@@ -16,8 +16,9 @@ export default function EventContainer({
     const [date, time] = convertDate(dateStart);
 
     return (
-        <div className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer">
+        <div className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer"
             onClick={() => navigate(`/evender/eventDetail/${id}`)}>
+
             <div className="flex flex-col gap-3">
                 <p className="text-xs text-gray-500 font-medium">
                     {date} {time}
@@ -42,7 +43,7 @@ export default function EventContainer({
                     </div>
                 </div>
                 <h1 className="font-medium text-darkbluecute text-base mt-1.5">
-                    {location}
+                    {placeProvince}
                 </h1>
                 <div className=" overflow-hidden h-10">
                     <p className="max-w-[450px] text-sm font-light ">

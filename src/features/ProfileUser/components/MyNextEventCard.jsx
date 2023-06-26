@@ -2,7 +2,7 @@ import { convertDate } from "../../../utils/dateUtil";
 
 export default function MyNextEventCard({
     title,
-    location,
+    placeProvince,
     image1,
     description,
     dateStart,
@@ -23,7 +23,7 @@ export default function MyNextEventCard({
                             at
                         </p>
                         <p className="text-base font-normal text-darkbluecute">
-                            {location}
+                            {placeProvince}
                         </p>
                     </div>
                 </div>

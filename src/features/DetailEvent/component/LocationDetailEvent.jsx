@@ -2,23 +2,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { ClockIcon, LocationPin } from "../../../icons";
 import { createJointEvent } from "../slice/eventDetailSlice";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function LocationDetailEvent({ eventDetail }) {
     const { id } = eventDetail;
+    console.log(eventDetail, '------////')
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleJointEvent = () => {
         try {
             dispatch(createJointEvent(id));
-            navigate("/evender/chat");
+            navigate(`/evender/chat/${user.id}`);
         } catch {
             toast.error("Room is Full");
         }
     };
     const isAuthToRoom = useSelector((state) => state.eventDetail.isAuthToRoom);
-    console.log(id);
+    const user = useSelector((state) => state.auth.user);
+
+
     return (
         <>
             <div className="flex flex-col justify-center  gap-4 w-[25%] items-center mb-4">
@@ -48,7 +51,7 @@ export default function LocationDetailEvent({ eventDetail }) {
                 {isAuthToRoom ? (
                     <button
                         className="border-2 border-[#004DFF] text-[#004DFF] rounded-xl w-[60%] hover:bg-[#004DFF] hover:text-white"
-                        onClick={navigate("/evender/chat")}
+                        onClick={() => navigate(`/evender/chat/${eventDetail.id}`)}
                     >
                         Chat
                     </button>

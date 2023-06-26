@@ -1,7 +1,11 @@
 // import { useSelector } from "react-redux";
+// import { cloneUniforms } from "three";
 import ModalEditDetail from "../component/ModalEditDetail";
 
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
+
+
+    console.log(eventDetail, hostDetail, "------->")
 
     // const isHost = useSelector(state => state.auth.user.id)
     // console.log("isHost", isHost)
@@ -16,7 +20,7 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
             <div className="flex flex-col gap-4">
                 <div>
                     <h1 className="font-semibold text-3xl">
-                        {eventDetail.location}
+                        {eventDetail.placeProvince}
                     </h1>
                 </div>
                 <div className="flex items-center gap-4">
