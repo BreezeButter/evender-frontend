@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon2, UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from '../features/auth/slice/authSlice'
+
+
 export default function Headers() {
+
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.auth.user)
+    const navagate = useNavigate()
+
+
+    const hdlLogOut = () => {
+
+        dispatch(logout())
+    }
     return (
         <div className="navbar text-darkbluecute">
             <div className="navbar-start">
@@ -26,8 +40,8 @@ export default function Headers() {
                 </ul>
             </div>
             <div className="navbar-end gap-3 pr-2">
-                <SearchIcon2 className="cursor-pointer" />
-                <MessageIcon2 className="cursor-pointer" />
+                <SearchIcon2 className="cursor-pointer" onClick={() => navagate(`search`)} />
+                <MessageIcon2 className="cursor-pointer" onClick={() => navagate(`chat/${user?.id}`)} />
 
                 {/* Dropdown */}
                 <div className="dropdown dropdown-end">
@@ -41,24 +55,27 @@ export default function Headers() {
                         <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 pl-4">
                             <div className="avatar">
                                 <div className="w-16 h-16 rounded-full">
-                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80" />
+                                    <img src={user?.image} />
                                 </div>
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col"
+                                onClick={() => navagate(`profile/${user?.id}`)}>
                                 <h1 className="text-base font-normal">
-                                    p boom
+                                    {user?.firstName}
                                 </h1>
-                                <p className="font-light">pboom@mail.com</p>
-                                <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
+                                <p className="font-light">{user?.email}</p>
+                                <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute"
+                                    onClick={() => navagate(`editprofile/${user?.id}`)}>
                                     Edit profile
                                 </p>
                             </div>
                         </div>
                         <hr />
-                        <li className="mt-2 hover:font-medium">
-                            <a>
+                        <li className="mt-2 hover:font-medium"
+                        >
+                            <a onClick={hdlLogOut}>
                                 Sign out
-                                <SignOutIcon className=" opacity-50" />
+                                <SignOutIcon className="opacity-50" />
                             </a>
                         </li>
                     </ul>

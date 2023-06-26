@@ -7,6 +7,7 @@ import EventPage from "../page/EventPage";
 import SearchPage from "../page/SearchPage";
 import Chat from "../page/Chat";
 import ProfileUser from "../page/ProfileUser";
+<<<<<<< HEAD
 import HeadersGuest from "../layouts/HeadersGuest";
 import Footer from "../layouts/Footer";
 import Usermanagement from "../page/Manageuserpage";
@@ -14,6 +15,15 @@ import Eventmanagement from "../page/Manageeventpage";
 import Dashboardmanagement from "../page/Managedashboard";
 import { Outlet } from "react-router-dom/dist";
 import Purchasecoinsmanagement from "../page/Managepurchasecoinspage";
+=======
+import AdminPage from "../page/AdminPage";
+import HeadersGuest from "../layouts/HeadersGuest";
+import Footer from "../layouts/Footer";
+// import Landing from '../page/Landing';
+import EventDetailPage from "../page/EventDetailPage";
+import ProtectedRoute from "../features/auth/components/ProtectedRoute";
+
+>>>>>>> develop
 
 const router = createBrowserRouter([
     {
@@ -45,9 +55,9 @@ const router = createBrowserRouter([
     {
         path: "/evender",
         element: (
-            // <ProtectedRoute>
-            // </ProtectedRoute>
-            <Container />
+            <ProtectedRoute>
+                <Container />
+            </ProtectedRoute>
         ),
         children: [
             {
@@ -87,6 +97,7 @@ const router = createBrowserRouter([
         ),
         children: [
             {
+<<<<<<< HEAD
                 path: "dashboardmanagement",
                 element: <Dashboardmanagement />,
             },
@@ -101,6 +112,32 @@ const router = createBrowserRouter([
             {
                 path: "purchasemanagement",
                 element: <Purchasecoinsmanagement />,
+=======
+                path: "coin",
+                element: <SearchPage />,
+            },
+            {
+                path: "blog",
+                element: <SearchPage />,
+            },
+            {
+                path: "about us",
+                element: <SearchPage />,
+            },
+            {
+                path: "admin",
+                element: (
+                    // <ProtectedRoute>
+                    <AdminPage />
+                    // </ProtectedRoute>
+                ),
+                // children: [
+                //     {
+                //         path: "manageuser",
+                //         // element: <AdminManageUser/>,
+                //     },
+                // ],
+>>>>>>> develop
             },
         ],
     },

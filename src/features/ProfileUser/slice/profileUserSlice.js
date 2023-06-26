@@ -7,7 +7,8 @@ const initialState = {
     error: null,
     loading: false,
     user: null,
-    initialLoading: false
+    initialLoading: false,
+    hostEvent: [],
 }
 
 export const editProfileUser = createAsyncThunk(
@@ -22,6 +23,17 @@ export const editProfileUser = createAsyncThunk(
     }
 )
 
+export const getUserHostEvent = createAsyncThunk(
+    "user/getUserHostEvent",
+    async (input, thunkApi) => {
+        try {
+            const result = await profileUserService.getUserHostEventById(input);
+            return result.data;
+        } catch (err) {
+            return thunkApi.rejectWithValue(err.response.data);
+        }
+    }
+);
 
 const userSlice = createSlice({
     name: "profileUser",
@@ -39,6 +51,14 @@ const userSlice = createSlice({
             .addCase(editProfileUser.fulfilled, (state, action) => {
                 state.loading = false
             })
+            .addCase(getUserHostEvent.pending, (stage, action) => {
+                stage.loading = true;
+            })
+            .addCase(getUserHostEvent.fulfilled, (stage, action) => {
+                stage.hostEvent = action.payload;
+                stage.loading = false;
+            })
+
 })
 
 export default userSlice.reducer

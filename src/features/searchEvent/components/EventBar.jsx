@@ -1,53 +1,128 @@
-export default function EventBar({ event, setSelected }) {
+import Reset from "../../../icons";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { syncEventSearch, syncEventPlace } from "../slice/searchSlice";
+import Input from '../../Event/component/Input'
+import CurrentGeo from "./CurrentGeo";
+
+
+export default function EventBar() {
+
+    const initialValue = {
+        eventCategoryId: undefined,
+        dateStart: undefined,
+        dateEnd: undefined,
+        placeProvince: undefined,
+        box: undefined,
+    }
+
+    const eventCategory = [
+        { id: undefined, name: "All", emoji: "👋" },
+        { id: 1, name: "Bar", emoji: "🥂" },
+        { id: 2, name: "Sport", emoji: "🏈" },
+        { id: 3, name: "Resterant", emoji: "🍲" },
+        { id: 4, name: "Cafe", emoji: "☕" },
+        { id: 5, name: "LifeStyle", emoji: "🛍️" },
+    ];
+
+    const dispatch = useDispatch()
+    //placemaping recive from backend
+    const placeLoad = useSelector((state) => state.search.placeLoad);
+    const addAllPlaceLoad = [...placeLoad, { placeProvince: "All" }];
+    useEffect(() => {
+        dispatch(syncEventPlace())
+    }, []);
+
+    ///keepdata send to backend
+    const [input, setInput] = useState(initialValue);
+
+    const handleChangeInput = (e) => {
+        setInput({ ...input, [e.target.name]: e.target.value });
+    };
+    console.log("input", input)
+
+    useEffect(() => {
+        dispatch(syncEventSearch(input))
+    }, [input]);
+
+
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100  flex justify-stretch">
             <div className="navbar-start">
-                <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16"
-                            />
-                        </svg>
-                    </label>
-                </div>
-                {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
-                <h1 className="ml-60">Location</h1>
             </div>
             <div className="navbar-center hidden lg:flex">
+                <select
+                    className="select select-bordered w-full max-w-xs mx-10"
+                    value={input.placeProvince} // Set the value of the select element to reflect the current state
+                    onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
+                    name="placeProvince"
+                >
+                    <option disabled value="">placeProvince?</option> {/* Add an empty value for the disabled option */}
+                    {addAllPlaceLoad?.map((el, idx) => (
+                        <option
+                            key={idx}
+                            value={
+                                el.placeProvince}
+                        >
+                            {el.placeProvince}
+                        </option>
+                    ))}
+                </select>
                 <ul className="menu menu-horizontal px-1">
-                    {event.map((el,idx) => (
-                        <li key={idx} >
-                            <a onClick={()=> setSelected(el.id)}>{el.name}</a>
+                    {eventCategory.map((el, idx) => (
+                        <li key={idx}>
+                            <a
+                                onClick={() => handleChangeInput({ target: { name: 'eventCategoryId', value: el.id } })}
+                                value={el.id}
+                                name="eventCategoryId"
+                            >
+                                {el.emoji}&nbsp;{el.name}
+                            </a>
                         </li>
                     ))}
-
-                    <li tabIndex={0}>
-                        <details>
-                            <summary>30km</summary>
-                            <ul className="p-2">
-                                <li>
-                                    <a>Submenu 1</a>
-                                </li>
-                                <li>
-                                    <a>Submenu 2</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
                 </ul>
             </div>
+            <Input
+                title="Date start"
+                type="datetime-local"
+                value={input.dateStart}
+                onChange={handleChangeInput}
+                name="dateStart"
+            />
+            <Input
+                title="Date end"
+                type="datetime-local"
+                value={input.dateEnd}
+                onChange={handleChangeInput}
+                name="dateEnd"
+            />
+            <div className="form-control">
+                <div className="input-group">
+                    <input type="text"
+                        placeholder="Search… title or place name"
+                        className="input input-bordered w-[300px]"
+                        value={input.box}
+                        onChange={handleChangeInput}
+                        name="box" />
+
+                </div>
+            </div>
+            <div className="form-control">
+                <div className="input-group">
+                    <CurrentGeo />
+                    <select className="select select-bordered">
+                        <option disabled selected>Nearby</option>
+                        <option>5 km</option>
+                        <option>10km</option>
+                        <option>30km</option>
+                    </select>
+                </div>
+            </div>
+            <button className="btn btn-square mx-4">
+                <span><Reset /></span>
+            </button>
             <div className="navbar-end">
-                {/* <a className="btn">Button</a> */}
             </div>
         </div>
     );

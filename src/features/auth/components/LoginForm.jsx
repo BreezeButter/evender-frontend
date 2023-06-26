@@ -6,13 +6,15 @@ import { toast } from "react-toastify";
 import { login, loginGoogle } from "../slice/authSlice";
 import useForm from "../../../hooks/useForm";
 import RegisterInput from "./RegisterInput";
-import Google from "../../../assets/Google_2015_logo.svg.png";
+// import Google from "../../../assets/Google_2015_logo.svg.png";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { LoginSocialGoogle } from "reactjs-social-login";
+import { useNavigate } from 'react-router-dom';
 
 import { Link } from "react-router-dom";
 
 export default function LoginForm() {
+    const navigate = useNavigate()
     const { input, handleChangeInput, error, handleSubmitForm } = useForm(
         {
             email: "",
@@ -26,6 +28,8 @@ export default function LoginForm() {
     const onSubmit = async (data) => {
         try {
             await dispatch(login(data)).unwrap();
+            navigate('/');
+
         } catch (err) {
             toast.error("invalid email");
         }
@@ -44,7 +48,7 @@ export default function LoginForm() {
             <div className="p-10">
                 <div className="flex flex-col font-bold p-4">Login</div>
                 <div className="flex flex-col font-light text-xs p-2">
-                    <Link to="/">register</Link>
+                    <Link to="/register">register</Link>
                 </div>
 
                 <div className="p-1">
@@ -94,13 +98,16 @@ export default function LoginForm() {
                             discoveryDocs="claims_supported"
                             access_type="offline"
                             onResolve={({ provider, data }) => {
+
                                 dispatch(loginGoogle(data)).unwrap();
+                                navigate('/');
                             }}
                             onReject={(err) => {
                                 console.log(err);
                             }}
                         >
-                            <GoogleLoginButton />
+                            <GoogleLoginButton
+                            />
                         </LoginSocialGoogle>
                     </div>
                 </div>

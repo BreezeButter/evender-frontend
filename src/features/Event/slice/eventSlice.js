@@ -5,6 +5,7 @@ const initialState = {
     events: [],
     loading: false,
     error: null,
+    eventUser: [],
 };
 
 export const getAllEventsAsync = createAsyncThunk(
@@ -26,6 +27,20 @@ export const creatEventAsync = createAsyncThunk(
             await eventService.createEvent(input);
         } catch (err) {
             console.log(err);
+            return thunkApi.rejectWithValue(err.response.data);
+        }
+    }
+);
+
+export const getNextEventUser = createAsyncThunk(
+    "event/getNextEvent",
+    async (_, thunkApi) => {
+        try {
+            // console.log("first");
+            const result = await eventService.getNextEvent();
+
+            return result.data;
+        } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
         }
     }
@@ -56,6 +71,16 @@ const eventSlice = createSlice({
             .addCase(creatEventAsync.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            })
+            .addCase(getNextEventUser.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getNextEventUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.eventUser = action.payload;
+            })
+            .addCase(getNextEventUser.rejected, (state) => {
+                state.loading = false;
             }),
 });
 

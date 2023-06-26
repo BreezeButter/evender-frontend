@@ -1,19 +1,14 @@
-import {convertDate} from '../../../utils/dateUtil'
+import { convertDate } from '../../../utils/dateUtil'
 
 export default function SearchContainer({
     title,
-    location,
+    placeProvince,
     image1,
     description,
     joinEventUsers,
     dateStart,
 }) {
     const [date, time] = convertDate(dateStart);
-
-    console.log(
-        joinEventUsers
-        )
-    
     return (
         <div className="flex max-w-[800px] border border-blue-800 rounded-md p-3 gap-4">
             <div className="flex flex-col gap-3">
@@ -36,7 +31,7 @@ export default function SearchContainer({
                         43/53
                     </div>
                 </div>
-                <h1 className="font-semibold">{location}</h1>
+                <h1 className="font-semibold">{placeProvince}</h1>
                 <p className="max-w-[450px]">{description}</p>
             </div>
             <div className="flex flex-col justify-around">

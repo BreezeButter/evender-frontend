@@ -7,7 +7,7 @@ import {
     getEventUserDetail,
     getUserHostEvent,
 } from "../slice/eventDetailSlice";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export default function ModalEditDetail({ eventDetail }) {
@@ -50,8 +50,8 @@ export default function ModalEditDetail({ eventDetail }) {
             if (input.description) {
                 formData.append("description", input.description);
             }
-            if (input.location) {
-                formData.append("location", input.location);
+            if (input.placeProvince) {
+                formData.append("placeProvince", input.placeProvince);
             }
             if (input.dateStart) {
                 formData.append("dateStart", input.dateStart);
@@ -108,10 +108,10 @@ export default function ModalEditDetail({ eventDetail }) {
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="text"
-                                    placeholder="location"
-                                    value={input.location}
+                                    placeholder="lplaceProvince"
+                                    value={input.placeProvince}
                                     onChange={handleChangeInput}
-                                    name="location"
+                                    name="placeProvince"
                                 />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
@@ -170,7 +170,7 @@ export default function ModalEditDetail({ eventDetail }) {
                                     <button
                                         type="submit"
                                         className="w-[6rem] h-[2.5rem] bg-[#004DFF] opacity-90 rounded-full text-white flex justify-center items-center hover:bg-white hover:text-[#004DFF] hover:border-2 hover:border-[#004DFF]"
-                                        // onClick={navigate("/")}
+                                    // onClick={navigate("/")}
                                     >
                                         Edit
                                     </button>

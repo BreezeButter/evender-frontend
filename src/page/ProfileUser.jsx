@@ -1,20 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMe } from "../features/auth/slice/authSlice";
+import { getUserHostEvent } from "../features/ProfileUser/slice/profileUserSlice";
+import MyEventCard from "../features/ProfileUser/components/myEventCard";
+import { getNextEventUser } from "../features/Event/slice/eventSlice";
+import MyNextEventCard from "../features/ProfileUser/components/MyNextEventCard";
 
 export default function ProfileUser() {
+    const { id } = useParams();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
+    const myEvent = useSelector((state) => state.profileUser.hostEvent);
+    const eventUser = useSelector((state) => state.event.eventUser);
+    const [click, setClick] = useState(false);
 
     useEffect(() => {
         let isCancel = false;
-        dispatch(fetchMe())
-            .unwrap()
-            .catch((err) => {
-                if (!isCancel) toast.error(err.message);
-            });
+        const userFunction = async () => {
+            await dispatch(fetchMe())
+                .unwrap()
+                .catch((err) => {
+                    if (!isCancel) toast.error(err.message);
+                });
+            await dispatch(getUserHostEvent(id)).unwrap();
+            await dispatch(getNextEventUser()).unwrap();
+        };
+        userFunction();
         return () => {
             isCancel = true;
         };
@@ -62,6 +75,8 @@ export default function ProfileUser() {
                                 {user?.firstName} {user?.lastName}
                             </p>
                             <p className="pt-3 ml-8 text-gray-400">#Username</p>
+                            <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/dollar-coin.png" alt="dollar-coin" />
+                            <p className="pt-3 ml-8 text-gray-400">  {user?.coin}</p>
                         </div>
                         <p className="w-[70%] mt-8 font-light">
                             {user?.aboutMe}
@@ -72,7 +87,7 @@ export default function ProfileUser() {
                         <div className="flex flex-row justify-between mt-4">
                             {user?.bdate ? (
                                 <p className="text-lg font-medium">
-                                    {calculateAge(user?.bdate)}
+                                    {calculateAge(user?.bdate)} years old
                                 </p>
                             ) : (
                                 <p></p>
@@ -87,19 +102,20 @@ export default function ProfileUser() {
                 </div>
 
                 {/* Event */}
+
                 <div className="">
                     {/* bar */}
                     <div className="navbar bg-transparent border-b border-gray-300">
                         <div className="navbar-start"></div>
                         <div className="navbar-center hidden lg:flex">
                             <ul className="menu menu-horizontal px-1 text-lg font-normal gap-4">
-                                <li>
+                                <li onClick={() => setClick(true)}>
                                     <a className="text-darkbluecute hover:font-medium hover:bg-gray-200">
                                         my event
                                     </a>
                                 </li>
 
-                                <li>
+                                <li onClick={() => setClick(false)}>
                                     <a className="text-darkbluecute hover:font-medium hover:bg-gray-200">
                                         joined event
                                     </a>
@@ -110,86 +126,33 @@ export default function ProfileUser() {
                     </div>
 
                     {/* event details */}
-                    <div className="flex flex-col justify-center items-center mt-6 gap-5 mb-24">
-                        <div className="w-[70%] border border-gray-300 rounded-md p-6 ">
-                            <div className="flex flex-row justify-between">
-                                <div>
-                                    <p className="text-xs font-medium text-gray-500 mb-2">
-                                        Today, Fri 16 Jun 2023, 9:00 PM
-                                    </p>
-                                    <p className="text-lg font-medium text-darkbluecute mb-7">
-                                        Urban Music Bar
-                                    </p>
-                                    <div className="flex flex-row">
-                                        <p className="text-base font-medium mr-1 text-darkbluecute">
-                                            at
-                                        </p>
-                                        <p className="text-base font-normal text-darkbluecute">
-                                            Liberty Thonglor Music & Bar
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="avatar">
-                                    <div className="w-24 rounded">
-                                        <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" />
-                                    </div>
-                                </div>
-                            </div>
+                    {click ? (
+                        <div className="flex flex-col justify-center items-center mt-6 gap-5 mb-24 ">
+                            {myEvent.map((el) => (
+                                <MyEventCard
+                                    key={el.id}
+                                    title={el.title}
+                                    placeProvince={el.placeProvince}
+                                    image1={el.image1}
+                                    description={el.description}
+                                    dateStart={el.dateStart}
+                                />
+                            ))}
                         </div>
-                        <div className="w-[70%] border border-gray-300 rounded-md p-6 ">
-                            <div className="flex flex-row justify-between">
-                                <div>
-                                    <p className="text-xs font-medium text-gray-500 mb-2">
-                                        Today, Fri 16 Jun 2023, 9:00 PM
-                                    </p>
-                                    <p className="text-lg font-medium text-darkbluecute mb-7">
-                                        Urban Music Bar
-                                    </p>
-                                    <div className="flex flex-row">
-                                        <p className="text-base font-medium mr-1 text-darkbluecute">
-                                            at
-                                        </p>
-                                        <p className="text-base font-normal text-darkbluecute">
-                                            Liberty Thonglor Music & Bar
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="avatar">
-                                    <div className="w-24 rounded">
-                                        <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" />
-                                    </div>
-                                </div>
-                            </div>
+                    ) : (
+                        <div className="flex flex-col justify-center items-center mt-6 gap-5 mb-24 ">
+                            {eventUser.map((el) => (
+                                <MyNextEventCard
+                                    key={el.Event.id}
+                                    title={el.Event.title}
+                                    placeProvince={el.Event.placeProvince}
+                                    image1={el.Event.image1}
+                                    description={el.Event.description}
+                                    dateStart={el.Event.dateStart}
+                                />
+                            ))}
                         </div>
-                        <div className="w-[70%] border border-gray-300 rounded-md p-6 ">
-                            <div className="flex flex-row justify-between">
-                                <div>
-                                    <p className="text-xs font-medium text-gray-500 mb-2">
-                                        Today, Fri 16 Jun 2023, 9:00 PM
-                                    </p>
-                                    <p className="text-lg font-medium text-darkbluecute mb-7">
-                                        Urban Music Bar
-                                    </p>
-                                    <div className="flex flex-row">
-                                        <p className="text-base font-medium mr-1 text-darkbluecute">
-                                            at
-                                        </p>
-                                        <p className="text-base font-normal text-darkbluecute">
-                                            Liberty Thonglor Music & Bar
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="avatar">
-                                    <div className="w-24 rounded">
-                                        <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

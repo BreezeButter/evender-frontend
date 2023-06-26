@@ -2,15 +2,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as authService from "../../../api/auth-api";
 import { removeAccessToken, setAccessToken } from "../../../utils/localstorage";
 import { toast } from "react-toastify";
-// import { useNavigate } from 'react-router-dom';
+import { getAccessToken } from "../../../utils/localstorage";
 
+const isAuth = getAccessToken();
 const initialState = {
-    isAuthenticated: false,
+    isAuthenticated: isAuth ? true : false,
     error: null,
     loading: false,
     user: null,
     initialLoading: false,
 };
+
 // const navigate = useNavigate();
 
 export const registerAsync = createAsyncThunk(
@@ -18,7 +20,6 @@ export const registerAsync = createAsyncThunk(
     async (input, thunkApi) => {
         // สามารถรับ parameter ได้ 2 ตัว
         try {
-            console.log("--->", input);
             const res = await authService.register(input);
             setAccessToken(res.data.accessToken);
             const resFetchMe = await authService.fetchMe();
@@ -37,7 +38,6 @@ export const login = createAsyncThunk("auth/login", async (input, thunkApi) => {
         const res = await authService.login(input);
         setAccessToken(res.data.accessToken);
         const resFetchMe = await authService.fetchMe();
-        console.log("ssadsadasd", resFetchMe);
         return resFetchMe.data.user;
     } catch (err) {
         return thunkApi.rejectWithValue(err.response.data.message);
@@ -47,7 +47,6 @@ export const loginGoogle = createAsyncThunk(
     "auth/loginGoogle",
     async (input, thunkApi) => {
         try {
-            console.log("GGGG--->", input);
             const res = await authService.loginGoogle({
                 email: input.email,
                 firstName: input.given_name,
@@ -56,7 +55,6 @@ export const loginGoogle = createAsyncThunk(
             });
             setAccessToken(res.data.accessToken);
             const resFetchMe = await authService.fetchMe();
-            console.log("ssadsadasd", resFetchMe);
             return resFetchMe.data.user;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data.message);
@@ -81,16 +79,6 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 const authSlice = createSlice({
     name: "auth",
     initialState,
-
-    // reducers:{
-    //     register: (state,action) =>{
-    //         state.user = action.payload;
-    //     },
-    //     startLoading: state =>{
-    //         state.loading = true
-    //     }
-    // },
-
     extraReducers: (
         builder //เขียนแบบนี้แทนข้างล่าง
     ) =>
@@ -98,6 +86,10 @@ const authSlice = createSlice({
             .addCase(logout.fulfilled, (state) => {
                 state.isAuthenticated = false;
                 state.user = null;
+                toast.info("Already Logout");
+            })
+            .addCase(logout.pending, (state) => {
+                state.loading = true;
             })
             .addCase(registerAsync.pending, (state) => {
                 state.loading = true;
@@ -114,9 +106,7 @@ const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
                 state.user = action.payload;
-                toast.success("login success");
-                console.log(state.isAuthenticated);
-                // navigate('/home');
+                toast.success("Login success");
             })
             .addCase(fetchMe.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
@@ -134,6 +124,7 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.user = action.payload;
                 state.initialLoading = false;
+                toast.success("Login success");
             })
             .addCase(loginGoogle.rejected, (state, action) => {
                 state.error = action.payload;

@@ -1,11 +1,10 @@
 import { LeftIcon } from "../icons";
-import Footer from "../layouts/Footer";
-import Headers from "../layouts/Headers";
+// import Footer from "../layouts/Footer";
+
 
 export default function Chat() {
     return (
         <>
-            <Headers />
 
             <div className="border-t border-gray-300 flex flex-row">
                 {/* 1 */}
