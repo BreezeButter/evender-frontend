@@ -62,6 +62,8 @@ export default function ProfileUser() {
                                 {user?.firstName} {user?.lastName}
                             </p>
                             <p className="pt-3 ml-8 text-gray-400">#Username</p>
+                            <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/dollar-coin.png" alt="dollar-coin" />
+                            <p className="pt-3 ml-8 text-gray-400">  {user?.coin}</p>
                         </div>
                         <p className="w-[70%] mt-8 font-light">
                             {user?.aboutMe}

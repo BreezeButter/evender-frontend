@@ -62,7 +62,7 @@ const router = createBrowserRouter([
                 element: <EventDetailPage />,
             },
             {
-                path: "chat/:idUser/:idEvent",
+                path: "chat/:id",
                 element: <Chat />,
             },
             {

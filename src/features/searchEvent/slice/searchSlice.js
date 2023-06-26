@@ -4,6 +4,7 @@ import * as eventSearchService from "../../../api/searchApi";
 const initialState = {
     placeLoad: [],
     eventFilter: [],
+    locationFilter: [],
     loading: false,
     error: "",
 };
@@ -37,6 +38,18 @@ export const syncEventSearch = createAsyncThunk(
     }
 );
 
+export const syncEventNearby = createAsyncThunk(
+    "search/syncEventNearby",
+    async (input, thunkApi) => {
+        try {
+            const res = await eventSearchService.getLocationNearby(input);
+            return res.data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.response.data);
+        }
+    }
+);
+
 const searchSlice = createSlice({
     name: "search",
     initialState,
@@ -62,6 +75,17 @@ const searchSlice = createSlice({
                 state.placeLoad = action.payload;
             })
             .addCase(syncEventPlace.rejected, (state, action) => {
+                state.error = action.payload;
+                state.loading = false;
+            })
+            .addCase(syncEventNearby.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(syncEventNearby.fulfilled, (state, action) => {
+                state.loading = false;
+                state.locationFilter = action.payload;
+            })
+            .addCase(syncEventNearby.rejected, (state, action) => {
                 state.error = action.payload;
                 state.loading = false;
             }),

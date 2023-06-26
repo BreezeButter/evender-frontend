@@ -40,8 +40,8 @@ export default function Headers() {
                 </ul>
             </div>
             <div className="navbar-end gap-3 pr-2">
-                <SearchIcon2 className="cursor-pointer" />
-                <MessageIcon2 className="cursor-pointer" />
+                <SearchIcon2 className="cursor-pointer" onClick={() => navagate(`search`)} />
+                <MessageIcon2 className="cursor-pointer" onClick={() => navagate(`chat/${user?.id}`)} />
 
                 {/* Dropdown */}
                 <div className="dropdown dropdown-end">
@@ -58,7 +58,8 @@ export default function Headers() {
                                     <img src={user?.image} />
                                 </div>
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col"
+                                onClick={() => navagate(`profile/${user?.id}`)}>
                                 <h1 className="text-base font-normal">
                                     {user?.firstName}
                                 </h1>

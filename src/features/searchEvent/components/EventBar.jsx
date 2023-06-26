@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { syncEventSearch, syncEventPlace } from "../slice/searchSlice";
 import Input from '../../Event/component/Input'
+import CurrentGeo from "./CurrentGeo";
 
 
 export default function EventBar() {
@@ -109,6 +110,7 @@ export default function EventBar() {
             </div>
             <div className="form-control">
                 <div className="input-group">
+                    <CurrentGeo />
                     <select className="select select-bordered">
                         <option disabled selected>Nearby</option>
                         <option>5 km</option>
