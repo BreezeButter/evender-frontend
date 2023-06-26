@@ -63,7 +63,7 @@ export default function Button() {
         <>
             <label
                 htmlFor="my_modal_7"
-                className="btn bg-black text-white rounded-full w-60 h-10 self-center"
+                className="btn bg-darkbluecute text-white rounded-full w-full h-12 self-center hover:text-darkbluecute"
                 ref={ref}
             >
                 Create Event

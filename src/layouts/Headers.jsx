@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { SearchIcon2, UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
+
 export default function Headers() {
+    const user = useSelector((state) => state.auth.user);
+    console.log(user);
     return (
         <div className="navbar text-darkbluecute">
             <div className="navbar-start">
@@ -46,7 +50,7 @@ export default function Headers() {
                             </div>
                             <div className="flex flex-col">
                                 <h1 className="text-base font-normal">
-                                    p boom
+                                    {user?.firstName}
                                 </h1>
                                 <p className="font-light">pboom@mail.com</p>
                                 <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
@@ -58,7 +62,7 @@ export default function Headers() {
                         <li className="mt-2 hover:font-medium">
                             <a>
                                 Sign out
-                                <SignOutIcon className=" opacity-50" />
+                                <SignOutIcon className="opacity-50" />
                             </a>
                         </li>
                     </ul>
