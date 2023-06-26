@@ -7,23 +7,29 @@ import {
     getChatByEventAsync,
 } from "../features/Event/slice/eventSlice";
 import { useRef } from "react";
+import socket from "../configs/socketConfig";
 
-const socket = io.connect("http://localhost:8888");
 export default function Chat() {
     const dispatch = useDispatch();
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const roomId = useParams().id;
     const [currentRoom, setCurrentRoom] = useState(roomId);
-    const ref = useRef();
 
-    const userId = useSelector((state) => state.auth.user?.id);
+    const ref = useRef();
+    const refInput = useRef();
+
+    const user = useSelector((state) => state.auth.user);
     const joinEventByUser = useSelector((state) => state.event.joinEventByUser);
     const chats = useSelector((state) => state.event.chats);
 
-    // console.log(userId);
-    // console.log(chats);
+    // console.log(user);
+    // useEffect(() => {
+    //     setCurrentRoom(roomId);
+    // }, [roomId]);
+
     useEffect(() => {
+        socket.emit("joinRoom", currentRoom);
         const fn = async () => {
             await dispatch(getJoinEventByUserAsync()).unwrap();
             await dispatch(getChatByEventAsync(currentRoom)).unwrap();
@@ -35,38 +41,48 @@ export default function Chat() {
         setMessages(chats);
     }, [chats]);
 
+    const socketSendmessage = (input) => {
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+                userId: input.userId,
+                message: input.message,
+                firstName: input.firstName,
+                image: input.image,
+            },
+        ]);
+    };
     useEffect(() => {
-        // socket.auth = { id: userId };
-
-        socket.connect();
-
-        socket.on("receiveMessage", (message) => {
-            setMessages((prevMessages) => [...prevMessages, message]);
-        });
-
+        socket.on("receiveMessage", socketSendmessage);
         return () => {
-            socket.disconnect();
+            socket.off("receiveMessage", socketSendmessage);
         };
     }, []);
 
     useEffect(() => {
-        socket.emit("joinRoom", currentRoom);
-        // ref.current.scrollTop = ref.current.scrollHeight;
-    }, []);
+        ref.current.scrollTop = ref.current.scrollHeight;
+    }, [messages]);
 
     const handleJoinRoom = async (roomId) => {
-        // console.log(roomId);
         setCurrentRoom(roomId);
-        // console.log("currentroom", currentRoom);
+
         socket.emit("joinRoom", roomId);
     };
-    // console.log(chats);
 
     const sendMessage = () => {
-        socket.emit("sendMessage", { room: currentRoom, message, userId });
-        setMessages((prevMessages) => [...prevMessages, { userId, message }]);
+        if (message === "" || message.trim() === "") return;
+        socket.emit("sendMessage", {
+            room: currentRoom,
+            message,
+            userId: user.id,
+            firstName: user.firstName,
+            image: user.image,
+        });
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            { userId: user.id, message },
+        ]);
         setMessage("");
-        ref.current.scrollTop = ref.current.scrollHeight;
     };
 
     return (
@@ -88,21 +104,39 @@ export default function Chat() {
                 </h1>
 
                 <div
-                    className="border border-black h-[340px] w-[750px] overflow-y-scroll flex flex-col gap-2 p-2"
+                    className="rounded h-[340px] w-[750px] overflow-y-scroll flex flex-col gap-3 p-2 bg-gray-300"
                     ref={ref}
                 >
                     {messages.map((el, index) => {
-                        if (el.userId == userId) {
+                        if (el.userId == user.id) {
                             return (
-                                <h1 key={index} className="self-end">
+                                <h1
+                                    key={index}
+                                    className="self-end w-[350px] bg-white rounded-3xl p-2"
+                                >
                                     {el.message}
                                 </h1>
                             );
                         } else {
                             return (
-                                <h1 key={index} className="self-start">
-                                    {el.message}
-                                </h1>
+                                <div
+                                    className="self-start w-[350px] flex flex-col gap-1"
+                                    key={index}
+                                >
+                                    <div className="flex gap-1">
+                                        <img
+                                            src={el.User?.image || el.image}
+                                            alt=""
+                                            className="w-8 h-8 rounded-full"
+                                        />
+                                        <p className="text-xs self-center">
+                                            {el.User?.firstName || el.firstName}
+                                        </p>
+                                    </div>
+                                    <h1 className=" bg-white rounded-3xl p-2">
+                                        {el.message}
+                                    </h1>
+                                </div>
                             );
                         }
                     })}
@@ -112,9 +146,16 @@ export default function Chat() {
                         type="text"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        onKeyUp={(e) => {
+                            if (e.key === "Enter") refInput.current.click();
+                        }}
                         className="flex-1"
                     />
-                    <button onClick={sendMessage} className="w-20">
+                    <button
+                        onClick={sendMessage}
+                        className="w-20 bg-gray-500 text-white"
+                        ref={refInput}
+                    >
                         Send
                     </button>
                 </div>
@@ -122,63 +163,3 @@ export default function Chat() {
         </div>
     );
 }
-
-//#############################################################################
-
-// import { io } from "socket.io-client";
-// import { useState, useEffect } from "react";
-
-// const socket = io.connect("http://localhost:8888");
-// export default function Chat() {
-//     const [message, setMessage] = useState("");
-//     const [messages, setMessages] = useState([]);
-//     const [currentRoom, setCurrentRoom] = useState("");
-//     const eventRoomId = "room1";
-//     const userId = "user1";
-
-//     useEffect(() => {
-//         socket.auth = { id: "user01" };
-
-//         socket.connect();
-
-//         socket.on("receiveMessage", (message) => {
-//             setMessages((prevMessages) => [...prevMessages, message]);
-//         });
-
-//         return () => {
-//             socket.disconnect();
-//         };
-//     }, []);
-
-//     const joinRoom = (room) => {
-//         setCurrentRoom(room);
-//         socket.emit("joinRoom", room);
-//     };
-
-//     const sendMessage = () => {
-//         socket.emit("sendMessage", { room: currentRoom, message });
-//         setMessages((prevMessages) => [...prevMessages, message]);
-
-//         setMessage("");
-//     };
-
-//     return (
-//         <div>
-//             <h1>Current Room: {currentRoom}</h1>
-//             <button onClick={() => joinRoom("room1")}>Join Room 1</button>
-//             <button onClick={() => joinRoom("room2")}>Join Room 2</button>
-
-//             <ul>
-//                 {messages.map((msg, index) => (
-//                     <li key={index}>{msg}</li>
-//                 ))}
-//             </ul>
-//             <input
-//                 type="text"
-//                 value={message}
-//                 onChange={(e) => setMessage(e.target.value)}
-//             />
-//             <button onClick={sendMessage}>Send</button>
-//         </div>
-//     );
-// }
