@@ -1,5 +1,6 @@
 import { UserEventIcon } from "../../../icons";
 import { convertDate } from "../../../utils/dateUtil";
+import { useNavigate } from 'react-router-dom';
 
 export default function EventContainer({
     title,
@@ -8,11 +9,15 @@ export default function EventContainer({
     description,
     joinEventUser,
     dateStart,
+    id
 }) {
+
+    const navigate = useNavigate()
     const [date, time] = convertDate(dateStart);
 
     return (
         <div className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer">
+            onClick={() => navigate(`/evender/eventDetail/${id}`)}>
             <div className="flex flex-col gap-3">
                 <p className="text-xs text-gray-500 font-medium">
                     {date} {time}

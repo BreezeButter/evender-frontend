@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export default function Header({ title }) {
     return (
         <h1 className="text-4xl text-center border-b border-gray-300 py-20 mb-14 text-darkbluecute font-semibold text-indent:1px">

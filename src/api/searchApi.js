@@ -1,10 +1,15 @@
 import axios from "./axios";
 
-
-export const getEventByCategory = async (input) => {
-  console.log(input)
-  return axios.get(`/search/category/${input}`);
+export const getSearchAll = async (input) => {
+    console.log(input, "getSearchAll");
+    return axios.post("/search/filter", input);
 };
-export const getEventAll = async () => {
-  return axios.get('/search/all');
+
+export const getLocationNearby = async (input) => {
+    console.log(input, "getSearchAll");
+    return axios.post("/search/nearby", input);
+};
+
+export const getSearchPlace = async (input) => {
+    return axios.get("/search/place", input);
 };

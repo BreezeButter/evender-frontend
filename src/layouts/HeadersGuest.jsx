@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function HeadersGuest() {
+
+    const isAuth = useSelector(state => state.auth.isAuthenticated)
+
     return (
         <div className="navbar text-darkbluecute">
             <div className="navbar-start">
@@ -26,12 +30,17 @@ export default function HeadersGuest() {
                 </ul>
             </div>
             <div className="navbar-end gap-3 pr-2">
-                <Link
+                {isAuth ? (<Link
+                    to="/evender/event/"
+                    className="btn bg-lightbluecute normal-case text-base text-white w-28 hover:text-lightbluecute hover:bg-gray-200 hover:border-none"
+                >
+                    Event
+                </Link>) : (<Link
                     to="/login"
                     className="btn bg-lightbluecute normal-case text-base text-white w-28 hover:text-lightbluecute hover:bg-gray-200 hover:border-none"
                 >
                     Login
-                </Link>
+                </Link>)}
             </div>
         </div>
     );
