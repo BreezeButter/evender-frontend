@@ -25,7 +25,7 @@ export default function NextEventBox({ eventUser }) {
                                                 at
                                             </p>
                                             <p className="font-light text-sm text-darkbluecute">
-                                                {el.Event.location}
+                                                {el.Event.placeProvince}
                                             </p>
                                         </div>
                                     </div>

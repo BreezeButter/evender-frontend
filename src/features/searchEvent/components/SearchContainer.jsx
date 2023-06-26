@@ -2,7 +2,7 @@ import { convertDate } from '../../../utils/dateUtil'
 
 export default function SearchContainer({
     title,
-    location,
+    placeProvince,
     image1,
     description,
     joinEventUsers,
@@ -31,7 +31,7 @@ export default function SearchContainer({
                         43/53
                     </div>
                 </div>
-                <h1 className="font-semibold">{location}</h1>
+                <h1 className="font-semibold">{placeProvince}</h1>
                 <p className="max-w-[450px]">{description}</p>
             </div>
             <div className="flex flex-col justify-around">

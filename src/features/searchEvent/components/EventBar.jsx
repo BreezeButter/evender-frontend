@@ -58,7 +58,7 @@ export default function EventBar() {
                     onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
                     name="placeProvince"
                 >
-                    <option disabled value="">Location?</option> {/* Add an empty value for the disabled option */}
+                    <option disabled value="">placeProvince?</option> {/* Add an empty value for the disabled option */}
                     {addAllPlaceLoad?.map((el, idx) => (
                         <option
                             key={idx}
