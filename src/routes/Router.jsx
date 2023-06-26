@@ -1,16 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "../page/LoginPage";
 import RegisterPage from "../page/RegisterPage";
-// import RedirectIfAuthenticated from "../features/auth/components/RedirectIfAuthenticated";
 import Container from "../layouts/Container";
-// import Container from "../layouts/Container";
-import EditProfile from "../page/EditProfile";
 import Landing from "../page/Landing";
 import EventPage from "../page/EventPage";
 import SearchPage from "../page/SearchPage";
 import Chat from "../page/Chat";
 import ProfileUser from "../page/ProfileUser";
-import EditProfile from "../page/EditProfile";
 import HeadersGuest from "../layouts/HeadersGuest";
 import Footer from "../layouts/Footer";
 import Usermanagement from "../page/Manageuserpage";
@@ -58,10 +54,10 @@ const router = createBrowserRouter([
                 path: "event",
                 element: <EventPage />,
             },
-            {
-                path: "eventdetail/:id",
-                element: <EventDetailPage />,
-            },
+            // {
+            //     path: "eventdetail/:id",
+            //     element: <EventDetailPage />,
+            // },
             {
                 path: "chat/:id",
                 element: <Chat />,
@@ -70,26 +66,14 @@ const router = createBrowserRouter([
                 path: "profile/:id",
                 element: <ProfileUser />,
             },
-            {
-                path: "editprofile/:id",
-                element: <EditProfile />,
-            },
+            // {
+            //     path: "editprofile/:id",
+            //     element: <EditProfile />,
+            // },
             {
                 path: "search",
                 element: <SearchPage />,
             },
-            // {
-            //     path: "dashboardmanagement",
-            //     element: <Dashboardmanagement />,
-            // },
-            // {
-            //     path: "usermanagement",
-            //     element: <Usermanagement />,
-            // },
-            // {
-            //     path: "eventmanagement",
-            //     element: <Eventmanagement />,
-            // },
         ],
     },
     {

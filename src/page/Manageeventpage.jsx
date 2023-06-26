@@ -1,10 +1,23 @@
 import { Datachartpolar } from "../components/chart/Datachartpolar";
 import { Datachartverticalbar } from "../components/chart/Datachartverticalbar";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { getAccessToken } from "../utils/localstorage";
+
 export default function Eventmanagement() {
     const navigate = useNavigate();
+    const [addeventInput, setAddeventInput] = useState({
+        title: "",
+        description: "",
+        location: "",
+        latitude: "",
+        longitude: "",
+        dateStart: "",
+        dateEnd: "",
+        capacity: "",
+    });
     return (
         <div className="grid grid-cols-2">
             <div>
