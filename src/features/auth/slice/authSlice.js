@@ -66,6 +66,7 @@ export const fetchMe = createAsyncThunk("auth/fetchMe", async (_, thunkApi) => {
     //ไม่ต้องมี parameter
     try {
         const res = await authService.fetchMe();
+        console.log("-------->", res.data.user);
         return res.data.user;
     } catch (err) {
         return thunkApi.rejectWithValue(err.response.data.message);

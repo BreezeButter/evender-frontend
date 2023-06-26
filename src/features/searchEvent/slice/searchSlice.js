@@ -42,6 +42,7 @@ export const syncEventNearby = createAsyncThunk(
     "search/syncEventNearby",
     async (input, thunkApi) => {
         try {
+            console.log(input);
             const res = await eventSearchService.getLocationNearby(input);
             return res.data;
         } catch (error) {
@@ -61,7 +62,6 @@ const searchSlice = createSlice({
             .addCase(syncEventSearch.fulfilled, (state, action) => {
                 state.loading = false;
                 state.eventFilter = action.payload;
-                console.log(action.payload, "action.payload");
             })
             .addCase(syncEventSearch.rejected, (state, action) => {
                 state.error = action.payload;

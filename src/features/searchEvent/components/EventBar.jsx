@@ -15,7 +15,11 @@ export default function EventBar() {
         dateEnd: undefined,
         placeProvince: undefined,
         box: undefined,
+        latitude: undefined,
+        longitude: undefined,
+        radius: undefined,
     }
+
 
     const eventCategory = [
         { id: undefined, name: "All", emoji: "👋" },
@@ -37,9 +41,11 @@ export default function EventBar() {
     ///keepdata send to backend
     const [input, setInput] = useState(initialValue);
 
+
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
+
     console.log("input", input)
 
     useEffect(() => {
@@ -58,12 +64,11 @@ export default function EventBar() {
                     onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
                     name="placeProvince"
                 >
-                    <option disabled value="">placeProvince?</option> {/* Add an empty value for the disabled option */}
+                    <option disabled value="">Province</option> {/* Add an empty value for the disabled option */}
                     {addAllPlaceLoad?.map((el, idx) => (
                         <option
                             key={idx}
-                            value={
-                                el.placeProvince}
+
                         >
                             {el.placeProvince}
                         </option>
@@ -108,9 +113,9 @@ export default function EventBar() {
 
                 </div>
             </div>
+            <CurrentGeo />
             <div className="form-control">
                 <div className="input-group">
-                    <CurrentGeo />
                     <select className="select select-bordered">
                         <option disabled selected>Nearby</option>
                         <option>5 km</option>
