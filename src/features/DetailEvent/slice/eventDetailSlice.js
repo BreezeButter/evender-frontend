@@ -26,6 +26,8 @@ export const getEventUserDetail = createAsyncThunk(
         }
     }
 );
+
+
 export const getUserHostEvent = createAsyncThunk(
     "detail/getUserHostEvent",
     async (input, thunkApi) => {

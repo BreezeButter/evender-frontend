@@ -12,6 +12,7 @@ export default function EditProfile() {
     const [showImage, setShowImage] = useState(null);
     // const [isLoading, setIsLoading] = useState(false);
     const user = useSelector((state) => state.auth.user);
+    const navigate = useNavigate();
 
     console.log(user);
 
@@ -40,6 +41,7 @@ export default function EditProfile() {
             }
 
             dispatch(editProfileUser(formData));
+            navigate(`/evender/profile/${user?.id}`);
         } catch (err) {
             console.log(err);
         }
@@ -94,7 +96,8 @@ export default function EditProfile() {
                             />
                             <input
                                 type="file"
-                                className="w-72 mt-8 opacity-75"
+                                // className="w-72 mt-8 opacity-75"
+                                className="file-input file-input-ghost file-input-bordered  file-input-md hover:border-lightbluecute cursor-pointer w-72 max-w-xs mt-8"
                                 onChange={(e) => {
                                     setImage(e.target.files[0]);
                                     setShowImage(
@@ -201,7 +204,7 @@ export default function EditProfile() {
                                         </span>
                                     </label>
                                     <textarea
-                                        className="block rounded-lg  border mb-6 border-gray-200 font-light py-3.5 w-[654px] bg-white text-sm pl-4"
+                                        className="block rounded-lg max-w-2xl border mb-6 border-gray-200 font-light py-3.5  bg-white text-sm pl-4 outline-none"
                                         rows="5"
                                         name="description"
                                         placeholder="About me..."
@@ -215,19 +218,18 @@ export default function EditProfile() {
                                     />
                                 </div>
                                 <div className="flex justify-center gap-4 mt-16">
-                                    <button
-                                        // onClick={hdlUpdate}
-                                        type="submit"
-                                        className="w-32 py-2 rounded-full bg-transparent border-lightbluecute border-2 font-medium text-base text-lightbluecute"
-                                    >
-                                        Save
-                                    </button>
-
-                                    <Link to="/profile">
-                                        <button className="w-32 py-2 rounded-full font-medium text-base text-white bg-lightbluecute border-2 border-lightbluecute hover:border-lightbluecute hover:bg-transparent hover:text-lightbluecute">
+                                    <Link to={`/evender/profile/${user?.id}`}>
+                                        <button
+                                            type="submit"
+                                            className="w-32 py-2 rounded-full bg-transparent border-lightbluecute border-2 font-medium text-base text-lightbluecute"
+                                        >
                                             Cancel
                                         </button>
                                     </Link>
+
+                                    <button className="w-32 py-2 rounded-full font-medium text-base text-white bg-lightbluecute border-2 border-lightbluecute hover:border-lightbluecute hover:bg-transparent hover:text-lightbluecute">
+                                        Save
+                                    </button>
                                 </div>
                             </div>
                         </div>

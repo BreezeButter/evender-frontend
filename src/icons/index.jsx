@@ -157,31 +157,17 @@ export function MessageIcon2(props) {
 export function SignOutIcon(props) {
     return (
         <svg
-            fill="#000"
             viewBox="0 0 24 24"
-            data-name="Flat Line"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="icon flat-line"
             {...props}
             width="17px"
             height="17px"
         >
-            <g
-                fill="none"
-                stroke="#000"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-            >
-                <path d="M11.9 5.9L11.9 11.9 12 12 14.1 14.1" />
-                <circle cx={12} cy={12} data-name="Circle" r={10} />
-                <path d="M18 9L21 12 18 15" />
-                <path data-name="primary" d="M21 12L7 12" />
-                <path
-                    data-name="primary"
-                    d="M14 16v3a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h9a1 1 0 011 1v3"
-                />
-            </g>
+            <path
+                d="M2 6a2 2 0 012-2h9a2 2 0 012 2v2a1 1 0 11-2 0V6H4v12h9v-2a1 1 0 112 0v2a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm15.293 2.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L18.586 13H9a1 1 0 110-2h9.586l-1.293-1.293a1 1 0 010-1.414z"
+                fill="#0D0D0D"
+            />
         </svg>
     );
 }
@@ -218,6 +204,23 @@ export function LoaderIcon({ className = null }) {
         >
             <g>
                 <path d="M10,1V3a7,7,0,1,1-7,7H1a9,9,0,1,0,9-9Z" />
+            </g>
+        </svg>
+    );
+}
+
+export function UserEventIcon(props) {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+            width="16px"
+            height="16px"
+        >
+            <g fill="#292D32">
+                <path d="M12 12a5 5 0 100-10 5 5 0 000 10zM12 14.5c-5.01 0-9.09 3.36-9.09 7.5 0 .28.22.5.5.5h17.18c.28 0 .5-.22.5-.5 0-4.14-4.08-7.5-9.09-7.5z" />
             </g>
         </svg>
     );
