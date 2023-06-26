@@ -132,7 +132,7 @@ export default function ProfileUser() {
                                 <MyEventCard
                                     key={el.id}
                                     title={el.title}
-                                    location={el.location}
+                                    placeProvince={el.placeProvince}
                                     image1={el.image1}
                                     description={el.description}
                                     dateStart={el.dateStart}
@@ -145,7 +145,7 @@ export default function ProfileUser() {
                                 <MyNextEventCard
                                     key={el.Event.id}
                                     title={el.Event.title}
-                                    location={el.Event.location}
+                                    placeProvince={el.Event.placeProvince}
                                     image1={el.Event.image1}
                                     description={el.Event.description}
                                     dateStart={el.Event.dateStart}

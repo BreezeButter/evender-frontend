@@ -21,13 +21,13 @@ export default function EventBar({ event, setSelected }) {
                     </label>
                 </div>
                 {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
-                <h1 className="ml-60">Location</h1>
+                <h1 className="ml-60">placeProvince</h1>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    {event.map((el,idx) => (
+                    {event.map((el, idx) => (
                         <li key={idx} >
-                            <a onClick={()=> setSelected(el.id)}>{el.name}</a>
+                            <a onClick={() => setSelected(el.id)}>{el.name}</a>
                         </li>
                     ))}
 

@@ -6,8 +6,8 @@ export default function ModalUserEvent({ eventDetail }) {
             <div className="modal">
                 <div className="modal-box">
                     <div className=" flex flex-col gap-6 ">
-                        {eventDetail.JoinEventUsers?.map((el) => (
-                            <div className="flex items-center gap-5">
+                        {eventDetail.JoinEventUsers?.map((el, idex) => (
+                            <div className="flex items-center gap-5" key={idex}>
                                 <img
                                     className="w-[5rem] h-[5rem] rounded-full"
                                     src={el.User.image}

@@ -6,7 +6,7 @@ import { creatEventAsync } from "../slice/eventSlice";
 const initialState = {
     title: "",
     description: "",
-    location: "",
+    placeProvince: "",
     dateStart: "",
     dateEnd: "",
     capacity: "",
@@ -35,7 +35,7 @@ export default function Button() {
         if (
             !input.title ||
             !input.description ||
-            !input.location ||
+            !input.placeProvince ||
             !input.dateStart ||
             !input.dateEnd ||
             !input.capacity ||
@@ -98,10 +98,10 @@ export default function Button() {
                                     name="description"
                                 />
                                 <Input
-                                    title="Location"
-                                    value={input.location}
+                                    title="placeProvince"
+                                    value={input.placeProvince}
                                     onChange={handleChangeInput}
-                                    name="location"
+                                    name="placeProvince"
                                 />
                                 <Input
                                     title="Date start"
