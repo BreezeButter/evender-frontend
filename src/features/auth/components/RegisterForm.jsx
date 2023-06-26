@@ -23,6 +23,7 @@ export default function RegisterForm() {
     const [error, setError] = useState({});
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleChangeInput = (e) =>
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -31,15 +32,15 @@ export default function RegisterForm() {
         try {
             e.preventDefault();
             const result = validateRegister(input); // ปั้นจาก validateRegister.js ไห้ส่งแค่ error เมื่อมี
-            console.log(input);
+
             if (result) {
                 return setError(result);
             }
             setError({});
             await dispatch(registerAsync(input)).unwrap(); // รอทำเส็จค่อยทำข้างล่างต่อ
-            navigate('/home');
+            navigate('/');
             toast.success('register successfully');
-            onSuccess();
+
         } catch (err) {
             toast.error('Error');
         }
@@ -52,7 +53,7 @@ export default function RegisterForm() {
                     Create new account.
                 </div>
                 <div className="flex flex-col font-light text-xs p-2">
-                    <Link to="/home">Already A Member?</Link>
+                    <Link to="/evender/event">Already A Member?</Link>
                 </div>
                 <div className=" grid grid-cols-2">
                     <div className="p-1">

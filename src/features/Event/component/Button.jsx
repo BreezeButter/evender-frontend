@@ -56,7 +56,7 @@ export default function Button() {
         setInput(initialState);
         setFiles({});
         ref.current.click();
-        console.log(ref);
+        // console.log(ref);
     };
 
     return (
