@@ -1,21 +1,22 @@
-import { useState } from 'react';
-import validateRegister from '../validators/validateRegister';
-import InputErrorMessage from './InputErrorMessage';
-import RegisterInput from './RegisterInput';
-import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { registerAsync } from '../slice/authSlice';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import validateRegister from "../validators/validateRegister";
+import InputErrorMessage from "./InputErrorMessage";
+import RegisterInput from "./RegisterInput";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { registerAsync } from "../slice/authSlice";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { LeftIcon2 } from "../../../icons";
 
 // import useAuth from
 
 const initialInput = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
 };
 
 export default function RegisterForm() {
@@ -23,7 +24,7 @@ export default function RegisterForm() {
     const [error, setError] = useState({});
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleChangeInput = (e) =>
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -38,25 +39,35 @@ export default function RegisterForm() {
             }
             setError({});
             await dispatch(registerAsync(input)).unwrap(); // รอทำเส็จค่อยทำข้างล่างต่อ
-            navigate('/');
-            toast.success('register successfully');
-
+            navigate("/");
+            toast.success("register successfully");
         } catch (err) {
-            toast.error('Error');
+            toast.error("Error");
         }
     };
 
     return (
         <form onSubmit={handleSubmitForm}>
-            <div className="p-10">
-                <div className="flex flex-col font-bold p-4">
-                    Create new account.
+            <div className="pt-20 pb-12 px-14">
+                <div className="flex flex-row font-semibold text-3xl text-darkbluecute pl-1">
+                    Create new account
+                    <p className=" text-redcute">.</p>
                 </div>
-                <div className="flex flex-col font-light text-xs p-2">
-                    <Link to="/evender/event">Already A Member?</Link>
+
+                <div className="flex flex-row font-light text-xs p-2 mt-0.5">
+                    <p className="mr-2 font-semibold text-xs text-gray-400 ">
+                        Already have an account?
+                    </p>
+                    <Link
+                        to="/login"
+                        className="text-lightbluecute font-semibold hover:underline"
+                    >
+                        Login
+                    </Link>
                 </div>
-                <div className=" grid grid-cols-2">
-                    <div className="p-1">
+
+                <div className=" grid grid-cols-2 mt-7">
+                    <div className="p-1 mb-1">
                         <RegisterInput
                             name="firstName"
                             placeholder="First name"
@@ -115,11 +126,18 @@ export default function RegisterForm() {
                         <InputErrorMessage message={error.confirmPassword} />
                     )}
                 </div>
-                <div className="p-3 text-center">
-                    <button className="btn btn-neutral p-3 rounded-3xl">
+
+                <div className="p-1 text-center mt-9 mb-8">
+                    <button className="bg-darkgraycute hover:bg-lightbluecute text-white text-sm py-3 font-semibold rounded-full w-full">
                         Create account
                     </button>
                 </div>
+                <Link to="/login">
+                    <p className="text-darkgraycute text-xs font-light cursor-pointer hover:underline flex items-center">
+                        <LeftIcon2 className="mr1" />
+                        back
+                    </p>
+                </Link>
             </div>
         </form>
     );

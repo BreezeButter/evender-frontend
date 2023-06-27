@@ -1,6 +1,8 @@
 import { convertDate } from "../../../utils/dateUtil";
+import { useNavigate } from "react-router-dom";
 
 export default function MyEventCard({
+    id,
     title,
     placeProvince,
     image1,
@@ -8,8 +10,12 @@ export default function MyEventCard({
     dateStart,
 }) {
     const [date, time] = convertDate(dateStart);
+    const navigate = useNavigate();
     return (
-        <div className="w-[70%] border border-gray-300 rounded-md p-6 ">
+        <div
+            className="w-[70%] border border-gray-300 rounded-md p-6 cursor-pointer  hover:border-lightbluecute "
+            onClick={() => navigate(`/evender/eventDetail/${id}`)}
+        >
             <div className="flex flex-row justify-between">
                 <div>
                     <p className="text-xs font-medium text-gray-500 mb-2">

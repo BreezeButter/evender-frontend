@@ -1,4 +1,4 @@
-import createClasses from '../../../utils/createClasses';
+import createClasses from "../../../utils/createClasses";
 
 export default function RegisterInput({
     placeholder,
@@ -8,12 +8,12 @@ export default function RegisterInput({
     isInvalid,
 }) {
     const defaultClassName =
-        'block w-full rounded-md border px-3 py-1.5 leading-6 outline-none text-sm focus:ring';
+        "block w-full rounded-lg border px-3 py-2 leading-6 outline-none text-sm focus:ring";
     const className = createClasses(
         defaultClassName,
         isInvalid
-            ? 'border-red-500 focus:ring-red-300'
-            : 'border-gray-300 focus:ring-blue-300 focus:border-blue-500'
+            ? "border-red-500 focus:ring-red-300"
+            : "border-darkbluecute focus:ring-blue-300 focus:border-blue-500"
     );
     return (
         <input

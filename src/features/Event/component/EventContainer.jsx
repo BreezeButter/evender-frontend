@@ -15,16 +15,10 @@ export default function EventContainer({
     const [date, time] = convertDate(dateStart);
 
     return (
-<<<<<<< HEAD
         <div
             className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer"
             onClick={() => navigate(`/evender/eventDetail/${id}`)}
         >
-=======
-        <div className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer"
-            onClick={() => navigate(`/evender/eventDetail/${id}`)}>
-
->>>>>>> 4ce52e8141a4e573ef966cf208ed99d617e73c50
             <div className="flex flex-col gap-3">
                 <p className="text-xs text-gray-500 font-medium">
                     {date} {time}

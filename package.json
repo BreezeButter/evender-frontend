@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "install": "^0.13.0",
     "javascript-time-ago": "^2.5.9",
     "joi": "^17.9.2",
     "jwt-decode": "^3.1.2",
+    "outline": "link:@heroicons/react/24/outline",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",
