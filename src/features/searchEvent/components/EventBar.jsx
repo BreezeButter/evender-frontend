@@ -15,9 +15,6 @@ export default function EventBar() {
         dateEnd: undefined,
         placeProvince: undefined,
         box: undefined,
-        latitude: undefined,
-        longitude: undefined,
-        radius: undefined,
     }
 
 
@@ -40,8 +37,9 @@ export default function EventBar() {
 
     ///keepdata send to backend
     const [input, setInput] = useState(initialValue);
-    const [radi, setRadi] = useState('');
-    console.log('RADIIIIIIIIRADIIIII', radi)
+    const [location, setLocation] = useState('')
+    const [radius, setRadiuse] = useState('');
+
 
 
 
@@ -52,8 +50,8 @@ export default function EventBar() {
     // console.log("input", input)
 
     useEffect(() => {
-        dispatch(syncEventSearch(input))
-    }, [input]);
+        dispatch(syncEventSearch({ ...input, latitude: location.latitude, longitude: location.longitude, radi: radius }))
+    }, [input, radius]);
 
 
     return (
@@ -67,16 +65,14 @@ export default function EventBar() {
                     onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
                     name="placeProvince"
                 >
-                    <option disabled value="">Province</option> {/* Add an empty value for the disabled option */}
+                    <option disabled value="Province">Province</option> {/* Add an empty value for the disabled option */}
                     {addAllPlaceLoad?.map((el, idx) => (
-                        <option
-                            key={idx}
-
-                        >
+                        <option key={idx}>
                             {el.placeProvince}
                         </option>
                     ))}
                 </select>
+
                 <ul className="menu menu-horizontal px-1">
                     {eventCategory.map((el, idx) => (
                         <li key={idx}>
@@ -116,13 +112,13 @@ export default function EventBar() {
 
                 </div>
             </div>
-            <CurrentGeo radi={radi} />
+            <CurrentGeo setLocation={setLocation} />
             <div className="form-control">
                 <div className="input-group">
                     <select className="select select-bordered"
-                        onChange={(e) => setRadi(e.target.value)}>
+                        onChange={(e) => setRadiuse(e.target.value)}>
                         <option disabled selected>Nearby</option>
-
+                        <option value={''}>None</option>
                         <option value={1}>1 km</option>
                         <option value={5}>5 km</option>
                         <option value={10}>10km</option>

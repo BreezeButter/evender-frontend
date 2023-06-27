@@ -1,13 +1,13 @@
 
 import { useDispatch } from "react-redux";
-import { syncEventNearby } from '../slice/searchSlice'
+// import { syncEventNearby } from '../slice/searchSlice'
 import { useEffect } from "react";
 
 
 
-export default function CurrentGeo({ radi }) {
+export default function CurrentGeo({ radi, setLocation }) {
 
-    const dispatch = useDispatch()
+
 
     const options = {
         enableHighAccuracy: true,
@@ -20,9 +20,9 @@ export default function CurrentGeo({ radi }) {
     function success(pos) {
 
         const crd = pos.coords;
-        console.log("########", { latitude: crd.latitude, longitude: crd.longitude })
 
-        dispatch(syncEventNearby({ latitude: crd.latitude, longitude: crd.longitude, radi: +radi }))
+
+        setLocation({ latitude: crd.latitude, longitude: crd.longitude })
 
 
         // console.log("Your current position is:");

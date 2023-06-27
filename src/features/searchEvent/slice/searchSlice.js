@@ -31,6 +31,7 @@ export const syncEventSearch = createAsyncThunk(
                     : input;
 
             const res = await eventSearchService.getSearchAll(modifiedInput);
+            console.log("RUTURNNNNNNN", res.data);
             return res.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data);
