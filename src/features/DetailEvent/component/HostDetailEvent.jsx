@@ -53,7 +53,7 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                         <div>
                             <Modal btnName='Delete Group '
                                 titleModal='Confirm Delete Group'
-                                descriptionModal='Before you delete group please tell every one know and accepted for delete group'
+                                descriptionModal='Before you delete group please tell every one know '
                                 btnTextModal='Leave'
                                 classExpreesion='bg-neutral text-white' />
                         </div>
