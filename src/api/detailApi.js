@@ -11,4 +11,4 @@ export const createJoinEventUser = async (id) =>
 export const leaveJointEvent = async (id) =>
     await axios.delete(`/eventdetails/${id}`);
 export const checkUserJoinedEvent = async (id) =>
-    await axios.get(`/eventdetails/${id}`);
+    await axios.get(`/eventdetails/check/${id}`);

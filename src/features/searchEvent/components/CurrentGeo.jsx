@@ -1,6 +1,7 @@
 
 import { useDispatch } from "react-redux";
 import { syncEventNearby } from '../slice/searchSlice'
+import { useEffect } from "react";
 
 
 
@@ -14,12 +15,14 @@ export default function CurrentGeo({ radi }) {
         maximumAge: 0,
     };
 
-    function success(pos) {
-        const crd = pos.coords;
 
+
+    function success(pos) {
+
+        const crd = pos.coords;
+        console.log("########", { latitude: crd.latitude, longitude: crd.longitude })
 
         dispatch(syncEventNearby({ latitude: crd.latitude, longitude: crd.longitude, radi: +radi }))
-
 
 
         // console.log("Your current position is:");
@@ -32,8 +35,9 @@ export default function CurrentGeo({ radi }) {
     function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
     }
-
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }, [radi])
 
     return (
         <div></div>

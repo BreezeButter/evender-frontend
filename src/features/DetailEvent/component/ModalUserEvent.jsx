@@ -1,5 +1,5 @@
 export default function ModalUserEvent({ eventDetail }) {
-    console.log(eventDetail);
+
     return (
         <>
             <input type="checkbox" id="showAllUser" className="modal-toggle" />

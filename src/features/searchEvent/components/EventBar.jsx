@@ -49,9 +49,7 @@ export default function EventBar() {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
 
-
-
-    console.log("input", input)
+    // console.log("input", input)
 
     useEffect(() => {
         dispatch(syncEventSearch(input))

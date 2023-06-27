@@ -48,7 +48,6 @@ export const updateDetailEvent = createAsyncThunk(
     async (input, thunkApi) => {
         try {
             const result = await updateEventDetail(input.id, input.formData);
-
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
@@ -60,7 +59,6 @@ export const createJointEvent = createAsyncThunk(
     async (input, thunkApi) => {
         try {
             const result = await createJoinEventUser(input);
-
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
@@ -72,7 +70,6 @@ export const leaveJointEventsync = createAsyncThunk(
     async (input, thunkApi) => {
         try {
             const result = await leaveJointEvent(input);
-
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
@@ -84,7 +81,6 @@ export const checkUserJoined = createAsyncThunk(
     async (input, thunkApi) => {
         try {
             const result = await checkUserJoinedEvent(input);
-
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
@@ -153,7 +149,7 @@ const eventDetailSlice = createSlice({
                 stage.loading = true;
             })
             .addCase(checkUserJoined.fulfilled, (stage, action) => {
-                stage.UserJoined = true;
+                stage.UserJoined = action.payload;
                 stage.loading = false;
             })
             .addCase(checkUserJoined.rejected, (stage, action) => {
