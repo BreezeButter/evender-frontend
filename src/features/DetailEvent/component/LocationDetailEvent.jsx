@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function LocationDetailEvent({ eventDetail }) {
     const { id } = eventDetail;
-    console.log(eventDetail, '------////')
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleJointEvent = () => {
@@ -18,7 +17,7 @@ export default function LocationDetailEvent({ eventDetail }) {
             toast.error("Room is Full");
         }
     };
-    const isAuthToRoom = useSelector((state) => state.eventDetail.isAuthToRoom);
+    // const isAuthToRoom = useSelector((state) => state.eventDetail.isAuthToRoom);
     const user = useSelector((state) => state.auth.user);
 
 

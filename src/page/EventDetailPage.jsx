@@ -16,9 +16,9 @@ export default function EventDetailPage() {
     const dispatch = useDispatch();
     const eventDetail = useSelector((state) => state.eventDetail.event);
     const hostDetail = useSelector((state) => state.eventDetail.hostEvent);
+    console.log('--=====>', hostDetail)
 
     useEffect(() => {
-        console.log(id);
         const eventFunction = async () => {
             await dispatch(getEventUserDetail(id)).unwrap();
             await dispatch(getUserHostEvent(id)).unwrap();

@@ -1,20 +1,30 @@
-// import { useSelector } from "react-redux";
-// import { cloneUniforms } from "three";
+
+import { useDispatch, useSelector } from "react-redux";
 import ModalEditDetail from "../component/ModalEditDetail";
+import Modal from "../../../components/Modal";
+import { leaveJointEventsync, checkUserJoined } from "../slice/eventDetailSlice"
+import { useEffect } from "react";
 
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
 
 
-    console.log(eventDetail, hostDetail, "------->")
+    const dispatch = useDispatch()
+    const { id } = useSelector(state => state.auth.user)
+    const joined = useSelector(state => state.eventDetail.UserJoined)
+    console.log(joined)
+    console.log(hostDetail.userId, "hostDetail.userId")
 
-    // const isHost = useSelector(state => state.auth.user.id)
-    // console.log("isHost", isHost)
-    // console.log("eventDetail", eventDetail)
+    const host = hostDetail.userId === id
 
 
 
+    useEffect(() => {
+        dispatch(checkUserJoined(eventDetail.id))
+    }, [])
 
-
+    const hdlOnclick = () => {
+        dispatch(leaveJointEventsync(eventDetail.id))
+    }
     return (
         <>
             <div className="flex flex-col gap-4">
@@ -38,8 +48,8 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                     </div>
                 </div>
             </div>
-            <div className="flex  items-end p-4">
 
+            {host ? (<div className="flex  items-end p-4">
                 <label
                     className="w-[6rem] h-[2.5rem] bg-[#004DFF] opacity-90 rounded-full text-white flex justify-center items-center hover:bg-white hover:text-[#004DFF] hover:border-2 hover:border-[#004DFF]"
                     htmlFor="Detail"
@@ -48,7 +58,14 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                     edit
                 </label>
                 <ModalEditDetail eventDetail={eventDetail} />
-            </div>
+            </div>) : null}
+
+            {joined && !host ? (<Modal btnName='Leave group '
+                titleModal='Confirm Leave Group'
+                descriptionModal='you can join again if ypu want before event is end or people not full'
+                btnTextModal='Leave'
+                classExpreesion='bg-neutral text-white'
+                hdlOnclick={hdlOnclick} />) : null}
         </>
     );
 }
