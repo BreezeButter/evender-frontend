@@ -40,11 +40,16 @@ export default function EventBar() {
 
     ///keepdata send to backend
     const [input, setInput] = useState(initialValue);
+    const [radi, setRadi] = useState('');
+    console.log('RADIIIIIIIIRADIIIII', radi)
+
 
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
+
+
 
     console.log("input", input)
 
@@ -113,14 +118,17 @@ export default function EventBar() {
 
                 </div>
             </div>
-            <CurrentGeo />
+            <CurrentGeo radi={radi} />
             <div className="form-control">
                 <div className="input-group">
-                    <select className="select select-bordered">
+                    <select className="select select-bordered"
+                        onChange={(e) => setRadi(e.target.value)}>
                         <option disabled selected>Nearby</option>
-                        <option>5 km</option>
-                        <option>10km</option>
-                        <option>30km</option>
+
+                        <option value={1}>1 km</option>
+                        <option value={5}>5 km</option>
+                        <option value={10}>10km</option>
+                        <option value={30}>30km</option>
                     </select>
                 </div>
             </div>

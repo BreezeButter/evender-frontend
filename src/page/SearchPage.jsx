@@ -1,20 +1,21 @@
 import EventBar from "../features/searchEvent/components/EventBar";
 import SearchContainer from "../features/searchEvent/components/SearchContainer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function SearchPage() {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // const events = useSelector((state) => state.event.events);
-    const categoryEvent = useSelector((state) => state.search.eventFilter);
-    console.log(categoryEvent, "categoryEvent")
+    // const categoryEvent = useSelector((state) => state.search.eventFilter);
+    const locationFilter = useSelector((state) => state.search.locationFilter);
+    console.log(locationFilter, "categoryEvent")
 
 
     return (
         <div>
             <EventBar />
             <div className="flex flex-col gap-5 ">
-                {categoryEvent.map((el) => {
+                {locationFilter.map((el) => {
                     return (
                         <SearchContainer
                             key={el.id}

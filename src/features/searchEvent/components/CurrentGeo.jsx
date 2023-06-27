@@ -1,10 +1,10 @@
 
 import { useDispatch } from "react-redux";
 import { syncEventNearby } from '../slice/searchSlice'
-import { useEffect } from "react";
 
 
-export default function CurrentGeo() {
+
+export default function CurrentGeo({ radi }) {
 
     const dispatch = useDispatch()
 
@@ -18,7 +18,7 @@ export default function CurrentGeo() {
         const crd = pos.coords;
 
 
-        dispatch(syncEventNearby({ latitude: crd.latitude, longitude: crd.longitude }))
+        dispatch(syncEventNearby({ latitude: crd.latitude, longitude: crd.longitude, radi: +radi }))
 
 
 

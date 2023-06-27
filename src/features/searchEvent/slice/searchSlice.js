@@ -42,7 +42,6 @@ export const syncEventNearby = createAsyncThunk(
     "search/syncEventNearby",
     async (input, thunkApi) => {
         try {
-            console.log(input);
             const res = await eventSearchService.getLocationNearby(input);
             return res.data;
         } catch (error) {
