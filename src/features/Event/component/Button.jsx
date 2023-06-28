@@ -45,7 +45,6 @@ export default function Button() {
         if (
             !input.title ||
             !input.description ||
-            !input.placeProvince ||
             !input.dateStart ||
             !input.dateEnd ||
             !input.capacity ||
@@ -117,6 +116,7 @@ export default function Button() {
                                     <AutoCompleteComponent
                                         setSelected={setSelected}
                                     />
+
                                     {/* <Map /> */}
                                 </div>
                                 <Input
@@ -143,6 +143,9 @@ export default function Button() {
                                     <h1 className="font-semibold">
                                         Choose your category
                                     </h1>
+
+                                    <Maps selected={selected} />
+
                                     <select
                                         name="eventCategoryId"
                                         value={input.eventCategoryId}
@@ -168,6 +171,8 @@ export default function Button() {
                                     onChange={handleChangeFile}
                                 />
 
+
+
                                 <button className="bg-black text-white rounded-full w-36 h-8">
                                     Create
                                 </button>
@@ -176,7 +181,7 @@ export default function Button() {
                     )}
 
                     {/* <div className="w-96 h-80"> */}
-                    <Maps selected={selected} />
+
                     {/* </div> */}
 
                     {/* <div
@@ -189,6 +194,7 @@ export default function Button() {
                 <label className="modal-backdrop" htmlFor="my_modal_7">
                     Close
                 </label>
+
             </div>
         </div>
     );
