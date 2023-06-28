@@ -19,10 +19,12 @@ export default function LocationDetailEvent({ eventDetail }) {
             toast.error("Room is Full");
         }
     };
-    const isAuthToRoom = useSelector((state) => state.eventDetail.isAuthToRoom);
-    const user = useSelector((state) => state.auth.user);
+
+    // const user = useSelector((state) => state.auth.user);
     console.log(id);
     console.log("alsdlkasdlk", eventDetail);
+    // const joined = useSelector(state => state.eventDetail.UserJoined)
+
 
     const { latitude, longitude } = eventDetail;
 
@@ -61,25 +63,14 @@ export default function LocationDetailEvent({ eventDetail }) {
                         alt=""
                     /> */}
                 </div>
+                <button
+                    className="border-2 border-[#004DFF] text-[#004DFF] rounded-xl w-[60%] hover:bg-[#004DFF] hover:text-white"
+                    onClick={handleJointEvent}
+                >
+                    Join
+                </button>
 
-                {isAuthToRoom ? (
-                    <button
-                        className="border-2 border-[#004DFF] text-[#004DFF] rounded-xl w-[60%] hover:bg-[#004DFF] hover:text-white"
-                        onClick={() =>
-                            navigate(`/evender/chat/${eventDetail.id}`)
-                        }
-                    >
-                        Chat
-                    </button>
-                ) : (
-                    <button
-                        className="border-2 border-[#004DFF] text-[#004DFF] rounded-xl w-[60%] hover:bg-[#004DFF] hover:text-white"
-                        onClick={handleJointEvent}
-                    >
-                        Join
-                    </button>
-                )}
-            </div>
+            </div >
         </>
     );
 }

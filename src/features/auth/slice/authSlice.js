@@ -86,12 +86,10 @@ const authSlice = createSlice({
             .addCase(logout.fulfilled, (state) => {
                 state.isAuthenticated = false;
                 state.user = null;
-                toast.info("Already Logout");
+                state.loading = false;
+                // toast.info("Already Logout");
             })
             .addCase(logout.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(registerAsync.pending, (state) => {
                 state.loading = true;
             })
             .addCase(registerAsync.fulfilled, (state, action) => {
@@ -99,14 +97,21 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload;
             })
+            .addCase(registerAsync.pending, (state) => {
+                state.loading = true;
+            })
             .addCase(registerAsync.rejected, (state, action) => {
                 state.error = action.payload; // err.response.data.message
                 state.loading = false;
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
+                state.loading = false;
                 state.user = action.payload;
-                toast.success("Login success");
+                // toast.success("Login success");
+            })
+            .addCase(login.pending, (state) => {
+                state.loading = true;
             })
             .addCase(fetchMe.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
@@ -118,21 +123,23 @@ const authSlice = createSlice({
                 state.initialLoading = false;
             })
             .addCase(fetchMe.pending, (state) => {
-                state.loading = true
+                state.loading = true;
                 // state.initialLoading = true;
             })
             .addCase(loginGoogle.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
+                state.loading = false;
                 state.user = action.payload;
                 // state.initialLoading = false;
                 toast.success("Login success");
             })
+            .addCase(loginGoogle.pending, (state) => {
+                state.initialLoading = true;
+                state.loading = true;
+            })
             .addCase(loginGoogle.rejected, (state, action) => {
                 state.error = action.payload;
-                // state.initialLoading = false;
-            })
-            .addCase(loginGoogle.pending, (state) => {
-                // state.initialLoading = true;
+                state.initialLoading = false;
             }),
 });
 

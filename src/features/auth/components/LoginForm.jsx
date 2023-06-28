@@ -28,6 +28,7 @@ export default function LoginForm() {
     const onSubmit = async (data) => {
         try {
             await dispatch(login(data)).unwrap();
+            toast.success("Login success");
             navigate('/');
 
         } catch (err) {
@@ -101,6 +102,7 @@ export default function LoginForm() {
 
                                 dispatch(loginGoogle(data)).unwrap();
                                 navigate('/');
+                                toast.success("Login success");
                             }}
                             onReject={(err) => {
                                 console.log(err);

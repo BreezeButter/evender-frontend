@@ -7,16 +7,31 @@ import {
     getEventUserDetail,
     getUserHostEvent,
 } from "../slice/eventDetailSlice";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 // import { Link } from "react-router-dom";
 
 export default function ModalEditDetail({ eventDetail }) {
     // console.log(eventDetail);
     // const navigate = useNavigate();
+
+    // console.log(showImage);
     const id = eventDetail.id;
     const inputRef = useRef();
     const dispatch = useDispatch();
-    const [input, setInput] = useState("");
+    const initialInput = {
+        title: "",
+        description: "",
+        location: "",
+        dateStart: "",
+        dateEnd: "",
+        capacity: "",
+        // image1: "",
+        // image2: "",
+        // image3: "",
+    };
+    const [input, setInput] = useState(initialInput);
+    // console.log(input);
     const [file, setFile] = useState({});
 
     // console.log("OK---->", eventDetail.title);
@@ -27,6 +42,7 @@ export default function ModalEditDetail({ eventDetail }) {
     // console.log(eventDetail);
 
     const handleChangeInput = async (e) => {
+        // console.log(e.target.value);
         setInput({ ...input, [e.target.name]: e.target.value });
         if (
             e.target.name == "image1" ||
@@ -39,8 +55,6 @@ export default function ModalEditDetail({ eventDetail }) {
     const updateEventDetail = async (e) => {
         try {
             e.preventDefault();
-            console.log(input);
-            console.log(file);
 
             const formData = new FormData();
             console.log(input, "Hellooooooooooooooooo");
@@ -50,8 +64,8 @@ export default function ModalEditDetail({ eventDetail }) {
             if (input.description) {
                 formData.append("description", input.description);
             }
-            if (input.placeProvince) {
-                formData.append("placeProvince", input.placeProvince);
+            if (input.location) {
+                formData.append("location", input.location);
             }
             if (input.dateStart) {
                 formData.append("dateStart", input.dateStart);
@@ -77,6 +91,25 @@ export default function ModalEditDetail({ eventDetail }) {
             console.log(err);
         }
     };
+
+    useEffect(() => {
+        if (eventDetail) {
+            setInput({
+                title: eventDetail?.title,
+                description: eventDetail?.description,
+                location: eventDetail?.location,
+                dateStart: eventDetail?.dateStart?.slice(0, 16),
+                dateEnd: eventDetail?.dateEnd?.slice(0, 16),
+                capacity: eventDetail?.capacity,
+                // image1: eventDetail?.image1,
+                // image2: eventDetail?.image2,
+                // image3: eventDetail?.image3,
+            });
+        }
+        // setFile({ image1: eventDetail.image1 });
+    }, [eventDetail]);
+
+    // console.log(eventDetail);
 
     return (
         <div>
@@ -108,10 +141,10 @@ export default function ModalEditDetail({ eventDetail }) {
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="text"
-                                    placeholder="lplaceProvince"
-                                    value={input.placeProvince}
+                                    placeholder="location"
+                                    value={input.location}
                                     onChange={handleChangeInput}
-                                    name="placeProvince"
+                                    name="location"
                                 />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
@@ -140,32 +173,59 @@ export default function ModalEditDetail({ eventDetail }) {
                                 {/* <div className="w-[400px] rounded-xl">
                                     <img src={src || defaultImage} />
                                 </div> */}
+                                <img
+                                    src={
+                                        file.image1
+                                            ? URL.createObjectURL(file.image1)
+                                            : eventDetail.image1
+                                    }
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="file"
                                     placeholder="Photo"
-                                    value={input.image}
+                                    value={input.image1}
                                     onChange={handleChangeInput}
                                     name="image1"
                                     ref={inputRef}
                                 />
+                                {/* <img
+                                    src={URL.createObjectURL(file?.image2)}
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                /> */}
+                                <img
+                                    src={
+                                        file.image2
+                                            ? URL.createObjectURL(file.image2)
+                                            : eventDetail.image2
+                                    }
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="file"
                                     placeholder="Photo"
-                                    value={input.image}
+                                    value={input.image2}
                                     onChange={handleChangeInput}
                                     name="image2"
                                     ref={inputRef}
                                 />
+                                <img
+                                    src={
+                                        file.image3
+                                            ? URL.createObjectURL(file.image3)
+                                            : eventDetail.image3
+                                    }
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="file"
                                     placeholder="Photo"
-                                    value={input.image}
+                                    value={input.image3}
                                     onChange={handleChangeInput}
-                                    name="image3"
-                                />
+                                    name="image3" />
                                 <div className="flex flex-row justify-center gap-6">
                                     <button
                                         type="submit"

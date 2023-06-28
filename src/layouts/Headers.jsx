@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon2, UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from '../features/auth/slice/authSlice'
+import { toast } from "react-toastify";
 
 
 export default function Headers() {
@@ -14,6 +15,7 @@ export default function Headers() {
     const hdlLogOut = () => {
 
         dispatch(logout())
+        toast.info("Already Logout");
     }
     return (
         <div className="navbar text-darkbluecute">
@@ -54,20 +56,26 @@ export default function Headers() {
                     >
                         <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 pl-4">
                             <div className="avatar">
-                                <div className="w-16 h-16 rounded-full">
-                                    <img src={user?.image} />
+                                <div className="w-16 h-16 rounded-full"
+                                >
+                                    <img src={user?.image}
+                                        onClick={() => navagate(`profile/${user?.id}`)} />
                                 </div>
                             </div>
                             <div className="flex flex-col"
-                                onClick={() => navagate(`profile/${user?.id}`)}>
+                            >
                                 <h1 className="text-base font-normal">
                                     {user?.firstName}
                                 </h1>
                                 <p className="font-light">{user?.email}</p>
-                                <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute"
-                                    onClick={() => navagate(`editprofile/${user?.id}`)}>
-                                    Edit profile
-                                </p>
+                                <Link to={`/evender/editprofile/${user?.id}`}>
+                                    <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute"
+                                    >
+                                        Edit profile
+                                    </p>
+                                </Link>
+
+
                             </div>
                         </div>
                         <hr />
