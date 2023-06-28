@@ -6,6 +6,8 @@ const initialState = {
     loading: false,
     error: null,
     eventUser: [],
+    joinEventByUser: [],
+    chats: [],
 };
 
 export const getAllEventsAsync = createAsyncThunk(
@@ -40,6 +42,29 @@ export const getNextEventUser = createAsyncThunk(
             const result = await eventService.getNextEvent();
 
             return result.data;
+        } catch (err) {
+            return thunkApi.rejectWithValue(err.response.data);
+        }
+    }
+);
+export const getJoinEventByUserAsync = createAsyncThunk(
+    "event/getJoinEventByUserAsync",
+    async (_, thunkApi) => {
+        try {
+            const res = await eventService.getJoinEventByUser();
+            return res.data.events;
+        } catch (err) {
+            return thunkApi.rejectWithValue(err.response.data);
+        }
+    }
+);
+
+export const getChatByEventAsync = createAsyncThunk(
+    "event/getChatByEventAsync",
+    async (input, thunkApi) => {
+        try {
+            const res = await eventService.getChatByEvent(input);
+            return res.data.chats;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
         }
@@ -81,6 +106,28 @@ const eventSlice = createSlice({
             })
             .addCase(getNextEventUser.rejected, (state) => {
                 state.loading = false;
+            })
+            .addCase(getJoinEventByUserAsync.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getJoinEventByUserAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.joinEventByUser = action.payload;
+            })
+            .addCase(getJoinEventByUserAsync.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(getChatByEventAsync.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getChatByEventAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.chats = action.payload;
+            })
+            .addCase(getChatByEventAsync.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             }),
 });
 
