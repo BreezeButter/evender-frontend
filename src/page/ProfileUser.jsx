@@ -1,20 +1,33 @@
 import { Link, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMe } from "../features/auth/slice/authSlice";
+// import { fetchProfile } from "../features/ProfileUser/slice/profileUserSlice";
 import { getUserHostEvent } from "../features/ProfileUser/slice/profileUserSlice";
 import MyEventCard from "../features/ProfileUser/components/myEventCard";
 import { getNextEventUser } from "../features/Event/slice/eventSlice";
 import MyNextEventCard from "../features/ProfileUser/components/MyNextEventCard";
 
+
 export default function ProfileUser() {
+
     const { id } = useParams();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const myEvent = useSelector((state) => state.profileUser.hostEvent);
+    // const userProfile = useSelector((state) => state.profileUser.userProfile);
     const eventUser = useSelector((state) => state.event.eventUser);
     const [click, setClick] = useState(false);
+
+
+    // const [renderUser, setRenderUser] = useState({})
+
+    // useEffect(() => {
+
+    //     dispatch(fetchProfile(id));
+    //     console.log(id)
+
+    // }, [id])
 
     useEffect(() => {
         let isCancel = false;
@@ -99,6 +112,7 @@ export default function ProfileUser() {
                             ) : (
                                 <p></p>
                             )}
+
                             <Link to={`/evender/editprofile/${user?.id}`}>
                                 <p className="underline cursor-pointer font-normal text-gray-500 hover:text-darkgraycute pr-10">
                                     Edit
@@ -137,6 +151,7 @@ export default function ProfileUser() {
                         <div className="flex flex-col justify-center items-center mt-6 gap-5 mb-24 ">
                             {myEvent.map((el) => (
                                 <MyEventCard
+                                    id={el.id}
                                     key={el.id}
                                     title={el.title}
                                     placeProvince={el.placeProvince}
@@ -151,6 +166,7 @@ export default function ProfileUser() {
                             {eventUser.map((el) => (
                                 <MyNextEventCard
                                     key={el.Event.id}
+                                    id={el.Event.id}
                                     title={el.Event.title}
                                     placeProvince={el.Event.placeProvince}
                                     image1={el.Event.image1}

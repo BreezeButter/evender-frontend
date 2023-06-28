@@ -79,6 +79,11 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 const authSlice = createSlice({
     name: "auth",
     initialState,
+    reducers: {
+        stopInitialLoading: (state, action) => {
+            state.initialLoading = false;
+        },
+    },
     extraReducers: (
         builder //เขียนแบบนี้แทนข้างล่าง
     ) =>
@@ -130,7 +135,7 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.loading = false;
                 state.user = action.payload;
-                // state.initialLoading = false;
+                state.initialLoading = false;
                 toast.success("Login success");
             })
             .addCase(loginGoogle.pending, (state) => {
@@ -142,5 +147,6 @@ const authSlice = createSlice({
                 state.initialLoading = false;
             }),
 });
+export const { stopInitialLoading } = authSlice.actions;
 
 export default authSlice.reducer;
