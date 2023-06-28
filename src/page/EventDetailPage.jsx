@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     getEventUserDetail,
     getUserHostEvent,
+    checkUserJoined,
 } from "../features/DetailEvent/slice/eventDetailSlice";
 
 export default function EventDetailPage() {
@@ -17,15 +18,16 @@ export default function EventDetailPage() {
     const eventDetail = useSelector((state) => state.eventDetail.event);
     const hostDetail = useSelector((state) => state.eventDetail.hostEvent);
 
+
     useEffect(() => {
-        console.log(id);
         const eventFunction = async () => {
             await dispatch(getEventUserDetail(id)).unwrap();
             await dispatch(getUserHostEvent(id)).unwrap();
+            await dispatch(checkUserJoined(id)).unwrap();
         };
         eventFunction();
     }, []);
-    // console.log(hostDetail);
+
     return (
         <div className="flex justify-center flex-col">
             {/* User Header + Button */}

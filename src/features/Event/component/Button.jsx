@@ -82,9 +82,9 @@ export default function Button() {
                 Create Event
             </label>
 
-            <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box w-full">
+            <input type="checkbox" id="my_modal_7" className="modal-toggle " />
+            <div className="modal ">
+                <div className="modal-box ">
                     {loading ? (
                         <div className="flex justify-center">
                             <span className="loading loading-spinner loading-lg"></span>
