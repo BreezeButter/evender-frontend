@@ -132,10 +132,10 @@ const authSlice = createSlice({
                 // state.initialLoading = true;
             })
             .addCase(loginGoogle.fulfilled, (state, action) => {
-                state.isAuthenticated = false;
+                state.isAuthenticated = true;
                 state.loading = false;
                 state.user = action.payload;
-                // state.initialLoading = false;
+                state.initialLoading = false;
                 toast.success("Login success");
             })
             .addCase(loginGoogle.pending, (state) => {
