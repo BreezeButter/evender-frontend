@@ -45,6 +45,9 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
 
     }
 
+    console.log("eventDetail", eventDetail)
+
+
 
     return (
         <>
@@ -54,11 +57,13 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                         {eventDetail.placeProvince}
                     </h1>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4"
+                    onClick={() => navigate(`/evender/profile/${eventDetail?.userId}`)}>
                     <img
                         className="w-[7rem] h-[7rem] rounded-full"
                         src={hostDetail.User?.image}
                         alt=""
+                    // onClick={navigate(`evender/profile/${}`)}
                     />
                     <div>
                         <p>Hosted By</p>
