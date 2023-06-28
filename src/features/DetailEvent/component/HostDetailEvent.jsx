@@ -2,21 +2,42 @@
 import { useDispatch, useSelector } from "react-redux";
 import ModalEditDetail from "../component/ModalEditDetail";
 import Modal from "../../../components/Modal";
-import { leaveJointEventsync } from "../slice/eventDetailSlice"
+import { leaveJointEventsync, deleteEventEventsync } from "../slice/eventDetailSlice"
+import { fetchMe } from "../../auth/slice/authSlice"
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 
 
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
 
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { id } = useSelector(state => state.auth.user)
-    const joined = useSelector(state => state.eventDetail.UserJoined)
-    const host = hostDetail.userId === id
-    console.log('host====>', host)
-    console.log('joined====>', joined)
-    const hdlOnclick = () => {
-        dispatch(leaveJointEventsync(eventDetail.id))
+    const me = useSelector(state => state.auth.user)
+    const joined = useSelector(state => state.eventDetail.userJoined)
+    console.log("joined", joined)
+    const host = hostDetail.userId === me?.id
+
+    const hdlOnclick = async () => {
+
+        await dispatch(leaveJointEventsync(eventDetail.id)).unwrap()
+        await dispatch(fetchMe()).unwrap()
+        toast.info("You are leave this group", {
+            icon: "🚀"
+        });
+        navigate('/evender/event')
     }
+
+    const hdlDelEvent = async () => {
+        await dispatch(deleteEventEventsync(eventDetail.id)).unwrap()
+        toast.error("You delete this group", {
+            icon: "😢"
+        });
+        navigate('/evender/event')
+
+    }
+
+
     return (
         <>
             <div className="flex flex-col gap-4">
@@ -33,7 +54,6 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                     />
                     <div>
                         <p>Hosted By</p>
-
                         <p className="font-semibold">
                             {hostDetail.User?.userName}
                         </p>
@@ -54,8 +74,10 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                             <Modal btnName='Delete Group '
                                 titleModal='Confirm Delete Group'
                                 descriptionModal='Before you delete group please tell every one know '
-                                btnTextModal='Leave'
-                                classExpreesion='bg-neutral text-white' />
+                                btnTextModal=' Cobfirm Delete!!'
+                                classExpreesion='bg-neutral text-white'
+                                hdlOnclick={hdlDelEvent}
+                            />
                         </div>
                         <ModalEditDetail eventDetail={eventDetail} />
                     </div>

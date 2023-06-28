@@ -6,6 +6,7 @@ import {
     createJoinEventUser,
     leaveJointEvent,
     checkUserJoinedEvent,
+    deleteEvent,
 } from "../../../api/detailApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ const initialState = {
     hostEvent: {},
     eventRoomId: null,
     loading: false,
-    UserJoined: false,
+    userJoined: "",
 };
 
 export const getEventUserDetail = createAsyncThunk(
@@ -70,6 +71,18 @@ export const leaveJointEventsync = createAsyncThunk(
     async (input, thunkApi) => {
         try {
             const result = await leaveJointEvent(input);
+            console.log("leaveJointEventsync_result.data", !!result.data);
+            return !!result.data;
+        } catch (err) {
+            return thunkApi.rejectWithValue(err.response.data);
+        }
+    }
+);
+export const deleteEventEventsync = createAsyncThunk(
+    "/eventdetails/deleteEventEventsync",
+    async (input, thunkApi) => {
+        try {
+            const result = await deleteEvent(input);
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
@@ -91,6 +104,7 @@ export const checkUserJoined = createAsyncThunk(
 const eventDetailSlice = createSlice({
     name: "Detail",
     initialState,
+
     extraReducers: (builder) =>
         builder
             .addCase(getEventUserDetail.pending, (stage, action) => {
@@ -138,9 +152,7 @@ const eventDetailSlice = createSlice({
             })
             .addCase(leaveJointEventsync.fulfilled, (stage, action) => {
                 stage.loading = false;
-                const navigate = useNavigate();
-                toast.info("Leave Group Success");
-                navigate("/evender/event");
+                stage.userJoined = false;
             })
             .addCase(leaveJointEventsync.rejected, (stage, action) => {
                 stage.loading = false;
@@ -149,10 +161,19 @@ const eventDetailSlice = createSlice({
                 stage.loading = true;
             })
             .addCase(checkUserJoined.fulfilled, (stage, action) => {
-                stage.UserJoined = action.payload;
+                stage.userJoined = action.payload;
                 stage.loading = false;
             })
             .addCase(checkUserJoined.rejected, (stage, action) => {
+                stage.loading = false;
+            })
+            .addCase(deleteEventEventsync.pending, (stage, action) => {
+                stage.loading = true;
+            })
+            .addCase(deleteEventEventsync.fulfilled, (stage, action) => {
+                stage.loading = false;
+            })
+            .addCase(deleteEventEventsync.rejected, (stage, action) => {
                 stage.loading = false;
             }),
 });

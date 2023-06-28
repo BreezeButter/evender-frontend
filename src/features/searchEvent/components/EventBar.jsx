@@ -10,11 +10,17 @@ import CurrentGeo from "./CurrentGeo";
 export default function EventBar() {
 
     const initialValue = {
-        eventCategoryId: undefined,
-        dateStart: undefined,
-        dateEnd: undefined,
-        placeProvince: undefined,
-        box: undefined,
+        eventCategoryId: '',
+        dateStart: '',
+        dateEnd: '',
+        placeProvince: '',
+        box: '',
+        latitude: '',
+        longitude: '',
+
+        radi: ''
+
+
     }
 
 
@@ -31,6 +37,8 @@ export default function EventBar() {
     //placemaping recive from backend
     const placeLoad = useSelector((state) => state.search.placeLoad);
     const addAllPlaceLoad = [...placeLoad, { placeProvince: "All" }];
+
+
     useEffect(() => {
         dispatch(syncEventPlace())
     }, []);
@@ -39,9 +47,6 @@ export default function EventBar() {
     const [input, setInput] = useState(initialValue);
     const [location, setLocation] = useState('')
     const [radius, setRadiuse] = useState('');
-
-
-
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -65,7 +70,7 @@ export default function EventBar() {
                     onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
                     name="placeProvince"
                 >
-                    <option disabled value="Province">Province</option> {/* Add an empty value for the disabled option */}
+                    <option disabled value={''}>Province</option> {/* Add an empty value for the disabled option */}
                     {addAllPlaceLoad?.map((el, idx) => (
                         <option key={idx}>
                             {el.placeProvince}
@@ -117,7 +122,7 @@ export default function EventBar() {
                 <div className="input-group">
                     <select className="select select-bordered"
                         onChange={(e) => setRadiuse(e.target.value)}>
-                        <option disabled selected>Nearby</option>
+                        <option disabled selected value={''}>Nearby</option>
                         <option value={''}>None</option>
                         <option value={1}>1 km</option>
                         <option value={5}>5 km</option>
@@ -126,8 +131,17 @@ export default function EventBar() {
                     </select>
                 </div>
             </div>
-            <button className="btn btn-square mx-4">
-                <span><Reset /></span>
+            <button className="btn btn-square mx-4"
+                onClick={() => {
+                    console.log("first")
+                    setInput(initialValue);
+                    setRadiuse('');
+                }}>
+                <span>
+                    <Reset
+
+                    />
+                </span>
             </button>
             <div className="navbar-end">
             </div>
