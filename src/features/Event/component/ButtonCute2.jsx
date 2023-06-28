@@ -78,7 +78,7 @@ export default function ButtonCute() {
         <>
             <label
                 htmlFor="my_modal_7"
-                className="btn bg-darkbluecute text-white rounded-full w-full h-12 self-center hover:text-darkbluecute"
+                className="bg-darkbluecute text-white rounded-full w-full h-12 self-center hover:text-darkbluecute"
                 onClick={() => setOpen(true)}
             >
                 Create Event
@@ -257,7 +257,7 @@ export default function ButtonCute() {
                                                                         Category
                                                                     </h1>
                                                                     <select
-                                                                        className="block rounded-lg border border-gray-400 font-normal py-2.5 focus:ring-1 w-full bg-white text-sm pl-4 mt-2"
+                                                                        className="block rounded-lg border border-gray-400 font-normal py-2.5 focus:ring-1 w-full bg-white text-sm pl-4 mt-2 "
                                                                         name="eventCategoryId"
                                                                         value={
                                                                             input.eventCategoryId

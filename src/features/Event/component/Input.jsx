@@ -1,4 +1,4 @@
-export default function Input({
+export default function Input2({
     title,
     type = "text",
     value,
@@ -8,10 +8,10 @@ export default function Input({
 }) {
     return (
         <div>
-            <h1 className="font-medium">{title}</h1>
+            <h1 className="font-medium text-darkbluecute">{title}</h1>
             <input
                 type={type}
-                className="block rounded-lg border border-gray-400 font-normal py-2.5 focus:ring-1 w-full bg-white text-sm pl-4 mt-2"
+                className="block rounded-lg border border-gray-400 font-normal py-2.5 focus:ring-1 w-full bg-transparent text-darkgraycute text-sm pl-4 mt-2 mb-3"
                 value={value}
                 onChange={onChange}
                 name={name}

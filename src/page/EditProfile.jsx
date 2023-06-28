@@ -2,8 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editProfileUser } from "../features/ProfileUser/slice/profileUserSlice";
+import { Label } from "../components/ui/label";
 // import { toast } from "react-toastify";
+
 import { fetchMe } from "../features/auth/slice/authSlice";
+import { Textarea } from "../components/ui/textarea";
+import { AddPhotoIcon } from "../icons";
+import { Input } from "../components/ui/input";
+
 // import { updateProfileImage as updateProfile } from "../features/ProfileUser/slice/profileUserSlice";
 // import * as userService from "../api/profileUserApi";
 
@@ -73,7 +79,7 @@ export default function EditProfile() {
             <div className="w-[65%] ">
                 {/* Head */}
                 <div className="mb-20 text-4xl font-semibold">
-                    <h1 className="borber border-b-4 pb-2 border-lightbluecute w-60">
+                    <h1 className="borber border-b-4 pb-2 border-lightbluecute w-60 text-darkgraycute">
                         Edit Profile
                     </h1>
                 </div>
@@ -83,7 +89,7 @@ export default function EditProfile() {
                     <div className="flex flex-row justify-between mb-28">
                         {/* Left */}
 
-                        <div className="w-72 h-72 rounded-full">
+                        <div className="w-[50%] flex  items-start flex-col relative">
                             <img
                                 src={showImage}
                                 // onChange={(e) =>
@@ -92,12 +98,16 @@ export default function EditProfile() {
                                 //         image: e.target.value,
                                 //     })
                                 // }
-                                className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                className="w-80 h-80 object-cover rounded-full border border-gray-200 "
                             />
+                            <Label htmlFor="picture" className="">
+                                <AddPhotoIcon className="absolute bottom-[122px] right-28 border border-gray-200 shadow-sm rounded-full p-3 bg-white hover:bg-gray-100 cursor-pointer" />
+                            </Label>
                             <input
                                 type="file"
+                                id="picture"
                                 // className="w-72 mt-8 opacity-75"
-                                className="file-input file-input-ghost file-input-bordered  file-input-md hover:border-lightbluecute cursor-pointer w-72 max-w-xs mt-8"
+                                className="hidden w-80"
                                 onChange={(e) => {
                                     setImage(e.target.files[0]);
                                     setShowImage(
@@ -117,10 +127,10 @@ export default function EditProfile() {
                                                 First Name
                                             </span>
                                         </label>
-                                        <input
+                                        <Input
+                                            className="text-darkgraycute border-darkbluecute "
                                             type="text"
                                             placeholder="First Name"
-                                            className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
                                             value={input?.firstName}
                                             onChange={(e) =>
                                                 setInput({
@@ -138,7 +148,7 @@ export default function EditProfile() {
                                         </label>
                                         <select
                                             id="gender"
-                                            className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
+                                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-darkgraycute border-darkbluecute"
                                             value={input?.gender}
                                             onChange={(e) =>
                                                 setInput({
@@ -163,10 +173,10 @@ export default function EditProfile() {
                                                 Last Name
                                             </span>
                                         </label>
-                                        <input
+                                        <Input
+                                            className="text-darkgraycute border-darkbluecute "
                                             type="text"
                                             placeholder="Last Name"
-                                            className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
                                             value={input?.lastName}
                                             onChange={(e) =>
                                                 setInput({
@@ -182,10 +192,10 @@ export default function EditProfile() {
                                                 Birthday
                                             </span>
                                         </label>
-                                        <input
+                                        <Input
+                                            className="text-darkgraycute border-darkbluecute "
                                             type="date"
                                             placeholder="Birthday"
-                                            className="input input-bordered w-full max-w-xs text-sm font-light bg-white "
                                             value={input?.bdate}
                                             onChange={(e) => {
                                                 console.log(e.target.value);
@@ -200,14 +210,14 @@ export default function EditProfile() {
                                 <div className="form-control w-full mt-3">
                                     <label className="label">
                                         <span className="label-text text-base text-darkbluecute font-medium">
-                                            About me
+                                            Bio
                                         </span>
                                     </label>
-                                    <textarea
-                                        className="block rounded-lg max-w-2xl border mb-6 border-gray-200 font-light py-3.5  bg-white text-sm pl-4 outline-none"
+                                    <Textarea
+                                        className="resize-none text-darkgraycute border-darkbluecute"
                                         rows="5"
                                         name="description"
-                                        placeholder="About me..."
+                                        placeholder="Tell us a little bit about yourself..."
                                         value={input?.aboutMe}
                                         onChange={(e) =>
                                             setInput({

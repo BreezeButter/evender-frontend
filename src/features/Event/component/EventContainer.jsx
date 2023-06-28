@@ -16,7 +16,7 @@ export default function EventContainer({
 
     return (
         <div
-            className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer"
+            className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer justify-between"
             onClick={() => navigate(`/evender/eventDetail/${id}`)}
         >
             <div className="flex flex-col gap-3">
@@ -39,14 +39,16 @@ export default function EventContainer({
                     </div>
                     <div className="border border-gray-500 h-fit rounded-md px-2 py-0.5 flex flex-row items-center gap-0.5">
                         <UserEventIcon className="pb-0.5" />
-                        <p className="text-sm font-light">43/53</p>
+                        <p className="text-sm font-light text-darkgraycute">
+                            43/53
+                        </p>
                     </div>
                 </div>
                 <h1 className="font-medium text-darkbluecute text-base mt-1.5">
                     {placeProvince}
                 </h1>
                 <div className=" overflow-hidden h-10">
-                    <p className="max-w-[450px] text-sm font-light ">
+                    <p className="max-w-[450px] text-sm font-light text-darkbluecute ">
                         {description}
                     </p>
                 </div>

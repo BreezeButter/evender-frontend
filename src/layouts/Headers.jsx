@@ -66,10 +66,12 @@ export default function Headers() {
                                 </div>
                             </div>
                             <div className="flex flex-col">
-                                <h1 className="text-base font-normal">
+                                <h1 className="text-base font-normal text-darkgraycute">
                                     {user?.firstName}
                                 </h1>
-                                <p className="font-light">{user?.email}</p>
+                                <p className="font-light text-gray-800">
+                                    {user?.email}
+                                </p>
                                 <Link to={`/evender/editprofile/${user?.id}`}>
                                     <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
                                         Edit profile
@@ -78,10 +80,10 @@ export default function Headers() {
                             </div>
                         </div>
                         <hr />
-                        <li className="mt-2 hover:font-medium">
+                        <li className="mt-2 hover:font-medium text-darkgraycute">
                             <a onClick={hdlLogOut}>
                                 Sign out
-                                <SignOutIcon className="opacity-50" />
+                                <SignOutIcon className="opacity-20 " />
                             </a>
                         </li>
                     </ul>

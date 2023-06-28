@@ -305,3 +305,47 @@ export function GoogleIcon(props) {
         </svg>
     );
 }
+
+export function DownIcon(props) {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+            width="17px"
+            height="17px"
+        >
+            <path
+                d="M7 10l5 5 5-5"
+                stroke="#000"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+}
+
+export function AddPhotoIcon(props) {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+            width="55px"
+            height="55px"
+        >
+            <g
+                stroke="#1117"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            >
+                <path d="M21 11v7a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2h1.5a2 2 0 001.6-.8l1.05-1.4a2 2 0 011.6-.8h2.5M18.5 4v2.5m0 2.5V6.5m0 0H16m2.5 0H21" />
+                <circle cx={12} cy={13} r={4} />
+            </g>
+        </svg>
+    );
+}
