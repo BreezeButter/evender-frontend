@@ -10,7 +10,7 @@ const initialState = {
     error: null,
     loading: false,
     user: null,
-    initialLoading: false,
+    initialLoading: true,
 };
 
 // const navigate = useNavigate();
@@ -118,20 +118,21 @@ const authSlice = createSlice({
                 state.initialLoading = false;
             })
             .addCase(fetchMe.pending, (state) => {
-                state.initialLoading = true;
+                state.loading = true
+                // state.initialLoading = true;
             })
             .addCase(loginGoogle.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
                 state.user = action.payload;
-                state.initialLoading = false;
+                // state.initialLoading = false;
                 toast.success("Login success");
             })
             .addCase(loginGoogle.rejected, (state, action) => {
                 state.error = action.payload;
-                state.initialLoading = false;
+                // state.initialLoading = false;
             })
             .addCase(loginGoogle.pending, (state) => {
-                state.initialLoading = true;
+                // state.initialLoading = true;
             }),
 });
 

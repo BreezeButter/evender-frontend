@@ -48,8 +48,9 @@ export default function EditProfile() {
     };
 
     useEffect(() => {
-        dispatch(fetchMe());
+        // dispatch(fetchMe());
     }, []);
+
     useEffect(() => {
         console.log(user);
         if (user) {
