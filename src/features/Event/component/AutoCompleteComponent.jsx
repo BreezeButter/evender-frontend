@@ -13,7 +13,7 @@ const AutoCompleteComponent = ({ setSelected }) => {
         const placeName = place?.address_components[0]?.long_name;
         const placeCountry = place?.address_components[4]?.long_name;
         const placeProvince = place?.address_components[3]?.long_name;
-        const placeAdress = splitAddress(place.formatted_address);
+        // const placeAdress = splitAddress(place.formatted_address);
 
         setSelected({
             lat: latitude,
