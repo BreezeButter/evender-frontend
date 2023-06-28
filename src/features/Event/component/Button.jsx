@@ -69,16 +69,16 @@ export default function Button() {
                 Create Event
             </label>
 
-            <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box">
+            <input type="checkbox" id="my_modal_7" className="modal-toggle " />
+            <div className="modal ">
+                <div className="modal-box ">
                     {loading ? (
                         <div className="flex justify-center">
                             <span className="loading loading-spinner loading-lg"></span>
                         </div>
                     ) : (
                         <>
-                            <h3 className="text-lg font-bold text-center">
+                            <h3 className="text-lg font-bold text-center ">
                                 Create your Event
                             </h3>
                             <form

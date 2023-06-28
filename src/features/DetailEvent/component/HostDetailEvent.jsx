@@ -6,6 +6,7 @@ import { leaveJointEventsync, deleteEventEventsync } from "../slice/eventDetailS
 import { fetchMe } from "../../auth/slice/authSlice"
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { useEffect, useState } from "react";
 
 
 
@@ -17,6 +18,13 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
     const joined = useSelector(state => state.eventDetail.userJoined)
     console.log("joined", joined)
     const host = hostDetail.userId === me?.id
+
+    const [showComponent, setShowComponent] = useState(false);
+
+    useEffect(() => {
+        let timeoutId = setTimeout(() => setShowComponent(true), 500); // 5000 ms = 5 seconds
+        return () => clearTimeout(timeoutId); // Clear the timeout if the component unmounts
+    }, []);
 
     const hdlOnclick = async () => {
 
@@ -61,36 +69,46 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                 </div>
             </div>
             <div>
-                {host ? (
-                    <div className="flex  items-end p-4">
-                        <label
-                            className="w-[6rem] h-[2.5rem] bg-[#004DFF] opacity-90 rounded-full text-white flex justify-center items-center hover:bg-white hover:text-[#004DFF] hover:border-2 hover:border-[#004DFF]"
-                            htmlFor="Detail"
-                            role="button"
-                        >
-                            edit
-                        </label>
-                        <div>
-                            <Modal btnName='Delete Group '
-                                titleModal='Confirm Delete Group'
-                                descriptionModal='Before you delete group please tell every one know '
-                                btnTextModal=' Cobfirm Delete!!'
-                                classExpreesion='bg-neutral text-white'
-                                hdlOnclick={hdlDelEvent}
-                            />
-                        </div>
-                        <ModalEditDetail eventDetail={eventDetail} />
-                    </div>
-                ) : null}
+                {showComponent && (
+                    <>
+                        {host && (
+                            <div className="flex items-end p-4">
+                                <label
+                                    className="w-[6rem] h-[2.5rem] bg-[#004DFF] opacity-90 rounded-full text-white flex justify-center items-center hover:bg-white hover:text-[#004DFF] hover:border-2 hover:border-[#004DFF]"
+                                    htmlFor="Detail"
+                                    role="button"
+                                >
+                                    edit
+                                </label>
+                                <div>
+                                    <Modal
+                                        btnName="Delete Group"
+                                        titleModal="Confirm Delete Group"
+                                        descriptionModal="Before you delete group please tell everyone know"
+                                        btnTextModal="Confirm Delete!!"
+                                        classExpression="bg-neutral text-white"
+                                        hdlOnclick={hdlDelEvent}
+                                    />
+                                </div>
+                                <ModalEditDetail eventDetail={eventDetail} />
+                            </div>
+                        )}
+                        {joined && !host && (
+                            <div>
+                                <Modal
+                                    btnName="Leave group"
+                                    titleModal="Confirm Leave Group"
+                                    descriptionModal="You can join again if you want before the event ends or the group is full"
+                                    btnTextModal="Leave"
+                                    classExpression="bg-neutral text-white"
+                                    hdlOnclick={hdlOnclick}
+                                />
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
-            <div>
-                {joined & !host ? (<Modal btnName='Leave group '
-                    titleModal='Confirm Leave Group'
-                    descriptionModal='you can join again if ypu want before event is end or people not full'
-                    btnTextModal='Leave'
-                    classExpreesion='bg-neutral text-white'
-                    hdlOnclick={hdlOnclick} />) : null}
-            </div>
+
         </>
     );
 }

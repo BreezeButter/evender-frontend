@@ -121,8 +121,9 @@ export default function EventBar() {
             <div className="form-control">
                 <div className="input-group">
                     <select className="select select-bordered"
+                        value=''
                         onChange={(e) => setRadiuse(e.target.value)}>
-                        <option disabled selected value={''}>Nearby</option>
+                        <option disabled value={''}>Nearby</option>
                         <option value={''}>None</option>
                         <option value={1}>1 km</option>
                         <option value={5}>5 km</option>

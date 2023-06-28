@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 function App() {
 
-    const initialLoading = useSelector(state => state.auth.loading);
+    const initialLoading = useSelector(state => state.auth.initialLoading);
     if (initialLoading) {
         return <Loading />;
     }
