@@ -1,4 +1,5 @@
-import Button from "./Button";
+import ButtonCute from "./ButtonCute";
+// import Button from "./Button";
 
 export default function CreateNewEventContainer() {
     return (
@@ -10,7 +11,7 @@ export default function CreateNewEventContainer() {
                 Connect with people in your area who are curious about the
                 things you love.
             </p>
-            <Button />
+            <ButtonCute />
         </div>
     );
 }
