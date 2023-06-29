@@ -8,7 +8,6 @@ export default function MyEventCard({
     image1,
     description,
     dateStart,
-    id,
 }) {
     const navigator = useNavigate();
     const [date, time] = convertDate(dateStart);

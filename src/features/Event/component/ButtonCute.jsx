@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useRef } from "react";
 import { creatEventAsync } from "../slice/eventSlice";
 import { DownIcon } from "../../../icons";
+import AutoCompleteComponent from "./AutoCompleteComponent";
+import Maps from "./Maps";
 
 const initialState = {
     title: "",
@@ -28,8 +30,11 @@ export default function ButtonCute() {
     const [input, setInput] = useState(initialState);
     const [files, setFiles] = useState({});
     const dispatch = useDispatch();
+    const [selected, setSelected] = useState(null);
     const loading = useSelector((state) => state.event.loading);
     const ref = useRef();
+
+    console.log("selected---------->", selected);
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -50,24 +55,26 @@ export default function ButtonCute() {
             setInput({ ...input, capacity: +input.capacity - 1 });
         }
     };
+    const cloneInput = { ...input, ...selected };
+    console.log("cloneInput", cloneInput);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (
-            !input.title ||
-            !input.description ||
-            !input.placeProvince ||
-            !input.dateStart ||
-            !input.dateEnd ||
-            !input.capacity ||
-            !input.eventCategoryId
+            !cloneInput.title ||
+            !cloneInput.description ||
+            !cloneInput.placeProvince ||
+            !cloneInput.dateStart ||
+            !cloneInput.dateEnd ||
+            !cloneInput.capacity ||
+            !cloneInput.eventCategoryId
         ) {
             return alert("please fill in every field");
         }
         const formData = new FormData();
 
-        for (let key in input) {
-            formData.append(key, input[key]);
+        for (let key in cloneInput) {
+            formData.append(key, cloneInput[key]);
         }
 
         for (let key in files) {
@@ -92,7 +99,7 @@ export default function ButtonCute() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[930px] bg-white rounded-3xl border border-gray-300 ">
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-semibold leading-6 text-lightbluecute border-b border-lightbluecute pb-5 mb-2.5">
+                        <DialogTitle className="text-2xl font-semibold leading-6 text-darkbluecute border-b border-darkbluecute pb-5 mb-2.5">
                             Create your event
                         </DialogTitle>
                     </DialogHeader>
@@ -123,13 +130,16 @@ export default function ButtonCute() {
                                             onChange={handleChangeInput}
                                             name="description"
                                         />
-                                        <Input2
-                                            placeholder="location"
-                                            title="Location"
-                                            value={input.placeProvince}
-                                            onChange={handleChangeInput}
-                                            name="placeProvince"
-                                        />
+                                        <div className="mb-3">
+                                            <p className="font-medium text-darkbluecute">
+                                                Location
+                                            </p>
+                                            <AutoCompleteComponent
+                                                setSelected={setSelected}
+                                            />
+
+                                            {/* <Map /> */}
+                                        </div>
                                         <div className="grid grid-cols-2 gap-2.5">
                                             <div className="relative">
                                                 {/* <CalendarIcon className="absolute right-0.5 top-10 -z-50 " /> */}
@@ -219,6 +229,9 @@ export default function ButtonCute() {
                                                     </option>
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div>
+                                            <Maps selected={selected} />
                                         </div>
                                     </div>
                                     <div>
@@ -326,9 +339,9 @@ export default function ButtonCute() {
                                     </div>
                                 </div>
                                 <div className="flex justify-center w-full mt-3">
-                                    <button className="hover:bg-white bg-lightbluecute hover:border-2 hover:border-lightbluecute text-white border-2 border-lightbluecute hover:text-lightbluecute text-sm py-3 font-semibold rounded-full w-full  mt-3">
+                                    <Button className="btn bg-darkbluecute text-white rounded-full w-full h-12 self-center hover:text-darkbluecute flex justify-center text-center">
                                         Create event
-                                    </button>
+                                    </Button>
                                 </div>
                             </form>
                         </>
