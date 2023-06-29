@@ -21,7 +21,10 @@ export default function CardMemberEvent({ eventDetail }) {
                 </div>
                 <div className="flex flex-row justify-center gap-6 ">
                     {joinEventUsersFourPeople?.map((el, idex) => (
-                        <div className="flex flex-col justify-center items-center" key={idex}>
+                        <div
+                            className="flex flex-col justify-center items-center"
+                            key={idex}
+                        >
                             <img
                                 className="w-[5rem] h-[5rem] rounded-full"
                                 src={el.User.image}
