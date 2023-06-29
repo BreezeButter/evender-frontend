@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { getAllEventsAsync } from "../features/Event/slice/eventSlice";
 import { getNextEventUser } from "../features/Event/slice/eventSlice";
 
-
 export default function EventPage() {
     const dispatch = useDispatch();
 
@@ -37,18 +36,19 @@ export default function EventPage() {
                     <CreateNewEventContainer />
                 </div>
                 <div className="flex flex-col gap-5">
-                    {Array.isArray(events) && events.map((el) => (
-                        <EventContainer
-                            key={el.id}
-                            title={el.title}
-                            placeProvince={el.placeProvince}
-                            image1={el.image1}
-                            description={el.description}
-                            dateStart={el.dateStart}
-                            joinEventUser={el.JoinEventUsers}
-                            id={el.id}
-                        />
-                    ))}
+                    {Array.isArray(events) &&
+                        events.map((el) => (
+                            <EventContainer
+                                key={el.id}
+                                title={el.title}
+                                placeProvince={el.placeProvince}
+                                image1={el.image1}
+                                description={el.description}
+                                dateStart={el.dateStart}
+                                joinEventUser={el.JoinEventUsers}
+                                id={el.id}
+                            />
+                        ))}
                 </div>
             </div>
         </>

@@ -7,23 +7,13 @@ import EventPage from "../page/EventPage";
 import SearchPage from "../page/SearchPage";
 import Chat from "../page/Chat";
 import ProfileUser from "../page/ProfileUser";
-<<<<<<< HEAD
 import HeadersGuest from "../layouts/HeadersGuest";
 import Footer from "../layouts/Footer";
-import Usermanagement from "../page/Manageuserpage";
 import Eventmanagement from "../page/Manageeventpage";
-import Dashboardmanagement from "../page/Managedashboard";
 import { Outlet } from "react-router-dom/dist";
-import Purchasecoinsmanagement from "../page/Managepurchasecoinspage";
-=======
-import AdminPage from "../page/AdminPage";
-import HeadersGuest from "../layouts/HeadersGuest";
-import Footer from "../layouts/Footer";
-// import Landing from '../page/Landing';
-import EventDetailPage from "../page/EventDetailPage";
 import ProtectedRoute from "../features/auth/components/ProtectedRoute";
-
->>>>>>> develop
+import Purchasecoinsmanagement from "../page/Managepurchasecoinspage";
+import Paymentsuccess from "../page/Paymentsuccess";
 
 const router = createBrowserRouter([
     {
@@ -64,10 +54,7 @@ const router = createBrowserRouter([
                 path: "event",
                 element: <EventPage />,
             },
-            // {
-            //     path: "eventdetail/:id",
-            //     element: <EventDetailPage />,
-            // },
+
             {
                 path: "chat/:id",
                 element: <Chat />,
@@ -76,13 +63,18 @@ const router = createBrowserRouter([
                 path: "profile/:id",
                 element: <ProfileUser />,
             },
-            // {
-            //     path: "editprofile/:id",
-            //     element: <EditProfile />,
-            // },
+
             {
                 path: "search",
                 element: <SearchPage />,
+            },
+            {
+                path: "success-payment",
+                element: <Paymentsuccess />,
+            },
+            {
+                path: "purchasemanagement",
+                element: <Purchasecoinsmanagement />,
             },
         ],
     },
@@ -96,49 +88,30 @@ const router = createBrowserRouter([
             </>
         ),
         children: [
-            {
-<<<<<<< HEAD
-                path: "dashboardmanagement",
-                element: <Dashboardmanagement />,
-            },
-            {
-                path: "usermanagement",
-                element: <Usermanagement />,
-            },
+            // {
+            //     path: "dashboardmanagement",
+            //     element: <Dashboardmanagement />,
+            // },
+            // {
+            //     path: "usermanagement",
+            //     element: <Usermanagement />,
+            // },
             {
                 path: "eventmanagement",
                 element: <Eventmanagement />,
             },
-            {
-                path: "purchasemanagement",
-                element: <Purchasecoinsmanagement />,
-=======
-                path: "coin",
-                element: <SearchPage />,
-            },
-            {
-                path: "blog",
-                element: <SearchPage />,
-            },
-            {
-                path: "about us",
-                element: <SearchPage />,
-            },
-            {
-                path: "admin",
-                element: (
-                    // <ProtectedRoute>
-                    <AdminPage />
-                    // </ProtectedRoute>
-                ),
-                // children: [
-                //     {
-                //         path: "manageuser",
-                //         // element: <AdminManageUser/>,
-                //     },
-                // ],
->>>>>>> develop
-            },
+            // {
+            //     path: "purchasemanagement",
+            //     element: <Purchasecoinsmanagement />,
+            // },
+            // {
+            //     path: "blog",
+            //     element: <SearchPage />,
+            // },
+            // {
+            //     path: "about us",
+            //     element: <SearchPage />,
+            // },
         ],
     },
 ]);
