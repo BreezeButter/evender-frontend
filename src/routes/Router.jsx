@@ -69,7 +69,7 @@ const router = createBrowserRouter([
                 element: <SearchPage />,
             },
             {
-                path: "success-payment",
+                path: "success",
                 element: <Paymentsuccess />,
             },
             {

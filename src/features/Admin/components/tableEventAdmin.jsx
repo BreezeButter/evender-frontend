@@ -12,11 +12,27 @@ export default function TaskEventAdmin({
     placeProvince,
     description,
     paymentLinkUrl,
+    productDefaultPrice,
+    userId,
 }) {
     const navigate = useNavigate();
     const modalRef = useRef(null);
     const dispatch = useDispatch();
     console.log(paymentLinkUrl, "paymentLinkUrl");
+    const onCheckout = async () => {
+        console.log("id", id);
+        console.log(productDefaultPrice);
+        const result = await axios.post(
+            `http://localhost:8888/payment/create-payment`,
+            {
+                productDefaultPrice: productDefaultPrice,
+                eventId: id,
+                userId: userId,
+            }
+        );
+
+        window.location.replace(result.data.session.url);
+    };
     const handleDelete = async () => {
         try {
             const token = getAccessToken();
@@ -54,12 +70,13 @@ export default function TaskEventAdmin({
             {/* button-delete */}
             <div className="flex flex-col gap-6">
                 <div>
-                    <Link
-                        to={paymentLinkUrl}
+                    <div
+                        // to={paymentLinkUrl}
                         className="btn btn-outline btn-success"
+                        onClick={onCheckout}
                     >
                         Boost Post
-                    </Link>
+                    </div>
                 </div>
                 {/* You can open the modal using ID.showModal() method */}
                 <button

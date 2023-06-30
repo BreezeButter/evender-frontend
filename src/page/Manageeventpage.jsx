@@ -11,6 +11,7 @@ import CreateNewEventAdmin from "../features/Admin/components/createNewEventAdmi
 export default function Eventmanagement() {
     const dispatch = useDispatch();
     const events = useSelector((state) => state.event.events);
+    console.log(events);
     // const eventUser = useSelector((state) => state.event.eventUser);
 
     useEffect(() => {
@@ -41,6 +42,7 @@ export default function Eventmanagement() {
                                 description={el.description}
                                 id={el.id}
                                 paymentLinkUrl={el.paymentLinkUrl}
+                                productDefaultPrice={el.productDefaultPrice}
                             />
                         ))}
                 </div>
