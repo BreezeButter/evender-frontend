@@ -92,10 +92,10 @@ export default function EventBar() {
         <div className="flex gap-1 m-8  text-darkbluecute">
             <div >
                 <div className="border-b border-gray-300 pb-4">
-                    <div className="text-darkbluecute text-2xl ">
-                        Search
+                    <div className="text-darkbluecute text-2xl font-semibold ">
+                        Search By Map
                     </div>
-                    <div className="text-darkbluecute">
+                    <div className="text-darkbluecute ">
                         Let's filter your event here.
                     </div>
                 </div>
@@ -103,15 +103,15 @@ export default function EventBar() {
                     <div className="flex flex-col  gap-4 mt-2">
                         <Label
                             htmlFor="Category"
-                            className=" text-darkbluecute"
+                            className=" text-darkbluecute text-xl font-semibold"
                         >
                             Category
                         </Label>
-                        <ul className="grid grid-cols-1 text-darkgraycute px-1 ">
+                        <ul className="grid grid-cols-1 text-darkgraycute px-1  ">
                             {eventCategory.map((el, idx) => (
                                 <li key={idx} className="">
                                     <Button
-                                        className="hover:bg-gray-200  text-darkgraycute text-sm font-normal hover:font-medium"
+                                        className="hover:bg-gray-200  text-darkgraycute  text-base font-normal hover:font-medium"
                                         onClick={() =>
                                             handleChangeInput({
                                                 target: {
@@ -130,15 +130,15 @@ export default function EventBar() {
                         </ul>
                     </div>
 
-                    <div className="flex flex-row items-center gap-4 mt-2 ">
+                    <div className="flex flex-row items-center gap-4 ">
                         <div>
                             <Label
                                 htmlFor="Datestart"
-                                className="text-right text-darkbluecute"
+                                className="text-right text-darkbluecute text-base font-semibold "
                             >
                                 Date start
                             </Label>
-                            <div className="flex flex-row items-center">
+                            <div className="flex flex-row items-center pt-4">
                                 <Input
                                     className=" border border-gray-300 text-darkgraycute"
                                     title="Date start"
@@ -152,12 +152,12 @@ export default function EventBar() {
                         <div className="">
                             <Label
                                 htmlFor="Dateend"
-                                className=" text-darkbluecute text-right"
+                                className=" text-darkbluecute text-right text-base font-semibold"
                             >
                                 Date end
                             </Label>
                             <Input
-                                className="border border-gray-300 text-darkgraycute"
+                                className="border border-gray-300 text-darkgraycute pt-4"
                                 title="Date end"
                                 type="datetime-local"
                                 value={input.dateEnd}

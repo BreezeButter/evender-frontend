@@ -36,7 +36,7 @@ export default function ProvinceSearch({ addAllPlaceLoad, setProvince }) {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-[200px] justify-between bg-white text-darkbluecute"
+                    className="w-[200px] justify-between bg-white text-darkbluecute text-sm  font-semibold"
                 >
                     {value
                         ? addAllPlaceLoad.find(item => item.placeProvince === value)?.placeProvince : "Select Province..."}
