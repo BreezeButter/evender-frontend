@@ -7,12 +7,15 @@ import NextEventContainer from "../features/Event/component/NextEventContainer";
 import { useEffect } from "react";
 import { getAllEventsAsync } from "../features/Event/slice/eventSlice";
 import { getNextEventUser } from "../features/Event/slice/eventSlice";
+import EventBar from "../features/searchEvent/components/EventBarCute";
+import CategoryBar from "../features/searchEvent/components/CategoryBar";
 
 export default function EventPage() {
     const dispatch = useDispatch();
 
     const events = useSelector((state) => state.event.events);
     const eventUser = useSelector((state) => state.event.eventUser);
+    const filterEvent = useSelector((state) => state.search.eventFilter);
 
     useEffect(() => {
         const eventFunction = async () => {
@@ -28,6 +31,8 @@ export default function EventPage() {
             {/* <div className="text-center font-semibold text-xl m-5">
                 Let's join your event!
             </div> */}
+            {/* <EventBar /> */}
+            <CategoryBar />
             <div className="flex justify-center gap-14 mb-14">
                 {/* <div className="w-[401px]"></div> */}
                 <div className="flex flex-col gap-8">
@@ -37,7 +42,7 @@ export default function EventPage() {
                 </div>
                 <div className="flex flex-col gap-5">
                     {Array.isArray(events) &&
-                        events.map((el) => (
+                        (filterEvent ? filterEvent : events).map((el) => (
                             <EventContainer
                                 key={el.id}
                                 title={el.title}

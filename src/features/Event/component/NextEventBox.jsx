@@ -1,14 +1,24 @@
-import React from "react";
 import { convertDate } from "../../../utils/dateUtil";
+import { useNavigate } from "react-router-dom";
 
 export default function NextEventBox({ eventUser }) {
+    const navigate = useNavigate();
+
     return (
         <>
+            {/* onClick={() => navigate(`/evender/eventDetail/${id}`)} */}
+            {/* el.Event.id */}
             <div>
                 {eventUser.map((el, index) => {
                     const [date, time] = convertDate(el.Event.dateStart);
                     return (
-                        <div key={index}>
+                        <div
+                            key={index}
+                            onClick={() =>
+                                navigate(`/evender/eventDetail/${el.Event.id}`)
+                            }
+                            className="cursor-pointer"
+                        >
                             <div className="flex flex-col border border-gray-300 rounded-md mb-3.5 px-4 py-3 hover:border-violetcute">
                                 <div className="flex flex-row justify-between items-center ">
                                     <div>

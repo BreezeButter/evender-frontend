@@ -3,19 +3,20 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { syncEventSearch, syncEventPlace } from "../slice/searchSlice";
-import Input from '../../Event/component/Input'
+import Input from "../../Event/component/Input";
 import CurrentGeo from "./CurrentGeo";
 
-
 export default function EventBar() {
-
     const initialValue = {
-        eventCategoryId: undefined,
-        dateStart: undefined,
-        dateEnd: undefined,
-        placeProvince: undefined,
-        box: undefined,
-    }
+        eventCategoryId: "",
+        dateStart: "",
+        dateEnd: "",
+        placeProvince: "",
+        box: "",
+        latitude: "",
+        longitude: "",
+        radi: "",
+    };
 
     const eventCategory = [
         { id: undefined, name: "All", emoji: "👋" },
@@ -26,31 +27,40 @@ export default function EventBar() {
         { id: 5, name: "LifeStyle", emoji: "🛍️" },
     ];
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     //placemaping recive from backend
     const placeLoad = useSelector((state) => state.search.placeLoad);
     const addAllPlaceLoad = [...placeLoad, { placeProvince: "All" }];
+
     useEffect(() => {
-        dispatch(syncEventPlace())
+        dispatch(syncEventPlace());
     }, []);
 
     ///keepdata send to backend
     const [input, setInput] = useState(initialValue);
+    const [location, setLocation] = useState("");
+    const [radius, setRadiuse] = useState("");
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
-    console.log("input", input)
+
+    console.log("input", input);
 
     useEffect(() => {
-        dispatch(syncEventSearch(input))
-    }, [input]);
-
+        dispatch(
+            syncEventSearch({
+                ...input,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                radi: radius,
+            })
+        );
+    }, [input, radius]);
 
     return (
-        <div className="navbar bg-base-100  flex justify-stretch">
-            <div className="navbar-start">
-            </div>
+        <div className="navbar bg-white flex justify-stretch">
+            <div className="navbar-start"></div>
             <div className="navbar-center hidden lg:flex">
                 <select
                     className="select select-bordered w-full max-w-xs mx-10"
@@ -58,22 +68,27 @@ export default function EventBar() {
                     onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
                     name="placeProvince"
                 >
-                    <option disabled value="">placeProvince?</option> {/* Add an empty value for the disabled option */}
+                    <option disabled value={""}>
+                        Province
+                    </option>{" "}
+                    {/* Add an empty value for the disabled option */}
                     {addAllPlaceLoad?.map((el, idx) => (
-                        <option
-                            key={idx}
-                            value={
-                                el.placeProvince}
-                        >
-                            {el.placeProvince}
-                        </option>
+                        <option key={idx}>{el.placeProvince}</option>
                     ))}
                 </select>
+
                 <ul className="menu menu-horizontal px-1">
                     {eventCategory.map((el, idx) => (
                         <li key={idx}>
                             <a
-                                onClick={() => handleChangeInput({ target: { name: 'eventCategoryId', value: el.id } })}
+                                onClick={() =>
+                                    handleChangeInput({
+                                        target: {
+                                            name: "eventCategoryId",
+                                            value: el.id,
+                                        },
+                                    })
+                                }
                                 value={el.id}
                                 name="eventCategoryId"
                             >
@@ -99,31 +114,48 @@ export default function EventBar() {
             />
             <div className="form-control">
                 <div className="input-group">
-                    <input type="text"
+                    <input
+                        type="text"
                         placeholder="Search… title or place name"
                         className="input input-bordered w-[300px]"
                         value={input.box}
                         onChange={handleChangeInput}
-                        name="box" />
-
+                        name="box"
+                    />
                 </div>
             </div>
+            <CurrentGeo setLocation={setLocation} />
             <div className="form-control">
                 <div className="input-group">
-                    <CurrentGeo />
-                    <select className="select select-bordered">
-                        <option disabled selected>Nearby</option>
-                        <option>5 km</option>
-                        <option>10km</option>
-                        <option>30km</option>
+                    <select
+                        className="select select-bordered"
+                        value=""
+                        onChange={(e) => setRadiuse(e.target.value)}
+                    >
+                        <option disabled value={""}>
+                            Nearby
+                        </option>
+                        <option value={""}>None</option>
+                        <option value={1}>1 km</option>
+                        <option value={5}>5 km</option>
+                        <option value={10}>10km</option>
+                        <option value={30}>30km</option>
                     </select>
                 </div>
             </div>
-            <button className="btn btn-square mx-4">
-                <span><Reset /></span>
+            <button
+                className="btn btn-square mx-4"
+                onClick={() => {
+                    console.log("first");
+                    setInput(initialValue);
+                    setRadiuse("");
+                }}
+            >
+                <span>
+                    <Reset />
+                </span>
             </button>
-            <div className="navbar-end">
-            </div>
+            <div className="navbar-end"></div>
         </div>
     );
 }

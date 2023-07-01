@@ -7,16 +7,34 @@ import {
     getEventUserDetail,
     getUserHostEvent,
 } from "../slice/eventDetailSlice";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import AutoCompleteComponent from "../../Event/component/AutoCompleteComponent";
+import Maps from "../../Event/component/Maps";
 // import { Link } from "react-router-dom";
 
 export default function ModalEditDetail({ eventDetail }) {
     // console.log(eventDetail);
     // const navigate = useNavigate();
+    const [selected, setSelected] = useState(null);
+
+    // console.log(showImage);
     const id = eventDetail.id;
     const inputRef = useRef();
     const dispatch = useDispatch();
-    const [input, setInput] = useState("");
+    const initialInput = {
+        title: "",
+        description: "",
+        location: "",
+        dateStart: "",
+        dateEnd: "",
+        capacity: "",
+        // image1: "",
+        // image2: "",
+        // image3: "",
+    };
+    const [input, setInput] = useState(initialInput);
+    // console.log(input);
     const [file, setFile] = useState({});
 
     // console.log("OK---->", eventDetail.title);
@@ -27,6 +45,7 @@ export default function ModalEditDetail({ eventDetail }) {
     // console.log(eventDetail);
 
     const handleChangeInput = async (e) => {
+        // console.log(e.target.value);
         setInput({ ...input, [e.target.name]: e.target.value });
         if (
             e.target.name == "image1" ||
@@ -39,8 +58,6 @@ export default function ModalEditDetail({ eventDetail }) {
     const updateEventDetail = async (e) => {
         try {
             e.preventDefault();
-            console.log(input);
-            console.log(file);
 
             const formData = new FormData();
             console.log(input, "Hellooooooooooooooooo");
@@ -50,9 +67,9 @@ export default function ModalEditDetail({ eventDetail }) {
             if (input.description) {
                 formData.append("description", input.description);
             }
-            if (input.placeProvince) {
-                formData.append("placeProvince", input.placeProvince);
-            }
+            // if (input.location) {
+            //     formData.append("location", input.location);
+            // }
             if (input.dateStart) {
                 formData.append("dateStart", input.dateStart);
             }
@@ -61,6 +78,21 @@ export default function ModalEditDetail({ eventDetail }) {
             }
             if (input.capacity) {
                 formData.append("capacity", input.capacity);
+            }
+            if (selected.lat) {
+                formData.append("lat", selected.lat);
+            }
+            if (selected.lng) {
+                formData.append("lng", selected.lng);
+            }
+            if (selected.placeId) {
+                formData.append("placeId", selected.placeId);
+            }
+            if (selected.placeName) {
+                formData.append("placeName", selected.placeName);
+            }
+            if (selected.placeCountry) {
+                formData.append("placeCountry", selected.placeCountry);
             }
             if (file) {
                 formData.append("image", file.image1);
@@ -76,6 +108,33 @@ export default function ModalEditDetail({ eventDetail }) {
             toast.error("Update Error");
             console.log(err);
         }
+    };
+
+    useEffect(() => {
+        if (eventDetail) {
+            setInput({
+                title: eventDetail?.title,
+                description: eventDetail?.description,
+                location: eventDetail?.location,
+                dateStart: eventDetail?.dateStart?.slice(0, 16),
+                dateEnd: eventDetail?.dateEnd?.slice(0, 16),
+                capacity: eventDetail?.capacity,
+
+                // image1: eventDetail?.image1,
+                // image2: eventDetail?.image2,
+                // image3: eventDetail?.image3,
+            });
+        }
+        // setFile({ image1: eventDetail.image1 });
+    }, [eventDetail]);
+
+    // console.log(eventDetail);
+
+    const { latitude, longitude } = eventDetail;
+
+    const position = {
+        lat: +latitude,
+        lng: +longitude,
     };
 
     return (
@@ -105,14 +164,21 @@ export default function ModalEditDetail({ eventDetail }) {
                                     onChange={handleChangeInput}
                                     name="description"
                                 />
-                                <input
+                                {/* <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="text"
-                                    placeholder="lplaceProvince"
-                                    value={input.placeProvince}
+                                    placeholder="location"
+                                    value={input.location}
                                     onChange={handleChangeInput}
-                                    name="placeProvince"
-                                />
+                                    name="location"
+                                /> */}
+                                <div>
+                                    <AutoCompleteComponent
+                                        setSelected={setSelected}
+                                    />
+
+                                    {/* <Map /> */}
+                                </div>
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="datetime-local"
@@ -140,29 +206,60 @@ export default function ModalEditDetail({ eventDetail }) {
                                 {/* <div className="w-[400px] rounded-xl">
                                     <img src={src || defaultImage} />
                                 </div> */}
+                                <img
+                                    src={
+                                        file.image1
+                                            ? URL.createObjectURL(file.image1)
+                                            : eventDetail.image1
+                                    }
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="file"
                                     placeholder="Photo"
-                                    value={input.image}
+                                    value={input.image1}
                                     onChange={handleChangeInput}
                                     name="image1"
                                     ref={inputRef}
                                 />
-                                <input
-                                    className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
-                                    type="file"
-                                    placeholder="Photo"
-                                    value={input.image}
-                                    onChange={handleChangeInput}
-                                    name="image2"
-                                    ref={inputRef}
+                                {/* <img
+                                    src={URL.createObjectURL(file?.image2)}
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                /> */}
+                                <img
+                                    src={
+                                        file.image2
+                                            ? URL.createObjectURL(file.image2)
+                                            : eventDetail.image2
+                                    }
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                />
+                                <Maps
+                                    selected={position ? position : selected}
                                 />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="file"
                                     placeholder="Photo"
-                                    value={input.image}
+                                    value={input.image2}
+                                    onChange={handleChangeInput}
+                                    name="image2"
+                                    ref={inputRef}
+                                />
+                                <img
+                                    src={
+                                        file.image3
+                                            ? URL.createObjectURL(file.image3)
+                                            : eventDetail.image3
+                                    }
+                                    className="w-72 h-72 object-cover rounded-full border border-gray-300 "
+                                />
+                                <input
+                                    className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
+                                    type="file"
+                                    placeholder="Photo"
+                                    value={input.image3}
                                     onChange={handleChangeInput}
                                     name="image3"
                                 />
@@ -170,7 +267,7 @@ export default function ModalEditDetail({ eventDetail }) {
                                     <button
                                         type="submit"
                                         className="w-[6rem] h-[2.5rem] bg-[#004DFF] opacity-90 rounded-full text-white flex justify-center items-center hover:bg-white hover:text-[#004DFF] hover:border-2 hover:border-[#004DFF]"
-                                    // onClick={navigate("/")}
+                                        // onClick={navigate("/")}
                                     >
                                         Edit
                                     </button>

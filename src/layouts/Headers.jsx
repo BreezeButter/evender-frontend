@@ -1,20 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { SearchIcon2, UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from '../features/auth/slice/authSlice'
-
+import { logout } from "../features/auth/slice/authSlice";
+import { toast } from "react-toastify";
 
 export default function Headers() {
-
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.auth.user)
-    const navagate = useNavigate()
-
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
+    const navagate = useNavigate();
 
     const hdlLogOut = () => {
-
-        dispatch(logout())
-    }
+        dispatch(logout());
+        toast.info("Already Logout");
+    };
     return (
         <div className="navbar text-darkbluecute">
             <div className="navbar-start">
@@ -26,7 +24,7 @@ export default function Headers() {
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                {/* <ul className="menu menu-horizontal px-1">
                     <li>
                         <Link to="" className="hover:bg-gray-200">
                             about us
@@ -37,11 +35,17 @@ export default function Headers() {
                             blog
                         </Link>
                     </li>
-                </ul>
+                </ul> */}
             </div>
             <div className="navbar-end gap-3 pr-2">
-                <SearchIcon2 className="cursor-pointer" onClick={() => navagate(`search`)} />
-                <MessageIcon2 className="cursor-pointer" onClick={() => navagate(`chat/${user?.id}`)} />
+                {/* <SearchIcon2
+                    className="cursor-pointer"
+                    onClick={() => navagate(`search`)}
+                /> */}
+                <MessageIcon2
+                    className="cursor-pointer"
+                    onClick={() => navagate(`chat/${user?.id}`)}
+                />
 
                 {/* Dropdown */}
                 <div className="dropdown dropdown-end">
@@ -50,32 +54,38 @@ export default function Headers() {
                     </label>
                     <ul
                         tabIndex={0}
-                        className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-200 rounded-box w-64 z-50"
+                        className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-200 rounded-box z-50 "
                     >
-                        <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 pl-4">
+                        <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5">
                             <div className="avatar">
                                 <div className="w-16 h-16 rounded-full">
-                                    <img src={user?.image} />
+                                    <img
+                                        src={user?.image}
+                                        onClick={() =>
+                                            navagate(`profile/${user?.id}`)
+                                        }
+                                    />
                                 </div>
                             </div>
-                            <div className="flex flex-col"
-                                onClick={() => navagate(`profile/${user?.id}`)}>
-                                <h1 className="text-base font-normal">
+                            <div className="flex flex-col">
+                                <h1 className="text-base font-normal text-darkgraycute">
                                     {user?.firstName}
                                 </h1>
-                                <p className="font-light">{user?.email}</p>
-                                <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute"
-                                    onClick={() => navagate(`editprofile/${user?.id}`)}>
-                                    Edit profile
+                                <p className="font-light text-gray-800">
+                                    {user?.email}
                                 </p>
+                                <Link to={`/evender/editprofile/${user?.id}`}>
+                                    <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
+                                        Edit profile
+                                    </p>
+                                </Link>
                             </div>
                         </div>
                         <hr />
-                        <li className="mt-2 hover:font-medium"
-                        >
+                        <li className="mt-2 hover:font-medium text-darkgraycute">
                             <a onClick={hdlLogOut}>
                                 Sign out
-                                <SignOutIcon className="opacity-50" />
+                                <SignOutIcon className="opacity-20 " />
                             </a>
                         </li>
                     </ul>

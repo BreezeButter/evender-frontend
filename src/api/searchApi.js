@@ -6,7 +6,6 @@ export const getSearchAll = async (input) => {
 };
 
 export const getLocationNearby = async (input) => {
-    console.log(input, "getSearchAll");
     return axios.post("/search/nearby", input);
 };
 

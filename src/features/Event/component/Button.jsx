@@ -3,6 +3,12 @@ import { useState, useRef } from "react";
 import InputImage from "./InputImage";
 import { useDispatch, useSelector } from "react-redux";
 import { creatEventAsync } from "../slice/eventSlice";
+import { useLoadScript } from "@react-google-maps/api";
+// import Map from "./Map";
+import AutoCompleteComponent from "./AutoCompleteComponent";
+import Maps from "./Maps";
+// import backgroundImage01 from "../../../assets/photo-1540539234-c14a20fb7c7b.avif";
+
 const initialState = {
     title: "",
     description: "",
@@ -16,6 +22,7 @@ const initialState = {
 export default function Button() {
     const [input, setInput] = useState(initialState);
     const [files, setFiles] = useState({});
+    const [selected, setSelected] = useState(null);
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.event.loading);
     const ref = useRef();
@@ -30,23 +37,26 @@ export default function Button() {
         }
     };
 
+    const cloneInput = { ...input, ...selected };
+    console.log("cloneInput", cloneInput);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (
             !input.title ||
             !input.description ||
-            !input.placeProvince ||
             !input.dateStart ||
             !input.dateEnd ||
             !input.capacity ||
-            !input.eventCategoryId
+            !input.eventCategoryId ||
+            !selected
         ) {
             return alert("please fill in every field");
         }
         const formData = new FormData();
 
-        for (let key in input) {
-            formData.append(key, input[key]);
+        for (let key in cloneInput) {
+            formData.append(key, cloneInput[key]);
         }
 
         for (let key in files) {
@@ -56,11 +66,13 @@ export default function Button() {
         setInput(initialState);
         setFiles({});
         ref.current.click();
-        // console.log(ref);
+        console.log(ref);
+
+        // console.log(selected);
     };
 
     return (
-        <>
+        <div>
             <label
                 htmlFor="my_modal_7"
                 className="btn bg-darkbluecute text-white rounded-full w-full h-12 self-center hover:text-darkbluecute"
@@ -69,15 +81,15 @@ export default function Button() {
                 Create Event
             </label>
 
-            <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box">
+            <input type="checkbox" id="my_modal_7" className="modal-toggle " />
+            <div className="modal ">
+                <div className="modal-box ">
                     {loading ? (
                         <div className="flex justify-center">
                             <span className="loading loading-spinner loading-lg"></span>
                         </div>
                     ) : (
-                        <>
+                        <div>
                             <h3 className="text-lg font-bold text-center">
                                 Create your Event
                             </h3>
@@ -97,12 +109,16 @@ export default function Button() {
                                     onChange={handleChangeInput}
                                     name="description"
                                 />
-                                <Input
-                                    title="placeProvince"
-                                    value={input.placeProvince}
-                                    onChange={handleChangeInput}
-                                    name="placeProvince"
-                                />
+                                <div>
+                                    <h3>Location</h3>
+                                </div>
+                                <div>
+                                    <AutoCompleteComponent
+                                        setSelected={setSelected}
+                                    />
+
+                                    {/* <Map /> */}
+                                </div>
                                 <Input
                                     title="Date start"
                                     type="datetime-local"
@@ -127,6 +143,9 @@ export default function Button() {
                                     <h1 className="font-semibold">
                                         Choose your category
                                     </h1>
+
+                                    <Maps selected={selected} />
+
                                     <select
                                         name="eventCategoryId"
                                         value={input.eventCategoryId}
@@ -139,7 +158,6 @@ export default function Button() {
                                         <option value="5">LifeStyle</option>
                                     </select>
                                 </div>
-
                                 <InputImage
                                     name="image1"
                                     onChange={handleChangeFile}
@@ -153,17 +171,31 @@ export default function Button() {
                                     onChange={handleChangeFile}
                                 />
 
+
+
                                 <button className="bg-black text-white rounded-full w-36 h-8">
                                     Create
                                 </button>
                             </form>
-                        </>
+                        </div>
                     )}
+
+                    {/* <div className="w-96 h-80"> */}
+
+                    {/* </div> */}
+
+                    {/* <div
+                className=" w-screen bg-cover bg-center"
+                style={{
+                    backgroundImage: `url(${backgroundImage01})`,
+                }}
+            ></div> */}
                 </div>
                 <label className="modal-backdrop" htmlFor="my_modal_7">
                     Close
                 </label>
+
             </div>
-        </>
+        </div>
     );
 }

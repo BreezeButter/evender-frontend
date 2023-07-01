@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { syncEventNearby } from '../slice/searchSlice'
+// import { syncEventNearby } from '../slice/searchSlice'
+import { useEffect } from "react";
 
-
-export default function CurrentGeo() {
-
-
-    let crd = ""
-
-
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(syncEventNearby({ latitude: crd.latitude, longitude: crd.longitude }))
-    }, []);
-
-    console.log("--->", crd)
+export default function CurrentGeo({ radi, setLocation }) {
     const options = {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -24,24 +11,25 @@ export default function CurrentGeo() {
 
     function success(pos) {
         const crd = pos.coords;
-        // return crd
-        console.log("Your current position is:");
-        console.log(`Latitude : ${crd.latitude}`);
-        console.log(`Longitude: ${crd.longitude}`);
-        console.log(`More or less ${crd.accuracy} meters.`);
 
+        setLocation({ latitude: crd.latitude, longitude: crd.longitude });
+        console.log("CURRENT LOCATION------->", {
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+        });
 
+        // console.log("Your current position is:");
+        // console.log(`Latitude : ${crd.latitude}`);
+        // console.log(`Longitude: ${crd.longitude}`);
+        // console.log(`More or less ${crd.accuracy} meters.`);
     }
-
-
 
     function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
     }
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }, [radi]);
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
-
-    return (
-        <div></div>
-    )
+    return <div></div>;
 }
