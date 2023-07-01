@@ -97,9 +97,9 @@ export default function ButtonCute() {
                         Create event
                     </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[930px] bg-white rounded-3xl border border-gray-300 ">
+                <DialogContent className="sm:max-w-[870px] bg-white rounded-3xl border border-gray-300 ">
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-semibold leading-6 text-darkbluecute border-b border-darkbluecute pb-5 mb-2.5">
+                        <DialogTitle className="text-2xl font-medium leading-6 text-darkbluecute border-b border-gray-400 pb-5 mb-2.5 mx-5 mt-5">
                             Create your event
                         </DialogTitle>
                     </DialogHeader>
@@ -114,7 +114,7 @@ export default function ButtonCute() {
                                 className="flex flex-col "
                                 onSubmit={handleSubmit}
                             >
-                                <div className="flex flex-row gap-10 justify-center">
+                                <div className="flex flex-row gap-12 justify-center">
                                     <div className="w-[50%] gap-20">
                                         <Input2
                                             placeholder="title"
@@ -131,7 +131,7 @@ export default function ButtonCute() {
                                             name="description"
                                         />
                                         <div className="mb-3">
-                                            <p className="font-medium text-darkbluecute">
+                                            <p className="font-medium text-sm text-darkbluecute -mb-1">
                                                 Location
                                             </p>
                                             <AutoCompleteComponent
@@ -167,10 +167,10 @@ export default function ButtonCute() {
                                         </div>
                                         <div className="grid grid-cols-2 gap-2.5">
                                             <div className="">
-                                                <p className="font-medium text-darkbluecute">
+                                                <p className="font-medium text-sm text-darkbluecute">
                                                     Capacity:
                                                 </p>
-                                                <div className="flex items-center border w-full text-darkbluecute border-gray-400 rounded-lg mt-2 bg-white">
+                                                <div className="flex items-center border w-full text-darkbluecute border-gray-400 rounded-lg mt-1 bg-white">
                                                     <button
                                                         type="button"
                                                         className="w-36 h-10 leading-10 text-gray-600 transition hover:opacity-75"
@@ -187,7 +187,7 @@ export default function ButtonCute() {
                                                             handleChangeInput
                                                         }
                                                         value={input.capacity}
-                                                        className="h-10 w-full border-transparent   text-center bg-transparent text-graynav [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                                                        className="h-10 w-full border-transparent text-center bg-transparent text-graynav [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                                                     />
                                                     <button
                                                         type="button"
@@ -201,11 +201,11 @@ export default function ButtonCute() {
                                                 </div>
                                             </div>
                                             <div>
-                                                <h1 className="font-medium text-darkbluecute">
+                                                <h1 className="font-medium text-sm text-darkbluecute">
                                                     Category
                                                 </h1>
                                                 <select
-                                                    className="block rounded-lg border border-gray-400 font-normal py-2.5 focus:ring-1 w-full bg-white text-sm pl-4 mt-2 text-darkgraycute"
+                                                    className="block rounded-lg border border-gray-400 font-normal py-2.5 focus:ring-1 w-full bg-white text-sm pl-4 mt-1 text-darkgraycute"
                                                     name="eventCategoryId"
                                                     value={
                                                         input.eventCategoryId
@@ -235,15 +235,15 @@ export default function ButtonCute() {
                                         </div>
                                     </div>
                                     <div>
-                                        <h1 className="font-medium text-darkbluecute">
+                                        <h1 className="font-medium text-sm text-darkbluecute">
                                             Upload event images
                                         </h1>
-                                        <div className="w-full max-w-sm mt-2.5">
-                                            <div className="mb-3 relative">
+                                        <div className="w-full max-w-sm ">
+                                            <div className="mb-2 relative">
                                                 <div className="flex justify-end">
                                                     <Label
                                                         htmlFor="picture"
-                                                        className="text-sm font-normal text-gray-500 hover:text-darkgraycute hover:underline cursor-pointer pr-3 absolute top-24 left-20 text-center pl-1.5"
+                                                        className="text-xs font-normal text-gray-500 hover:text-darkgraycute hover:underline cursor-pointer pr-3 absolute top-24 right-16 text-center pl-1.5"
                                                     >
                                                         + Add your event profile
                                                         image
@@ -264,16 +264,16 @@ export default function ButtonCute() {
                                                         )
                                                     }
                                                     alt=""
-                                                    className="w-[400px] h-[200px] bg-gray-50 rounded-lg object-cover border border-gray-300 mt-2"
+                                                    className="w-[320px] h-[190px] bg-gray-50 rounded-lg object-cover border border-gray-300 mt-2"
                                                 />
                                             </div>
-                                            <div className="mb-3 relative">
+                                            <div className="mb-2 relative">
                                                 <div className="flex justify-end">
                                                     <Label
                                                         htmlFor="picture2"
-                                                        className="text-sm font-normal text-gray-500 hover:text-darkgraycute hover:underline cursor-pointer pr-3 absolute top-24 left-20 text-center pl-1.5"
+                                                        className="text-xs font-normal text-gray-500 hover:text-darkgraycute hover:underline cursor-pointer pr-3 absolute top-24 right-16 ext-center pl-1.5"
                                                     >
-                                                        + Add images about your
+                                                        + Add image about your
                                                         event
                                                     </Label>
                                                 </div>
@@ -292,16 +292,16 @@ export default function ButtonCute() {
                                                         )
                                                     }
                                                     alt=""
-                                                    className="w-[400px] bg-gray-50 h-[200px] rounded-lg object-cover border border-gray-300 mt-2"
+                                                    className="w-[320px] h-[190px] bg-gray-50  rounded-lg object-cover border border-gray-300 mt-2"
                                                 />
                                             </div>
-                                            <div className="mb-3 relative">
+                                            <div className="mb-2 relative">
                                                 <div className="flex justify-end">
                                                     <Label
                                                         htmlFor="picture3"
-                                                        className="text-sm font-normal text-gray-500 hover:text-darkgraycute hover:underline cursor-pointer pr-3 absolute top-24 left-20 text-center pl-1.5"
+                                                        className="text-xs font-normal text-gray-500 hover:text-darkgraycute hover:underline cursor-pointer pr-3 absolute top-24 right-16 text-center pl-1.5"
                                                     >
-                                                        + Add images about your
+                                                        + Add image about your
                                                         event
                                                     </Label>
                                                 </div>
@@ -320,7 +320,7 @@ export default function ButtonCute() {
                                                         )
                                                     }
                                                     alt=""
-                                                    className="w-[400px] h-[200px] bg-gray-50 rounded-lg object-cover border border-gray-300 mt-2"
+                                                    className="w-[320px] h-[190px] bg-gray-50 rounded-lg object-cover border border-gray-300 mt-2"
                                                 />
                                             </div>
                                         </div>
@@ -338,8 +338,8 @@ export default function ButtonCute() {
                                         /> */}
                                     </div>
                                 </div>
-                                <div className="flex justify-center w-full mt-3">
-                                    <Button className="btn bg-darkbluecute text-white rounded-full w-full h-12 self-center hover:text-darkbluecute flex justify-center text-center">
+                                <div className="flex justify-center w-full mt-8 mb-2.5">
+                                    <Button className="btn bg-darkbluecute w-[95%] text-white rounded-full  h-12 self-center hover:text-darkbluecute flex justify-center text-center">
                                         Create event
                                     </Button>
                                 </div>

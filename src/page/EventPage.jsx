@@ -7,7 +7,8 @@ import NextEventContainer from "../features/Event/component/NextEventContainer";
 import { useEffect } from "react";
 import { getAllEventsAsync } from "../features/Event/slice/eventSlice";
 import { getNextEventUser } from "../features/Event/slice/eventSlice";
-import EventBar from '../features/searchEvent/components/EventBar'
+import EventBar from "../features/searchEvent/components/EventBarCute";
+import CategoryBar from "../features/searchEvent/components/CategoryBar";
 
 export default function EventPage() {
     const dispatch = useDispatch();
@@ -30,7 +31,8 @@ export default function EventPage() {
             {/* <div className="text-center font-semibold text-xl m-5">
                 Let's join your event!
             </div> */}
-            <EventBar />
+            {/* <EventBar /> */}
+            <CategoryBar />
             <div className="flex justify-center gap-14 mb-14">
                 {/* <div className="w-[401px]"></div> */}
                 <div className="flex flex-col gap-8">
@@ -39,18 +41,19 @@ export default function EventPage() {
                     <CreateNewEventContainer />
                 </div>
                 <div className="flex flex-col gap-5">
-                    {Array.isArray(events) && (filterEvent ? filterEvent : events).map((el) => (
-                        <EventContainer
-                            key={el.id}
-                            title={el.title}
-                            placeProvince={el.placeProvince}
-                            image1={el.image1}
-                            description={el.description}
-                            dateStart={el.dateStart}
-                            joinEventUser={el.JoinEventUsers}
-                            id={el.id}
-                        />
-                    ))}
+                    {Array.isArray(events) &&
+                        (filterEvent ? filterEvent : events).map((el) => (
+                            <EventContainer
+                                key={el.id}
+                                title={el.title}
+                                placeProvince={el.placeProvince}
+                                image1={el.image1}
+                                description={el.description}
+                                dateStart={el.dateStart}
+                                joinEventUser={el.JoinEventUsers}
+                                id={el.id}
+                            />
+                        ))}
                 </div>
             </div>
         </>

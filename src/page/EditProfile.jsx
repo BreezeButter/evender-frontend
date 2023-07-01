@@ -121,7 +121,7 @@ export default function EditProfile() {
                         {/* Right */}
                         <div className="flex justify-center w-full">
                             <div className="w-[80%] flex justify-center flex-col">
-                                <div className="grid grid-rows-2 grid-flow-col gap-2">
+                                <div className="grid grid-rows-2 grid-flow-col gap-3">
                                     <div className="form-control w-full max-w-xs">
                                         <label className="label">
                                             <span className="label-text text-base text-darkbluecute font-medium">

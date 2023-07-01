@@ -3,13 +3,11 @@ import SearchContainer from "../features/searchEvent/components/SearchContainer"
 import { useSelector } from "react-redux";
 
 export default function SearchPage() {
-
     // const dispatch = useDispatch();
     // const events = useSelector((state) => state.event.events);
     const categoryEvent = useSelector((state) => state.search.eventFilter);
     // const locationFilter = useSelector((state) => state.search.locationFilter);
-    console.log(categoryEvent, "categoryEvent")
-
+    console.log(categoryEvent, "categoryEvent");
 
     return (
         <div>
