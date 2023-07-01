@@ -176,9 +176,12 @@ export default function Landing() {
                                 share them. Lasting connections are made on
                                 Evender.
                             </p>
-                            <button className="w-40 py-2.5 rounded-full font-medium text-lg text-white border-2 border-redcute bg-redcute hover:bg-white hover:text-redcute hover:border-2 hover:border-redcute">
-                                Start today
-                            </button>
+                            <Link to='/register'>
+                                <button
+                                    className="w-40 py-2.5 rounded-full font-medium text-lg text-white border-2 border-redcute bg-redcute hover:bg-white hover:text-redcute hover:border-2 hover:border-redcute">
+                                    Start today
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

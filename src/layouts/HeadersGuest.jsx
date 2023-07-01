@@ -14,7 +14,7 @@ export default function HeadersGuest() {
                     Evender.
                 </Link>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            {/* <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
                         <Link to="" className="hover:bg-gray-200 ">
@@ -27,7 +27,7 @@ export default function HeadersGuest() {
                         </Link>
                     </li>
                 </ul>
-            </div>
+            </div> */}
             <div className="navbar-end gap-3 pr-2">
                 {isAuth ? (
                     <Link
