@@ -25,7 +25,6 @@ export default function LocationDetailEvent({ eventDetail }) {
     console.log("alsdlkasdlk", eventDetail);
     // const joined = useSelector(state => state.eventDetail.UserJoined)
 
-
     const { latitude, longitude } = eventDetail;
 
     const position = {
@@ -48,6 +47,11 @@ export default function LocationDetailEvent({ eventDetail }) {
                                 Lorem ipsum dolor sit amet consectetur
                                 adipisicing elit. Aliquid, odit.
                             </p>
+                            <a
+                                href={`http://maps.google.com/?q=${latitude},${longitude}`}
+                            >
+                                Google Map
+                            </a>
                         </div>
                         <div className="flex">
                             <p className="text-sm">
@@ -69,8 +73,7 @@ export default function LocationDetailEvent({ eventDetail }) {
                 >
                     Join
                 </button>
-
-            </div >
+            </div>
         </>
     );
 }

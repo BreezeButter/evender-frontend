@@ -67,14 +67,14 @@ export default function ProfileUser() {
             <div className="w-[65%] ">
                 {/* Head */}
                 <div className="mb-20 text-4xl font-semibold">
-                    <h1>Profile</h1>
+                    <h1 className="text-darkgraycute">Profile</h1>
                 </div>
 
                 {/* User */}
                 <div className="flex flex-row justify-between mb-28">
                     {/* Left */}
                     <div className="avatar">
-                        <div className="w-72 h-72 rounded-full">
+                        <div className="w-80 h-80 rounded-full mr-10">
                             <img src={userProfile?.image} className="" />
                         </div>
                     </div>
@@ -82,29 +82,29 @@ export default function ProfileUser() {
                     {/* Right */}
                     <div className="w-[63%] pl-28 border-l border-gray-300 pt-6">
                         <div className="flex flex-row">
-                            <p className="pr-4 font-semibold text-4xl">
+                            <p className="pr-4 font-semibold text-4xl text-darkgraycute ">
                                 {userProfile?.firstName} {userProfile?.lastName}
                             </p>
                             <p className="pt-3 ml-8 text-gray-400">#Username</p>
-                            <img
+                            {/* <img
                                 width="94"
                                 height="94"
                                 src="https://img.icons8.com/3d-fluency/94/dollar-coin.png"
                                 alt="dollar-coin"
-                            />
-                            <p className="pt-3 ml-8 text-gray-400">
+                            /> */}
+                            {/* <p className="pt-3 ml-8 text-gray-400 ">
                                 {" "}
-                                {userProfile?.coin}
-                            </p>
+                                {user?.coin}
+                            </p> */}
                         </div>
-                        <p className="w-[70%] mt-8 font-light">
-                            {userProfile?.aboutMe}
+                        <p className="w-[70%] mt-8 font-light text-darkgraycute">
+                            {user?.aboutMe}
                         </p>
-                        <p className="mt-14 text-lg font-medium">
-                            {userProfile?.gender}
+                        <p className="mt-14 text-lg font-medium text-darkgraycute">
+                            {user?.gender}
                         </p>
-                        <div className="flex flex-row justify-between mt-4">
-                            {userProfile?.bdate ? (
+                        <div className="flex flex-row justify-between mt-4 text-darkgraycute">
+                            {user?.bdate ? (
                                 <p className="text-lg font-medium">
                                     {calculateAge(userProfile?.bdate)} years old
                                 </p>

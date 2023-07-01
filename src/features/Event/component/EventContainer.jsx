@@ -1,6 +1,6 @@
 import { UserEventIcon } from "../../../icons";
 import { convertDate } from "../../../utils/dateUtil";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function EventContainer({
     title,
@@ -9,16 +9,16 @@ export default function EventContainer({
     description,
     joinEventUser,
     dateStart,
-    id
+    id,
 }) {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [date, time] = convertDate(dateStart);
 
     return (
-        <div className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer"
-            onClick={() => navigate(`/evender/eventDetail/${id}`)}>
-
+        <div
+            className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer justify-between"
+            onClick={() => navigate(`/evender/eventDetail/${id}`)}
+        >
             <div className="flex flex-col gap-3">
                 <p className="text-xs text-gray-500 font-medium">
                     {date} {time}
@@ -26,8 +26,8 @@ export default function EventContainer({
                 <h1 className="text-lg font-semibold text-darkbluecute -mt-1 ">
                     {title}
                 </h1>
-                <div className="flex gap-7 items-center">
-                    <div className="flex">
+                <div className="flex gap-7 items-center ">
+                    <div className="flex ">
                         {joinEventUser?.map((el) => (
                             <img
                                 key={el.id}
@@ -37,16 +37,18 @@ export default function EventContainer({
                             />
                         ))}
                     </div>
-                    <div className="border border-gray-500 h-fit rounded-md px-2 py-0.5 flex flex-row items-center gap-0.5">
+                    <div className="border border-gray-500 h-fit rounded-md px-2 py-0.5 flex flex-row items-center gap-0.5 ">
                         <UserEventIcon className="pb-0.5" />
-                        <p className="text-sm font-light">43/53</p>
+                        <p className="text-sm font-light text-darkgraycute">
+                            {`${joinEventUser.length}/30`}
+                        </p>
                     </div>
                 </div>
                 <h1 className="font-medium text-darkbluecute text-base mt-1.5">
                     {placeProvince}
                 </h1>
                 <div className=" overflow-hidden h-10">
-                    <p className="max-w-[450px] text-sm font-light ">
+                    <p className="max-w-[450px] text-sm font-light text-darkbluecute ">
                         {description}
                     </p>
                 </div>

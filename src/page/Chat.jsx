@@ -1,6 +1,5 @@
 import { LeftIcon } from "../icons";
 // import Footer from "../layouts/Footer";
-
 import { io } from "socket.io-client";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -89,7 +88,7 @@ export default function Chat() {
     };
 
     return (
-        <div className="w-[1000px] m-auto mb-5 flex justify-center gap-5">
+        <div className="border-t border-gray-300 flex flex-row">
             <div className="flex flex-col mt-10 gap-3">
                 {joinEventByUser.map((el, index) => (
                     <button
