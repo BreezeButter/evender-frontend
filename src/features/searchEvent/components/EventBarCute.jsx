@@ -1,4 +1,4 @@
-import Reset, { SearchIcon2 } from "../../../icons";
+import Reset from "../../../icons";
 import { SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +28,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "../../../components/ui/sheet";
-
+import NearBySearch from './NearBySearch'
 const SHEET_SIDES = ["left"];
 
 export default function EventBar() {
@@ -70,7 +70,7 @@ export default function EventBar() {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
 
-    console.log("input", input);
+    console.log("radius", radius);
 
     useEffect(() => {
         dispatch(
@@ -200,7 +200,8 @@ export default function EventBar() {
                                         ))}
                                     </select>
                                 </div>
-                                <div className="flex flex-col">
+                                <NearBySearch setRadiuse={setRadiuse} />
+                                {/* <div className="flex flex-col">
                                     <Label
                                         htmlFor="NearBy"
                                         className=" text-darkbluecute text-left mb-1 "
@@ -223,7 +224,7 @@ export default function EventBar() {
                                         <option value={10}>10km</option>
                                         <option value={30}>30km</option>
                                     </select>
-                                </div>
+                                </div> */}
                             </div>
                             <CurrentGeo setLocation={setLocation} />
                             {/* <div className="grid grid-cols-4 items-center gap-4">

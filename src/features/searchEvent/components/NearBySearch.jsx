@@ -90,23 +90,23 @@ const radius = [
     },
     {
         id: 1,
-        name: "1km",
+        name: "1 km",
     },
     {
         id: 5,
-        name: "5km",
+        name: "5 km",
     },
     {
         id: 10,
-        name: "10km",
+        name: "10 km",
     },
     {
         id: 30,
-        name: "30km",
+        name: "30 km",
     },
     {
         id: 50,
-        name: "50km",
+        name: "50 km",
     },
 ];
 
@@ -115,8 +115,7 @@ function classNames(...classes) {
 }
 
 export default function SelectedBarRadius({ setRadiuse }) {
-    const [selected, setSelected] = useState(radius[1].id);
-    console.log("XXX", selected);
+    const [selected, setSelected] = useState(radius[0].id);
     setRadiuse(selected.id ? selected.id : "");
 
     return (
@@ -127,7 +126,7 @@ export default function SelectedBarRadius({ setRadiuse }) {
                     <div className="relative mt-2">
                         <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
                             <span className="flex items-center">
-                                <span className="ml-6 first-letter:block truncate">
+                                <span className="ml-2 first-letter:block truncate">
                                     {selected.name ? selected.name : "Nearby"}
                                 </span>
                             </span>
