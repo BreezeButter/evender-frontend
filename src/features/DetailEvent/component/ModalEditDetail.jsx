@@ -9,11 +9,14 @@ import {
 } from "../slice/eventDetailSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import AutoCompleteComponent from "../../Event/component/AutoCompleteComponent";
+import Maps from "../../Event/component/Maps";
 // import { Link } from "react-router-dom";
 
 export default function ModalEditDetail({ eventDetail }) {
     // console.log(eventDetail);
     // const navigate = useNavigate();
+    const [selected, setSelected] = useState(null);
 
     // console.log(showImage);
     const id = eventDetail.id;
@@ -64,9 +67,9 @@ export default function ModalEditDetail({ eventDetail }) {
             if (input.description) {
                 formData.append("description", input.description);
             }
-            if (input.location) {
-                formData.append("location", input.location);
-            }
+            // if (input.location) {
+            //     formData.append("location", input.location);
+            // }
             if (input.dateStart) {
                 formData.append("dateStart", input.dateStart);
             }
@@ -75,6 +78,21 @@ export default function ModalEditDetail({ eventDetail }) {
             }
             if (input.capacity) {
                 formData.append("capacity", input.capacity);
+            }
+            if (selected.lat) {
+                formData.append("lat", selected.lat);
+            }
+            if (selected.lng) {
+                formData.append("lng", selected.lng);
+            }
+            if (selected.placeId) {
+                formData.append("placeId", selected.placeId);
+            }
+            if (selected.placeName) {
+                formData.append("placeName", selected.placeName);
+            }
+            if (selected.placeCountry) {
+                formData.append("placeCountry", selected.placeCountry);
             }
             if (file) {
                 formData.append("image", file.image1);
@@ -101,6 +119,7 @@ export default function ModalEditDetail({ eventDetail }) {
                 dateStart: eventDetail?.dateStart?.slice(0, 16),
                 dateEnd: eventDetail?.dateEnd?.slice(0, 16),
                 capacity: eventDetail?.capacity,
+
                 // image1: eventDetail?.image1,
                 // image2: eventDetail?.image2,
                 // image3: eventDetail?.image3,
@@ -110,6 +129,13 @@ export default function ModalEditDetail({ eventDetail }) {
     }, [eventDetail]);
 
     // console.log(eventDetail);
+
+    const { latitude, longitude } = eventDetail;
+
+    const position = {
+        lat: +latitude,
+        lng: +longitude,
+    };
 
     return (
         <div>
@@ -138,14 +164,21 @@ export default function ModalEditDetail({ eventDetail }) {
                                     onChange={handleChangeInput}
                                     name="description"
                                 />
-                                <input
+                                {/* <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="text"
                                     placeholder="location"
                                     value={input.location}
                                     onChange={handleChangeInput}
                                     name="location"
-                                />
+                                /> */}
+                                <div>
+                                    <AutoCompleteComponent
+                                        setSelected={setSelected}
+                                    />
+
+                                    {/* <Map /> */}
+                                </div>
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="datetime-local"
@@ -202,6 +235,9 @@ export default function ModalEditDetail({ eventDetail }) {
                                     }
                                     className="w-72 h-72 object-cover rounded-full border border-gray-300 "
                                 />
+                                <Maps
+                                    selected={position ? position : selected}
+                                />
                                 <input
                                     className="border-2 border-gray-400 rounded-md p-2 w-[20rem]"
                                     type="file"
@@ -225,12 +261,13 @@ export default function ModalEditDetail({ eventDetail }) {
                                     placeholder="Photo"
                                     value={input.image3}
                                     onChange={handleChangeInput}
-                                    name="image3" />
+                                    name="image3"
+                                />
                                 <div className="flex flex-row justify-center gap-6">
                                     <button
                                         type="submit"
                                         className="w-[6rem] h-[2.5rem] bg-[#004DFF] opacity-90 rounded-full text-white flex justify-center items-center hover:bg-white hover:text-[#004DFF] hover:border-2 hover:border-[#004DFF]"
-                                    // onClick={navigate("/")}
+                                        // onClick={navigate("/")}
                                     >
                                         Edit
                                     </button>
