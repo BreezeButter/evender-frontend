@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useState } from "react";
-//import { eventManager } from "react-toastify/dist/core";
 import { getAccessToken } from "../../../utils/localstorage";
 import { useNavigate } from "react-router-dom";
 import axios from "../../../api/axios";

@@ -53,9 +53,3 @@ export default function EventDetailPage() {
         </div>
     );
 }
-
-// 004DFF
-// FF9840
-// FF5050
-// A200FF
-// 111441

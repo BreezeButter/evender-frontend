@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function LocationDetailEvent({ eventDetail }) {
     const { id } = eventDetail;
-    console.log(eventDetail, '------////')
+    console.log(eventDetail, "------////");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleJointEvent = () => {
@@ -20,7 +20,6 @@ export default function LocationDetailEvent({ eventDetail }) {
     };
     const isAuthToRoom = useSelector((state) => state.eventDetail.isAuthToRoom);
     const user = useSelector((state) => state.auth.user);
-
 
     return (
         <>
@@ -51,7 +50,9 @@ export default function LocationDetailEvent({ eventDetail }) {
                 {isAuthToRoom ? (
                     <button
                         className="border-2 border-[#004DFF] text-[#004DFF] rounded-xl w-[60%] hover:bg-[#004DFF] hover:text-white"
-                        onClick={() => navigate(`/evender/chat/${eventDetail.id}`)}
+                        onClick={() =>
+                            navigate(`/evender/chat/${eventDetail.id}`)
+                        }
                     >
                         Chat
                     </button>

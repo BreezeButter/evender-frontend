@@ -12,7 +12,6 @@ import Footer from "../layouts/Footer";
 import Eventmanagement from "../page/Manageeventpage";
 import { Outlet } from "react-router-dom/dist";
 import ProtectedRoute from "../features/auth/components/ProtectedRoute";
-import Purchasecoinsmanagement from "../page/Managepurchasecoinspage";
 import Paymentsuccess from "../page/Paymentsuccess";
 
 const router = createBrowserRouter([
@@ -72,10 +71,6 @@ const router = createBrowserRouter([
                 path: "success",
                 element: <Paymentsuccess />,
             },
-            {
-                path: "purchasemanagement",
-                element: <Purchasecoinsmanagement />,
-            },
         ],
     },
     {
@@ -88,30 +83,10 @@ const router = createBrowserRouter([
             </>
         ),
         children: [
-            // {
-            //     path: "dashboardmanagement",
-            //     element: <Dashboardmanagement />,
-            // },
-            // {
-            //     path: "usermanagement",
-            //     element: <Usermanagement />,
-            // },
             {
                 path: "eventmanagement",
                 element: <Eventmanagement />,
             },
-            // {
-            //     path: "purchasemanagement",
-            //     element: <Purchasecoinsmanagement />,
-            // },
-            // {
-            //     path: "blog",
-            //     element: <SearchPage />,
-            // },
-            // {
-            //     path: "about us",
-            //     element: <SearchPage />,
-            // },
         ],
     },
 ]);
