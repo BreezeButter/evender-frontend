@@ -10,10 +10,10 @@ import ProfileUser from "../page/ProfileUser";
 import HeadersGuest from "../layouts/HeadersGuest";
 import Footer from "../layouts/Footer";
 import Eventmanagement from "../page/Manageeventpage";
-import { Outlet } from "react-router-dom/dist";
+// import { Outlet } from "react-router-dom/dist";
 import ProtectedRoute from "../features/auth/components/ProtectedRoute";
 import Paymentsuccess from "../page/Paymentsuccess";
-
+import EventDetailPage from "../page/EventDetailPage"
 const router = createBrowserRouter([
     {
         path: "/",
@@ -57,6 +57,10 @@ const router = createBrowserRouter([
             {
                 path: "chat/:id",
                 element: <Chat />,
+            },
+            {
+                path: "eventDetail/:id",
+                element: <EventDetailPage />,
             },
             {
                 path: "profile/:id",
