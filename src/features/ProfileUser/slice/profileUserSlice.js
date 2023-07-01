@@ -9,7 +9,7 @@ const initialState = {
     user: null,
     initialLoading: false,
     hostEvent: [],
-    userProfile: null,
+    userProfile: {},
 };
 
 export const editProfileUser = createAsyncThunk(
@@ -73,14 +73,15 @@ const userSlice = createSlice({
             .addCase(getUserHostEvent.fulfilled, (stage, action) => {
                 stage.hostEvent = action.payload;
                 stage.loading = false;
+            })
+            .addCase(fetchProfile.pending, (stage, action) => {
+                stage.loading = true;
+            })
+            .addCase(fetchProfile.fulfilled, (stage, action) => {
+                stage.userProfile = action.payload;
+                console.log("action.payload",action.payload)
+                stage.loading = false;
             }),
-    // .addCase(fetchProfile.pending, (stage, action) => {
-    //     stage.loading = true;
-    // })
-    // .addCase(fetchProfile.fulfilled, (stage, action) => {
-    //     stage.userProfile = action.payload;
-    //     stage.loading = false;
-    // }),
 });
 
 export default userSlice.reducer;

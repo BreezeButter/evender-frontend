@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 // import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { fetchProfile } from "../features/ProfileUser/slice/profileUserSlice";
+import { fetchProfile } from "../features/ProfileUser/slice/profileUserSlice";
 import { getUserHostEvent } from "../features/ProfileUser/slice/profileUserSlice";
 import MyEventCard from "../features/ProfileUser/components/myEventCard";
 import { getNextEventUser } from "../features/Event/slice/eventSlice";
@@ -10,10 +10,11 @@ import MyNextEventCard from "../features/ProfileUser/components/MyNextEventCard"
 
 export default function ProfileUser() {
     const { id } = useParams();
+
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const myEvent = useSelector((state) => state.profileUser.hostEvent);
-    // const userProfile = useSelector((state) => state.profileUser.userProfile);
+    const userProfile = useSelector((state) => state.profileUser.userProfile);
     const eventUser = useSelector((state) => state.event.eventUser);
     const [click, setClick] = useState(false);
 
@@ -25,7 +26,7 @@ export default function ProfileUser() {
     //     console.log(id)
 
     // }, [id])
-
+    console.log("=============", userProfile);
     useEffect(() => {
         let isCancel = false;
         const userFunction = async () => {
@@ -35,6 +36,7 @@ export default function ProfileUser() {
             // });
             await dispatch(getUserHostEvent(id)).unwrap();
             await dispatch(getNextEventUser()).unwrap();
+            await dispatch(fetchProfile(id)).unwrap();
         };
         userFunction();
         // return () => {
@@ -73,7 +75,7 @@ export default function ProfileUser() {
                     {/* Left */}
                     <div className="avatar">
                         <div className="w-80 h-80 rounded-full mr-10">
-                            <img src={user?.image} className="" />
+                            <img src={userProfile?.image} className="" />
                         </div>
                     </div>
 
@@ -81,7 +83,7 @@ export default function ProfileUser() {
                     <div className="w-[63%] pl-28 border-l border-gray-300 pt-6">
                         <div className="flex flex-row">
                             <p className="pr-4 font-semibold text-4xl text-darkgraycute ">
-                                {user?.firstName} {user?.lastName}
+                                {userProfile?.firstName} {userProfile?.lastName}
                             </p>
                             <p className="pt-3 ml-8 text-gray-400">#Username</p>
                             {/* <img
@@ -104,17 +106,23 @@ export default function ProfileUser() {
                         <div className="flex flex-row justify-between mt-4 text-darkgraycute">
                             {user?.bdate ? (
                                 <p className="text-lg font-medium">
-                                    {calculateAge(user?.bdate)} years old
+                                    {calculateAge(userProfile?.bdate)} years old
                                 </p>
                             ) : (
                                 <p></p>
                             )}
 
-                            <Link to={`/evender/editprofile/${user?.id}`}>
-                                <p className="underline cursor-pointer font-normal text-gray-500 hover:text-darkgraycute pr-10">
-                                    Edit
-                                </p>
-                            </Link>
+                            {userProfile.id == user.id ? (
+                                <Link
+                                    to={`/evender/editprofile/${userProfile?.id}`}
+                                >
+                                    <p className="underline cursor-pointer font-normal text-gray-500 hover:text-darkgraycute pr-10">
+                                        Edit
+                                    </p>
+                                </Link>
+                            ) : (
+                                []
+                            )}
                         </div>
                     </div>
                 </div>
