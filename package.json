@@ -1,15 +1,20 @@
 {
-    "name": "evender-frontend",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
-    },
+  "name": "evender-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
     "dependencies": {
+        "react-chartjs-2": "^4.3.1",
+        "chart.js": "^3.9.1",
+        "cors": "^2.8.5",
+        "@stripe/react-stripe-js": "^2.1.1",
+        "@stripe/stripe-js": "^1.54.1",
         "@headlessui/react": "^1.7.15",
         "@heroicons/react": "^2.0.18",
         "@radix-ui/react-dialog": "^1.0.4",
@@ -37,6 +42,7 @@
         "react-dom": "^18.2.0",
         "react-google-autocomplete": "^2.7.3",
         "react-google-login": "^5.2.2",
+        "react-google-maps": "^9.4.5",
         "react-redux": "^8.1.0",
         "react-router-dom": "^6.13.0",
         "react-social-login-buttons": "^3.9.1",
@@ -47,6 +53,7 @@
         "tailwindcss-animate": "^1.0.6"
     },
     "devDependencies": {
+        "@faker-js/faker": "^8.0.2",
         "@types/react": "^18.0.37",
         "@types/react-dom": "^18.0.11",
         "@vitejs/plugin-react": "^4.0.0",
