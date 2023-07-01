@@ -8,6 +8,7 @@ import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import EventBarCute from "../components/EventBarCute";
 import { Search } from "lucide-react";
+import CurrentGeo from "./CurrentGeo";
 
 import SearchByType from "./SearchByType";
 import NearBySearch from "./NearBySearch";
@@ -39,20 +40,25 @@ export default function EventBar() {
 
     ///keepdata send to backend
     const [input, setInput] = useState(initialValue);
+    const [location, setLocation] = useState("");
+    const [radius, setRadiuse] = useState("");
+    console.log(radius, "radius");
+    console.log(location, "location");
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
 
-    console.log("input", input);
-
     useEffect(() => {
         dispatch(
             syncEventSearch({
                 ...input,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                radi: radius,
             })
         );
-    }, [input]);
+    }, [input, radius, location]);
 
     return (
         <div className="bg-whitebg text-darkbluecute flex space-x-[300px] border-b border-gray-300 mb-14 pt-5 pb-6 w-full ">
@@ -92,7 +98,8 @@ export default function EventBar() {
                     {/* <SearchIcon2 className=" cursor-pointer " /> */}
                     {/* <EventBarCute /> */}
                     {/* <p className="ml-1.5">search</p> */}
-                    <NearBySearch />
+                    <CurrentGeo setLocation={setLocation} />
+                    <NearBySearch setRadiuse={setRadiuse} />
                     <div className="w-33"></div>
                 </div>
             </div>

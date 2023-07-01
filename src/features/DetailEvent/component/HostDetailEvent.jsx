@@ -46,10 +46,10 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
 
     return (
         <>
-            <div className="flex flex-col gap-4">
-                <div>
-                    <h1 className="font-semibold text-3xl">
-                        {eventDetail.placeProvince}
+            <div className="flex flex-col gap-4 py-5">
+                <div className="mb-3.5">
+                    <h1 className="font-semibold text-3xl text-darkbluecute ">
+                        {eventDetail?.title}
                     </h1>
                 </div>
                 <div
