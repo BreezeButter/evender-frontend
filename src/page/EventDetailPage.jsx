@@ -18,7 +18,6 @@ export default function EventDetailPage() {
     const eventDetail = useSelector((state) => state.eventDetail.event);
     const hostDetail = useSelector((state) => state.eventDetail.hostEvent);
 
-
     useEffect(() => {
         const eventFunction = async () => {
             await dispatch(getEventUserDetail(id)).unwrap();
@@ -55,9 +54,3 @@ export default function EventDetailPage() {
         </div>
     );
 }
-
-// 004DFF
-// FF9840
-// FF5050
-// A200FF
-// 111441
