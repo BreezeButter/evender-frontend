@@ -26,8 +26,8 @@ export default function EventContainer({
                 <h1 className="text-lg font-semibold text-darkbluecute -mt-1 ">
                     {title}
                 </h1>
-                <div className="flex gap-7 items-center">
-                    <div className="flex">
+                <div className="flex gap-7 items-center ">
+                    <div className="flex ">
                         {joinEventUser?.map((el) => (
                             <img
                                 key={el.id}
@@ -37,10 +37,10 @@ export default function EventContainer({
                             />
                         ))}
                     </div>
-                    <div className="border border-gray-500 h-fit rounded-md px-2 py-0.5 flex flex-row items-center gap-0.5">
+                    <div className="border border-gray-500 h-fit rounded-md px-2 py-0.5 flex flex-row items-center gap-0.5 ">
                         <UserEventIcon className="pb-0.5" />
                         <p className="text-sm font-light text-darkgraycute">
-                            43/53
+                            {`${joinEventUser.length}/30`}
                         </p>
                     </div>
                 </div>

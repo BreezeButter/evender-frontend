@@ -38,10 +38,10 @@ export default function Headers() {
                 </ul> */}
             </div>
             <div className="navbar-end gap-3 pr-2">
-                <SearchIcon2
+                {/* <SearchIcon2
                     className="cursor-pointer"
                     onClick={() => navagate(`search`)}
-                />
+                /> */}
                 <MessageIcon2
                     className="cursor-pointer"
                     onClick={() => navagate(`chat/${user?.id}`)}

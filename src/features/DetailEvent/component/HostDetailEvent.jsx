@@ -1,23 +1,22 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import ModalEditDetail from "../component/ModalEditDetail";
 import Modal from "../../../components/Modal";
-import { leaveJointEventsync, deleteEventEventsync } from "../slice/eventDetailSlice"
-import { fetchMe } from "../../auth/slice/authSlice"
+import {
+    leaveJointEventsync,
+    deleteEventEventsync,
+} from "../slice/eventDetailSlice";
+import { fetchMe } from "../../auth/slice/authSlice";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-
-
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
-
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const me = useSelector(state => state.auth.user)
-    const joined = useSelector(state => state.eventDetail.userJoined)
-    console.log("joined", joined)
-    const host = hostDetail.userId === me?.id
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const me = useSelector((state) => state.auth.user);
+    const joined = useSelector((state) => state.eventDetail.userJoined);
+    console.log("joined", joined);
+    const host = hostDetail.userId === me?.id;
 
     const [showComponent, setShowComponent] = useState(false);
 
@@ -27,27 +26,23 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
     }, []);
 
     const hdlOnclick = async () => {
-
-        await dispatch(leaveJointEventsync(eventDetail.id)).unwrap()
-        await dispatch(fetchMe()).unwrap()
+        await dispatch(leaveJointEventsync(eventDetail.id)).unwrap();
+        await dispatch(fetchMe()).unwrap();
         toast.info("You are leave this group", {
-            icon: "🚀"
+            icon: "🚀",
         });
-        navigate('/evender/event')
-    }
+        navigate("/evender/event");
+    };
 
     const hdlDelEvent = async () => {
-        await dispatch(deleteEventEventsync(eventDetail.id)).unwrap()
+        await dispatch(deleteEventEventsync(eventDetail.id)).unwrap();
         toast.error("You delete this group", {
-            icon: "😢"
+            icon: "😢",
         });
-        navigate('/evender/event')
+        navigate("/evender/event");
+    };
 
-    }
-
-    console.log("eventDetail", eventDetail)
-
-
+    console.log("eventDetail", eventDetail);
 
     return (
         <>
@@ -57,13 +52,17 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                         {eventDetail.placeProvince}
                     </h1>
                 </div>
-                <div className="flex items-center gap-4"
-                    onClick={() => navigate(`/evender/profile/${eventDetail?.userId}`)}>
+                <div
+                    className="flex items-center gap-4"
+                    onClick={() =>
+                        navigate(`/evender/profile/${eventDetail?.userId}`)
+                    }
+                >
                     <img
                         className="w-[7rem] h-[7rem] rounded-full"
                         src={hostDetail.User?.image}
                         alt=""
-                    // onClick={navigate(`evender/profile/${}`)}
+                        // onClick={navigate(`evender/profile/${}`)}
                     />
                     <div>
                         <p>Hosted By</p>
@@ -87,12 +86,24 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                                 </label>
                                 <div>
                                     <Modal
+                                        num="1"
                                         btnName="Delete Group"
                                         titleModal="Confirm Delete Group"
                                         descriptionModal="Before you delete group please tell everyone know"
                                         btnTextModal="Confirm Delete!!"
                                         classExpression="bg-neutral text-white"
                                         hdlOnclick={hdlDelEvent}
+                                    />
+                                </div>
+                                <div>
+                                    <Modal
+                                        num="2"
+                                        btnName="Boost Event"
+                                        titleModal="Boost Event"
+                                        descriptionModal="Before you delete group please tell everyone know"
+                                        btnTextModal="Confirm Boost!!"
+                                        classExpression="bg-neutral text-white"
+                                        // hdlOnclick={hdlBoost}
                                     />
                                 </div>
                                 <ModalEditDetail eventDetail={eventDetail} />
@@ -113,7 +124,6 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                     </>
                 )}
             </div>
-
         </>
     );
 }

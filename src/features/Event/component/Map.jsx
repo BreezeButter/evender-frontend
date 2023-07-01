@@ -15,7 +15,7 @@ export default function Map({ selected }) {
             <GoogleMap
                 zoom={10}
                 center={selected ? selected : center}
-                mapContainerClassName="map-container w-[439px] h-[243px] mt-5 rounded-lg shadow-sm"
+                mapContainerClassName="map-container w-[415px] h-[233px] mt-5 rounded-lg shadow-sm"
             >
                 {selected && <MarkerF position={selected} />}
             </GoogleMap>
