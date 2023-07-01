@@ -26,7 +26,7 @@ export default function ProfileUser() {
     //     console.log(id)
 
     // }, [id])
-    console.log("=============", userProfile);
+
     useEffect(() => {
         let isCancel = false;
         const userFunction = async () => {
@@ -45,7 +45,7 @@ export default function ProfileUser() {
     }, []);
 
     function calculateAge(birthdate) {
-        console.log("----------", birthdate);
+
         const today = new Date();
         const birthdateObj = new Date(birthdate);
 
