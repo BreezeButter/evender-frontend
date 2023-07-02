@@ -1,3 +1,4 @@
+import { GalleryVertical, Beer, Sailboat, Soup, Coffee, Goal, Map } from "lucide-react";
 import Reset from "../../../icons";
 import { SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
@@ -44,12 +45,12 @@ export default function EventBar() {
     };
 
     const eventCategory = [
-        { id: undefined, name: "All", emoji: "👋" },
-        { id: 1, name: "Bar", emoji: "🥂" },
-        { id: 2, name: "Sport", emoji: "🏈" },
-        { id: 3, name: "Resterant", emoji: "🍲" },
-        { id: 4, name: "Cafe", emoji: "☕" },
-        { id: 5, name: "LifeStyle", emoji: "🛍️" },
+        { id: undefined, name: "All", emoji: <GalleryVertical /> },
+        { id: 1, name: "Bar", emoji: <Beer /> },
+        { id: 2, name: "Sport", emoji: <Sailboat /> },
+        { id: 3, name: "Resterant", emoji: <Soup /> },
+        { id: 4, name: "Cafe", emoji: <Coffee /> },
+        { id: 5, name: "LifeStyle", emoji: <Goal /> },
     ];
 
     const dispatch = useDispatch();
@@ -89,7 +90,7 @@ export default function EventBar() {
                 <Sheet key={side}>
                     <SheetTrigger asChild>
                         <a
-                            // variant="ghost"
+
                             className=" flex flex-row justify-center "
                         >
                             <Button
@@ -103,6 +104,7 @@ export default function EventBar() {
                     <SheetContent side={side} className="bg-whitebg ">
                         <SheetHeader className="border-b border-gray-300 pb-4">
                             <SheetTitle className="text-darkbluecute text-2xl">
+
                                 Search
                             </SheetTitle>
                             <SheetDescription className="text-darkbluecute">

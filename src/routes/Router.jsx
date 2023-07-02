@@ -63,19 +63,24 @@ const router = createBrowserRouter([
                 element: <EventDetailPage />,
             },
             {
-                path: "profile/:id",
-                element: <ProfileUser />,
-            },
-
-            {
                 path: "search",
                 element: <SearchPage />,
+            },
+            {
+                path: "profile/:id",
+                element: <ProfileUser />,
             },
             {
                 path: "success",
                 element: <Paymentsuccess />,
             },
         ],
+    },
+    {
+
+        path: "search",
+        element: <SearchPage />,
+
     },
     {
         path: "/admin",

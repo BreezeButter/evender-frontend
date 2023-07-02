@@ -14,7 +14,7 @@ export default function Headers() {
         toast.info("Already Logout");
     };
     return (
-        <div className="navbar text-darkbluecute">
+        <div className="navbar text-darkbluecute ">
             <div className="navbar-start">
                 <Link
                     to="/"
