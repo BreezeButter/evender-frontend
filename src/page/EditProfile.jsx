@@ -129,7 +129,7 @@ export default function EditProfile() {
                                             </span>
                                         </label>
                                         <Input
-                                            className="text-darkgraycute border-darkbluecute "
+                                            className="text-darkgraycute border-darkbluecute placeholder:text-gray-400 "
                                             type="text"
                                             placeholder="First Name"
                                             value={input?.firstName}
@@ -175,7 +175,7 @@ export default function EditProfile() {
                                             </span>
                                         </label>
                                         <Input
-                                            className="text-darkgraycute border-darkbluecute "
+                                            className="text-darkgraycute border-darkbluecute placeholder:text-gray-400 "
                                             type="text"
                                             placeholder="Last Name"
                                             value={input?.lastName}
@@ -194,7 +194,7 @@ export default function EditProfile() {
                                             </span>
                                         </label>
                                         <Input
-                                            className="text-darkgraycute border-darkbluecute "
+                                            className="text-darkgraycute border-darkbluecute placeholder:text-gray-400 "
                                             type="date"
                                             placeholder="Birthday"
                                             value={input?.bdate}
@@ -215,7 +215,7 @@ export default function EditProfile() {
                                         </span>
                                     </label>
                                     <Textarea
-                                        className="resize-none text-darkgraycute border-darkbluecute"
+                                        className="resize-none text-darkgraycute border-darkbluecute placeholder:text-gray-400 "
                                         rows="5"
                                         name="description"
                                         placeholder="Tell us a little bit about yourself..."

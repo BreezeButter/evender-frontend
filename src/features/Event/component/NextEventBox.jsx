@@ -26,7 +26,7 @@ export default function NextEventBox({ eventUser }) {
                                             <p className="text-xs text-gray-500 font-medium">
                                                 {date} {time}
                                             </p>
-                                            <p className="font-medium text-base text-darkbluecute mt-1.5 max-w-[250px]">
+                                            <p className="font-medium text-base text-darkbluecute mt-1.5 max-w-[220px]">
                                                 {el.Event.title}
                                             </p>
                                         </div>

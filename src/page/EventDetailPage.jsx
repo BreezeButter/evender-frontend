@@ -28,9 +28,9 @@ export default function EventDetailPage() {
     }, []);
 
     return (
-        <div className="flex justify-center flex-col">
+        <div className="flex justify-center flex-col mb-36">
             {/* User Header + Button */}
-            <div className=" border-b-[1px] border-[#004DFF]">
+            <div className=" border-b-2 border-lightbluecute">
                 <div className="flex justify-between w-[75%] m-auto p-4 my-4">
                     <HostDetailEvent
                         hostDetail={hostDetail}
@@ -42,13 +42,14 @@ export default function EventDetailPage() {
             {/* carousel */}
             <CarouselDetail eventDetail={eventDetail} />
             {/* detail */}
-            <div className="flex justify-center items-center gap-20 mt-8">
-                <div className="w-[35%] flex flex-col gap-8">
+            <div className="flex justify-center gap-28 w-full mt-14 ">
+                <div className="w-[39%] flex flex-col ">
                     <DetailEvent eventDetail={eventDetail} />
                     {/* Card Member*/}
 
                     <CardMemberEvent eventDetail={eventDetail} />
                 </div>
+
                 <LocationDetailEvent eventDetail={eventDetail} />
             </div>
         </div>

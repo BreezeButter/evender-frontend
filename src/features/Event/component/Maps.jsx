@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "./Map";
 
-function Maps({ selected }) {
+function Maps({ selected, mapContainerClassName }) {
     // const [selected, setSelected] = useState(null);
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyDENUzpP8_nFEkz1ZbBCFqgkyF1nrPuryE",
@@ -11,7 +11,12 @@ function Maps({ selected }) {
 
     if (!isLoaded) return <div>Loading...</div>;
 
-    return <Map selected={selected} />;
+    return (
+        <Map
+            selected={selected}
+            mapContainerClassName={`${mapContainerClassName}`}
+        />
+    );
 }
 
 export default Maps;

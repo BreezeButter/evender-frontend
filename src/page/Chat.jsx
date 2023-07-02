@@ -11,6 +11,7 @@ import {
 } from "../features/Event/slice/eventSlice";
 import { useRef } from "react";
 import socket from "../configs/socketConfig";
+import { convertDate } from "../utils/dateUtil";
 
 export default function Chat() {
     const dispatch = useDispatch();
@@ -107,10 +108,15 @@ export default function Chat() {
                     {joinEventByUser.map((el, index) => (
                         <button
                             key={index}
-                            onClick={() => { handleJoinRoom(el.eventId), setActiveButtonIndex(index) }
-                            }
-                            className={`border-b-[1px] w-full border-gray-300 flex p-4 rounded font-semibold  hover:shadow-xl  shadow-slate-200  transition delay-120 duration-120 ease-in-out  ${activeButtonIndex === index ? ' bg-darkgraycute  shadow-slate-200  shadow-xl  text-white  hover:text-white' : ''
-                                }`}
+                            onClick={() => {
+                                handleJoinRoom(el.eventId),
+                                    setActiveButtonIndex(index);
+                            }}
+                            className={`border-b-[1px] w-full border-gray-300 flex p-4 rounded font-semibold  hover:shadow-xl  shadow-slate-200  transition delay-120 duration-120 ease-in-out  ${
+                                activeButtonIndex === index
+                                    ? " bg-darkgraycute  shadow-slate-200  shadow-xl  text-white  hover:text-white"
+                                    : ""
+                            }`}
                         >
                             <div className=" border-emerald-50 ">
                                 <img
@@ -120,12 +126,22 @@ export default function Chat() {
                                 />
                             </div>
                             <div className="w-[80%] ">
-                                <div className={`text-darkbluecute text-sm ${activeButtonIndex === index ? ' text-white ' : ''
-                                    }`}>
+                                <div
+                                    className={`text-darkbluecute text-sm ${
+                                        activeButtonIndex === index
+                                            ? " text-white "
+                                            : ""
+                                    }`}
+                                >
                                     {el.Event.title}
                                 </div>
-                                <div className={`text-darkbluecute text-sm   ${activeButtonIndex === index ? ' text-white' : ''
-                                    }`}>
+                                <div
+                                    className={`text-darkbluecute text-sm   ${
+                                        activeButtonIndex === index
+                                            ? " text-white"
+                                            : ""
+                                    }`}
+                                >
                                     @ {el.Event.placeName}
                                 </div>
                             </div>
@@ -146,50 +162,90 @@ export default function Chat() {
                                 (el) => el?.Event?.id == currentRoom
                             ).Event?.title}
                     </h1>
-                    {/* <div className="rounded-xl h-[700px] w-[1200px] overflow-auto flex flex-col gap-3 p-2 border-2" ref={ref}>
+                    <div
+                        className="rounded-xl h-[700px] w-[1200px] overflow-auto flex flex-col gap-3 p-2 border-2"
+                        ref={ref}
+                    >
                         {messages &&
-                            messages.length > 0 && messages?.map((el, index) => {
+                            messages.length > 0 &&
+                            messages?.map((el, index) => {
+                                const [date, time] = convertDate(el.createdAt);
+
                                 if (el.userId === user.id) {
                                     return (
-                                        <div className="chat chat-end" key={index}>
+                                        <div
+                                            className="chat chat-end"
+                                            key={index}
+                                        >
                                             <div className="chat-image avatar">
                                                 <div className="w-10 rounded-full">
-                                                    <img src={el.User?.image || <span className="loading loading-dots loading-sm"></span>} alt="User avatar" />
+                                                    {/* <img
+                                                        src={
+                                                            el.User?.image || (
+                                                                <span className="loading loading-dots loading-sm"></span>
+                                                            )
+                                                        }
+                                                        alt="User avatar"
+                                                    /> */}
                                                 </div>
                                             </div>
-                                            <div className="chat-header">
-                                                {el.User?.firstName || <span className="loading loading-dots loading-sm"></span>}
-                                                <time className="text-xs opacity-50">{el.createdAt
-                                                }</time>
+                                            {/* <div className="chat-header">
+                                                {el.User?.firstName || (
+                                                    <span className="loading loading-dots loading-sm"></span>
+                                                )}
+                                                <time className="text-xs opacity-50">
+                                                    {el.createdAt}
+                                                </time>
+                                            </div> */}
+                                            <div className="chat-bubble">
+                                                {el.message}
                                             </div>
-                                            <div className="chat-bubble">{el.message}</div>
-                                            <div className="chat-footer opacity-50">Seen</div>
+                                            {/* <div className="chat-footer opacity-50">
+                                                Seen
+                                            </div> */}
                                         </div>
                                     );
                                 } else {
                                     return (
-                                        <div className="chat chat-start" key={index}>
+                                        <div
+                                            className="chat chat-start"
+                                            key={index}
+                                        >
                                             <div className="chat-image avatar">
                                                 <div className="w-10 rounded-full">
-                                                    <img src={el.User?.image || <span className="loading loading-dots loading-sm"></span>} alt="User avatar" />
+                                                    <img
+                                                        src={
+                                                            el.User?.image || (
+                                                                <span className="loading loading-dots loading-sm"></span>
+                                                            )
+                                                        }
+                                                        alt="User avatar"
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="chat-header">
-                                                {el.User?.firstName || <span className="loading loading-dots loading-sm"></span>}
-                                                <time className="text-xs opacity-50">{el.createdAt
-                                                }</time>
+                                                {el.User?.firstName || (
+                                                    <span className="loading loading-dots loading-sm"></span>
+                                                )}
+                                                <time className="text-xs opacity-50">
+                                                    {date}
+                                                    {time}
+                                                </time>
                                             </div>
-                                            <div className="chat-bubble">{el.message}</div>
-                                            <div className="chat-footer opacity-50">Delivered</div>
+                                            <div className="chat-bubble">
+                                                {el.message}
+                                            </div>
+                                            <div className="chat-footer opacity-50">
+                                                Delivered
+                                            </div>
                                         </div>
                                     );
                                 }
                             })}
-                    </div> */}
-
+                    </div>
 
                     {/* ))} */}
-                    <div
+                    {/* <div
                         className="rounded-xl h-[700px] w-[1200px] overflow-auto flex flex-col gap-3 p-2 border-2 "
                         ref={ref}
                     >
@@ -227,7 +283,7 @@ export default function Chat() {
                                 );
                             }
                         })}
-                    </div>
+                    </div> */}
                     <div className="flex h-10 mt-2 border-[1px] -p-2 ring-0 bg-white rounded-xl">
                         <input
                             type="text"
