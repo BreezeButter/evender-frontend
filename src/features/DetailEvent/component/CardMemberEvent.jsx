@@ -3,12 +3,13 @@ import ModalUserEvent from "./ModalUserEvent";
 export default function CardMemberEvent({ eventDetail }) {
     // console.log(eventDetail);
     const joinEventUsersFourPeople = eventDetail.JoinEventUsers?.slice(0, 4);
+    const JointUserAttendees = eventDetail.JoinEventUsers?.length;
 
     return (
         <>
             <div className="border-2 rounded-xl p-4  flex flex-col gap-4 mt-10">
                 <div className="flex justify-between">
-                    <h1>Attendees (9)</h1>
+                    <h1>Attendees ({JointUserAttendees})</h1>
 
                     <label
                         htmlFor="showAllUser"

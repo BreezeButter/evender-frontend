@@ -21,6 +21,7 @@ import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 
 import NearBySearch from './NearBySearch'
+import { toast } from "react-toastify";
 
 
 export default function EventBar() {
@@ -71,8 +72,11 @@ export default function EventBar() {
         setRadiuse("");
         setLocation("");
         setProvince("");
+        toast.info("Reset Filter")
 
     };
+
+
 
     useEffect(() => {
         dispatch(
@@ -94,6 +98,8 @@ export default function EventBar() {
                 longitude: location.longitude,
                 placeProvince: "",
                 radi: "",
+
+
             })
         );
     }, [handleReset]);
@@ -148,9 +154,9 @@ export default function EventBar() {
                             >
                                 Date start
                             </Label>
-                            <div className="flex flex-row items-center pt-4">
+                            <div className="flex flex-row items-center ">
                                 <Input
-                                    className=" border border-gray-300 text-darkgraycute"
+                                    className=" border border-gray-300  bg-white text-darkbluecute"
                                     title="Date start"
                                     type="datetime-local"
                                     value={input.dateStart}
@@ -162,12 +168,12 @@ export default function EventBar() {
                         <div className="">
                             <Label
                                 htmlFor="Dateend"
-                                className=" text-darkbluecute text-right text-base font-semibold"
+                                className=" text-darkbluecute text-right text-base "
                             >
                                 Date end
                             </Label>
                             <Input
-                                className="border border-gray-300 text-darkgraycute pt-4"
+                                className="border border-gray-300 bg-white text-darkbluecute"
                                 title="Date end"
                                 type="datetime-local"
                                 value={input.dateEnd}
@@ -186,8 +192,15 @@ export default function EventBar() {
                             </Label>
                             <ProvinceSearch addAllPlaceLoad={addAllPlaceLoad} setProvince={setProvince} />
                         </div>
-                        <NearBySearch setRadiuse={setRadiuse} />
-
+                        <div>
+                            <Label
+                                htmlFor="province"
+                                className="text-left text-darkbluecute mb-1 "
+                            >
+                                Radius
+                            </Label>
+                            <NearBySearch setRadiuse={setRadiuse} />
+                        </div>
                     </div>
                     <CurrentGeo setLocation={setLocation} />
                 </div>

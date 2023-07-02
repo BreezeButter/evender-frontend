@@ -114,7 +114,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function SelectedBarRadius({ setRadiuse, handleReset }) {
+export default function SelectedBarRadius({ setRadiuse }) {
     const [selected, setSelected] = useState(radius[0].id);
     setRadiuse(selected.id ? selected.id : "");
 
