@@ -4,13 +4,14 @@ import ModalUserEvent from "./ModalUserEvent";
 export default function CardMemberEvent({ eventDetail }) {
     // console.log(eventDetail);
     const joinEventUsersFourPeople = eventDetail.JoinEventUsers?.slice(0, 4);
+    const JointUserAttendees = eventDetail.JoinEventUsers?.length;
 
     return (
         <>
             <div className="border border-gray-400 rounded-xl  flex flex-col gap-4 mt-52 py-8 px-10">
                 <div className="flex justify-between">
                     <h1 className="text-base font-medium text-darkbluecute">
-                        Attendees(9)
+                        Attendees ({JointUserAttendees})
                     </h1>
 
                     <label

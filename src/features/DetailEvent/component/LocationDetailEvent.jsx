@@ -8,10 +8,12 @@ import Maps from "../../Event/component/Maps";
 import { Clock, MapPin } from "lucide-react";
 // import { deleteEventEventsync } from "../slice/eventDetailSlice";
 // import Modal from "../../../components/Modal";
+import { convertDate } from "../../../utils/dateUtil";
 
 export default function LocationDetailEvent({ eventDetail }) {
     const { id } = eventDetail;
-    console.log(eventDetail, "------////");
+
+    const [date, time] = convertDate(eventDetail.dateStart);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleJointEvent = () => {
@@ -52,22 +54,19 @@ export default function LocationDetailEvent({ eventDetail }) {
                             <div className="flex items-center">
                                 <Clock className="h-[30px] w-[30px] text-darkgraycute ml-0.5 mr-4" />
                                 <p className="text-base font-normal text-darkgraycute ">
-                                    Lorem ipsum dolor sit amet consectetur
+                                    {date}
+                                    {time}
                                 </p>
                             </div>
                             <div className="flex items-center">
                                 <LocationPin className="mr-3.5" />
                                 <p className="text-base font-normal text-darkgraycute">
-                                    Lorem ipsum dolor sit amet consectetur
+                                    {eventDetail.placeName}
+                                    {eventDetail.placeProvince}
                                 </p>
                             </div>
                             {/* <Maps /> */}
                         </div>
-                        {/* <img
-                        className="rounded-b-lg"
-                        src="https://tn.com.ar/resizer/Sb7Z4QS-w6oDL_IvUzPi__pTUPE=/1440x0/smart/filters:format(webp)/cloudfront-us-east-1.images.arcpublishing.com/artear/KQY6CKSVO6RV25FVGEKBDKJUSQ.jpg"
-                        alt=""
-                    /> */}
                     </div>
                     <div className="flex w-full rounded-lg flex-col ">
                         <a

@@ -199,7 +199,7 @@ export default function EditProfile() {
                                             placeholder="Birthday"
                                             value={input?.bdate}
                                             onChange={(e) => {
-                                                console.log(e.target.value);
+
                                                 return setInput({
                                                     ...input,
                                                     bdate: e.target.value,

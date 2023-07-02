@@ -1,9 +1,9 @@
-// import MapComponent from "../features/searchEvent/components/AdvanceMarker";
-
-// export default function SearchPage() {
-//     return <MapComponent />;
-// }
+import MapComponent from "../features/searchEvent/components/AdvanceMarker";
 
 export default function SearchPage() {
-    return <div>SearchPage</div>;
+    return <MapComponent />;
 }
+
+// export default function SearchPage() {
+//     return <div>SearchPage</div>;
+// }
