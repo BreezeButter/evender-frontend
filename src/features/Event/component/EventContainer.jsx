@@ -12,16 +12,65 @@ export default function EventContainer({
     dateStart,
     id,
     capacity,
-
+    isBoost
 }) {
     const navigate = useNavigate();
     const [date, time] = convertDate(dateStart);
+    function formatDateAndTimeAgo(dateString) {
+        // Convert date string to Date object
+        const originalDate = new Date(dateString);
+
+        // Format the date and time
+        const formattedDate = originalDate.toLocaleString("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+        });
+
+        // Calculate the time difference in milliseconds
+        const currentDate = new Date();
+        const timeDifference = Math.abs(currentDate - originalDate);
+
+        // Convert milliseconds to seconds, minutes, hours, and days
+        const seconds = Math.floor(timeDifference / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+
+        let timeAgo;
+
+        if (days > 0) {
+            timeAgo = `${days} day${days > 1 ? "s" : ""} ago`;
+        } else if (hours > 0) {
+            timeAgo = `${hours} hour${hours > 1 ? "s" : ""} ago`;
+        } else if (minutes > 0) {
+            timeAgo = `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+        } else {
+            timeAgo = `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
+        }
+
+        return {
+            formattedDate,
+            timeAgo,
+        };
+    }
+
+    // Example usage
+    const dateString = dateStart;
+    const { formattedDate, timeAgo } = formatDateAndTimeAgo(dateString);
+
+    console.log(formattedDate);
+    console.log(timeAgo);
 
 
 
     return (
         <div
-            className="flex max-w-[800px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer justify-between"
+            className={`flex max-w-[800px] border ${isBoost ? "  border-violetcute border-[2px]" : "border-lightbluecute"} p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer justify-between`}
             onClick={() => navigate(`/evender/eventDetail/${id}`)}
         >
             <div className="flex flex-col gap-3">
@@ -60,7 +109,7 @@ export default function EventContainer({
             </div>
             <div className="flex flex-col justify-between ml-20">
                 <p className="text-end text-sm font-light text-gray-400">
-                    1 day
+                    {timeAgo}
                 </p>
                 <img
                     src={image1}

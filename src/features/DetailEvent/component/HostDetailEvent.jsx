@@ -110,11 +110,11 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                                 {/* <div className="-ml-[152px] "> */}
                                 <div className="z-40">
                                     <div className="h-[120px] z-50"></div>
-                                    <Button
+                                    {eventDetail.isBoost ? (null) : (<Button
                                         onClick={onCheckout}
                                         className="bg-violetcute rounded-lg h-11 w-[118px]  text-white  hover:text-violetcute hover:border hover:border-violetcute border-violetcute ">
                                         Boost Event
-                                    </Button>
+                                    </Button>)}
                                 </div>
                                 <div className="-ml-[133px] flex flex-row">
                                     <div className="flex flex-col justify-between ">
@@ -167,7 +167,7 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                         )}
                     </>
                 )}
-            </div>
+            </div >
         </>
     );
 }

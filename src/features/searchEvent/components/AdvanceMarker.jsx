@@ -43,8 +43,7 @@ const MapComponent = () => {
         };
     });
 
-    console.log("newEvent ", newEvent);
-    console.log(" newfilterEvent ", newfilterEvent);
+
 
     const center = {
         lat: location.latitude ? location.latitude : 13.736717,

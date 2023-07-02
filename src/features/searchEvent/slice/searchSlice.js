@@ -25,13 +25,14 @@ export const syncEventSearch = createAsyncThunk(
     "search/syncEventAll",
     async (input, thunkApi) => {
         try {
+            console.log(input, "SLICE");
             const modifiedInput =
                 input.placeProvince === "All"
                     ? { ...input, placeProvince: undefined }
                     : input;
 
             const res = await eventSearchService.getSearchAll(modifiedInput);
-            console.log("RUTURNNNNNNN", res.data);
+
             return res.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data);
