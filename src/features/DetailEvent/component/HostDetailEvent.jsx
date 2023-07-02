@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import ModalEditDetailCute from "../component/ModalEditDetailCute";
-
+import axios from "axios";
 import Modal from "../../../components/Modal";
 import {
     leaveJointEventsync,
@@ -14,6 +14,7 @@ import DeleteModal from "../../../components/DeleteModla";
 import { Button } from "../../../components/ui/button";
 
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const me = useSelector((state) => state.auth.user);
@@ -27,6 +28,19 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
         let timeoutId = setTimeout(() => setShowComponent(true), 500); // 5000 ms = 5 seconds
         return () => clearTimeout(timeoutId); // Clear the timeout if the component unmounts
     }, []);
+
+
+    const onCheckout = async () => {
+        const result = await axios.post(
+            `http://localhost:8888/payment/create-payment`,
+            {
+                productDefaultPrice: eventDetail?.productDefaultPrice,
+                eventId: eventDetail?.id,
+                userId: eventDetail?.userId,
+            }
+        );
+        window.location.replace(result.data.session.url);
+    };
 
     const hdlOnclick = async () => {
         await dispatch(leaveJointEventsync(eventDetail.id)).unwrap();
@@ -57,9 +71,9 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                 </div>
                 <div
                     className="flex items-center gap-4"
-                    // onClick={() =>
-                    //     navigate(`/evender/profile/${eventDetail?.userId}`)
-                    // }
+                // onClick={() =>
+                //     navigate(`/evender/profile/${eventDetail?.userId}`)
+                // }
                 >
                     <img
                         className="w-[7rem] h-[7rem] rounded-full object-cover cursor-pointer "
@@ -68,7 +82,7 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                         onClick={() =>
                             navigate(`/evender/profile/${eventDetail?.userId}`)
                         }
-                        // onClick={navigate(`evender/profile/${}`)}
+                    // onClick={navigate(`evender/profile/${}`)}
                     />
                     <div className="ml-5">
                         <p className="font-normal text-base text-darkgraycute mb-2">
@@ -96,7 +110,9 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                                 {/* <div className="-ml-[152px] "> */}
                                 <div className="z-40">
                                     <div className="h-[120px] z-50"></div>
-                                    <Button className="bg-violetcute rounded-lg h-11 w-[118px]  text-white  hover:text-violetcute hover:border hover:border-violetcute border-violetcute ">
+                                    <Button
+                                        onClick={onCheckout}
+                                        className="bg-violetcute rounded-lg h-11 w-[118px]  text-white  hover:text-violetcute hover:border hover:border-violetcute border-violetcute ">
                                         Boost Event
                                     </Button>
                                 </div>

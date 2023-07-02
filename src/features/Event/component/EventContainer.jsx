@@ -2,6 +2,7 @@ import { UserEventIcon } from "../../../icons";
 import { convertDate } from "../../../utils/dateUtil";
 import { useNavigate } from "react-router-dom";
 
+
 export default function EventContainer({
     title,
     placeProvince,
@@ -11,9 +12,12 @@ export default function EventContainer({
     dateStart,
     id,
     capacity,
+
 }) {
     const navigate = useNavigate();
     const [date, time] = convertDate(dateStart);
+
+
 
     return (
         <div

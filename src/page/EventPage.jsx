@@ -54,6 +54,8 @@ export default function EventPage() {
                                 joinEventUser={el.JoinEventUsers}
                                 id={el.id}
                                 capacity={el.capacity}
+                                productDefaultPrice={el.productDefaultPrice}
+                                userId={el.userId}
                             />
                         ))}
                 </div>
