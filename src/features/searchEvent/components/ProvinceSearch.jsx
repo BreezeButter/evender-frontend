@@ -20,10 +20,11 @@ import {
 
 
 
-export default function ProvinceSearch({ addAllPlaceLoad, setProvince }) {
+export default function ProvinceSearch({ addAllPlaceLoad, setProvince, }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
     setProvince(value ? value : "");
+
 
 
 

@@ -25,6 +25,7 @@ export default function Chat() {
     const user = useSelector((state) => state.auth.user);
     const joinEventByUser = useSelector((state) => state.event.joinEventByUser);
     const chats = useSelector((state) => state.event.chats);
+    const [activeButtonIndex, setActiveButtonIndex] = useState(null);
 
     // console.log(user);
     // useEffect(() => {
@@ -62,9 +63,9 @@ export default function Chat() {
         };
     }, []);
 
-    useEffect(() => {
-        ref.current.scrollTop = ref.current.scrollHeight;
-    }, [messages]);
+    // useEffect(() => {
+    //     ref.current.scrollTop = ref.current.scrollHeight;
+    // }, [messages]);
 
     const handleJoinRoom = async (roomId) => {
         setCurrentRoom(roomId);
@@ -89,39 +90,43 @@ export default function Chat() {
     };
     console.log(joinEventByUser);
     return (
-        <div className="flex border-t-2">
+        <div className="flex border-t-2 ">
             <div className="relative">
-                <div className="w-[250px] h-screen bg-lightbluecute opacity-25"></div>
+                <div className="w-[250px] h-screen bg-lightbluecute opacity-50  shadow-indigo-950 shadow-xl"></div>
 
                 <Link
                     to="/evender/event"
-                    className="text-lightbluecute text-base font-medium cursor-pointer absolute left-14 bottom-28 hover:underline flex items-center"
+                    className=" text-white text-base font-medium cursor-pointer absolute left-14 bottom-28 hover:underline   flex items-center"
                 >
                     <LeftIcon />
-                    Back
+                    <a className="text-lightbluecute">Back</a>
                 </Link>
             </div>
-            <div className="flex flex-col w-[300px] border-r border-gray-200">
-                <div className="flex flex-col">
+            <div className="flex flex-col w-[300px] border-r border-gray-200  ">
+                <div className="flex flex-col ">
                     {joinEventByUser.map((el, index) => (
                         <button
                             key={index}
-                            onClick={() => handleJoinRoom(el.eventId)}
-                            className="border-b-[1px] border-gray-300 flex p-4 rounded font-semibold hover:bg-lightbluecute hover:text-white  "
+                            onClick={() => { handleJoinRoom(el.eventId), setActiveButtonIndex(index) }
+                            }
+                            className={`border-b-[1px] w-full border-gray-300 flex p-4 rounded font-semibold  hover:shadow-xl  shadow-slate-200  transition delay-120 duration-120 ease-in-out  ${activeButtonIndex === index ? ' bg-darkgraycute  shadow-slate-200  shadow-xl  text-white  hover:text-white' : ''
+                                }`}
                         >
-                            <div className="text-gray-400 text-sm">
+                            <div className=" border-emerald-50 ">
                                 <img
                                     src={el.Event.image1}
                                     alt=""
                                     className="w-[4rem] h-[4rem] rounded-full"
                                 />
                             </div>
-                            <div className="w-[80%]">
-                                <div className="flex text-sm ">
+                            <div className="w-[80%] ">
+                                <div className={`text-darkbluecute text-sm ${activeButtonIndex === index ? ' text-white ' : ''
+                                    }`}>
                                     {el.Event.title}
                                 </div>
-                                <div className="text-gray-400 text-sm">
-                                    {el.Event.placeName}
+                                <div className={`text-darkbluecute text-sm   ${activeButtonIndex === index ? ' text-white' : ''
+                                    }`}>
+                                    @ {el.Event.placeName}
                                 </div>
                             </div>
                         </button>
@@ -134,16 +139,58 @@ export default function Chat() {
                 {/* <div className="w-[100rem] m-auto mb-5 flex justify-center gap-5"> */}
                 <div className="p-4">
                     {/* {joinEventByUser.map((el, index) => ( */}
-                    <h1 className="font-semibold text-xl text-blue-400  w-fit p-2 rounded-full bg-white">
+                    <h1 className="font-bold text-2xl  text-darkbluecute  transition delay-120 duration-120 ease-in-out w-fit p-2 rounded-full">
                         {/* Event Room: {currentRoom} */}
                         {joinEventByUser.length > 0 &&
                             joinEventByUser.find(
                                 (el) => el?.Event?.id == currentRoom
                             ).Event?.title}
                     </h1>
+                    {/* <div className="rounded-xl h-[700px] w-[1200px] overflow-auto flex flex-col gap-3 p-2 border-2" ref={ref}>
+                        {messages &&
+                            messages.length > 0 && messages?.map((el, index) => {
+                                if (el.userId === user.id) {
+                                    return (
+                                        <div className="chat chat-end" key={index}>
+                                            <div className="chat-image avatar">
+                                                <div className="w-10 rounded-full">
+                                                    <img src={el.User?.image || <span className="loading loading-dots loading-sm"></span>} alt="User avatar" />
+                                                </div>
+                                            </div>
+                                            <div className="chat-header">
+                                                {el.User?.firstName || <span className="loading loading-dots loading-sm"></span>}
+                                                <time className="text-xs opacity-50">{el.createdAt
+                                                }</time>
+                                            </div>
+                                            <div className="chat-bubble">{el.message}</div>
+                                            <div className="chat-footer opacity-50">Seen</div>
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div className="chat chat-start" key={index}>
+                                            <div className="chat-image avatar">
+                                                <div className="w-10 rounded-full">
+                                                    <img src={el.User?.image || <span className="loading loading-dots loading-sm"></span>} alt="User avatar" />
+                                                </div>
+                                            </div>
+                                            <div className="chat-header">
+                                                {el.User?.firstName || <span className="loading loading-dots loading-sm"></span>}
+                                                <time className="text-xs opacity-50">{el.createdAt
+                                                }</time>
+                                            </div>
+                                            <div className="chat-bubble">{el.message}</div>
+                                            <div className="chat-footer opacity-50">Delivered</div>
+                                        </div>
+                                    );
+                                }
+                            })}
+                    </div> */}
+
+
                     {/* ))} */}
                     <div
-                        className="rounded-xl h-[480px] w-[900px] overflow-auto flex flex-col gap-3 p-2 border-2 border-white bg-white mt-4"
+                        className="rounded-xl h-[700px] w-[1200px] overflow-auto flex flex-col gap-3 p-2 border-2 "
                         ref={ref}
                     >
                         {messages.map((el, index) => {
@@ -151,7 +198,7 @@ export default function Chat() {
                                 return (
                                     <h1
                                         key={index}
-                                        className="self-end w-[350px] bg-gray-200 rounded-3xl p-2 "
+                                        className=" chat-bubble self-end w-[350px] bg-blue-500 rounded-3xl p-2 "
                                     >
                                         {el.message}
                                     </h1>
@@ -173,7 +220,7 @@ export default function Chat() {
                                                     el.firstName}
                                             </p>
                                         </div>
-                                        <h1 className=" bg-gray-200 rounded-3xl p-2 ">
+                                        <h1 className="chat-bubble bg-gray-200 rounded-3xl p-2 ">
                                             {el.message}
                                         </h1>
                                     </div>

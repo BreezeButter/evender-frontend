@@ -5,10 +5,12 @@ import { toast } from "react-toastify";
 // import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Maps from "../../Event/component/Maps";
+import { convertDate } from "../../../utils/dateUtil"
 
 export default function LocationDetailEvent({ eventDetail }) {
     const { id } = eventDetail;
-    console.log(eventDetail, "------////");
+
+    const [date, time] = convertDate(eventDetail.dateStart);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleJointEvent = () => {
@@ -44,8 +46,8 @@ export default function LocationDetailEvent({ eventDetail }) {
                             <LocationPin />
 
                             <p className="text-sm">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Aliquid, odit.
+                                {eventDetail.placeName}
+                                {eventDetail.placeProvince}
                             </p>
                             <a
                                 href={`http://maps.google.com/?q=${latitude},${longitude}`}
@@ -55,8 +57,7 @@ export default function LocationDetailEvent({ eventDetail }) {
                         </div>
                         <div className="flex">
                             <p className="text-sm">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Aliquid, odit.
+                                {date}{time}
                             </p>
                         </div>
                         {/* <Maps /> */}
