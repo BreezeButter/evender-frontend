@@ -16,6 +16,7 @@ export default function EventPage() {
     const events = useSelector((state) => state.event.events);
     const eventUser = useSelector((state) => state.event.eventUser);
     const filterEvent = useSelector((state) => state.search.eventFilter);
+    console.log(filterEvent, "filterEvent");
 
     useEffect(() => {
         const eventFunction = async () => {
@@ -52,6 +53,7 @@ export default function EventPage() {
                                 dateStart={el.dateStart}
                                 joinEventUser={el.JoinEventUsers}
                                 id={el.id}
+                                capacity={el.capacity}
                             />
                         ))}
                 </div>

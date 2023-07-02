@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useState } from "react";
 // import AutoCompleteComponent from "./Autocomplete";
 
-export default function Map({ selected }) {
+export default function Map({ selected, mapContainerClassName }) {
     const center = useMemo(() => ({ lat: 13.736717, lng: 100.523186 }), []);
     // const [selected, setSelected] = useState(null);
     // console.log("=========", { selected });
@@ -15,7 +15,8 @@ export default function Map({ selected }) {
             <GoogleMap
                 zoom={10}
                 center={selected ? selected : center}
-                mapContainerClassName="map-container w-[415px] h-[233px] mt-5 rounded-lg shadow-sm"
+                // mapContainerClassName=""
+                mapContainerClassName={`${mapContainerClassName}`}
             >
                 {selected && <MarkerF position={selected} />}
             </GoogleMap>

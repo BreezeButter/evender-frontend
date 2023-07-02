@@ -10,6 +10,7 @@ export default function EventContainer({
     joinEventUser,
     dateStart,
     id,
+    capacity,
 }) {
     const navigate = useNavigate();
     const [date, time] = convertDate(dateStart);
@@ -33,22 +34,22 @@ export default function EventContainer({
                                 key={el.id}
                                 src={el.User.image}
                                 alt=""
-                                className="w-10 h-10 bg-slate-500 rounded-full -mr-4"
+                                className="w-10 h-10 bg-slate-500 rounded-full -mr-4  min-w-[40px] object-cover"
                             />
                         ))}
                     </div>
                     <div className="border border-gray-500 h-fit rounded-md px-2 py-0.5 flex flex-row items-center gap-0.5 ">
                         <UserEventIcon className="pb-0.5" />
                         <p className="text-sm font-light text-darkgraycute">
-                            {`${joinEventUser.length}/30`}
+                            {`${joinEventUser.length}/${capacity}`}
                         </p>
                     </div>
                 </div>
                 <h1 className="font-medium text-darkbluecute text-base mt-1.5">
                     {placeProvince}
                 </h1>
-                <div className=" overflow-hidden h-10">
-                    <p className="max-w-[450px] text-sm font-light text-darkbluecute ">
+                <div className=" overflow-hidden max-h-10">
+                    <p className="max-w-[450px]  text-sm font-light text-darkbluecute ">
                         {description}
                     </p>
                 </div>

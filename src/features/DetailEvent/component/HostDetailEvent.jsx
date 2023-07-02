@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import ModalEditDetail from "../component/ModalEditDetail";
+import ModalEditDetailCute from "../component/ModalEditDetailCute";
+
 import Modal from "../../../components/Modal";
 import {
     leaveJointEventsync,
@@ -9,6 +10,8 @@ import { fetchMe } from "../../auth/slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import DeleteModal from "../../../components/DeleteModla";
+import { Button } from "../../../components/ui/button";
 
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
     const navigate = useNavigate();
@@ -46,28 +49,41 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
 
     return (
         <>
-            <div className="flex flex-col gap-4 py-5">
-                <div className="mb-3.5">
+            <div className="flex flex-col gap-4 py-4">
+                <div className="mb-5">
                     <h1 className="font-semibold text-3xl text-darkbluecute ">
                         {eventDetail?.title}
                     </h1>
                 </div>
                 <div
                     className="flex items-center gap-4"
-                    onClick={() =>
-                        navigate(`/evender/profile/${eventDetail?.userId}`)
-                    }
+                    // onClick={() =>
+                    //     navigate(`/evender/profile/${eventDetail?.userId}`)
+                    // }
                 >
                     <img
-                        className="w-[7rem] h-[7rem] rounded-full"
+                        className="w-[7rem] h-[7rem] rounded-full object-cover cursor-pointer "
                         src={hostDetail.User?.image}
                         alt=""
+                        onClick={() =>
+                            navigate(`/evender/profile/${eventDetail?.userId}`)
+                        }
                         // onClick={navigate(`evender/profile/${}`)}
                     />
-                    <div>
-                        <p>Hosted By</p>
-                        <p className="font-semibold">
-                            {hostDetail.User?.userName}
+                    <div className="ml-5">
+                        <p className="font-normal text-base text-darkgraycute mb-2">
+                            Hosted By
+                        </p>
+                        <p
+                            className="font-medium text-base text-darkgraycute cursor-pointer hover:font-semibold"
+                            onClick={() =>
+                                navigate(
+                                    `/evender/profile/${eventDetail?.userId}`
+                                )
+                            }
+                        >
+                            {hostDetail.User?.firstName}{" "}
+                            {hostDetail.User?.lastName}
                         </p>
                     </div>
                 </div>
@@ -76,37 +92,49 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                 {showComponent && (
                     <>
                         {host && (
-                            <div className="flex items-end p-4">
-                                <label
-                                    className="w-[6rem] h-[2.5rem] bg-[#004DFF] opacity-90 rounded-full text-white flex justify-center items-center hover:bg-white hover:text-[#004DFF] hover:border-2 hover:border-[#004DFF]"
-                                    htmlFor="Detail"
-                                    role="button"
-                                >
-                                    edit
-                                </label>
-                                <div>
-                                    <Modal
+                            <div className="grid grid-cols-3 mt-9 -mr-[232px]">
+                                {/* <div className="-ml-[152px] "> */}
+                                <div className="z-40">
+                                    <div className="h-[120px] z-50"></div>
+                                    <Button className="bg-violetcute rounded-lg h-11 w-[118px]  text-white  hover:text-violetcute hover:border hover:border-violetcute border-violetcute ">
+                                        Boost Event
+                                    </Button>
+                                </div>
+                                <div className="-ml-[133px] flex flex-row">
+                                    <div className="flex flex-col justify-between ">
+                                        {/* <div className="h-[150px]"></div> */}
+                                        <ModalEditDetailCute
+                                            eventDetail={eventDetail}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col justify-between">
+                                        {/* <div className="h-[150px]"></div> */}
+                                        {/* <Modal
                                         num="1"
                                         btnName="Delete Group"
                                         titleModal="Confirm Delete Group"
                                         descriptionModal="Before you delete group please tell everyone know"
-                                        btnTextModal="Confirm Delete!!"
-                                        classExpression="bg-neutral text-white"
+                                        btnTextModal="Confirm Delete"
+                                        classExpression="text-redcute"
                                         hdlOnclick={hdlDelEvent}
-                                    />
+                                    /> */}
+
+                                        <DeleteModal hdlOnclick={hdlDelEvent} />
+                                    </div>
                                 </div>
-                                <div>
-                                    <Modal
+                                {/* <Modal
                                         num="2"
                                         btnName="Boost Event"
                                         titleModal="Boost Event"
                                         descriptionModal="Before you delete group please tell everyone know"
                                         btnTextModal="Confirm Boost!!"
-                                        classExpression="bg-neutral text-white"
+                                        classExpression="btn bg-violetcute"
                                         // hdlOnclick={hdlBoost}
-                                    />
-                                </div>
-                                <ModalEditDetail eventDetail={eventDetail} />
+                                    /> */}
+                                {/* <Button className="bg-violetcute rounded-full h-11 w-36 font-semibold text-white hover:text-violetcute hover:border hover:border-violetcute border-violetcute ">
+                                        Boost Event
+                                    </Button> */}
+                                {/* </div> */}
                             </div>
                         )}
                         {joined && !host && (

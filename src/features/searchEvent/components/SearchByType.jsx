@@ -59,8 +59,8 @@ export default function SearchByType() {
     return (
         <Input
             type="text"
-            className="pl-10 border border-gray-400"
-            placeholder="Search here..."
+            className="pl-10 border border-gray-400 placeholder:text-gray-500"
+            placeholder="Search here.."
             value={input.box}
             onChange={handleChangeInput}
             name="box"

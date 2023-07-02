@@ -10,7 +10,7 @@ export default function Modal({
     return (
         <div>
             <button
-                className={`btn ${classExpreesion}`}
+                className={`${classExpreesion}`}
                 onClick={() => window[`my_modal_${num}`].showModal()}
             >
                 {btnName}

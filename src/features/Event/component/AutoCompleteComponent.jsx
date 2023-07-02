@@ -30,6 +30,7 @@ const AutoCompleteComponent = ({ setSelected }) => {
             <Autocomplete
                 className="block rounded-lg border border-gray-400 font-normal py-2.5 focus:ring-1 w-full bg-white text-sm pl-4 mt-2 text-darkgraycute z-50"
                 onPlaceSelected={placeSelected}
+                placeholder="location"
                 options={{
                     types: ["address"],
                     //   componentRestrictions: { country: "th" },
