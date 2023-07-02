@@ -74,8 +74,6 @@ export default function EventBar() {
 
     };
 
-
-
     useEffect(() => {
         dispatch(
             syncEventSearch({
@@ -87,6 +85,18 @@ export default function EventBar() {
             })
         );
     }, [input, radius, province, location, handleReset]);
+
+    useEffect(() => {
+        dispatch(
+            syncEventSearch({
+                ...initialValue,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                placeProvince: "",
+                radi: "",
+            })
+        );
+    }, [handleReset]);
 
     return (
         <div className="flex gap-1 m-8  text-darkbluecute">
@@ -175,68 +185,11 @@ export default function EventBar() {
                                 Province
                             </Label>
                             <ProvinceSearch addAllPlaceLoad={addAllPlaceLoad} setProvince={setProvince} />
-                            {/* <select
-                                className=" w-full text-darkgraycute rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                value={input.placeProvince} // Set the value of the select element to reflect the current state
-                                onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
-                                name="placeProvince"
-                            >
-                                <option disabled value={""}>
-                                    Province
-                                </option>{" "}
-                                {/* Add an empty value for the disabled option */}
-                            {/* {addAllPlaceLoad?.map((el, idx) => (
-                                    <option key={idx}>
-                                        {el.placeProvince}
-                                    </option>
-                                ))}
-                            </select> */}
                         </div>
                         <NearBySearch setRadiuse={setRadiuse} />
 
-                        {/* <div className="flex flex-col">
-                                    <Label
-                                        htmlFor="NearBy"
-                                        className=" text-darkbluecute text-left mb-1 "
-                                    >
-                                        Nearby
-                                    </Label>
-                                    <select
-                                        className="w-full  text-darkgraycute rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        value=""
-                                        onChange={(e) =>
-                                            setRadiuse(e.target.value)
-                                        }
-                                    >
-                                        <option disabled value={""}>
-                                            Nearby
-                                        </option>
-                                        <option value={""}>None</option>
-                                        <option value={1}>1 km</option>
-                                        <option value={5}>5 km</option>
-                                        <option value={10}>10km</option>
-                                        <option value={30}>30km</option>
-                                    </select>
-                                </div> */}
                     </div>
                     <CurrentGeo setLocation={setLocation} />
-                    {/* <div className="grid grid-cols-4 items-center gap-4">
-                                <Label
-                                    htmlFor="Search"
-                                    className=" text-darkbluecute text-right"
-                                >
-                                    Search
-                                </Label>
-                                <Input
-                                    type="text"
-                                    placeholder="Search… title or place name"
-                                    className="w-80 border border-gray-300 text-darkgraycute"
-                                    value={input.box}
-                                    onChange={handleChangeInput}
-                                    name="box"
-                                />
-                            </div>
-                            <CurrentGeo setLocation={setLocation} /> */}
                 </div>
                 <div className=" mb-8">
                     <button
