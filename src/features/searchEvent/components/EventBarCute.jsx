@@ -1,6 +1,14 @@
-import { GalleryVertical, Beer, Sailboat, Soup, Coffee, Goal, Map } from "lucide-react";
-import Reset from "../../../icons";
-import { SlidersHorizontal } from "lucide-react";
+import {
+    GalleryVertical,
+    Beer,
+    Sailboat,
+    Soup,
+    Coffee,
+    Goal,
+    Map,
+} from "lucide-react";
+import Reset, { DownIcon } from "../../../icons";
+import { SlidersHorizontal, ListRestart } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -30,6 +38,7 @@ import {
     SheetTrigger,
 } from "../../../components/ui/sheet";
 import NearBySearch from "./NearBySearch";
+import ProvinceSearch from "./ProvinceSearch";
 const SHEET_SIDES = ["left"];
 
 export default function EventBar() {
@@ -45,12 +54,28 @@ export default function EventBar() {
     };
 
     const eventCategory = [
-        { id: undefined, name: "All", emoji: <GalleryVertical /> },
-        { id: 1, name: "Bar", emoji: <Beer /> },
-        { id: 2, name: "Sport", emoji: <Sailboat /> },
-        { id: 3, name: "Resterant", emoji: <Soup /> },
-        { id: 4, name: "Cafe", emoji: <Coffee /> },
-        { id: 5, name: "LifeStyle", emoji: <Goal /> },
+        {
+            id: undefined,
+            name: "All",
+            emoji: <GalleryVertical className="stroke-[1.5px]" />,
+        },
+        { id: 1, name: "Bar", emoji: <Beer className="stroke-[1.5px]" /> },
+        {
+            id: 2,
+            name: "Sport",
+            emoji: <Sailboat className="stroke-[1.5px]" />,
+        },
+        {
+            id: 3,
+            name: "Resterant",
+            emoji: <Soup className="stroke-[1.5px]" />,
+        },
+        { id: 4, name: "Cafe", emoji: <Coffee className="stroke-[1.5px]" /> },
+        {
+            id: 5,
+            name: "LifeStyle",
+            emoji: <Goal className="stroke-[1.5px]" />,
+        },
     ];
 
     const dispatch = useDispatch();
@@ -66,6 +91,8 @@ export default function EventBar() {
     const [input, setInput] = useState(initialValue);
     const [location, setLocation] = useState("");
     const [radius, setRadiuse] = useState("");
+    const [province, setProvince] = useState("");
+    const [activeButtonIndex, setActiveButtonIndex] = useState(null);
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -80,19 +107,17 @@ export default function EventBar() {
                 latitude: location.latitude,
                 longitude: location.longitude,
                 radi: radius,
+                placeProvince: province,
             })
         );
-    }, [input, radius]);
+    }, [input, radius, province]);
 
     return (
         <div className="flex gap-2">
             {SHEET_SIDES.map((side) => (
                 <Sheet key={side}>
                     <SheetTrigger asChild>
-                        <a
-
-                            className=" flex flex-row justify-center "
-                        >
+                        <a className="flex flex-row justify-center ">
                             <Button
                                 size="icon"
                                 className="hover:bg-gray-200  border border-gray-400"
@@ -101,11 +126,10 @@ export default function EventBar() {
                             </Button>
                         </a>
                     </SheetTrigger>
-                    <SheetContent side={side} className="bg-whitebg ">
+                    <SheetContent side={side} className="bg-white  ">
                         <SheetHeader className="border-b border-gray-300 pb-4">
                             <SheetTitle className="text-darkbluecute text-2xl">
-
-                                Search
+                                Filter
                             </SheetTitle>
                             <SheetDescription className="text-darkbluecute">
                                 Let's filter your event here.
@@ -119,19 +143,26 @@ export default function EventBar() {
                                 >
                                     Category
                                 </Label>
-                                <ul className="grid grid-cols-3 text-darkgraycute px-1 ">
+                                <ul className="grid grid-cols-3 mt-4  text-darkgraycute px-1 ">
                                     {eventCategory.map((el, idx) => (
                                         <li key={idx} className="">
                                             <Button
-                                                className="hover:bg-gray-200  text-darkgraycute text-sm font-normal hover:font-medium"
-                                                onClick={() =>
+                                                onClick={() => {
+                                                    setActiveButtonIndex(idx);
                                                     handleChangeInput({
                                                         target: {
                                                             name: "eventCategoryId",
                                                             value: el.id,
                                                         },
-                                                    })
-                                                }
+                                                    });
+                                                }}
+                                                className={`hover:bg-gray-100 mb-6 w-full flex justify-start text-darkgraycute text-sm font-normal hover:font-medium  ${
+                                                    activeButtonIndex === idx
+                                                        ? " text-lightbluecute stroke-lightbluecute"
+                                                        : ""
+                                                }`}
+                                                // className="hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-8 hover:border-b-4 hover:border-lightbluecute cursor-pointer "
+
                                                 value={el.id}
                                                 name="eventCategoryId"
                                             >
@@ -141,17 +172,18 @@ export default function EventBar() {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="flex flex-row items-center gap-4 mt-2 ">
-                                <div>
+                            <div className="flex flex-row items-center gap-[17px]  ">
+                                <div className="relative">
                                     <Label
                                         htmlFor="Datestart"
                                         className="text-right text-darkbluecute"
                                     >
                                         Date start
                                     </Label>
+                                    <DownIcon className="absolute right-3.5 top-9 -z-50 cursor-pointer " />
                                     <div className="flex flex-row items-center">
                                         <Input
-                                            className=" border border-gray-300 text-darkgraycute"
+                                            className="border border-gray-400 text-darkgraycute"
                                             title="Date start"
                                             type="datetime-local"
                                             value={input.dateStart}
@@ -160,15 +192,17 @@ export default function EventBar() {
                                         />
                                     </div>
                                 </div>
-                                <div className="">
+
+                                <div className="relative">
                                     <Label
                                         htmlFor="Dateend"
                                         className=" text-darkbluecute text-right"
                                     >
                                         Date end
                                     </Label>
+                                    <DownIcon className="absolute right-3.5 top-9 -z-50 cursor-pointer" />
                                     <Input
-                                        className="border border-gray-300 text-darkgraycute"
+                                        className="border border-gray-400 text-darkgraycute"
                                         title="Date end"
                                         type="datetime-local"
                                         value={input.dateEnd}
@@ -177,15 +211,25 @@ export default function EventBar() {
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col">
-                                <div className="flex flex-col mb-5 mt-1">
+                            <div className="flex flex-row items-center  gap-[17px] mt-3  ">
+                                <div className="flex flex-col w-full">
                                     <Label
+                                        htmlFor="Province"
+                                        className=" text-darkbluecute text-left mb-1"
+                                    >
+                                        Province
+                                    </Label>
+                                    <ProvinceSearch
+                                        addAllPlaceLoad={addAllPlaceLoad}
+                                        setProvince={setProvince}
+                                    />
+                                    {/* <Label
                                         htmlFor="province"
                                         className="text-left text-darkbluecute mb-1 "
                                     >
                                         Province
-                                    </Label>
-                                    <select
+                                    </Label> */}
+                                    {/* <select
                                         className=" w-full text-darkgraycute rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                         value={input.placeProvince} // Set the value of the select element to reflect the current state
                                         onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
@@ -193,16 +237,27 @@ export default function EventBar() {
                                     >
                                         <option disabled value={""}>
                                             Province
-                                        </option>{" "}
-                                        {/* Add an empty value for the disabled option */}
-                                        {addAllPlaceLoad?.map((el, idx) => (
+                                        </option>{" "} */}
+                                    {/* Add an empty value for the disabled option */}
+                                    {/* {addAllPlaceLoad?.map((el, idx) => (
                                             <option key={idx}>
                                                 {el.placeProvince}
                                             </option>
                                         ))}
-                                    </select>
+                                    </select> */}
                                 </div>
-                                <NearBySearch setRadiuse={setRadiuse} />
+                                <div className="flex flex-col w-full">
+                                    <Label
+                                        htmlFor="Nearby"
+                                        className=" text-darkbluecute text-left mb-1"
+                                    >
+                                        Nearby
+                                    </Label>
+                                    <NearBySearch
+                                        setRadiuse={setRadiuse}
+                                        className="border border-gray-400"
+                                    />
+                                </div>
                                 {/* <div className="flex flex-col">
                                     <Label
                                         htmlFor="NearBy"
@@ -249,18 +304,18 @@ export default function EventBar() {
                         </div>
                         <SheetFooter>
                             <SheetClose asChild>
-                                <button
-                                    className="btn btn-square border-gray-200 hover:border-gray-300  bg-transparent hover:bg-gray-200 "
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="border border-gray-400 mr-2 mt-8 hover:bg-gray-100   hover:text-darkgraycute  "
                                     onClick={() => {
                                         console.log("first");
                                         setInput(initialValue);
                                         setRadiuse("");
                                     }}
                                 >
-                                    <span>
-                                        <Reset />
-                                    </span>
-                                </button>
+                                    <ListRestart className="w-5 h-5 text-gray-400 bg-transparent stroke-[1.75px] " />
+                                </Button>
                             </SheetClose>
                         </SheetFooter>
                     </SheetContent>

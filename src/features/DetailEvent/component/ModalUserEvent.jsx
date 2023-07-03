@@ -29,36 +29,34 @@ export default function ModalUserEvent({ eventDetail }) {
                         View all <ChevronRight className="h-4 w-4 stroke-1" />
                     </div>
                 </DialogTrigger>
-                <DialogContent className="bg-whitebg">
+                <DialogContent className="bg-white max-w-sm">
                     <DialogHeader>
                         <DialogDescription>
                             <ScrollArea className="">
-                                <div className="flex flex-col justify-center px-14 gap-5">
-                                    {/* <h4 className="mb-4 text-sm font-medium leading-none">
-                                        Tags
-                                    </h4> */}
+                                <div className="flex flex-col justify-center px-2 max-h-[450px] gap-2 -mt-1.5 mb-1.5">
                                     {eventDetail.JoinEventUsers?.map(
                                         (el, idex) => (
                                             <React.Fragment key={idex}>
+                                                <Separator className="my-1 bg-gray-200 " />
                                                 <Link
                                                     to={`/evender/profile/${el.id}`}
                                                     key={idex}
                                                 >
                                                     <div
-                                                        className="flex items-center gap-5 "
+                                                        className="flex items-center gap-6 "
                                                         key={idex}
                                                     >
                                                         <img
-                                                            className="w-[5rem] h-[5rem] rounded-full object-cover"
+                                                            className="w-[4rem] h-[4rem] rounded-full object-cover border border-gray-200 hover:shadow-sm"
                                                             src={el.User.image}
                                                             alt="ProfileImage"
                                                         />
-                                                        <p>
-                                                            {el.User.userName}
+                                                        <p className="text-darkgraycute font-normal text-sm hover:font-medium">
+                                                            {el.User.firstName}{" "}
+                                                            {el.User.lastName}
                                                         </p>
                                                     </div>
                                                 </Link>
-                                                <Separator className="my-2 stroke-black fill-black text-black z-50 " />
                                             </React.Fragment>
                                         )
                                     )}

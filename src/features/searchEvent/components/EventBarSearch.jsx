@@ -1,5 +1,13 @@
-
-import { GalleryVertical, Beer, Sailboat, Soup, Coffee, Goal, Map, CalendarSearch } from "lucide-react";
+import {
+    GalleryVertical,
+    Beer,
+    Sailboat,
+    Soup,
+    Coffee,
+    Goal,
+    Map,
+    CalendarSearch,
+} from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -23,6 +31,8 @@ import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 
 import NearBySearch from "./NearBySearch";
+import Input2 from "../../Event/component/Input";
+import { DownIcon } from "../../../icons";
 
 export default function EventBar() {
     // const location = useLocation();
@@ -47,12 +57,12 @@ export default function EventBar() {
     ];
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     //placemaping recive from backend
     const placeLoad = useSelector((state) => state.search.placeLoad);
     const user = useSelector((state) => state.auth.users);
     const addAllPlaceLoad = [...placeLoad, { placeProvince: "All" }];
-    console.log(user)
+    console.log(user);
 
     useEffect(() => {
         dispatch(syncEventPlace());
@@ -67,15 +77,12 @@ export default function EventBar() {
     const [activeCard1, setActiveCard1] = useState(false);
     const [activeCard2, setActiveCard2] = useState(false);
 
-
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
 
     const handleReset = () => {
-
-        setInput(initialValue)
-
+        setInput(initialValue);
     };
 
     useEffect(() => {
@@ -97,17 +104,19 @@ export default function EventBar() {
                     {eventCategory.map((el, idx) => (
                         <li key={idx} className="">
                             <Button
-                                className={`hover:bg-white text-darkgraycute  ring-1 ring-violetcute hover:shadow-violetcute bg-white m-4 text-base font-normal hover:font-medium  hover:transition-transform hover:shadow-md hover:scale-[120%] transform-gpu ${activeButtonIndex === idx
-                                    ? " bg-violetcute text-white hover:text-violetcute "
-                                    : ""}`}
+                                className={`hover:bg-white text-darkgraycute  ring-1 ring-violetcute hover:shadow-violetcute bg-white m-4 text-base font-normal hover:font-medium  hover:transition-transform hover:shadow-md hover:scale-[120%] transform-gpu ${
+                                    activeButtonIndex === idx
+                                        ? " bg-violetcute text-white hover:text-violetcute "
+                                        : ""
+                                }`}
                                 onClick={() => {
-                                    setActiveButtonIndex(idx)
+                                    setActiveButtonIndex(idx);
                                     handleChangeInput({
                                         target: {
                                             name: "eventCategoryId",
                                             value: el.id,
                                         },
-                                    })
+                                    });
                                 }}
                                 value={el.id}
                                 name="eventCategoryId"
@@ -126,42 +135,34 @@ export default function EventBar() {
                 />
             </div> */}
 
-
-            <div className={`flex flex-col items-center gap-4 hover:ring-1 hover:ring-violetcute hover:shadow-violetcute absolute ml-[-140px] mt-[100px] bg-white p-8 rounded-lg  hover:transition-transform hover:shadow-md hover:scale-[110%] transform-gpu 
-            ${activeCard2 ? " text-violetcute hover:text-violetcute ring-1 ring-violetcute shadow-violetcute shadow-md "
-                    : ""}`}
-                onClick={() => setActiveCard2(!activeCard2)}>
-                <div className="mr-4 mt-4 text-darkgraycute" >
+            <div
+                className={`flex flex-col items-center gap-2 hover:ring-1 hover:ring-violetcute hover:shadow-violetcute absolute ml-[-140px] mt-[130px] bg-white min-w-[350px] p-8 rounded-lg  hover:transition-transform hover:shadow-md hover:scale-[110%] transform-gpu 
+            ${
+                activeCard2
+                    ? " text-violetcute hover:text-violetcute ring-1 ring-violetcute shadow-violetcute shadow-md "
+                    : ""
+            }`}
+                onClick={() => setActiveCard2(!activeCard2)}
+            >
+                <div className="mr-4 mt-4 text-darkgraycute">
                     <CalendarSearch size={44} />
                 </div>
-                <div>
-                    <Label
-                        htmlFor="Datestart"
-                        className="text-right text-darkbluecute text-base font-semibold "
-                    >
-                        Date start
-                    </Label>
-                    <div className="flex flex-col items-center">
-                        <Input
 
-                            className=" border border-darkgraycute text-darkgraycute "
-                            title="Date start"
-                            type="datetime-local"
-                            value={input.dateStart}
-                            onChange={handleChangeInput}
-                            name="dateStart"
-                        />
-                    </div>
+                <div className="relative w-full mt-5">
+                    {/* <CalendarIcon className="absolute right-0.5 top-10 -z-50 " /> */}
+                    <DownIcon className="absolute right-0.5 top-9 -z-50 " />
+                    <Input2
+                        title="Date start"
+                        type="datetime-local"
+                        value={input.dateStart}
+                        onChange={handleChangeInput}
+                        name="dateStart"
+                    />
                 </div>
-                <div className="">
-                    <Label
-                        htmlFor="Dateend"
-                        className=" text-darkbluecute text-right text-base font-semibold"
-                    >
-                        Date end
-                    </Label>
-                    <Input
-                        className="border border-darkgraycute text-darkgraycute"
+                <div className="relative w-full">
+                    {/* <CalendarIcon className="absolute" /> */}
+                    <DownIcon className="absolute right-0.5 top-9 -z-50 " />
+                    <Input2
                         title="Date end"
                         type="datetime-local"
                         value={input.dateEnd}
@@ -170,42 +171,56 @@ export default function EventBar() {
                     />
                 </div>
             </div>
-            <div className={`flex flex-col items-center gap-4 hover:ring-1 hover:ring-violetcute hover:shadow-violetcute absolute ml-[-140px] mt-[400px] bg-white p-8 rounded-lg  hover:transition-transform hover:shadow-md hover:scale-[110%] transform-gpu 
-            ${activeCard1 ? " text-violetcute hover:text-violetcute ring-1 ring-violetcute shadow-violetcute shadow-md "
-                    : ""}`}
-                onClick={() => setActiveCard1(!activeCard1)}>
+            <div
+                className={`flex flex-col items-center gap-4 hover:ring-1 pb-11 hover:ring-violetcute hover:shadow-violetcute absolute ml-[-140px] min-w-[350px]  mt-[470px] bg-white p-8 rounded-lg  hover:transition-transform hover:shadow-md hover:scale-[110%] transform-gpu 
+            ${
+                activeCard1
+                    ? " text-violetcute hover:text-violetcute ring-1 ring-violetcute shadow-violetcute shadow-md "
+                    : ""
+            }`}
+                onClick={() => setActiveCard1(!activeCard1)}
+            >
                 <div className="m-auto mb-4  text-darkgraycute">
                     <Map size={44} />
                 </div>
-                <div className="flex flex-col items-baseline">
-                    <Label
-                        htmlFor="Dateend"
-                        className=" text-darkbluecute text-right text-base font-semibold"
-                    >
-                        Location
-                    </Label>
-                    <ProvinceSearch
-                        addAllPlaceLoad={addAllPlaceLoad}
-                        setProvince={setProvince}
-
-                    />
-                    <Label
-                        htmlFor="Dateend"
-                        className=" text-darkbluecute text-right text-base font-semibold mt-4"
-                    >
-                        Nearby
-                    </Label>
-                    <NearBySearch setRadiuse={setRadiuse} />
+                <div className="flex flex-col items-baseline w-full ">
+                    <div className="w-full flex flex-col mb-4">
+                        <Label
+                            htmlFor="Province"
+                            className=" text-darkbluecute text-left mb-1.5"
+                        >
+                            Province
+                        </Label>
+                        <ProvinceSearch
+                            addAllPlaceLoad={addAllPlaceLoad}
+                            setProvince={setProvince}
+                        />
+                    </div>
+                    <div className="w-full">
+                        <Label
+                            htmlFor="Nearby"
+                            className=" text-darkbluecute text-left mb-1.5"
+                        >
+                            Nearby
+                        </Label>
+                        <NearBySearch
+                            setRadiuse={setRadiuse}
+                            className="border w-full border-gray-400"
+                        />
+                    </div>
                 </div>
             </div>
             <CurrentGeo setLocation={setLocation} />
 
-            <div className="mt-[720px] ml-[-430px] 
-            " onClick={() => navigate('/evender/event')}>
-                <button className="btn w-[230px] hover:transition-transform hover:ring-1 hover:ring-darkgraycute hover:shadow-2xl rounded-xl  hover:scale-[110%] transform-gpu text-white">Back to event</button>
-
+            <div
+                className="mt-[785px] ml-[-449px] 
+            "
+                onClick={() => navigate("/evender/event")}
+            >
+                <button className="btn min-w-[350px] hover:transition-transform hover:ring-1 hover:ring-darkgraycute hover:shadow-2xl rounded-xl  hover:scale-[110%] transform-gpu text-white">
+                    Back to event
+                </button>
             </div>
-
 
             {/* <span>
                 <a href="/evender/event" className=" hover:underline">
@@ -216,11 +231,6 @@ export default function EventBar() {
         </div>
     );
 }
-
-
-
-
-
 
 // <div className="flex gap-1 m-8  text-darkbluecute">
 // <div>

@@ -13,7 +13,6 @@ export default function EventContainer({
     capacity,
     isBoost,
     events = { el },
-
 }) {
     const navigate = useNavigate();
     const [date, time] = convertDate(dateStart);
@@ -36,11 +35,9 @@ export default function EventContainer({
         } else if (hours > 0) {
             timeAgo = `${hours} hour${hours > 1 ? "s" : ""} ago`;
         } else if (minutes > 0) {
-
             timeAgo = `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
         } else {
             timeAgo = `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
-
         }
 
         return {
@@ -51,16 +48,14 @@ export default function EventContainer({
     const dateString = dateStart;
     const { timeAgo } = formatDateAndTimeAgo(dateString);
 
-
-
     return (
         <div
-
-            className={`flex max-w-[800px] border ${isBoost
-                ? "  border-violetcute border-[2px]"
-                : "border-lightbluecute"
-                } p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer justify-between`}
-
+            className={`flex max-w-[800px] border ${
+                isBoost
+                    ? // ? "border-violetcute border-[1px] animate-bounce"
+                      "box"
+                    : "border-lightbluecute"
+            } p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer justify-between`}
             onClick={() => navigate(`/evender/eventDetail/${id}`)}
         >
             <div className="flex flex-col gap-3">

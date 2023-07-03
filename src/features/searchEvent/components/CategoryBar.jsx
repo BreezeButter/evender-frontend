@@ -20,9 +20,7 @@ import {
 import { Link } from "react-router-dom";
 
 export default function EventBar() {
-
     const [activeButtonIndex, setActiveButtonIndex] = useState(0);
-
     const initialValue = {
         eventCategoryId: "",
     };
@@ -84,7 +82,6 @@ export default function EventBar() {
                         <li key={idx}>
                             <a
                                 onClick={() => {
-
                                     setActiveButtonIndex(idx ? idx : 0);
 
                                     handleChangeInput({
@@ -94,13 +91,11 @@ export default function EventBar() {
                                         },
                                     });
                                 }}
-
-                                className={`hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-11  cursor-pointer  ${activeButtonIndex === idx
-                                    ? "pb-9 border-b-4 border-lightbluecute "
-                                    : ""
-                                    }`}
-
-
+                                className={`hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-11  cursor-pointer  ${
+                                    activeButtonIndex === idx
+                                        ? "pb-11 border-b-4 border-lightbluecute "
+                                        : ""
+                                }`}
                                 // className="hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-8 hover:border-b-4 hover:border-lightbluecute cursor-pointer "
 
                                 value={el.id}
@@ -132,7 +127,7 @@ export default function EventBar() {
                             </Link>
                         </HoverCardTrigger>
                         <HoverCardContent className="bg-whitebg text-sm font-normal text-darkgraycute w-48 mt-2">
-                            See event in your area on Google Maps.
+                            See all event in your area on Google Maps.
                         </HoverCardContent>
                     </HoverCard>
 

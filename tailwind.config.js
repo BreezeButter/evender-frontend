@@ -17,6 +17,7 @@ module.exports = {
       },
     },
     extend: {
+
       colors: {
         'darkgraycute': '#1e2022',
         'lightbluecute': '#004DFF',
@@ -24,7 +25,7 @@ module.exports = {
         'redcute': '#FF5050',
         'orangecute': '#FF9840',
         'violetcute': '#A200FF',
-        'whitebg': '#f0f2f5',
+        'whitebg': '',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

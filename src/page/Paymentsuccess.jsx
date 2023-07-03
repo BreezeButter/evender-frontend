@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from "lucide-react";
 // import { useDispatch } from "react-redux";
 // import { upBoostPost } from "../api/paymentApi";
 
@@ -14,7 +14,12 @@ function Paymentsuccess() {
             try {
                 const result = await axios.get(
                     "http://localhost:8888/payment/session?session_id=" +
-                    sessionId
+                        sessionId,
+                    {
+                        headers: {
+                            "Content-Type": "text/html",
+                        },
+                    }
                 );
             } catch (error) {
                 console.log(error);
@@ -42,16 +47,23 @@ function Paymentsuccess() {
                             <h3 className="md:text-5xl text-lightbluecute font-semibold text-end">
                                 <span>Payment Successful</span>
                             </h3>
-                            <CheckCircle2 className="text-lightbluecute" size={44} />
+                            <CheckCircle2
+                                className="text-lightbluecute"
+                                size={44}
+                            />
                         </div>
                         <p className="text-gray-600 text-xl my-2">
                             Thank you for completing your secure online payment.
                         </p>
                         <p className="text-xl"> Have a great day! </p>
 
-                        <a href="/evender/event "
+                        <a
+                            href="/evender/event "
                             className="mt-[120px] font-bold hover:underline hover:text-lightbluecute cursor-pointer"
-                        > Back to Event</a>
+                        >
+                            {" "}
+                            Back to Event
+                        </a>
                         {/* <div class="py-10 text-center">
                             <a
                                 href="#"
@@ -64,10 +76,10 @@ function Paymentsuccess() {
                 </div>
                 <div className="mx-0 my-auto ">
                     <img
-                        src='/src/assets/techny-payment-by-card-using-a-terminal.png'
+                        src="/src/assets/techny-payment-by-card-using-a-terminal.png"
                         alt="paymentpicture"
-                        className="w-[480px] h-[480px]" />
-
+                        className="w-[480px] h-[480px]"
+                    />
                 </div>
             </div>
         </div>
@@ -75,4 +87,3 @@ function Paymentsuccess() {
 }
 
 export default Paymentsuccess;
-
