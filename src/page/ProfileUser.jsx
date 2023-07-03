@@ -18,6 +18,8 @@ export default function ProfileUser() {
     const [click, setClick] = useState(true);
     const [activeButton, setActiveButton] = useState(true);
 
+    console.log(userProfile, "userProfiluserProfileuserProfileuserProfile");
+
     // const [renderUser, setRenderUser] = useState({})
 
     // useEffect(() => {
@@ -84,8 +86,9 @@ export default function ProfileUser() {
                             <p className="pr-4 font-semibold text-4xl text-darkgraycute ">
                                 {userProfile?.firstName} {userProfile?.lastName}
                             </p>
-                            <p className="pt-3 ml-8 text-gray-400">{userProfile?.userName
-                            }</p>
+                            <p className="pt-3 ml-8 text-gray-400">
+                                #{userProfile?.UserType?.type}
+                            </p>
                             {/* <img
                                 width="94"
                                 height="94"
@@ -145,22 +148,32 @@ export default function ProfileUser() {
                         <div className="navbar-start"></div>
                         <div className="navbar-center hidden lg:flex">
                             <ul className="menu menu-horizontal px-1 text-lg font-normal gap-4">
-                                <li onClick={() => {
-                                    setActiveButton(!activeButton)
-                                    setClick(!click)
-
-                                }}>
-                                    <a className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? ' text-red-500' : ''} `}
+                                <li
+                                    onClick={() => {
+                                        setActiveButton(!activeButton);
+                                        setClick(!click);
+                                    }}
+                                >
+                                    <a
+                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${
+                                            activeButton ? " text-red-500" : ""
+                                        } `}
                                     >
                                         Host event
                                     </a>
                                 </li>
 
-                                <li onClick={() => {
-                                    setActiveButton(!activeButton)
-                                    setClick(!click)
-                                }}>
-                                    <a className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? '' : 'text-red-500'} `}>
+                                <li
+                                    onClick={() => {
+                                        setActiveButton(!activeButton);
+                                        setClick(!click);
+                                    }}
+                                >
+                                    <a
+                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${
+                                            activeButton ? "" : "text-red-500"
+                                        } `}
+                                    >
                                         Joined event
                                     </a>
                                 </li>
