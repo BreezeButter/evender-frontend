@@ -66,8 +66,8 @@ const MapComponent = () => {
     const meMarker = new google.maps.Marker({
         position: new google.maps.LatLng(+location.latitude, +location.longitude),
         icon: {
-            url: '/src/assets/Logo1.pdf (1).svg',
-            scaledSize: new window.google.maps.Size(300, 300),
+            url: '/src/assets/me.gif',
+            scaledSize: new window.google.maps.Size(400, 200),
         },
     });
     const allMarker = new google.maps.Marker({
@@ -83,7 +83,11 @@ const MapComponent = () => {
     return (
 
         <GoogleMap defaultZoom={15} defaultCenter={center}>
-            <Marker position={meMarker.position} icon={meMarker.icon} />
+            <Marker position={meMarker.position} icon={meMarker.icon} onClick={hdlOnClick(<InfoWindow>
+                <div className=" bg-white w-[100px] h-[80px]">
+                    <h2>Me</h2>
+                </div>
+            </InfoWindow>)} />
             <CurrentGeo setLocation={setLocation} />
 
             {(newfilterEvent ? newfilterEvent : newEvent).map((el, index) => (
