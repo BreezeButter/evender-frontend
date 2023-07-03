@@ -73,7 +73,8 @@ export default function EventContainer({
         <div
             className={`flex max-w-[800px] border ${
                 isBoost
-                    ? "  border-violetcute border-[2px]"
+                    ? // ? "border-violetcute border-[1px] animate-bounce"
+                      "box"
                     : "border-lightbluecute"
             } p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer justify-between`}
             onClick={() => navigate(`/evender/eventDetail/${id}`)}

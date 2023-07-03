@@ -129,6 +129,9 @@ export default function ModalEditDetailCute({ eventDetail }) {
             if (selected.placeName) {
                 formData.append("placeName", selected.placeName);
             }
+            if (selected.placeProvince) {
+                formData.append("placeProvince", selected.placeProvince);
+            }
             if (selected.placeCountry) {
                 formData.append("placeCountry", selected.placeCountry);
             }
@@ -181,7 +184,7 @@ export default function ModalEditDetailCute({ eventDetail }) {
                 <DialogTrigger asChild>
                     <Button
                         variant="ghost"
-                        className="hover:underline pr-5 hover:text-darkgraycute font-normal z-50 text-gray-500 border-gray-400 border-r rounded-none h-6 "
+                        className="hover:underline pr-5 hover:text-darkgraycute font-normal z-40 text-gray-500 border-gray-400 border-r rounded-none h-6 "
                     >
                         Edit
                     </Button>

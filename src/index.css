@@ -45,11 +45,31 @@
     color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
     }
+} */
+
+.box {
+    border: 3px solid #0000;
+    border-radius: 16px;
+    background: linear-gradient(#f0f2f5, #f0f2f5) padding-box,
+        linear-gradient(var(--angle), #95b5ff, #a200ff) border-box;
+    animation: 1.75s rotate linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }

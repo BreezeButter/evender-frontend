@@ -3,12 +3,12 @@ import ModalUserEvent from "./ModalUserEvent";
 
 export default function CardMemberEvent({ eventDetail }) {
     // console.log(eventDetail);
-    const joinEventUsersFourPeople = eventDetail.JoinEventUsers?.slice(0, 4);
+    const joinEventUsersFourPeople = eventDetail.JoinEventUsers?.slice(0, 5);
     const JointUserAttendees = eventDetail.JoinEventUsers?.length;
 
     return (
         <>
-            <div className="border border-gray-300 rounded-lg flex flex-col gap-4 mt-40 py-8  px-10">
+            <div className="border border-gray-300 rounded-lg flex flex-col gap-4 mt-40 py-8  px-8">
                 <div className="flex justify-between">
                     <h1 className="text-base font-normal text-darkbluecute">
                         Attendees ({JointUserAttendees})
@@ -23,7 +23,7 @@ export default function CardMemberEvent({ eventDetail }) {
                     </label> */}
                     <ModalUserEvent eventDetail={eventDetail} />
                 </div>
-                <div className="flex flex-row gap-6 mt-2 ">
+                <div className="flex flex-row gap-4 mt-2 pl-0.5  ">
                     {joinEventUsersFourPeople?.map((el, idex) => (
                         <div
                             className="flex flex-col justify-center items-center"

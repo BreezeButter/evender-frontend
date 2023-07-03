@@ -15,7 +15,6 @@ import { Button } from "../../../components/ui/button";
 import ModalLeaveGroup from "../../../components/ModalLeaveGroup";
 
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const me = useSelector((state) => state.auth.user);
@@ -30,7 +29,6 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
         return () => clearTimeout(timeoutId); // Clear the timeout if the component unmounts
     }, []);
 
-
     const onCheckout = async () => {
         const result = await axios.post(
             `http://localhost:8888/payment/create-payment`,
@@ -38,6 +36,12 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                 productDefaultPrice: eventDetail?.productDefaultPrice,
                 eventId: eventDetail?.id,
                 userId: eventDetail?.userId,
+            },
+            {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
+                },
             }
         );
         window.location.replace(result.data.session.url);
@@ -72,9 +76,9 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                 </div>
                 <div
                     className="flex items-center gap-4"
-                // onClick={() =>
-                //     navigate(`/evender/profile/${eventDetail?.userId}`)
-                // }
+                    // onClick={() =>
+                    //     navigate(`/evender/profile/${eventDetail?.userId}`)
+                    // }
                 >
                     <img
                         className="w-[7rem] h-[7rem] rounded-full object-cover cursor-pointer "
@@ -83,7 +87,7 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                         onClick={() =>
                             navigate(`/evender/profile/${eventDetail?.userId}`)
                         }
-                    // onClick={navigate(`evender/profile/${}`)}
+                        // onClick={navigate(`evender/profile/${}`)}
                     />
                     <div className="ml-5">
                         <p className="font-normal text-base text-darkgraycute mb-2">
@@ -111,11 +115,14 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                                 {/* <div className="-ml-[152px] "> */}
                                 <div className="z-40">
                                     <div className="h-[120px] z-50"></div>
-                                    {eventDetail.isBoost ? (null) : (<Button
-                                        onClick={onCheckout}
-                                        className="bg-violetcute rounded-lg h-11 w-[118px]  text-white  hover:text-violetcute hover:border hover:border-violetcute border-violetcute ">
-                                        Boost Event
-                                    </Button>)}
+                                    {eventDetail.isBoost ? null : (
+                                        <Button
+                                            onClick={onCheckout}
+                                            className="bg-violetcute rounded-lg h-11 w-[118px]  text-white  hover:text-violetcute hover:border hover:border-violetcute border-violetcute "
+                                        >
+                                            Boost Event
+                                        </Button>
+                                    )}
                                 </div>
                                 <div className="-ml-[133px] flex flex-row">
                                     <div className="flex flex-col justify-between ">
@@ -170,7 +177,7 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                         )}
                     </>
                 )}
-            </div >
+            </div>
         </>
     );
 }

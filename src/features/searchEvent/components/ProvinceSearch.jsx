@@ -1,67 +1,67 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
 
-import { cn } from "../../../lib/utils"
-import { Button } from "../../../components/ui/button"
+import { cn } from "../../../lib/utils";
+import { Button } from "../../../components/ui/button";
 import {
     Command,
     CommandEmpty,
     CommandGroup,
     CommandInput,
     CommandItem,
-} from "../../../components/ui/command"
+} from "../../../components/ui/command";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "../../../components/ui/popover"
+} from "../../../components/ui/popover";
 
-
-
-export default function ProvinceSearch({ addAllPlaceLoad, setProvince, }) {
-    const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
+export default function ProvinceSearch({ addAllPlaceLoad, setProvince }) {
+    const [open, setOpen] = React.useState(false);
+    const [value, setValue] = React.useState("");
     setProvince(value ? value : "");
-    console.log(value, "value")
-
-
-
-
+    console.log(value, "value");
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <Button
-
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-[200px] justify-between bg-white text-darkbluecute text-sm  font-semibold"
+                    className="w-full justify-between bg-white text-darkgraycute text-sm border border-gray-400  font-normal"
                 >
                     {value
-                        ? addAllPlaceLoad.find(item => item.placeProvince === value)?.placeProvince : "Select Province..."}
+                        ? addAllPlaceLoad.find(
+                              (item) => item.placeProvince === value
+                          )?.placeProvince
+                        : "Select Province..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0  bg-white  text-darkbluecute">
+            <PopoverContent className="w-[196.5px] p-0  bg-white  text-darkgraycute">
                 <Command>
                     <CommandInput placeholder="Select Province..." />
                     <CommandEmpty>No framework found.</CommandEmpty>
                     <CommandGroup>
                         {addAllPlaceLoad?.map((addAllPlaceLoad, idx) => (
                             <CommandItem
+                                className=""
                                 key={idx}
                                 onSelect={() => {
-                                    setValue(addAllPlaceLoad.placeProvince)
-                                    setOpen(false)
+                                    setValue(addAllPlaceLoad.placeProvince);
+                                    setOpen(false);
                                 }}
                             >
                                 <Check
                                     className={cn(
-                                        "mr-2 h-4 w-4",
-                                        addAllPlaceLoad.placeProvince === addAllPlaceLoad.placeProvince ? "opacity-100" : "opacity-0"
+                                        "mr-2 h-4 w-4 ",
+                                        addAllPlaceLoad.placeProvince ===
+                                            addAllPlaceLoad.placeProvince
+                                            ? "opacity-100"
+                                            : "opacity-0"
                                     )}
                                 />
                                 {addAllPlaceLoad.placeProvince}
@@ -71,5 +71,5 @@ export default function ProvinceSearch({ addAllPlaceLoad, setProvince, }) {
                 </Command>
             </PopoverContent>
         </Popover>
-    )
+    );
 }

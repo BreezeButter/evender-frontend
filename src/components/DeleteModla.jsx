@@ -25,7 +25,7 @@ export default function DeleteModal({
             <AlertDialogTrigger asChild>
                 <Button
                     variant="ghost"
-                    className="hover:underline pl-5 hover:text-redcute  font-normal text-gray-500  rounded-none h-6 z-50"
+                    className="hover:underline pl-5 hover:text-redcute  font-normal text-gray-500  rounded-none h-6 z-40"
                 >
                     Delete
                 </Button>

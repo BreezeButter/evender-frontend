@@ -13,7 +13,12 @@ function Paymentsuccess() {
             try {
                 const result = await axios.get(
                     "http://localhost:8888/payment/session?session_id=" +
-                        sessionId
+                        sessionId,
+                    {
+                        headers: {
+                            "Content-Type": "text/html",
+                        },
+                    }
                 );
                 //const upBoostPostResponse = await upBoostPost(result.data);
                 // console.log(result);

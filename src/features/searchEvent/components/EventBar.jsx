@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { syncEventSearch, syncEventPlace } from "../slice/searchSlice";
 import Input from "../../Event/component/Input";
 import CurrentGeo from "./CurrentGeo";
+import ProvinceSearch from "./ProvinceSearch";
 
 export default function EventBar() {
     const initialValue = {
@@ -62,7 +63,8 @@ export default function EventBar() {
         <div className="navbar bg-white flex justify-stretch">
             <div className="navbar-start"></div>
             <div className="navbar-center hidden lg:flex">
-                <select
+                <ProvinceSearch />
+                {/* <select
                     className="select select-bordered w-full max-w-xs mx-10"
                     value={input.placeProvince} // Set the value of the select element to reflect the current state
                     onChange={(e) => handleChangeInput(e)} // Call handleChangeInput when the selection changes
@@ -70,12 +72,12 @@ export default function EventBar() {
                 >
                     <option disabled value={""}>
                         Province
-                    </option>{" "}
-                    {/* Add an empty value for the disabled option */}
-                    {addAllPlaceLoad?.map((el, idx) => (
+                    </option>{" "} */}
+                {/* Add an empty value for the disabled option */}
+                {/* {addAllPlaceLoad?.map((el, idx) => (
                         <option key={idx}>{el.placeProvince}</option>
                     ))}
-                </select>
+                </select> */}
 
                 <ul className="menu menu-horizontal px-1">
                     {eventCategory.map((el, idx) => (

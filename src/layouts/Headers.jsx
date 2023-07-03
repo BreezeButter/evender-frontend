@@ -49,13 +49,13 @@ export default function Headers() {
                 />
 
                 {/* Dropdown */}
-                <div className="dropdown dropdown-end">
+                <div className="dropdown dropdown-end ">
                     <label tabIndex={0} className="flex items-center">
                         <UserIcon2 className="cursor-pointer" />
                     </label>
                     <ul
                         tabIndex={0}
-                        className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-200 rounded-box z-50 "
+                        className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-300 rounded-box z-50 "
                     >
                         <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5">
                             <div className="avatar">

@@ -125,7 +125,7 @@ export default function SelectedBarRadius({ setRadiuse }) {
                 <>
                     <Listbox.Label className="block text-sm font-medium leading-6 text-darkbluecute "></Listbox.Label>
                     <div className="relative ">
-                        <Listbox.Button className="relative w-[200px] cursor-default rounded-md bg-white  py-2 pl-3 pr-10 text-left text-darkbluecute text-sm  font-semibold border-darkbluecute border-[1px]">
+                        <Listbox.Button className="relative w-full h-[40px] cursor-default cursor-pointer rounded-md bg-transparent  py-2 pl-3 pr-10 text-left text-darkgraycute text-sm  font-normal border-gray-400 border">
                             <span className="flex items-center">
                                 <MapPin className=" stroke-[1.25px] stroke-darkgraycute mr-1" />
                                 <span className="ml-2 first-letter:block truncate ">
@@ -146,7 +146,7 @@ export default function SelectedBarRadius({ setRadiuse }) {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-[200px] overflow-auto rounded-md bg-whitebg border  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-[200px] overflow-auto rounded-md bg-white border  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                 {radius.map((radius) => (
                                     <Listbox.Option
                                         key={radius.id}
