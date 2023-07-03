@@ -48,33 +48,32 @@ export default function LocationDetailEvent({ eventDetail }) {
     return (
         <>
             <div className="flex flex-col w-[27%]">
-                <div className="flex flex-col justify-center bg-transparent  bg-gray-200  rounded-2xl  gap-4 w-full items-center mb-4">
-                    <div className="bg-gray-200 rounded-2xl flex flex-col w-full px-10 pt-10 justify-center ">
-                        <div className=" flex flex-col gap-5 ">
+                <div className="flex flex-col justify-center border border-gray-300  bg-transparent shadow-sm rounded-2xl  gap-4 w-full items-center mb-4">
+                    <div className="bg-transparent rounded-2xl flex flex-col w-full px-14 pt-12 justify-center ">
+                        <div className=" flex flex-col gap-5 justify-center  ">
                             <div className="flex items-center">
-                                <Clock className="h-[30px] w-[30px] text-darkgraycute ml-0.5 mr-4" />
-                                <p className="text-base font-normal text-darkgraycute ">
-                                    {date}
-                                    {time}
+                                <Clock className="h-[30px] w-[30px] text-gray-500 stroke-[1.50px] ml-0.5 mr-4" />
+                                <p className="text-sm font-medium text-gray-700">
+                                    {date} {time}
                                 </p>
                             </div>
-                            <div className="flex items-center">
-                                <LocationPin className="mr-3.5" />
-                                <p className="text-base font-normal text-darkgraycute">
-                                    {eventDetail.placeName}
+                            <div className="flex items-center mb-6">
+                                <MapPin className="h-[32px] w-[32px] text-gray-500 stroke-[1.50px] ml-0.5 mr-4" />
+                                <p className="text-sm font-medium text-gray-700 flex flex-col">
+                                    {eventDetail.placeName}{" "}
                                     {eventDetail.placeProvince}
+                                    <a
+                                        className="font-light text-xs mt-0.5 text hover:text-darkgraycute hover:underline"
+                                        href={`http://maps.google.com/?q=${latitude},${longitude}`}
+                                    >
+                                        See more in Google Maps
+                                    </a>
                                 </p>
                             </div>
                             {/* <Maps /> */}
                         </div>
                     </div>
-                    <div className="flex w-full rounded-lg flex-col ">
-                        <a
-                            className="font-light text-xs text-end pr-4 mb-2.5 hover:text-darkgraycute hover:underline"
-                            href={`http://maps.google.com/?q=${latitude},${longitude}`}
-                        >
-                            Google Map
-                        </a>
+                    <div className="flex w-full rounded-lg flex-col  ">
                         <Maps
                             selected={position}
                             mapContainerClassName="w-full h-[330px] rounded-b-2xl"
@@ -93,7 +92,7 @@ export default function LocationDetailEvent({ eventDetail }) {
                 </div> */}
                 </div>
                 <button
-                    className="hover:border-2 hover:border-lightbluecute mt-5  font-medium text-base hover:text-lightbluecute hover:bg-transparent rounded-full w-full h-11 bg-lightbluecute text-white"
+                    className="hover:border-2 hover:border-lightbluecute mt-8  shadow-md  font-medium text-base hover:text-lightbluecute hover:bg-transparent rounded-full w-full h-11 bg-lightbluecute text-white"
                     onClick={handleJointEvent}
                 >
                     Join

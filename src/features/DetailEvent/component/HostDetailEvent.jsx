@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import DeleteModal from "../../../components/DeleteModla";
 import { Button } from "../../../components/ui/button";
+import ModalLeaveGroup from "../../../components/ModalLeaveGroup";
 
 export default function HostDetailEvent({ eventDetail, hostDetail }) {
 
@@ -154,15 +155,17 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
                             </div>
                         )}
                         {joined && !host && (
-                            <div>
-                                <Modal
+                            <div className="">
+                                <div className="h-[150px]"></div>
+                                {/* <Modal
                                     btnName="Leave group"
                                     titleModal="Confirm Leave Group"
                                     descriptionModal="You can join again if you want before the event ends or the group is full"
                                     btnTextModal="Leave"
                                     classExpression="bg-neutral text-white"
                                     hdlOnclick={hdlOnclick}
-                                />
+                                /> */}
+                                <ModalLeaveGroup hdlOnclick={hdlOnclick} />
                             </div>
                         )}
                     </>

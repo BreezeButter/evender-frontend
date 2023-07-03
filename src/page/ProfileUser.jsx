@@ -45,7 +45,6 @@ export default function ProfileUser() {
     }, []);
 
     function calculateAge(birthdate) {
-
         const today = new Date();
         const birthdateObj = new Date(birthdate);
 
