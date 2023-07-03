@@ -19,7 +19,7 @@ export default function HostDetailEvent({ eventDetail, hostDetail }) {
     const dispatch = useDispatch();
     const me = useSelector((state) => state.auth.user);
     const joined = useSelector((state) => state.eventDetail.userJoined);
-    console.log("joined", joined);
+
     const host = hostDetail.userId === me?.id;
 
     const [showComponent, setShowComponent] = useState(false);

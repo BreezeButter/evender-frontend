@@ -15,8 +15,8 @@ export default function ProfileUser() {
     const myEvent = useSelector((state) => state.profileUser.hostEvent);
     const userProfile = useSelector((state) => state.profileUser.userProfile);
     const eventUser = useSelector((state) => state.event.eventUser);
-    const [click, setClick] = useState(false);
-
+    const [click, setClick] = useState(true);
+    const [activeButton, setActiveButton] = useState(true);
 
     // const [renderUser, setRenderUser] = useState({})
 
@@ -146,15 +146,23 @@ export default function ProfileUser() {
                         <div className="navbar-start"></div>
                         <div className="navbar-center hidden lg:flex">
                             <ul className="menu menu-horizontal px-1 text-lg font-normal gap-4">
-                                <li>
-                                    <a className="text-darkbluecute hover:font-medium hover:bg-gray-200">
-                                        my event
+                                <li onClick={() => {
+                                    setActiveButton(!activeButton)
+                                    setClick(!click)
+
+                                }}>
+                                    <a className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? ' text-red-500' : ''} `}
+                                    >
+                                        Host event
                                     </a>
                                 </li>
 
-                                <li onClick={() => setClick(false)}>
-                                    <a className="text-darkbluecute hover:font-medium hover:bg-gray-200">
-                                        joined event
+                                <li onClick={() => {
+                                    setActiveButton(!activeButton)
+                                    setClick(!click)
+                                }}>
+                                    <a className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? '' : 'text-red-500'} `}>
+                                        Joined event
                                     </a>
                                 </li>
                             </ul>

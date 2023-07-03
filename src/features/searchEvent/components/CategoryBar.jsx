@@ -14,6 +14,7 @@ import SearchByType from "./SearchByType";
 import NearBySearch from "./NearBySearch";
 
 export default function EventBar() {
+    const [activeButtonIndex, setActiveButtonIndex] = useState(0);
     const initialValue = {
         eventCategoryId: "",
     };
@@ -74,15 +75,21 @@ export default function EventBar() {
                     {eventCategory.map((el, idx) => (
                         <li key={idx}>
                             <a
-                                className="hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-8 hover:border-b-4 hover:border-lightbluecute cursor-pointer "
-                                onClick={() =>
+                                onClick={() => {
+                                    setActiveButtonIndex(idx ? idx : 0);
                                     handleChangeInput({
                                         target: {
                                             name: "eventCategoryId",
                                             value: el.id,
                                         },
-                                    })
-                                }
+                                    });
+                                }}
+                                className={`hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-11  cursor-pointer  ${activeButtonIndex === idx
+                                    ? "pb-9 border-b-4 border-lightbluecute "
+                                    : ""
+                                    }`}
+                                // className="hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-8 hover:border-b-4 hover:border-lightbluecute cursor-pointer "
+
                                 value={el.id}
                                 name="eventCategoryId"
                             >
