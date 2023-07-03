@@ -13,7 +13,8 @@ import Eventmanagement from "../page/Manageeventpage";
 // import { Outlet } from "react-router-dom/dist";
 import ProtectedRoute from "../features/auth/components/ProtectedRoute";
 import Paymentsuccess from "../page/Paymentsuccess";
-import EventDetailPage from "../page/EventDetailPage"
+import EventDetailPage from "../page/EventDetailPage";
+import EditProfile from "../page/EditProfile";
 import Errorpage from "../page/Errorpage";
 import EditProfile from "../page/EditProfile";
 import ProtectedRouteAdmin from "../features/Admin/components/ProtectedRouteAdmin";
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
                 element: <EventDetailPage />,
             },
             {
+
                 path: "editprofile/:id",
                 element: <EditProfile />,
             },
@@ -76,8 +78,17 @@ const router = createBrowserRouter([
                 element: <SearchPage />,
             },
             {
+
                 path: "profile/:id",
                 element: <ProfileUser />,
+            },
+            {
+                path: "editprofile/:id",
+                element: <EditProfile />,
+            },
+            {
+                path: "search",
+                element: <SearchPage />,
             },
             {
                 path: "success",

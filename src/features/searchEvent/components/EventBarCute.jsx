@@ -29,7 +29,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "../../../components/ui/sheet";
-import NearBySearch from './NearBySearch'
+import NearBySearch from "./NearBySearch";
 const SHEET_SIDES = ["left"];
 
 export default function EventBar() {

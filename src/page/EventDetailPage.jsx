@@ -47,8 +47,8 @@ export default function EventDetailPage() {
             {/* carousel */}
             <CarouselDetail eventDetail={eventDetail} />
             {/* detail */}
-            <div className="flex justify-center gap-28 w-full mt-14 ">
-                <div className="w-[39%] flex flex-col ">
+            <div className="flex justify-center gap-40 w-full mt-28 ">
+                <div className="w-[36%] flex flex-col">
                     <DetailEvent eventDetail={eventDetail} />
                     {/* Card Member*/}
 

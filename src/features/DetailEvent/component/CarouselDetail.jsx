@@ -1,7 +1,7 @@
 export default function CarouselDetail({ eventDetail }) {
     return (
         <div>
-            <div className="flex flex-col justify-center items-center mt-14 rounded-2x ">
+            <div className="flex flex-col justify-center items-center mt-16 rounded-2x ">
                 <div className="carousel max-w-[1250px] rounded-2xl">
                     <div
                         id="item1"

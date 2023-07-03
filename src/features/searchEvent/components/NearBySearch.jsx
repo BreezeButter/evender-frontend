@@ -82,6 +82,7 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { MapPin } from "lucide-react";
 
 const radius = [
     {
@@ -118,15 +119,15 @@ export default function SelectedBarRadius({ setRadiuse }) {
     const [selected, setSelected] = useState(radius[0].id);
     setRadiuse(selected.id ? selected.id : "");
 
-
     return (
-        <Listbox value={selected} onChange={setSelected} >
+        <Listbox value={selected} onChange={setSelected}>
             {({ open }) => (
                 <>
                     <Listbox.Label className="block text-sm font-medium leading-6 text-darkbluecute "></Listbox.Label>
                     <div className="relative ">
                         <Listbox.Button className="relative w-[200px] cursor-default rounded-md bg-white  py-2 pl-3 pr-10 text-left text-darkbluecute text-sm  font-semibold border-darkbluecute border-[1px]">
                             <span className="flex items-center">
+                                <MapPin className=" stroke-[1.25px] stroke-darkgraycute mr-1" />
                                 <span className="ml-2 first-letter:block truncate ">
                                     {selected.name ? selected.name : "Nearby"}
                                 </span>
@@ -145,7 +146,7 @@ export default function SelectedBarRadius({ setRadiuse }) {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-[200px]  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-[200px] overflow-auto rounded-md bg-whitebg border  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                 {radius.map((radius) => (
                                     <Listbox.Option
                                         key={radius.id}
