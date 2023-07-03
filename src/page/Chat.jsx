@@ -1,4 +1,4 @@
-import { LeftIcon } from "../icons";
+import { ImageIcon, LeftIcon } from "../icons";
 // import Footer from "../layouts/Footer";
 
 import { io } from "socket.io-client";
@@ -12,16 +12,21 @@ import {
 import { useRef } from "react";
 import socket from "../configs/socketConfig";
 import { convertDate } from "../utils/dateUtil";
+// import e from "cors";
 
 export default function Chat() {
     const dispatch = useDispatch();
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState({});
     const [messages, setMessages] = useState([]);
     const roomId = useParams().id;
     const [currentRoom, setCurrentRoom] = useState(roomId);
-    console.log(roomId);
+
+    // const [file, setFile] = useState(null);
+
+    // console.log(roomId);
     const ref = useRef();
     const refInput = useRef();
+    const refUploadImage = useRef();
 
     const user = useSelector((state) => state.auth.user);
     const joinEventByUser = useSelector((state) => state.event.joinEventByUser);
@@ -47,6 +52,10 @@ export default function Chat() {
     }, [chats]);
 
     const socketSendmessage = (input) => {
+        // console.log(input);
+        if (typeof input.message === "object") {
+            input.message = new Blob([input.message]);
+        }
         setMessages((prevMessages) => [
             ...prevMessages,
             {
@@ -64,9 +73,9 @@ export default function Chat() {
         };
     }, []);
 
-    // useEffect(() => {
-    //     ref.current.scrollTop = ref.current.scrollHeight;
-    // }, [messages]);
+    useEffect(() => {
+        ref.current.scrollTop = ref.current.scrollHeight;
+    }, [messages]);
 
     const handleJoinRoom = async (roomId) => {
         setCurrentRoom(roomId);
@@ -75,21 +84,42 @@ export default function Chat() {
     };
 
     const sendMessage = () => {
-        if (message === "" || message.trim() === "") return;
-        socket.emit("sendMessage", {
-            room: currentRoom,
-            message,
-            userId: user.id,
-            firstName: user.firstName,
-            image: user.image,
-        });
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { userId: user.id, message },
-        ]);
-        setMessage("");
+        if (message.message) {
+            if (message.message === "" || message.message.trim() === "") return;
+            socket.emit("sendMessage", {
+                room: currentRoom,
+                message: message.message,
+                userId: user.id,
+                firstName: user.firstName,
+                image: user.image,
+            });
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { userId: user.id, message: message.message },
+            ]);
+        } else if (message.image) {
+            socket.emit("sendMessage", {
+                room: currentRoom,
+                message: message.image,
+                userId: user.id,
+                firstName: user.firstName,
+                image: user.image,
+            });
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { userId: user.id, message: message.image },
+            ]);
+            refUploadImage.current.value = null;
+        }
+        setMessage({ message: "" });
     };
-    console.log(joinEventByUser);
+    // console.log(typeof message);
+
+    // const handleChangeFile = (e) => {
+    //     if (e.target.files[0]) {
+    //         setMessage({ image: e.target.files[0] });
+    //     }
+    // };
     return (
         <div className="flex border-t-2 ">
             <div className="relative">
@@ -100,7 +130,7 @@ export default function Chat() {
                     className=" text-white text-base font-medium cursor-pointer absolute left-14 bottom-28 hover:underline   flex items-center"
                 >
                     <LeftIcon />
-                    <a className="text-lightbluecute">Back</a>
+                    <div className="text-lightbluecute">Back</div>
                 </Link>
             </div>
             <div className="flex flex-col w-[300px] border-r border-gray-200  ">
@@ -112,11 +142,10 @@ export default function Chat() {
                                 handleJoinRoom(el.eventId),
                                     setActiveButtonIndex(index);
                             }}
-                            className={`border-b-[1px] w-full border-gray-300 flex p-4 rounded font-semibold  hover:shadow-xl  shadow-slate-200  transition delay-120 duration-120 ease-in-out  ${
-                                activeButtonIndex === index
+                            className={`border-b-[1px] w-full border-gray-300 flex p-4 rounded font-semibold  hover:shadow-xl  shadow-slate-200  transition delay-120 duration-120 ease-in-out  ${activeButtonIndex === index
                                     ? " bg-darkgraycute  shadow-slate-200  shadow-xl  text-white  hover:text-white"
                                     : ""
-                            }`}
+                                }`}
                         >
                             <div className=" border-emerald-50 ">
                                 <img
@@ -127,20 +156,18 @@ export default function Chat() {
                             </div>
                             <div className="w-[80%] ">
                                 <div
-                                    className={`text-darkbluecute text-sm ${
-                                        activeButtonIndex === index
+                                    className={`text-darkbluecute text-sm ${activeButtonIndex === index
                                             ? " text-white "
                                             : ""
-                                    }`}
+                                        }`}
                                 >
                                     {el.Event.title}
                                 </div>
                                 <div
-                                    className={`text-darkbluecute text-sm   ${
-                                        activeButtonIndex === index
+                                    className={`text-darkbluecute text-sm   ${activeButtonIndex === index
                                             ? " text-white"
                                             : ""
-                                    }`}
+                                        }`}
                                 >
                                     @ {el.Event.placeName}
                                 </div>
@@ -163,7 +190,7 @@ export default function Chat() {
                             ).Event?.title}
                     </h1>
                     <div
-                        className="rounded-xl h-[700px] w-[1200px] overflow-auto flex flex-col gap-3 p-2 border-2"
+                        className="rounded-xl h-[500px] w-[1000px] overflow-auto flex flex-col gap-3 p-2 border-2"
                         ref={ref}
                     >
                         {messages &&
@@ -178,31 +205,20 @@ export default function Chat() {
                                             key={index}
                                         >
                                             <div className="chat-image avatar">
-                                                <div className="w-10 rounded-full">
-                                                    {/* <img
-                                                        src={
-                                                            el.User?.image || (
-                                                                <span className="loading loading-dots loading-sm"></span>
-                                                            )
-                                                        }
-                                                        alt="User avatar"
-                                                    /> */}
+                                                <div className="w-10 rounded-full"></div>
+                                            </div>
+                                            {typeof el.message === "string" ? (
+                                                <div className="chat-bubble">
+                                                    {el.message}
                                                 </div>
-                                            </div>
-                                            {/* <div className="chat-header">
-                                                {el.User?.firstName || (
-                                                    <span className="loading loading-dots loading-sm"></span>
-                                                )}
-                                                <time className="text-xs opacity-50">
-                                                    {el.createdAt}
-                                                </time>
-                                            </div> */}
-                                            <div className="chat-bubble">
-                                                {el.message}
-                                            </div>
-                                            {/* <div className="chat-footer opacity-50">
-                                                Seen
-                                            </div> */}
+                                            ) : (
+                                                <img
+                                                    src={URL.createObjectURL(
+                                                        el.message
+                                                    )}
+                                                    className="w-20 h-20"
+                                                ></img>
+                                            )}
                                         </div>
                                     );
                                 } else {
@@ -215,26 +231,33 @@ export default function Chat() {
                                                 <div className="w-10 rounded-full">
                                                     <img
                                                         src={
-                                                            el.User?.image || (
-                                                                <span className="loading loading-dots loading-sm"></span>
-                                                            )
+                                                            el.image ||
+                                                            el.User.image
                                                         }
                                                         alt="User avatar"
                                                     />
                                                 </div>
                                             </div>
                                             <div className="chat-header">
-                                                {el.User?.firstName || (
-                                                    <span className="loading loading-dots loading-sm"></span>
-                                                )}
+                                                {el.firstName ||
+                                                    el.User.firstName}
                                                 <time className="text-xs opacity-50">
                                                     {date}
                                                     {time}
                                                 </time>
                                             </div>
-                                            <div className="chat-bubble">
-                                                {el.message}
-                                            </div>
+                                            {typeof el.message === "string" ? (
+                                                <div className="chat-bubble">
+                                                    {el.message}
+                                                </div>
+                                            ) : (
+                                                <img
+                                                    src={URL?.createObjectURL(
+                                                        el.message
+                                                    )}
+                                                    className="w-20 h-20"
+                                                ></img>
+                                            )}
                                             <div className="chat-footer opacity-50">
                                                 Delivered
                                             </div>
@@ -284,19 +307,64 @@ export default function Chat() {
                             }
                         })}
                     </div> */}
-                    <div className="flex h-10 mt-2 border-[1px] -p-2 ring-0 bg-white rounded-xl">
+                    <div className="flex h-10 mt-2 border-[1px] -p-2 ring-0 bg-white rounded-xl gap-2">
                         <input
                             type="text"
-                            value={message}
-                            placeholder="Write a message...
-                            "
-                            // placeholder="Please Fill Message"
-                            onChange={(e) => setMessage(e.target.value)}
+                            value={message.message}
+                            placeholder="Write a message..."
+                            onChange={(e) =>
+                                setMessage({ message: e.target.value })
+                            }
                             onKeyUp={(e) => {
                                 if (e.key === "Enter") refInput.current.click();
                             }}
-                            className="flex-1  items-center relative rounded-xl"
+                            className="flex-1 items-center relative rounded-xl"
                         />
+
+                        {/* You can open the modal using ID.showModal() method */}
+                        {/* Open the modal using ID.showModal() method */}
+                        {/* <button
+                            className="btn"
+                            onClick={() => window.my_modal_5.showModal()}
+                        >
+                            open modal
+                        </button> */}
+                        <dialog
+                            id="my_modal_5"
+                            className="modal modal-bottom sm:modal-middle"
+                        >
+                            <form method="dialog" className="modal-box">
+                                <img
+                                    src={
+                                        message.image &&
+                                        URL.createObjectURL(message.image)
+                                    }
+                                    alt=""
+                                    className="w-40 h-40 mx-auto"
+                                />
+                                <div className="modal-action">
+                                    <button className="btn">confirm</button>
+                                </div>
+                            </form>
+                        </dialog>
+                        <input
+                            type="file"
+                            onChange={(e) => {
+                                if (e.target.files[0]) {
+                                    setMessage({ image: e.target.files[0] });
+                                }
+                                window.my_modal_5.showModal();
+                            }}
+                            ref={refUploadImage}
+                            className="hidden"
+                        />
+                        <div
+                            className="self-center "
+                            onClick={() => refUploadImage.current.click()}
+                            role="button"
+                        >
+                            <ImageIcon />
+                        </div>
                         <button
                             onClick={sendMessage}
                             className=" bg-white text-blue-400 rounded-xl border-none  relative mr-2"

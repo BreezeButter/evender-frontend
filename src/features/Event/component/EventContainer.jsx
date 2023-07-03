@@ -12,29 +12,17 @@ export default function EventContainer({
     id,
     capacity,
     isBoost,
+    events = { el },
 }) {
     const navigate = useNavigate();
     const [date, time] = convertDate(dateStart);
-    function formatDateAndTimeAgo(dateString) {
-        // Convert date string to Date object
-        const originalDate = new Date(dateString);
+    const showTime = events.createdAt;
+    function formatDateAndTimeAgo() {
+        const originalDate = new Date(showTime);
 
-        // Format the date and time
-        const formattedDate = originalDate.toLocaleString("en-US", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false,
-        });
-
-        // Calculate the time difference in milliseconds
         const currentDate = new Date();
         const timeDifference = Math.abs(currentDate - originalDate);
 
-        // Convert milliseconds to seconds, minutes, hours, and days
         const seconds = Math.floor(timeDifference / 1000);
         const minutes = Math.floor(seconds / 60);
         const hours = Math.floor(minutes / 60);
@@ -43,31 +31,22 @@ export default function EventContainer({
         let timeAgo;
 
         if (days > 0) {
-            timeAgo = ` Event start in ${days} day${days > 1 ? "s" : ""}`;
+            timeAgo = `${days} day${days > 1 ? "s" : ""} ago`;
         } else if (hours > 0) {
-            timeAgo = `Event start in ${hours} hour${hours > 1 ? "s" : ""}`;
+            timeAgo = `${hours} hour${hours > 1 ? "s" : ""} ago`;
         } else if (minutes > 0) {
-            timeAgo = ` Event start in ${minutes} minute${
-                minutes > 1 ? "s" : ""
-            }`;
+            timeAgo = `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
         } else {
-            timeAgo = `Event start in ${seconds} second${
-                seconds !== 1 ? "s" : ""
-            }`;
+            timeAgo = `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
         }
 
         return {
-            formattedDate,
             timeAgo,
         };
     }
-
     // Example usage
     const dateString = dateStart;
-    const { formattedDate, timeAgo } = formatDateAndTimeAgo(dateString);
-
-    console.log(formattedDate);
-    console.log(timeAgo);
+    const { timeAgo } = formatDateAndTimeAgo(dateString);
 
     return (
         <div

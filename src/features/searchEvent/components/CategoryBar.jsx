@@ -82,7 +82,8 @@ export default function EventBar() {
                         <li key={idx}>
                             <a
                                 onClick={() => {
-                                    setActiveButtonIndex(idx);
+                                    setActiveButtonIndex(idx ? idx : 0);
+
                                     handleChangeInput({
                                         target: {
                                             name: "eventCategoryId",

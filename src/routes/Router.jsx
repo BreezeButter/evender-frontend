@@ -16,6 +16,8 @@ import Paymentsuccess from "../page/Paymentsuccess";
 import EventDetailPage from "../page/EventDetailPage";
 import EditProfile from "../page/EditProfile";
 import Errorpage from "../page/Errorpage";
+import EditProfile from "../page/EditProfile";
+import ProtectedRouteAdmin from "../features/Admin/components/ProtectedRouteAdmin";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -46,9 +48,11 @@ const router = createBrowserRouter([
     {
         path: "/evender",
         element: (
+            // <RedirectIfAuthenticated>
             <ProtectedRoute>
                 <Container />
             </ProtectedRoute>
+            // </RedirectIfAuthenticated>
         ),
         children: [
             {
@@ -65,6 +69,16 @@ const router = createBrowserRouter([
                 element: <EventDetailPage />,
             },
             {
+
+                path: "editprofile/:id",
+                element: <EditProfile />,
+            },
+            {
+                path: "search",
+                element: <SearchPage />,
+            },
+            {
+
                 path: "profile/:id",
                 element: <ProfileUser />,
             },
@@ -87,7 +101,9 @@ const router = createBrowserRouter([
         element: (
             <>
                 {/* <HeadersGuest /> */}
-                <Container />
+                <ProtectedRouteAdmin>
+                    <Container />
+                </ProtectedRouteAdmin>
                 {/* <Footer /> */}
             </>
         ),
