@@ -16,6 +16,8 @@ import { DownIcon } from "../../../icons";
 import AutoCompleteComponent from "./AutoCompleteComponent";
 import Maps from "./Maps";
 import { Textarea } from "../../../components/ui/textarea";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
     title: "",
@@ -28,12 +30,13 @@ const initialState = {
 };
 
 export default function ButtonCute() {
+    const navigate = useNavigate()
     const [input, setInput] = useState(initialState);
     const [files, setFiles] = useState({});
     const dispatch = useDispatch();
     const [selected, setSelected] = useState(null);
     const loading = useSelector((state) => state.event.loading);
-    const ref = useRef();
+    // const ref = useRef();
 
     console.log("selected---------->", selected);
 
@@ -84,7 +87,11 @@ export default function ButtonCute() {
         await dispatch(creatEventAsync(formData)).unwrap();
         setInput(initialState);
         setFiles({});
-        ref.current.click();
+        toast.success('create success')
+        setTimeout(() => {
+            location.reload()
+        }, 2500)
+
         // console.log(ref);
     };
     return (

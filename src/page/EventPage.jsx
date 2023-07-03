@@ -7,7 +7,7 @@ import NextEventContainer from "../features/Event/component/NextEventContainer";
 import { useEffect } from "react";
 import { getAllEventsAsync } from "../features/Event/slice/eventSlice";
 import { getNextEventUser } from "../features/Event/slice/eventSlice";
-import EventBar from "../features/searchEvent/components/EventBarCute";
+// import EventBar from "../features/searchEvent/components/EventBarCute";
 import CategoryBar from "../features/searchEvent/components/CategoryBar";
 
 export default function EventPage() {
@@ -46,6 +46,7 @@ export default function EventPage() {
                         (filterEvent ? filterEvent : events).map((el) => (
                             <EventContainer
                                 key={el.id}
+                                isBoost={el.isBoost}
                                 title={el.title}
                                 placeProvince={el.placeProvince}
                                 image1={el.image1}
@@ -54,6 +55,8 @@ export default function EventPage() {
                                 joinEventUser={el.JoinEventUsers}
                                 id={el.id}
                                 capacity={el.capacity}
+                                productDefaultPrice={el.productDefaultPrice}
+                                userId={el.userId}
                             />
                         ))}
                 </div>

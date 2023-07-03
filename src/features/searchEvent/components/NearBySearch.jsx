@@ -125,7 +125,7 @@ export default function SelectedBarRadius({ setRadiuse }) {
                 <>
                     <Listbox.Label className="block text-sm font-medium leading-6 text-darkbluecute "></Listbox.Label>
                     <div className="relative ">
-                        <Listbox.Button className="relative w-[140px] cursor-default  rounded-md h-[40px] bg-transparent py-1.5 pl-3 pr-10 text-left text-darkgraycute font-normal  text-sm   border-gray-400 border">
+                        <Listbox.Button className="relative w-[200px] cursor-default rounded-md bg-white  py-2 pl-3 pr-10 text-left text-darkbluecute text-sm  font-semibold border-darkbluecute border-[1px]">
                             <span className="flex items-center">
                                 <MapPin className=" stroke-[1.25px] stroke-darkgraycute mr-1" />
                                 <span className="ml-2 first-letter:block truncate ">

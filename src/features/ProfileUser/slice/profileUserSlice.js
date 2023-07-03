@@ -64,23 +64,23 @@ const userSlice = createSlice({
             .addCase(editProfileUser.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(editProfileUser.fulfilled, (state, action) => {
+            .addCase(editProfileUser.fulfilled, (state) => {
                 state.loading = false;
             })
-            .addCase(getUserHostEvent.pending, (stage, action) => {
-                stage.loading = true;
+            .addCase(getUserHostEvent.pending, (state) => {
+                state.loading = true;
             })
-            .addCase(getUserHostEvent.fulfilled, (stage, action) => {
-                stage.hostEvent = action.payload;
-                stage.loading = false;
+            .addCase(getUserHostEvent.fulfilled, (state, action) => {
+                state.hostEvent = action.payload;
+                state.loading = false;
             })
-            .addCase(fetchProfile.pending, (stage, action) => {
-                stage.loading = true;
+            .addCase(fetchProfile.pending, (state) => {
+                state.loading = true;
             })
-            .addCase(fetchProfile.fulfilled, (stage, action) => {
-                stage.userProfile = action.payload;
-                console.log("action.payload",action.payload)
-                stage.loading = false;
+            .addCase(fetchProfile.fulfilled, (state, action) => {
+                state.userProfile = action.payload;
+                console.log("action.payload", action.payload);
+                state.loading = false;
             }),
 });
 

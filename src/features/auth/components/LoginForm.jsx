@@ -68,6 +68,7 @@ export default function LoginForm() {
                         name="password"
                         placeholder="Password"
                         value={input.password}
+                        type="password"
                         onchange={handleChangeInput}
                         isInvalid={error.password}
                     />

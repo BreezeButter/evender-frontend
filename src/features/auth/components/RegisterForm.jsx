@@ -106,9 +106,11 @@ export default function RegisterForm() {
                     <RegisterInput
                         name="password"
                         placeholder="Password"
+                        type="password"
                         value={input.password}
                         onchange={handleChangeInput}
                         isInvalid={error.password}
+
                     />
                     {error.password && (
                         <InputErrorMessage message={error.password} />
@@ -118,6 +120,7 @@ export default function RegisterForm() {
                     <RegisterInput
                         name="confirmPassword"
                         placeholder="Conform password"
+                        type="password"
                         value={input.confirmPassword}
                         onchange={handleChangeInput}
                         isInvalid={error.confirmPassword}

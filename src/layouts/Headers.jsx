@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { SearchIcon2, UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
+import { UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/auth/slice/authSlice";
 import { toast } from "react-toastify";
@@ -14,10 +14,10 @@ export default function Headers() {
         toast.info("Already Logout");
     };
     return (
-        <div className="navbar text-darkbluecute">
+        <div className="navbar text-darkbluecute ">
             <div className="navbar-start">
                 <Link
-                    to="/"
+                    to="/evender/event"
                     className="btn btn-ghost normal-case text-xl text-lightbluecute  hover:bg-gray-200"
                     // className="btn btn-ghost normal-case text-xl text-white  hover:bg-gray-200"
                 >

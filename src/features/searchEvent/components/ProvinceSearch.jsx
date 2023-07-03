@@ -24,6 +24,7 @@ export default function ProvinceSearch({ addAllPlaceLoad, setProvince, }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
     setProvince(value ? value : "");
+    console.log(value, "value")
 
 
 
