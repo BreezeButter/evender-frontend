@@ -15,6 +15,7 @@ import ProtectedRoute from "../features/auth/components/ProtectedRoute";
 import Paymentsuccess from "../page/Paymentsuccess";
 import EventDetailPage from "../page/EventDetailPage"
 import Errorpage from "../page/Errorpage";
+import EditProfile from "../page/EditProfile";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             {
                 path: "eventDetail/:id",
                 element: <EventDetailPage />,
+            },
+            {
+                path: "editprofile/:id",
+                element: <EditProfile />,
             },
             {
                 path: "search",

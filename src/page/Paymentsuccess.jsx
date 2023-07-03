@@ -13,7 +13,7 @@ function Paymentsuccess() {
             try {
                 const result = await axios.get(
                     "http://localhost:8888/payment/session?session_id=" +
-                        sessionId
+                    sessionId
                 );
                 //const upBoostPostResponse = await upBoostPost(result.data);
                 // console.log(result);
@@ -43,7 +43,9 @@ function Paymentsuccess() {
     }, []);
     // const dispatch = useDispatch();
     // dispatch(addPaymentSuccess(result));
-    return <div>Paymentsuccess</div>;
+    return <div>
+
+    </div>;
 }
 
 export default Paymentsuccess;
