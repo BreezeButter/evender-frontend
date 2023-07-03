@@ -60,6 +60,7 @@ export const createJointEvent = createAsyncThunk(
     async (input, thunkApi) => {
         try {
             const result = await createJoinEventUser(input);
+            console.log("dasdalksjdlkasjdlksajd", result.data);
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);

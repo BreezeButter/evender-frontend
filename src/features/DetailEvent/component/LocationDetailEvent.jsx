@@ -16,9 +16,9 @@ export default function LocationDetailEvent({ eventDetail }) {
     const [date, time] = convertDate(eventDetail.dateStart);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const handleJointEvent = () => {
+    const handleJointEvent = async () => {
         try {
-            dispatch(createJointEvent(id));
+            await dispatch(createJointEvent(id)).unwrap()
             navigate(`/evender/chat/${id}`);
         } catch {
             toast.error("Room is Full");
@@ -91,6 +91,7 @@ export default function LocationDetailEvent({ eventDetail }) {
                     />
                 </div> */}
                 </div>
+
                 <button
                     className="hover:border-2 hover:border-lightbluecute mt-8  shadow-md  font-medium text-base hover:text-lightbluecute hover:bg-transparent rounded-full w-full h-11 bg-lightbluecute text-white"
                     onClick={handleJointEvent}

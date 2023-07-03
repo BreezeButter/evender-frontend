@@ -40,7 +40,6 @@ export const getNextEventUser = createAsyncThunk(
         try {
             // console.log("first");
             const result = await eventService.getNextEvent();
-
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
