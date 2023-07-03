@@ -44,13 +44,13 @@ export default function EventContainer({
         let timeAgo;
 
         if (days > 0) {
-            timeAgo = `${days} day${days > 1 ? "s" : ""} ago`;
+            timeAgo = ` Event start in ${days} day${days > 1 ? "s" : ""}`;
         } else if (hours > 0) {
-            timeAgo = `${hours} hour${hours > 1 ? "s" : ""} ago`;
+            timeAgo = `Event start in ${hours} hour${hours > 1 ? "s" : ""}`;
         } else if (minutes > 0) {
-            timeAgo = `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+            timeAgo = ` Event start in ${minutes} minute${minutes > 1 ? "s" : ""}`;
         } else {
-            timeAgo = `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
+            timeAgo = `Event start in ${seconds} second${seconds !== 1 ? "s" : ""}`;
         }
 
         return {
