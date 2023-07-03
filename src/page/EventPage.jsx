@@ -36,12 +36,12 @@ export default function EventPage() {
             <CategoryBar />
             <div className="flex justify-center gap-14 mb-14">
                 {/* <div className="w-[401px]"></div> */}
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 max-w-[408px] ">
                     {/* <div className="flex flex-col gap-5 fixed left-64 top-80 pt-1.5"> */}
                     <NextEventContainer eventUser={eventUser} />
                     <CreateNewEventContainer />
                 </div>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-5 min-w-[740px]">
                     {Array.isArray(events) &&
                         (filterEvent ? filterEvent : events).map((el) => (
                             <EventContainer

@@ -19,6 +19,7 @@ export default function Headers() {
                 <Link
                     to="/"
                     className="btn btn-ghost normal-case text-xl text-lightbluecute  hover:bg-gray-200"
+                    // className="btn btn-ghost normal-case text-xl text-white  hover:bg-gray-200"
                 >
                     Evender.
                 </Link>
