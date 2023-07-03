@@ -20,7 +20,9 @@ import {
 import { Link } from "react-router-dom";
 
 export default function EventBar() {
-    const [activeButtonIndex, setActiveButtonIndex] = useState(null);
+
+    const [activeButtonIndex, setActiveButtonIndex] = useState(0);
+
     const initialValue = {
         eventCategoryId: "",
     };
@@ -82,7 +84,9 @@ export default function EventBar() {
                         <li key={idx}>
                             <a
                                 onClick={() => {
-                                    setActiveButtonIndex(idx);
+
+                                    setActiveButtonIndex(idx ? idx : 0);
+
                                     handleChangeInput({
                                         target: {
                                             name: "eventCategoryId",
@@ -90,11 +94,13 @@ export default function EventBar() {
                                         },
                                     });
                                 }}
-                                className={`hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-11  cursor-pointer  ${
-                                    activeButtonIndex === idx
-                                        ? "pb-9 border-b-4 border-lightbluecute "
-                                        : ""
-                                }`}
+
+                                className={`hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-11  cursor-pointer  ${activeButtonIndex === idx
+                                    ? "pb-9 border-b-4 border-lightbluecute "
+                                    : ""
+                                    }`}
+
+
                                 // className="hover:bg-gray-200 hover:bg-transparent hover:font-medium font-normal text-base text-darkgraycute pb-8 hover:border-b-4 hover:border-lightbluecute cursor-pointer "
 
                                 value={el.id}

@@ -11,6 +11,7 @@ const initialState = {
     loading: false,
     user: null,
     initialLoading: true,
+    admin: null,
 };
 
 // const navigate = useNavigate();
@@ -121,6 +122,8 @@ const authSlice = createSlice({
             .addCase(fetchMe.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
                 state.user = action.payload;
+                state.admin = action.payload.isAdmin;
+                console.log(action.payload.isAdmin, "action.payload.isAdmin");
                 state.initialLoading = false;
             })
             .addCase(fetchMe.rejected, (state, action) => {

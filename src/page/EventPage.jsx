@@ -57,6 +57,7 @@ export default function EventPage() {
                                 capacity={el.capacity}
                                 productDefaultPrice={el.productDefaultPrice}
                                 userId={el.userId}
+                                events={el}
                             />
                         ))}
                 </div>
