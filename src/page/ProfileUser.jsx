@@ -10,13 +10,13 @@ import MyNextEventCard from "../features/ProfileUser/components/MyNextEventCard"
 
 export default function ProfileUser() {
     const { id } = useParams();
-
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const myEvent = useSelector((state) => state.profileUser.hostEvent);
     const userProfile = useSelector((state) => state.profileUser.userProfile);
     const eventUser = useSelector((state) => state.event.eventUser);
     const [click, setClick] = useState(false);
+
 
     // const [renderUser, setRenderUser] = useState({})
 
@@ -85,7 +85,8 @@ export default function ProfileUser() {
                             <p className="pr-4 font-semibold text-4xl text-darkgraycute ">
                                 {userProfile?.firstName} {userProfile?.lastName}
                             </p>
-                            <p className="pt-3 ml-8 text-gray-400">#Username</p>
+                            <p className="pt-3 ml-8 text-gray-400">{userProfile?.userName
+                            }</p>
                             {/* <img
                                 width="94"
                                 height="94"
@@ -112,7 +113,7 @@ export default function ProfileUser() {
                                 <p></p>
                             )}
 
-                            {userProfile.id == user.id ? (
+                            {userProfile?.id == user.id ? (
                                 <Link
                                     to={`/evender/editprofile/${userProfile?.id}`}
                                 >
@@ -128,6 +129,16 @@ export default function ProfileUser() {
                 </div>
 
                 {/* Event */}
+                {/* className={`hover:bg-white text-darkgraycute  ring-1 ring-violetcute hover:shadow-violetcute bg-white m-4 text-base font-normal hover:font-medium  hover:transition-transform hover:shadow-md hover:scale-[120%] transform-gpu ${activeButtonIndex === idx
+                                    ? " bg-violetcute text-white hover:text-violetcute "
+                                    : ""}`}
+                                onClick={() => {
+                                    setActiveButtonIndex(idx)
+                                    handleChangeInput({
+                                        target: {
+                                            name: "eventCategoryId",
+                                            value: el.id,
+                                        }, */}
 
                 <div className="">
                     {/* bar */}
@@ -135,7 +146,7 @@ export default function ProfileUser() {
                         <div className="navbar-start"></div>
                         <div className="navbar-center hidden lg:flex">
                             <ul className="menu menu-horizontal px-1 text-lg font-normal gap-4">
-                                <li onClick={() => setClick(true)}>
+                                <li>
                                     <a className="text-darkbluecute hover:font-medium hover:bg-gray-200">
                                         my event
                                     </a>

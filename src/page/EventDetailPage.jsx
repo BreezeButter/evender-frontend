@@ -12,11 +12,14 @@ import {
     checkUserJoined,
 } from "../features/DetailEvent/slice/eventDetailSlice";
 
+
 export default function EventDetailPage() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const eventDetail = useSelector((state) => state.eventDetail.event);
     const hostDetail = useSelector((state) => state.eventDetail.hostEvent);
+
+    console.log(eventDetail, "--------eventDetail")
 
     useEffect(() => {
         const eventFunction = async () => {
@@ -26,6 +29,8 @@ export default function EventDetailPage() {
         };
         eventFunction();
     }, []);
+
+
 
     return (
         <div className="flex justify-center flex-col mb-36">

@@ -6,6 +6,8 @@ export default function RegisterInput({
     onchange,
     name,
     isInvalid,
+    type
+
 }) {
     const defaultClassName =
         "block w-full rounded-lg border bg-transparent px-3 py-2 text-darkgraycute leading-6 outline-none text-sm focus:ring";
@@ -17,12 +19,13 @@ export default function RegisterInput({
     );
     return (
         <input
-            type="text"
+            type={type ? type : "text"}
             className={className}
             placeholder={placeholder}
             value={value}
             onChange={onchange}
             name={name}
+
         />
     );
 }

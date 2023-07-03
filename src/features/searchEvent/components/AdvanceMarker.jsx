@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Bird } from 'lucide-react';
 import {
     GoogleMap,
     Marker,
@@ -13,13 +14,20 @@ import { useNavigate } from "react-router-dom";
 import EventBarSearch from "../../../features/searchEvent/components/EventBarSearch";
 import CurrentGeo from "../../searchEvent/components/CurrentGeo";
 
+
 const MapComponent = () => {
     const [open, setOpen] = useState(null);
     const navigate = useNavigate();
     const events = useSelector((state) => state.event.events);
     const filterEvent = useSelector((state) => state.search.eventFilter);
+    const me = useSelector((state) => state.auth.users)
     const [location, setLocation] = useState({ latitude: 13.736717, longitude: 100.523186 });
 
+    const mePosition = {
+        lat: +location.latitude,
+        lag: +location.longitude
+    }
+    console.log(mePosition)
 
 
     const newEvent = events.map((el) => {
@@ -43,8 +51,7 @@ const MapComponent = () => {
         };
     });
 
-    console.log("newEvent ", newEvent);
-    console.log(" newfilterEvent ", newfilterEvent);
+
 
     const center = {
         lat: location.latitude ? location.latitude : 13.736717,
@@ -56,9 +63,31 @@ const MapComponent = () => {
         setOpen(el.title);
     };
 
+    const meMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(+location.latitude, +location.longitude),
+        icon: {
+            url: '/src/assets/me.gif',
+            scaledSize: new window.google.maps.Size(400, 200),
+        },
+    });
+    const allMarker = new google.maps.Marker({
+        icon: {
+            url: '/src/assets/icons8-location-94.png',
+            scaledSize: new window.google.maps.Size(60, 60),
+        },
+    });
+
+
+
+
     return (
 
         <GoogleMap defaultZoom={15} defaultCenter={center}>
+            <Marker position={meMarker.position} icon={meMarker.icon} onClick={hdlOnClick(<InfoWindow>
+                <div className=" bg-white w-[100px] h-[80px]">
+                    <h2>Me</h2>
+                </div>
+            </InfoWindow>)} />
             <CurrentGeo setLocation={setLocation} />
 
             {(newfilterEvent ? newfilterEvent : newEvent).map((el, index) => (
@@ -67,10 +96,11 @@ const MapComponent = () => {
                         position={el.position}
                         name={el.title}
                         onClick={hdlOnClick(el)}
+                        icon={allMarker.icon}
                     >
                         {open === el.title && (
                             <InfoWindow>
-                                <div className="bg-white grid grid-cols-2  w-[300px] h-[140px] gap-4">
+                                <div className="bg-white grid grid-cols-2  w-[300px] h-[140px] gap-4 transition-transform ">
                                     <div className="flex justify-center items-center flex-col gap-y-2">
                                         <h3 className="font-semibold text-center">
                                             {el.title}
@@ -109,7 +139,7 @@ const MapComponent = () => {
                                                 <p>Go to Google Map</p>
                                             </a>
                                         </div>
-                                        <div className="w-30 h-10 bg-white rounded-md border-slate-400  border-[1px] hover:bg-slate-300 hover:text-white">
+                                        <div className="w-30 h-10 bg-white rounded-md border-darkgraycute  border-[1px] hover:bg-darkgraycute hover:text-white">
                                             <button
                                                 className="text-sm w-20 h-10"
                                                 onClick={() =>
@@ -136,8 +166,8 @@ const WrappedMapComponent = withScriptjs(withGoogleMap(MapComponent));
 
 const App = () => {
     return (
-        <div className="flex flex-row border-t border-gray-300">
-            <div>
+        <div className="relative  border-gray-300">
+            <div className="max-w-[500px] absolute z-10 rounded-xl mt-[-46px] ml-[150px] drop-shadow-2xl">
                 <EventBarSearch />
             </div>
             <div className="w-full h-screen rounded-lg">

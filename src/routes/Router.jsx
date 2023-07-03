@@ -14,6 +14,7 @@ import Eventmanagement from "../page/Manageeventpage";
 import ProtectedRoute from "../features/auth/components/ProtectedRoute";
 import Paymentsuccess from "../page/Paymentsuccess";
 import EventDetailPage from "../page/EventDetailPage"
+import Errorpage from "../page/Errorpage";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -63,13 +64,12 @@ const router = createBrowserRouter([
                 element: <EventDetailPage />,
             },
             {
-                path: "profile/:id",
-                element: <ProfileUser />,
-            },
-
-            {
                 path: "search",
                 element: <SearchPage />,
+            },
+            {
+                path: "profile/:id",
+                element: <ProfileUser />,
             },
             {
                 path: "success",
@@ -92,6 +92,10 @@ const router = createBrowserRouter([
                 element: <Eventmanagement />,
             },
         ],
+    },
+    {
+        path: "*",
+        element: <Errorpage />,
     },
 ]);
 

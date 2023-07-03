@@ -124,8 +124,8 @@ export default function SelectedBarRadius({ setRadiuse }) {
             {({ open }) => (
                 <>
                     <Listbox.Label className="block text-sm font-medium leading-6 text-darkbluecute "></Listbox.Label>
-                    <div className="relative mt-2">
-                        <Listbox.Button className="relative w-[200px] cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-darkbluecute text-sm  font-semibold border-darkbluecute border-[1px]">
+                    <div className="relative ">
+                        <Listbox.Button className="relative w-[200px] cursor-default rounded-md bg-white  py-2 pl-3 pr-10 text-left text-darkbluecute text-sm  font-semibold border-darkbluecute border-[1px]">
                             <span className="flex items-center">
                                 <span className="ml-2 first-letter:block truncate ">
                                     {selected.name ? selected.name : "Nearby"}
