@@ -615,7 +615,10 @@ export default function CreateNewEventAdmin() {
                                             </div>
 
                                             <div>
-                                                <Maps selected={selected} />
+                                                <Maps
+                                                    selected={selected}
+                                                    mapContainerClassName="map-container w-[410px] h-[182px] mt-5 rounded-lg shadow-sm"
+                                                />
                                             </div>
                                         </div>
                                     </div>
