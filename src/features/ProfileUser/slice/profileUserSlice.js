@@ -10,6 +10,7 @@ const initialState = {
     initialLoading: false,
     hostEvent: [],
     userProfile: {},
+    loadingEdite: false,
 };
 
 export const editProfileUser = createAsyncThunk(
@@ -62,10 +63,10 @@ const userSlice = createSlice({
     extraReducers: (builder) =>
         builder
             .addCase(editProfileUser.pending, (state) => {
-                state.loading = true;
+                state.loadingEdite = true;
             })
             .addCase(editProfileUser.fulfilled, (state) => {
-                state.loading = false;
+                state.loadingEdite = false;
             })
             .addCase(getUserHostEvent.pending, (state) => {
                 state.loading = true;

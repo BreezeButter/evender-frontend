@@ -17,8 +17,9 @@ export default function ProfileUser() {
     const eventUser = useSelector((state) => state.event.eventUser);
     const [click, setClick] = useState(true);
     const [activeButton, setActiveButton] = useState(true);
+    const loading = useSelector((state) => state.profileUser.loadingEdite);
 
-    console.log(userProfile, "userProfiluserProfileuserProfileuserProfile");
+    console.log(loading, "loading");
 
     // const [renderUser, setRenderUser] = useState({})
 
@@ -76,7 +77,11 @@ export default function ProfileUser() {
                     {/* Left */}
                     <div className="avatar">
                         <div className="w-80 h-80 rounded-full mr-10">
-                            <img src={userProfile?.image} className="" />
+                            {loading ?
+                                <span className="loading loading-spinner text-white w-20 h-20 "></span>
+                                :
+                                <img src={userProfile?.image} className="" />
+                            }
                         </div>
                     </div>
 
@@ -155,9 +160,8 @@ export default function ProfileUser() {
                                     }}
                                 >
                                     <a
-                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${
-                                            activeButton ? " text-red-500" : ""
-                                        } `}
+                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? " text-red-500" : ""
+                                            } `}
                                     >
                                         Host event
                                     </a>
@@ -170,9 +174,8 @@ export default function ProfileUser() {
                                     }}
                                 >
                                     <a
-                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${
-                                            activeButton ? "" : "text-red-500"
-                                        } `}
+                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? "" : "text-red-500"
+                                            } `}
                                     >
                                         Joined event
                                     </a>
