@@ -25,7 +25,7 @@ module.exports = {
         'redcute': '#FF5050',
         'orangecute': '#FF9840',
         'violetcute': '#A200FF',
-        'whitebg': '',
+        'whitebg': '#f0f2f5',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

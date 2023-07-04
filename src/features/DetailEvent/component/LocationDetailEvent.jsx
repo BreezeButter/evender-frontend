@@ -10,18 +10,21 @@ import { Clock, MapPin } from "lucide-react";
 // import Modal from "../../../components/Modal";
 import { convertDate } from "../../../utils/dateUtil";
 
+import { getJoinEventByUserAsync } from "../../Event/slice/eventSlice";
+
 export default function LocationDetailEvent({ eventDetail }) {
     const { id } = eventDetail;
 
     const [date, time] = convertDate(eventDetail.dateStart);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const handleJointEvent = () => {
+    const handleJointEvent = async () => {
         try {
-            dispatch(createJointEvent(id));
+            await dispatch(createJointEvent(id)).unwrap();
+            await dispatch(getJoinEventByUserAsync()).unwrap();
             navigate(`/evender/chat/${id}`);
         } catch {
-            toast.error("Room is Full");
+            navigate(`/evender/chat/${id}`);
         }
     };
 
