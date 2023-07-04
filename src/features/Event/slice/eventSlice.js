@@ -112,6 +112,7 @@ const eventSlice = createSlice({
             .addCase(getJoinEventByUserAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.joinEventByUser = action.payload;
+                console.log(state.joinEventByUser, "state.joinEventByUser");
             })
             .addCase(getJoinEventByUserAsync.rejected, (state, action) => {
                 state.loading = false;
@@ -123,6 +124,7 @@ const eventSlice = createSlice({
             .addCase(getChatByEventAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.chats = action.payload;
+                console.log(state.chats, "state.chats");
             })
             .addCase(getChatByEventAsync.rejected, (state, action) => {
                 state.loading = false;
