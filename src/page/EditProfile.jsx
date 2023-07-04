@@ -23,6 +23,7 @@ export default function EditProfile() {
 
     const navigate = useNavigate();
 
+
     // console.log(loading, "loading");
 
     const initialInput = {
