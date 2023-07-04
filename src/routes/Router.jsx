@@ -18,6 +18,7 @@ import EditProfile from "../page/EditProfile";
 import Errorpage from "../page/Errorpage";
 
 import ProtectedRouteAdmin from "../features/Admin/components/ProtectedRouteAdmin";
+import Usermanagement from "../features/Admin/components/UserManagement";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
             {
                 path: "eventmanagement",
                 element: <Eventmanagement />,
+            },
+            {
+                path: "usermanagement",
+                element: <Usermanagement />,
             },
         ],
     },

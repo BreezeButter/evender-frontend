@@ -5,3 +5,4 @@ export const deleteEvent = async () =>
     await axios.delete("/admin/adminDeleteEvent/:id");
 export const createEventAdmin = async () =>
     await axios.post("/admin/adminCreateEvent");
+export const showAllUser = async () => await axios.get("/admin/showAllUser");
