@@ -1,10 +1,12 @@
 import { AlignRightIcon, ChevronRight } from "lucide-react";
 import ModalUserEvent from "./ModalUserEvent";
+import { useNavigate } from "react-router-dom";
 
 export default function CardMemberEvent({ eventDetail }) {
     // console.log(eventDetail);
     const joinEventUsersFourPeople = eventDetail.JoinEventUsers?.slice(0, 5);
     const JointUserAttendees = eventDetail.JoinEventUsers?.length;
+    const navigte = useNavigate()
 
     return (
         <>
@@ -25,6 +27,7 @@ export default function CardMemberEvent({ eventDetail }) {
                 </div>
                 <div className="flex flex-row gap-4 mt-2 pl-0.5  ">
                     {joinEventUsersFourPeople?.map((el, idex) => (
+
                         <div
                             className="flex flex-col justify-center items-center"
                             key={idex}
@@ -33,14 +36,17 @@ export default function CardMemberEvent({ eventDetail }) {
                                 className="w-[5rem] h-[5rem] rounded-full object-cover cursor-pointer"
                                 src={el.User.image}
                                 alt="ProfileImage"
+                                onClick={() => navigte(`/evender/profile/${el.userId}`)}
+
                             />
                             <p className="text-xs w-[6rem] text-center font-light mt-3 text-gray-800 cursor-pointer  hover:text-black">
                                 {el.User.userName}
                             </p>
                         </div>
+
                     ))}
                 </div>
-            </div>
+            </div >
         </>
     );
 }

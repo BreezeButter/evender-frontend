@@ -39,7 +39,7 @@ export default function ModalUserEvent({ eventDetail }) {
                                             <React.Fragment key={idex}>
                                                 <Separator className="my-1 bg-gray-200 " />
                                                 <Link
-                                                    to={`/evender/profile/${el.id}`}
+                                                    to={`/evender/profile/${el.userId}`}
                                                     key={idex}
                                                 >
                                                     <div

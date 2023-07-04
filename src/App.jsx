@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import socket from "./configs/socketConfig";
 function App() {
     const initialLoading = useSelector((state) => state.auth.initialLoading);
+    const loading = useSelector((state) => state.event.loading);
 
     useEffect(() => {
         if (!initialLoading) socket.connect();

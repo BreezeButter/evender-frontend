@@ -17,10 +17,12 @@ const initialState = {
     eventRoomId: null,
     loading: false,
     userJoined: "",
+    chat: {},
+    joinEventByUser: {},
 };
 
 export const getEventUserDetail = createAsyncThunk(
-    "detail/getEventUserDetail",
+    "eventDetail/getEventUserDetail",
     async (input, thunkApi) => {
         try {
             const result = await getDetailUserById(input);
@@ -33,7 +35,7 @@ export const getEventUserDetail = createAsyncThunk(
 );
 
 export const getUserHostEvent = createAsyncThunk(
-    "detail/getUserHostEvent",
+    "eventDetail/getUserHostEvent",
     async (input, thunkApi) => {
         try {
             const result = await getUserHostEventById(input);
@@ -45,7 +47,7 @@ export const getUserHostEvent = createAsyncThunk(
     }
 );
 export const updateDetailEvent = createAsyncThunk(
-    "/eventdetails/updateDetailEvent",
+    "eventDetail/updateDetailEvent",
     async (input, thunkApi) => {
         try {
             const result = await updateEventDetail(input.id, input.formData);
@@ -56,10 +58,11 @@ export const updateDetailEvent = createAsyncThunk(
     }
 );
 export const createJointEvent = createAsyncThunk(
-    "/eventdetails/createEventJoin",
+    "eventDetail/createEventJoin",
     async (input, thunkApi) => {
         try {
             const result = await createJoinEventUser(input);
+            console.log("dasdalksjdlkasjdlksajd", result.data);
             return result.data;
         } catch (err) {
             return thunkApi.rejectWithValue(err.response.data);
@@ -67,7 +70,7 @@ export const createJointEvent = createAsyncThunk(
     }
 );
 export const leaveJointEventsync = createAsyncThunk(
-    "/eventdetails/leaveJointEvent",
+    "eventDetail/leaveJointEvent",
     async (input, thunkApi) => {
         try {
             const result = await leaveJointEvent(input);
@@ -79,7 +82,7 @@ export const leaveJointEventsync = createAsyncThunk(
     }
 );
 export const deleteEventEventsync = createAsyncThunk(
-    "/eventdetails/deleteEventEventsync",
+    "eventDetail/deleteEventEventsync",
     async (input, thunkApi) => {
         try {
             const result = await deleteEvent(input);
@@ -90,7 +93,7 @@ export const deleteEventEventsync = createAsyncThunk(
     }
 );
 export const checkUserJoined = createAsyncThunk(
-    "/eventdetails/checkUserJoined",
+    "eventDetail/checkUserJoined",
     async (input, thunkApi) => {
         try {
             const result = await checkUserJoinedEvent(input);
@@ -102,7 +105,7 @@ export const checkUserJoined = createAsyncThunk(
 );
 
 const eventDetailSlice = createSlice({
-    name: "Detail",
+    name: "eventDetail",
     initialState,
 
     extraReducers: (builder) =>
@@ -142,6 +145,10 @@ const eventDetailSlice = createSlice({
             })
             .addCase(createJointEvent.fulfilled, (stage, action) => {
                 stage.eventRoomId = action.payload;
+                stage.joinEventByUser = action.payload.events;
+                stage.chat = action.payload.chats;
+                console.log("++joinEventByUser++", action.payload.events);
+                console.log("++chat++", action.payload.chats);
                 stage.loading = false;
             })
             .addCase(createJointEvent.rejected, (stage, action) => {

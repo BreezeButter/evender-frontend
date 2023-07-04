@@ -65,17 +65,17 @@ export default function ButtonCute() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (
-            !cloneInput.title ||
-            !cloneInput.description ||
-            !cloneInput.placeProvince ||
-            !cloneInput.dateStart ||
-            !cloneInput.dateEnd ||
-            !cloneInput.capacity ||
-            !cloneInput.eventCategoryId
-        ) {
-            return alert("please fill in every field");
-        }
+        // if (
+        //     !cloneInput.title ||
+        //     !cloneInput.description ||
+        //     !cloneInput.placeProvince ||
+        //     !cloneInput.dateStart ||
+        //     !cloneInput.dateEnd ||
+        //     !cloneInput.capacity ||
+        //     !cloneInput.eventCategoryId
+        // ) {
+        //     return alert("please fill  in every field");
+        // }
         const formData = new FormData();
 
         for (let key in cloneInput) {

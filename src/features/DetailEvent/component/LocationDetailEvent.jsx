@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ClockIcon, LocationPin } from "../../../icons";
 import { createJointEvent } from "../slice/eventDetailSlice";
+import { getJoinEventByUserAsync } from "../../Event/slice/eventSlice";
 import { toast } from "react-toastify";
 // import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,6 @@ import { getJoinEventByUserAsync } from "../../Event/slice/eventSlice";
 
 export default function LocationDetailEvent({ eventDetail }) {
     const { id } = eventDetail;
-
     const [date, time] = convertDate(eventDetail.dateStart);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -94,6 +94,7 @@ export default function LocationDetailEvent({ eventDetail }) {
                     />
                 </div> */}
                 </div>
+
                 <button
                     className="hover:border-2 hover:border-lightbluecute mt-8  shadow-md  font-medium text-base hover:text-lightbluecute hover:bg-transparent rounded-full w-full h-11 bg-lightbluecute text-white"
                     onClick={handleJointEvent}
