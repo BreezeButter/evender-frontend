@@ -151,7 +151,7 @@ export default function ProfileUser() {
                     {/* bar */}
                     <div className="navbar bg-transparent border-b border-gray-300">
                         <div className="navbar-start"></div>
-                        <div className="navbar-center hidden lg:flex">
+                        <div className="navbar-center hidden lg:flex ">
                             <ul className="menu menu-horizontal px-1 text-lg font-normal gap-4">
                                 <li
                                     onClick={() => {
@@ -160,7 +160,7 @@ export default function ProfileUser() {
                                     }}
                                 >
                                     <a
-                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? " text-red-500" : ""
+                                        className={`text-darkbluecute hover:bg-transparent hover:text-lightbluecute ${activeButton ? " text-lightbluecute font-semibold border-lightbluecute  border-b-4 rounded-none pb-6 -mb-4" : ""
                                             } `}
                                     >
                                         Host event
@@ -174,7 +174,7 @@ export default function ProfileUser() {
                                     }}
                                 >
                                     <a
-                                        className={`text-darkbluecute hover:font-medium hover:bg-gray-200 ${activeButton ? "" : "text-red-500"
+                                        className={`text-darkbluecute hover:bg-transparent hover:text-lightbluecute ${activeButton ? "" : "text-lightbluecute font-semibold border-lightbluecute  border-b-4 rounded-none pb-6 -mb-4"
                                             } `}
                                     >
                                         Joined event
@@ -187,7 +187,7 @@ export default function ProfileUser() {
 
                     {/* event details */}
                     {click ? (
-                        <div className="flex flex-col justify-center items-center mt-6 gap-5 mb-24 ">
+                        <div className="flex flex-col justify-center items-center mt-10 gap-5 mb-24 ">
                             {myEvent.map((el) => (
                                 <MyEventCard
                                     id={el.id}
@@ -201,7 +201,7 @@ export default function ProfileUser() {
                             ))}
                         </div>
                     ) : (
-                        <div className="flex flex-col justify-center items-center mt-6 gap-5 mb-24 ">
+                        <div className="flex flex-col justify-center items-center mt-10 gap-5 mb-24 ">
                             {eventUser.map((el) => (
                                 <MyNextEventCard
                                     key={el.Event.id}

@@ -46,7 +46,7 @@ export default function Footer() {
             </div>
             <div>
                 <p>
-                    Copyright © 2023 - All right reserved by ACME Industries Ltd
+                    Copyright © 2023 - All right reserved by Evender Always Better Together
                 </p>
             </div>
         </footer>

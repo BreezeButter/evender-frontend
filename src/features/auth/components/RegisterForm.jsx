@@ -39,7 +39,7 @@ export default function RegisterForm() {
             }
             setError({});
             await dispatch(registerAsync(input)).unwrap(); // รอทำเส็จค่อยทำข้างล่างต่อ
-            navigate("/");
+            navigate('/evender/event');
             toast.success("register successfully");
         } catch (err) {
             toast.error("Error");

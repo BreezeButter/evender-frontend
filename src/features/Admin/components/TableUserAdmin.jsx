@@ -43,7 +43,7 @@ export default function TableUserAdmin({
 
     return (
         <div
-            className="flex max-w-[600px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer"
+            className="flex max-w-[600px] border border-lightbluecute p-3 gap-4 px-10 py-6 rounded-2xl hover:scale-105 duration-500 cursor-pointer  items-center justify-between"
         // onClick={() => navigate(`/evender/eventDetail/${id}`)}
         >
             <div className="flex flex-col gap-3 ">
