@@ -17,6 +17,20 @@ export const showAllEventAdmin = createAsyncThunk(
     }
 );
 
+export const getAllUserAsync = createAsyncThunk(
+    "/admin/showAllUser",
+    async (_, thunkApi) => {
+        try {
+            const result = await adminApi.showAllUser();
+            console.log(result.data);
+            console.log(result.data.user);
+            return result.data;
+        } catch (err) {
+            return thunkApi.rejectWithValue(err.response.data);
+        }
+    }
+);
+
 const adminSlice = createSlice({
     name: "admin",
     initialState,
@@ -30,6 +44,17 @@ const adminSlice = createSlice({
                 state.adminEvent = action.payload;
             })
             .addCase(showAllEventAdmin.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(getAllUserAsync.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAllUserAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.adminUser = action.payload;
+            })
+            .addCase(getAllUserAsync.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             }),

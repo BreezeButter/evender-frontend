@@ -93,10 +93,11 @@ const authSlice = createSlice({
                 state.isAuthenticated = false;
                 state.user = null;
                 state.loading = false;
+                state.initialLoading = false;
                 // toast.info("Already Logout");
             })
             .addCase(logout.pending, (state) => {
-                state.loading = true;
+                state.initialLoading = true;
             })
             .addCase(registerAsync.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
@@ -104,7 +105,7 @@ const authSlice = createSlice({
                 state.user = action.payload;
             })
             .addCase(registerAsync.pending, (state) => {
-                state.loading = true;
+                state.initialLoading = true;
             })
             .addCase(registerAsync.rejected, (state, action) => {
                 state.error = action.payload; // err.response.data.message
@@ -114,10 +115,11 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.loading = false;
                 state.user = action.payload;
+                state.initialLoading = false;
                 // toast.success("Login success");
             })
             .addCase(login.pending, (state) => {
-                state.loading = true;
+                state.initialLoading = true;
             })
             .addCase(fetchMe.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
