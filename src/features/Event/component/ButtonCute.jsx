@@ -5,12 +5,13 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogFooter,
 } from "../../../components/ui/dialog";
 import Input2 from "./Input";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { creatEventAsync } from "../slice/eventSlice";
 import { DownIcon } from "../../../icons";
 import AutoCompleteComponent from "./AutoCompleteComponent";
@@ -30,7 +31,7 @@ const initialState = {
 };
 
 export default function ButtonCute() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [input, setInput] = useState(initialState);
     const [files, setFiles] = useState({});
     const dispatch = useDispatch();
@@ -87,10 +88,16 @@ export default function ButtonCute() {
         await dispatch(creatEventAsync(formData)).unwrap();
         setInput(initialState);
         setFiles({});
-        toast.success('create success')
-        // navigate('/evender/event')
+        toast.success("create success");
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+
         // console.log(ref);
     };
+
+    // useEffect(() => {}, [loading]);
+
     return (
         <>
             <Dialog>
@@ -110,7 +117,7 @@ export default function ButtonCute() {
                     </DialogHeader>
 
                     {loading ? (
-                        <div className="flex justify-center">
+                        <div className="flex justify-center px-8 py-8">
                             <span className="loading loading-spinner loading-lg"></span>
                         </div>
                     ) : (
@@ -349,8 +356,12 @@ export default function ButtonCute() {
                                         /> */}
                                     </div>
                                 </div>
+
                                 <div className="flex justify-center w-full mt-6 mb-2.5">
-                                    <Button className="btn bg-darkbluecute w-[95%] text-white rounded-full  h-12 self-center hover:text-darkbluecute flex justify-center text-center">
+                                    <Button
+                                        type="submit"
+                                        className="btn bg-darkbluecute w-[95%] text-white rounded-full h-12 self-center hover:text-darkbluecute flex justify-center text-center"
+                                    >
                                         Create event
                                     </Button>
                                 </div>

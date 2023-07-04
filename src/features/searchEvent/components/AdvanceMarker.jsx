@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bird } from 'lucide-react';
+import { Bird } from "lucide-react";
 import {
     GoogleMap,
     Marker,
@@ -14,21 +14,22 @@ import { useNavigate } from "react-router-dom";
 import EventBarSearch from "../../../features/searchEvent/components/EventBarSearch";
 import CurrentGeo from "../../searchEvent/components/CurrentGeo";
 
-
 const MapComponent = () => {
     const [open, setOpen] = useState(null);
     const navigate = useNavigate();
     const events = useSelector((state) => state.event.events);
     const filterEvent = useSelector((state) => state.search.eventFilter);
-    const me = useSelector((state) => state.auth.users)
-    const [location, setLocation] = useState({ latitude: 13.736717, longitude: 100.523186 });
+    const me = useSelector((state) => state.auth.users);
+    const [location, setLocation] = useState({
+        latitude: 13.736717,
+        longitude: 100.523186,
+    });
 
     const mePosition = {
         lat: +location.latitude,
-        lag: +location.longitude
-    }
-    console.log(mePosition)
-
+        lag: +location.longitude,
+    };
+    console.log(mePosition);
 
     const newEvent = events.map((el) => {
         const { latitude, longitude, ...rest } = el;
@@ -51,11 +52,9 @@ const MapComponent = () => {
         };
     });
 
-
-
     const center = {
         lat: location.latitude ? location.latitude : 13.736717,
-        lng: location.longitude ? location.longitude : 100.523186
+        lng: location.longitude ? location.longitude : 100.523186,
     };
 
     const hdlOnClick = (el) => () => {
@@ -64,30 +63,35 @@ const MapComponent = () => {
     };
 
     const meMarker = new google.maps.Marker({
-        position: new google.maps.LatLng(+location.latitude, +location.longitude),
+        position: new google.maps.LatLng(
+            +location.latitude,
+            +location.longitude
+        ),
         icon: {
-            url: '/src/assets/me.gif',
+            url: "/src/assets/me.gif",
             scaledSize: new window.google.maps.Size(400, 200),
         },
     });
     const allMarker = new google.maps.Marker({
         icon: {
-            url: '/src/assets/icons8-location-94.png',
+            url: "/src/assets/icons8-location-94.png",
             scaledSize: new window.google.maps.Size(60, 60),
         },
     });
 
-
-
-
     return (
-
         <GoogleMap defaultZoom={15} defaultCenter={center}>
-            <Marker position={meMarker.position} icon={meMarker.icon} onClick={hdlOnClick(<InfoWindow>
-                <div className=" bg-white w-[100px] h-[80px]">
-                    <h2>Me</h2>
-                </div>
-            </InfoWindow>)} />
+            <Marker
+                position={meMarker.position}
+                icon={meMarker.icon}
+                onClick={hdlOnClick(
+                    <InfoWindow>
+                        <div className=" bg-white w-[100px] h-[80px]">
+                            <h2>Me</h2>
+                        </div>
+                    </InfoWindow>
+                )}
+            />
             <CurrentGeo setLocation={setLocation} />
 
             {(newfilterEvent ? newfilterEvent : newEvent).map((el, index) => (
@@ -179,7 +183,6 @@ const App = () => {
                 />
             </div>
         </div>
-
     );
 };
 
