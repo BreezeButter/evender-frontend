@@ -20,6 +20,7 @@ export default function Loading() {
       <div className="fixed inset-0 bg-base-100 opacity-50 z-40"></div>
       <div className="fixed inset-0 z-50">
         <div className="flex justify-center items-center min-h-full">
+          <h1 className="text-lg text-white p-5">Evender Always Better Together</h1>
           <span className="loading loading-spinner text-white w-20 h-20 "></span>
           <div>
           </div>

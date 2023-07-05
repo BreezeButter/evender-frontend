@@ -63,7 +63,7 @@ export default function ModalEditDetailCute({ eventDetail }) {
 
     useEffect(() => {
         if (loading) {
-            toast.loading("loading");
+            // toast.loading("loading");
         } else {
             toast.dismiss();
         }
@@ -367,8 +367,8 @@ export default function ModalEditDetailCute({ eventDetail }) {
                                                     src={
                                                         file.image1
                                                             ? URL.createObjectURL(
-                                                                  file.image1
-                                                              )
+                                                                file.image1
+                                                            )
                                                             : eventDetail.image1
                                                     }
                                                     alt=""
@@ -398,8 +398,8 @@ export default function ModalEditDetailCute({ eventDetail }) {
                                                     src={
                                                         file.image2
                                                             ? URL.createObjectURL(
-                                                                  file.image2
-                                                              )
+                                                                file.image2
+                                                            )
                                                             : eventDetail.image2
                                                     }
                                                     alt=""
@@ -428,8 +428,8 @@ export default function ModalEditDetailCute({ eventDetail }) {
                                                     src={
                                                         file.image3
                                                             ? URL.createObjectURL(
-                                                                  file.image3
-                                                              )
+                                                                file.image3
+                                                            )
                                                             : eventDetail.image3
                                                     }
                                                     alt=""

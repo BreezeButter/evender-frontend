@@ -26,37 +26,37 @@ export default function Usermanagement() {
     }, [click]);
     console.log("adasdasd", users);
     return (
-        <div className="grid grid-cols-2">
-            <div>
-                <div className="flex justify-center">
-                    Usermanagement - It's not about how much we lost. It's about
-                    how much we have left.
-                </div>
-                <div className="grid grid-cols-2 h-full">
-                    {/*ปุ่มการจัดการด้านข้างของฝั่งแอดมิน*/}
-                    <div className="flex flex-col w-full gap-4 mt-4 pl-8 pr-8">
-                        <Link to="/admin/eventmanagement">
-                            <button
-                                className="btn btn-active btn-base-200 rounded-full w-full"
-                            // onClick={() => navigate("/admin/eventmanagement")}
-                            >
-                                Event
-                            </button>
-                        </Link>
+        <div className="flex flex-row">
+            <div className="flex flex-col m-12 ">
+                <Link
+                    to="/admin/eventmanagement"
+                    className="btn btn-active btn-base-200 bg-white rounded-full w-[300px] mb-4"
+                >
+                    <button
+                        className=" "
+                    // onClick={() => navigate("/admin/eventmanagement")}
+                    >
+                        Event
+                    </button>
+                </Link>
 
-                        <button
-                            className="btn btn-active btn-base-200 rounded-full"
-                        // onClick={() => navigate("/admin/usermanagement")}
-                        >
-                            User
-                        </button>
-                    </div>
-                </div>
+                <Link
+                    to="/admin/usermanagement"
+                    className="  btn btn-active btn-base-200 rounded-full w-[300px]"
+                >
+                    <button
+                        className=""
+                    // onClick={() => navigate("/admin/usermanagement")}
+                    >
+                        User
+                    </button>
+                </Link>
             </div>
-            <div className="grid">
+
+            <div className="flex">
                 {/* <Datachartpolar /> */}
                 <div className="overflow-x-auto">
-                    <div className="flex flex-col gap-5 p-4">
+                    <div className="flex flex-col gap-5 p-4 ">
                         {Array.isArray(users) &&
                             users.map((el) => (
                                 <TableUserAdmin

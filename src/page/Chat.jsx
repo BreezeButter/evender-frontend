@@ -185,13 +185,13 @@ export default function Chat() {
                 {/* <div className="w-[100rem] m-auto mb-5 flex justify-center gap-5"> */}
                 <div className="p-4">
                     {/* {joinEventByUser.map((el, index) => ( */}
-                    <h1 className="font-bold text-2xl  text-darkbluecute  transition delay-120 duration-120 ease-in-out w-fit p-2 rounded-full">
-                        {/* Event Room: {currentRoom} */}
-                        {joinEventByUser.length > 0 &&
-                            joinEventByUser.find(
-                                (el) => el?.Event?.id == currentRoom
-                            ).Event?.title}
-                    </h1>
+                    {/* <h1 className="font-bold text-2xl  text-darkbluecute  transition delay-120 duration-120 ease-in-out w-fit p-2 rounded-full"> */}
+                    {/* Event Room: {currentRoom} */}
+                    {/* {joinEventByUser.length > 0 && */}
+                    {/* joinEventByUser.find( */}
+                    {/* (el) => el?.Event?.id == currentRoom */}
+                    {/* ).Event?.title} */}
+                    {/* </h1> */}
                     <div
                         className="rounded-xl h-[500px] w-[1000px] overflow-auto flex flex-col gap-3 p-2 border-2"
                         ref={ref}

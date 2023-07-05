@@ -30,7 +30,7 @@ export default function LoginForm() {
         try {
             await dispatch(login(data)).unwrap();
             toast.success("Login success");
-            navigate('/');
+            navigate('/evender/event');
 
         } catch (err) {
             toast.error("invalid email");
@@ -118,8 +118,12 @@ export default function LoginForm() {
                             access_type="offline"
                             onResolve={({ provider, data }) => {
                                 dispatch(loginGoogle(data)).unwrap();
-                                navigate('/');
-                                toast.success("Login success");
+                                navigate('/evender/event');
+
+
+                                setTimeout(() => { toast.success("Login success") }
+                                    , 2000)
+
                             }}
                             onReject={(err) => {
                                 console.log(err);

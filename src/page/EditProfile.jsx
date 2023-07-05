@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editProfileUser } from "../features/ProfileUser/slice/profileUserSlice";
 import { Label } from "../components/ui/label";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 
 import { fetchMe } from "../features/auth/slice/authSlice";
@@ -14,13 +15,16 @@ import { Input } from "../components/ui/input";
 // import * as userService from "../api/profileUserApi";
 
 export default function EditProfile() {
+
     const [image, setImage] = useState(null);
     const [showImage, setShowImage] = useState(null);
     // const [isLoading, setIsLoading] = useState(false);
     const user = useSelector((state) => state.auth.user);
+
     const navigate = useNavigate();
 
-    console.log(user);
+
+    // console.log(loading, "loading");
 
     const initialInput = {
         firstName: "",
@@ -37,7 +41,7 @@ export default function EditProfile() {
     const hdlUpdate = async (e) => {
         try {
             e.preventDefault();
-            console.log(input, image);
+            console.log(input, image, 'GGGGGGGGWP');
             const formData = new FormData();
             for (let key in input) {
                 formData.append(key, input[key]);
@@ -46,16 +50,18 @@ export default function EditProfile() {
                 formData.append("image", image);
             }
 
-            dispatch(editProfileUser(formData));
-            navigate(`/evender/profile/${user?.id}`);
+            await dispatch(editProfileUser(formData)).unwrap();
+            await dispatch(fetchMe()).unwrap()
+            await navigate(`/evender/profile/${user?.id}`).unwrap();
+            toast.success("Update Success")
         } catch (err) {
             console.log(err);
         }
     };
 
-    useEffect(() => {
-        // dispatch(fetchMe());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(fetchMe());
+    // }, [user]);
 
     useEffect(() => {
         console.log(user);
@@ -74,6 +80,7 @@ export default function EditProfile() {
     // useEffect(() => {
     //     setInput(user);
     // }, [user]);
+
 
     return (
         <div className="flex justify-center mt-10">
