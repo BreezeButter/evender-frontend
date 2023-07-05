@@ -62,6 +62,10 @@
     animation: 1.75s rotate linear infinite;
 }
 
+.gmnoprint {
+    display: none;
+}
+
 @keyframes rotate {
     to {
         --angle: 360deg;

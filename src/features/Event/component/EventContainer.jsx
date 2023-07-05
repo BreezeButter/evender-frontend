@@ -50,7 +50,7 @@ export default function EventContainer({
 
     return (
         <div
-            className={`flex max-w-[800px] border ${
+            className={`flex max-w-[800px] min-w-[744px] border ${
                 isBoost
                     ? // ? "border-violetcute border-[1px] animate-bounce"
                       "box"

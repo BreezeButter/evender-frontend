@@ -142,10 +142,11 @@ export default function Chat() {
                                 handleJoinRoom(el.eventId),
                                     setActiveButtonIndex(index);
                             }}
-                            className={`border-b-[1px] w-full border-gray-300 flex p-4 rounded font-semibold  hover:shadow-xl  shadow-slate-200  transition delay-120 duration-120 ease-in-out  ${activeButtonIndex === index
-                                ? " bg-darkgraycute  shadow-slate-200  shadow-xl  text-white  hover:text-white"
-                                : ""
-                                }`}
+                            className={`border-b-[1px] w-full border-gray-300 flex p-4 rounded font-semibold  hover:shadow-xl  shadow-slate-200  transition delay-120 duration-120 ease-in-out  ${
+                                activeButtonIndex === index
+                                    ? " bg-darkgraycute  shadow-slate-200  shadow-xl  text-white  hover:text-white"
+                                    : ""
+                            }`}
                         >
                             <div className=" border-emerald-50 ">
                                 <img
@@ -156,18 +157,20 @@ export default function Chat() {
                             </div>
                             <div className="w-[80%] ">
                                 <div
-                                    className={`text-darkbluecute text-sm ${activeButtonIndex === index
-                                        ? " text-white "
-                                        : ""
-                                        }`}
+                                    className={`text-darkbluecute text-sm ${
+                                        activeButtonIndex === index
+                                            ? " text-white "
+                                            : ""
+                                    }`}
                                 >
                                     {el.Event.title}
                                 </div>
                                 <div
-                                    className={`text-darkbluecute text-sm   ${activeButtonIndex === index
-                                        ? " text-white"
-                                        : ""
-                                        }`}
+                                    className={`text-darkbluecute text-sm   ${
+                                        activeButtonIndex === index
+                                            ? " text-white"
+                                            : ""
+                                    }`}
                                 >
                                     @ {el.Event.placeName}
                                 </div>

@@ -48,12 +48,28 @@ export default function EventBar() {
     };
 
     const eventCategory = [
-        { id: undefined, name: "All", emoji: <GalleryVertical /> },
-        { id: 1, name: "Bar", emoji: <Beer /> },
-        { id: 2, name: "Sport", emoji: <Sailboat /> },
-        { id: 3, name: "Resterant", emoji: <Soup /> },
-        { id: 4, name: "Cafe", emoji: <Coffee /> },
-        { id: 5, name: "LifeStyle", emoji: <Goal /> },
+        {
+            id: undefined,
+            name: "All",
+            emoji: <GalleryVertical className="stroke-[1.5px]" />,
+        },
+        { id: 1, name: "Bar", emoji: <Beer className="stroke-[1.5px]" /> },
+        {
+            id: 2,
+            name: "Sport",
+            emoji: <Sailboat className="stroke-[1.5px]" />,
+        },
+        {
+            id: 3,
+            name: "Resterant",
+            emoji: <Soup className="stroke-[1.5px]" />,
+        },
+        { id: 4, name: "Cafe", emoji: <Coffee className="stroke-[1.5px]" /> },
+        {
+            id: 5,
+            name: "LifeStyle",
+            emoji: <Goal className="stroke-[1.5px]" />,
+        },
     ];
 
     const dispatch = useDispatch();
@@ -73,7 +89,7 @@ export default function EventBar() {
     const [location, setLocation] = useState("");
     const [radius, setRadiuse] = useState("");
     const [province, setProvince] = useState("");
-    const [activeButtonIndex, setActiveButtonIndex] = useState(null);
+    const [activeButtonIndex, setActiveButtonIndex] = useState(0);
     const [activeCard1, setActiveCard1] = useState(false);
     const [activeCard2, setActiveCard2] = useState(false);
 
@@ -98,15 +114,15 @@ export default function EventBar() {
     }, [input, radius, province, location, handleReset]);
 
     return (
-        <div className="flex gap-1 m-8  text-darkbluecute relative">
-            <div className="flex flex-col  gap-4 mt-2">
-                <ul className=" text-darkgraycute px-1 flex max-w-[300px] ">
+        <div className="flex gap-1  m-8  text-darkbluecute w-6 relative">
+            <div className="flex flex-col mt-2">
+                <ul className=" text-darkgraycute px-1 flex max-w-[300px] -ml-[160px] ">
                     {eventCategory.map((el, idx) => (
                         <li key={idx} className="">
                             <Button
-                                className={`hover:bg-white text-darkgraycute  ring-1 ring-violetcute hover:shadow-violetcute bg-white m-4 text-base font-normal hover:font-medium  hover:transition-transform hover:shadow-md hover:scale-[120%] transform-gpu ${
+                                className={` text-darkgraycute ring-1 ring-lightbluecute  bg-white  mt-9  ml-4 text-base font-normal hover:font-medium  hover:transition-transform hover:shadow-md hover:scale-105 hover:bg-lightbluecute hover:text-white transform-gpu ${
                                     activeButtonIndex === idx
-                                        ? " bg-violetcute text-white hover:text-violetcute "
+                                        ? " bg-lightbluecute text-white  "
                                         : ""
                                 }`}
                                 onClick={() => {
@@ -136,16 +152,15 @@ export default function EventBar() {
             </div> */}
 
             <div
-                className={`flex flex-col items-center gap-2 hover:ring-1 hover:ring-violetcute hover:shadow-violetcute absolute ml-[-140px] mt-[130px] bg-white min-w-[350px] p-8 rounded-lg  hover:transition-transform hover:shadow-md hover:scale-[110%] transform-gpu 
-            ${
-                activeCard2
-                    ? " text-violetcute hover:text-violetcute ring-1 ring-violetcute shadow-violetcute shadow-md "
-                    : ""
-            }`}
+                className={`flex flex-col items-center gap-2 hover:ring-1  absolute ml-[-140px] mt-[140px] bg-white min-w-[350px] p-8 rounded-lg  hover:transition-transform hover:shadow-md  transform-gpu 
+            ${activeCard2 ? "   shadow-md " : ""}`}
                 onClick={() => setActiveCard2(!activeCard2)}
             >
                 <div className="mr-4 mt-4 text-darkgraycute">
-                    <CalendarSearch size={44} />
+                    <CalendarSearch
+                        size={44}
+                        className="stroke-lightbluecute"
+                    />
                 </div>
 
                 <div className="relative w-full mt-5">
@@ -172,16 +187,12 @@ export default function EventBar() {
                 </div>
             </div>
             <div
-                className={`flex flex-col items-center gap-4 hover:ring-1 pb-11 hover:ring-violetcute hover:shadow-violetcute absolute ml-[-140px] min-w-[350px]  mt-[470px] bg-white p-8 rounded-lg  hover:transition-transform hover:shadow-md hover:scale-[110%] transform-gpu 
-            ${
-                activeCard1
-                    ? " text-violetcute hover:text-violetcute ring-1 ring-violetcute shadow-violetcute shadow-md "
-                    : ""
-            }`}
+                className={`flex flex-col items-center gap-4 hover:ring-1 pb-11  absolute ml-[-140px] min-w-[350px]  mt-[480px] bg-white p-8 rounded-lg  hover:transition-transform hover:shadow-md  transform-gpu 
+            ${activeCard1 ? "   shadow-md " : ""}`}
                 onClick={() => setActiveCard1(!activeCard1)}
             >
                 <div className="m-auto mb-4  text-darkgraycute">
-                    <Map size={44} />
+                    <Map size={44} className="stroke-lightbluecute" />
                 </div>
                 <div className="flex flex-col items-baseline w-full ">
                     <div className="w-full flex flex-col mb-4">
@@ -196,7 +207,7 @@ export default function EventBar() {
                             setProvince={setProvince}
                         />
                     </div>
-                    <div className="w-full">
+                    <div className="w-full ">
                         <Label
                             htmlFor="Nearby"
                             className=" text-darkbluecute text-left mb-1.5"
@@ -205,7 +216,7 @@ export default function EventBar() {
                         </Label>
                         <NearBySearch
                             setRadiuse={setRadiuse}
-                            className="border w-full border-gray-400"
+                            className="border w-full border-gray-400 z-50"
                         />
                     </div>
                 </div>
@@ -213,11 +224,10 @@ export default function EventBar() {
             <CurrentGeo setLocation={setLocation} />
 
             <div
-                className="mt-[785px] ml-[-449px] 
-            "
+                className="mt-[860px] ml-80"
                 onClick={() => navigate("/evender/event")}
             >
-                <button className="btn min-w-[350px] hover:transition-transform hover:ring-1 hover:ring-darkgraycute hover:shadow-2xl rounded-xl  hover:scale-[110%] transform-gpu text-white">
+                <button className="btn min-w-[400px] hover:transition-transform bg-lightbluecute  cursor-pointer hover:ring-1 hover:bg-lightbluecute border-none hover:shadow-2xl rounded-xl  hover:scale-105  transform-gpu text-white">
                     Back to event
                 </button>
             </div>

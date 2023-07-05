@@ -114,7 +114,9 @@ export default function EventBar() {
                     {/* <EventBarCute /> */}
                     {/* <p className="ml-1.5">search</p> */}
                     <CurrentGeo setLocation={setLocation} />
-                    <NearBySearch setRadiuse={setRadiuse} />
+                    <div className="min-w-[138px]">
+                        <NearBySearch setRadiuse={setRadiuse} />
+                    </div>
                     <HoverCard>
                         <HoverCardTrigger>
                             <Link to="/evender/search">

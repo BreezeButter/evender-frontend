@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bird } from "lucide-react";
+import { Bird, ChevronRight } from "lucide-react";
 import {
     GoogleMap,
     Marker,
@@ -13,6 +13,7 @@ import { GoogleIcon } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import EventBarSearch from "../../../features/searchEvent/components/EventBarSearch";
 import CurrentGeo from "../../searchEvent/components/CurrentGeo";
+import { Separator } from "../../../components/ui/separator";
 
 const MapComponent = () => {
     const [open, setOpen] = useState(null);
@@ -74,8 +75,8 @@ const MapComponent = () => {
     });
     const allMarker = new google.maps.Marker({
         icon: {
-            url: "/src/assets/icons8-location-94.png",
-            scaledSize: new window.google.maps.Size(60, 60),
+            url: "/src/assets/icons8-location-1001.png",
+            scaledSize: new window.google.maps.Size(90, 90),
         },
     });
 
@@ -93,7 +94,6 @@ const MapComponent = () => {
                 )}
             />
             <CurrentGeo setLocation={setLocation} />
-
             {(newfilterEvent ? newfilterEvent : newEvent).map((el, index) => (
                 <div key={index}>
                     <Marker
@@ -103,17 +103,92 @@ const MapComponent = () => {
                         icon={allMarker.icon}
                     >
                         {open === el.title && (
+                            // <InfoWindow>
+                            //     <div className="bg-white grid grid-cols-2  max-w-[300px] h-[140px] gap-4 transition-transform ">
+                            //         <div className="flex justify-center items-center flex-col gap-y-2">
+                            //             <h3 className="font-medium text-center text-sm text-darkgraycute">
+                            //                 {el.title}
+                            //             </h3>
+                            //             <h4 className="font-light text-xs text-darkgraycute">
+                            //                 at {el.placeName}
+                            //             </h4>
+                            //             <div className="flex">
+                            //                 {el.JoinEventUsers?.map(
+                            //                     (JoinEventUser, idex) => {
+                            //                         return (
+                            //                             <img
+                            //                                 key={idex}
+                            //                                 src={
+                            //                                     JoinEventUser
+                            //                                         .User.image
+                            //                                 }
+                            //                                 alt=""
+                            //                                 className="w-10 h-10 bg-slate-500 rounded-full -mr-4"
+                            //                             />
+                            //                         );
+                            //                     }
+                            //                 )}
+                            //             </div>
+                            //             <p className=" border-gray-300">
+                            //                 {`${el.JoinEventUsers.length}/${el.capacity}`}
+                            //             </p>
+                            //         </div>
+                            //         <div className="grid grid-rows-2 text-center">
+                            //             <div className="flex items-center justify-center p-1">
+                            //                 <a
+                            //                     href={`http://maps.google.com/?q=${el.position.lat},${el.position.lng}`}
+                            //                     className="flex flex-col items-center text-center"
+                            //                 >
+                            //                     <GoogleIcon className="w-[20px] h-[20px] items-center text-center" />
+                            //                     <p>Go to Google Map</p>
+                            //                 </a>
+                            //             </div>
+                            //             <div className="w-30 h-10 bg-white rounded-md border-darkgraycute  border-[1px] hover:bg-darkgraycute hover:text-white">
+                            // <button
+                            //     className="text-sm w-20 h-10"
+                            //     onClick={() =>
+                            //         navigate(
+                            //             `/evender/eventDetail/${el.id}`
+                            //         )
+                            //     }
+                            // >
+                            //     Event Detail
+                            // </button>
+                            //             </div>
+                            //         </div>
+                            //     </div>
+                            // </InfoWindow>
                             <InfoWindow>
-                                <div className="bg-white grid grid-cols-2  w-[300px] h-[140px] gap-4 transition-transform ">
-                                    <div className="flex justify-center items-center flex-col gap-y-2">
-                                        <h3 className="font-semibold text-center">
-                                            {el.title}
-                                        </h3>
-                                        <h4 className="font-semibold">
-                                            @ {el.placeName}
-                                        </h4>
-                                        <div className="flex">
-                                            {el.JoinEventUsers?.slice(0, 4).map(
+                                <div className="max-w-[274px] h-[100px] -mb-1  ">
+                                    <div className="flex flex-row justify-between">
+                                        <div className="space-y-1 ">
+                                            <h4 className="text-sm font-medium leading-none text-lightbluecute cursor-pointer">
+                                                {el.title}
+                                            </h4>
+                                            <p className="text-xs text-gray-500 ">
+                                                at {el.placeName}
+                                            </p>
+                                        </div>
+
+                                        <div className="flex  flex-col justify-between ">
+                                            <div className=""></div>
+                                            <a
+                                                href={`http://maps.google.com/?q=${el.position.lat},${el.position.lng}`}
+                                                className="flex flex-col items-center"
+                                            >
+                                                <div className="flex flex-row w-[87px]  justify-end hover:text-darkgraycute hover:underline">
+                                                    <p className="text-[10px]  font-light ">
+                                                        Google Maps
+                                                    </p>
+                                                    <ChevronRight className="h-3.5 stroke-[1px] w-3.5" />
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <Separator className="my-2 bg-gray-300" />
+                                    <div className="flex h-5 items-center space-x-4 text-sm">
+                                        <div className="flex flex-row mr-2.5">
+                                            {el.JoinEventUsers?.map(
                                                 (JoinEventUser, idex) => {
                                                     return (
                                                         <img
@@ -123,36 +198,33 @@ const MapComponent = () => {
                                                                     .User.image
                                                             }
                                                             alt=""
-                                                            className="w-10 h-10 bg-slate-500 rounded-full -mr-4"
+                                                            className="w-10 h-10 bg-slate-500 rounded-full -mr-4 mt-5  object-cover "
                                                         />
                                                     );
                                                 }
                                             )}
                                         </div>
-                                        <p className=" border-gray-300">
-                                            {el.JoinEventUsers.length}/30
-                                        </p>
-                                    </div>
-                                    <div className="grid grid-rows-2 text-center">
-                                        <div className="flex items-center justify-center p-1">
-                                            <a
-                                                href={`http://maps.google.com/?q=${el.position.lat},${el.position.lng}`}
-                                                className="flex flex-col items-center text-center"
-                                            >
-                                                <GoogleIcon className="w-[20px] h-[20px] items-center text-center" />
-                                                <p>Go to Google Map</p>
-                                            </a>
+                                        <Separator
+                                            orientation="vertical"
+                                            className="bg-gray-300 h-10 mt-5"
+                                        />
+                                        <div className="flex items-center mt-5 text-darkgraycute">
+                                            {`${el.JoinEventUsers.length}/${el.capacity}`}
                                         </div>
-                                        <div className="w-30 h-10 bg-white rounded-md border-darkgraycute  border-[1px] hover:bg-darkgraycute hover:text-white">
+                                        <Separator
+                                            orientation="vertical"
+                                            className="bg-gray-300 h-10 mt-5"
+                                        />
+                                        <div>
                                             <button
-                                                className="text-sm w-20 h-10"
+                                                className="text-xs mt-5 mr-2 cursor-pointer hover:underline hover:text-lightbluecute text-darkgraycute"
                                                 onClick={() =>
                                                     navigate(
                                                         `/evender/eventDetail/${el.id}`
                                                     )
                                                 }
                                             >
-                                                Event Detail
+                                                More details
                                             </button>
                                         </div>
                                     </div>
@@ -170,7 +242,7 @@ const WrappedMapComponent = withScriptjs(withGoogleMap(MapComponent));
 
 const App = () => {
     return (
-        <div className="relative  border-gray-300">
+        <div className="relative border border-gray-300 ">
             <div className="max-w-[500px] absolute z-10 rounded-xl mt-[-46px] ml-[150px] drop-shadow-2xl">
                 <EventBarSearch />
             </div>
