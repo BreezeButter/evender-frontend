@@ -19,6 +19,7 @@ import { ScrollArea } from "../components/ui/scroll-area";
 
 export default function Chat() {
     const dispatch = useDispatch();
+
     const [message, setMessage] = useState({});
     const [messages, setMessages] = useState([]);
     const roomId = useParams().id;
@@ -36,6 +37,7 @@ export default function Chat() {
     const chats = useSelector((state) => state.event.chats);
     const [activeButtonIndex, setActiveButtonIndex] = useState(null);
     const { id } = useParams();
+    console.log(chats, "HHHHHHHHHHHHHHHHHHHHHHHH__________>>>>>>>>>");
 
     // console.log(user);
     // useEffect(() => {
@@ -229,8 +231,8 @@ export default function Chat() {
                                                     src={URL.createObjectURL(
                                                         el.message
                                                     )}
-                                                    // className="w-[400px] h-[250px] object-cover rounded-md mt-2"
-                                                    className="w-[50px] h-[50px] object-cover rounded-md mt-2"
+                                                    className="w-[400px] h-[250px] object-cover rounded-md mt-2"
+                                                    // className="w-[50px] h-[50px] object-cover rounded-md mt-2"
                                                 ></img>
                                             )}
                                         </div>
