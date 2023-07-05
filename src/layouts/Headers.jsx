@@ -57,7 +57,7 @@ export default function Headers() {
                         tabIndex={0}
                         className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-300 rounded-box z-50 "
                     >
-                        <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5">
+                        <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5 ">
                             <div className="avatar">
                                 <div className="w-16 h-16 rounded-full">
                                     <img
@@ -68,15 +68,15 @@ export default function Headers() {
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col">
-                                <h1 className="text-base font-normal text-darkgraycute">
-                                    {user?.firstName}
+                            <div className="flex flex-col  ">
+                                <h1 className="text-base font-normal text-darkgraycute ">
+                                    {user?.firstName} {user?.lastName}
                                 </h1>
-                                <p className="font-light text-gray-800">
+                                <p className="font-light text-xs mt-0.5 text-gray-800  ">
                                     {user?.email}
                                 </p>
                                 <Link to={`/evender/editprofile/${user?.id}`}>
-                                    <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
+                                    <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2.5 hover:text-darkgraycute">
                                         Edit profile
                                     </p>
                                 </Link>

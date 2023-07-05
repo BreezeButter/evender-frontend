@@ -5,7 +5,6 @@ import Container from "../layouts/Container";
 import Landing from "../page/Landing";
 import EventPage from "../page/EventPage";
 import SearchPage from "../page/SearchPage";
-import Chat from "../page/Chat";
 import ProfileUser from "../page/ProfileUser";
 import HeadersGuest from "../layouts/HeadersGuest";
 import Footer from "../layouts/Footer";
@@ -19,6 +18,7 @@ import Errorpage from "../page/Errorpage";
 
 import ProtectedRouteAdmin from "../features/Admin/components/ProtectedRouteAdmin";
 import Usermanagement from "../features/Admin/components/UserManagement";
+import Chat from "../page/ChatCute";
 const router = createBrowserRouter([
     {
         path: "/",
