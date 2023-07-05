@@ -1,3 +1,207 @@
+// import { Link, useNavigate } from "react-router-dom";
+// import { UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
+// import { useDispatch, useSelector } from "react-redux";
+// import { logout } from "../features/auth/slice/authSlice";
+// import { toast } from "react-toastify";
+// import { useEffect } from "react";
+
+// export default function Headers() {
+//     const dispatch = useDispatch();
+//     const user = useSelector((state) => state.auth.user);
+//     const navagate = useNavigate();
+//     console.log(user.id, "usefdlmfl;sdmxlbkmnxf;lkmbl;xfkmb;lfxr");
+
+//     const hdlLogOut = () => {
+//         dispatch(logout());
+//         toast.info("Already Logout");
+//     };
+
+//     return (
+//         <>
+//             {user?.isAdmin ? (
+//                 <div className="navbar text-darkbluecute ">
+//                     <div className="navbar-start">
+//                         <Link
+//                             to="/evender/event"
+//                             className="btn btn-ghost normal-case text-xl text-lightbluecute  hover:bg-gray-200"
+//                         // className="btn btn-ghost normal-case text-xl text-white  hover:bg-gray-200"
+//                         >
+//                             Evender.
+//                         </Link>
+//                     </div>
+//                     <div className=" ">
+//                         <Link
+//                             to="/admin/eventmanagement"
+//                             className="btn btn-ghost normal-case text-xl text-black  hover:bg-gray-200 text-center"
+//                         // className="btn btn-ghost normal-case text-xl text-white  hover:bg-gray-200"
+//                         >
+//                             Admin Mode
+//                         </Link>
+//                     </div>
+
+//                     <div className="navbar-center hidden lg:flex">
+//                         {/* <ul className="menu menu-horizontal px-1">
+//                     <li>
+//                         <Link to="" className="hover:bg-gray-200">
+//                             about us
+//                         </Link>
+//                     </li>
+//                     <li>
+//                         <Link to="" className="hover:bg-gray-200">
+//                             blog
+//                         </Link>
+//                     </li>
+//                 </ul> */}
+//                     </div>
+//                     <div className="navbar-end gap-3 pr-2">
+//                         {/* <SearchIcon2
+//                     className="cursor-pointer"
+//                     onClick={() => navagate(`search`)}
+//                 /> */}
+//                         <MessageIcon2
+//                             className="cursor-pointer"
+//                             onClick={() => navagate(`chat/${user?.id}`)}
+//                         />
+
+//                         {/* Dropdown */}
+//                         <div className="dropdown dropdown-end ">
+//                             <label tabIndex={0} className="flex items-center">
+//                                 <UserIcon2 className="cursor-pointer" />
+//                             </label>
+//                             <ul
+//                                 tabIndex={0}
+//                                 className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-300 rounded-box z-50 "
+//                             >
+//                                 <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5">
+//                                     <div className="avatar">
+//                                         <div className="w-16 h-16 rounded-full">
+//                                             <Link to={`/evender/profile/${user?.id}`}>
+//                                                 <img
+//                                                     src={user?.image}
+//                                                 // onClick={() => navagate(
+//                                                 //     `profile/${user?.id}`
+//                                                 // )
+//                                                 // } 
+//                                                 />
+//                                             </Link>
+//                                         </div>
+//                                     </div>
+//                                     <div className="flex flex-col">
+//                                         <h1 className="text-base font-normal text-darkgraycute">
+//                                             {user?.firstName}
+//                                         </h1>
+//                                         <p className="font-light text-gray-800">
+//                                             {user?.email}
+//                                         </p>
+//                                         <Link
+//                                             to={`/evender/editprofile/${user?.id}`}
+//                                         >
+//                                             <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
+//                                                 Edit profile
+//                                             </p>
+//                                         </Link>
+//                                     </div>
+//                                 </div>
+//                                 <hr />
+//                                 <li className="mt-2 hover:font-medium text-darkgraycute">
+//                                     <a onClick={hdlLogOut}>
+//                                         Sign out
+//                                         <SignOutIcon className="opacity-20 " />
+//                                     </a>
+//                                 </li>
+//                             </ul>
+//                         </div>
+//                     </div>
+//                 </div>
+//             ) : (
+//                 <div className="navbar text-darkbluecute ">
+//                     <div className="navbar-start">
+//                         <Link
+//                             to="/evender/event"
+//                             className="btn btn-ghost normal-case text-xl text-lightbluecute  hover:bg-gray-200"
+//                         // className="btn btn-ghost normal-case text-xl text-white  hover:bg-gray-200"
+//                         >
+//                             Evender.
+//                         </Link>
+//                     </div>
+
+//                     <div className="navbar-center hidden lg:flex">
+//                         {/* <ul className="menu menu-horizontal px-1">
+//                     <li>
+//                         <Link to="" className="hover:bg-gray-200">
+//                             about us
+//                         </Link>
+//                     </li>
+//                     <li>
+//                         <Link to="" className="hover:bg-gray-200">
+//                             blog
+//                         </Link>
+//                     </li>
+//                 </ul> */}
+//                     </div>
+//                     <div className="navbar-end gap-3 pr-2">
+//                         {/* <SearchIcon2
+//                     className="cursor-pointer"
+//                     onClick={() => navagate(`search`)}
+//                 /> */}
+//                         <MessageIcon2
+//                             className="cursor-pointer"
+//                             onClick={() => navagate(`chat/${user?.id}`)}
+//                         />
+
+//                         {/* Dropdown */}
+//                         <div className="dropdown dropdown-end ">
+//                             <label tabIndex={0} className="flex items-center">
+//                                 <UserIcon2 className="cursor-pointer" />
+//                             </label>
+//                             <ul
+//                                 tabIndex={0}
+//                                 className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-300 rounded-box z-50 "
+//                             >
+//                                 <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5">
+//                                     <div className="avatar">
+//                                         <div className="w-16 h-16 rounded-full">
+//                                             <img
+//                                                 src={user?.image}
+//                                                 onClick={() =>
+//                                                     navagate(
+//                                                         ` profile/ ${user?.id}`
+//                                                     )
+//                                                 }
+//                                             />
+//                                         </div>
+//                                     </div>
+//                                     <div className="flex flex-col">
+//                                         <h1 className="text-base font-normal text-darkgraycute">
+//                                             {user?.firstName}
+//                                         </h1>
+//                                         <p className="font-light text-gray-800">
+//                                             {user?.email}
+//                                         </p>
+//                                         <Link
+//                                             to={`/evender/editprofile/${user?.id}`}
+//                                         >
+//                                             <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
+//                                                 Edit profile
+//                                             </p>
+//                                         </Link>
+//                                     </div>
+//                                 </div>
+//                                 <hr />
+//                                 <li className="mt-2 hover:font-medium text-darkgraycute">
+//                                     <a onClick={hdlLogOut}>
+//                                         Sign out
+//                                         <SignOutIcon className="opacity-20 " />
+//                                     </a>
+//                                 </li>
+//                             </ul>
+//                         </div>
+//                     </div>
+//                 </div>
+//             )}
+//         </>
+//     );
+// }
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon2, MessageIcon2, SignOutIcon } from "../icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +223,7 @@ export default function Headers() {
                 <Link
                     to="/evender/event"
                     className="btn btn-ghost normal-case text-xl text-lightbluecute  hover:bg-gray-200"
-                    // className="btn btn-ghost normal-case text-xl text-white  hover:bg-gray-200"
+                // className="btn btn-ghost normal-case text-xl text-white  hover:bg-gray-200"
                 >
                     Evender.
                 </Link>
@@ -57,7 +261,7 @@ export default function Headers() {
                         tabIndex={0}
                         className="dropdown-content menu p-2 shadow-sm bg-whitebg border border-gray-300 rounded-box z-50 "
                     >
-                        <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5">
+                        <div className="flex flex-row justify-start items-center gap-5 mb-3 mt-1 px-3 py-0.5 ">
                             <div className="avatar">
                                 <div className="w-16 h-16 rounded-full">
                                     <img
@@ -68,15 +272,15 @@ export default function Headers() {
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-col">
-                                <h1 className="text-base font-normal text-darkgraycute">
-                                    {user?.firstName}
+                            <div className="flex flex-col  ">
+                                <h1 className="text-base font-normal text-darkgraycute ">
+                                    {user?.firstName} {user?.lastName}
                                 </h1>
-                                <p className="font-light text-gray-800">
+                                <p className="font-light text-xs mt-0.5 text-gray-800  ">
                                     {user?.email}
                                 </p>
                                 <Link to={`/evender/editprofile/${user?.id}`}>
-                                    <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2 hover:text-darkgraycute">
+                                    <p className="font-light text-xs text-gray-500 underline cursor-pointer mt-2.5 hover:text-darkgraycute">
                                         Edit profile
                                     </p>
                                 </Link>

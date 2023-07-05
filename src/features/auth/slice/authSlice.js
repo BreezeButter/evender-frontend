@@ -103,6 +103,7 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.loading = false;
                 state.user = action.payload;
+                state.initialLoading = false;
             })
             .addCase(registerAsync.pending, (state) => {
                 state.initialLoading = true;
@@ -110,6 +111,7 @@ const authSlice = createSlice({
             .addCase(registerAsync.rejected, (state, action) => {
                 state.error = action.payload; // err.response.data.message
                 state.loading = false;
+                state.initialLoading = false;
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.isAuthenticated = true;

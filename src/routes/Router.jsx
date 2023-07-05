@@ -19,6 +19,7 @@ import Errorpage from "../page/Errorpage";
 
 import ProtectedRouteAdmin from "../features/Admin/components/ProtectedRouteAdmin";
 import Usermanagement from "../features/Admin/components/UserManagement";
+import EventManagement from "../features/Admin/components/Eventmanagement";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -109,7 +110,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "eventmanagement",
-                element: <Eventmanagement />,
+                element: <EventManagement />,
             },
             {
                 path: "usermanagement",

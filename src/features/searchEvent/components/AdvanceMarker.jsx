@@ -113,7 +113,7 @@ const MapComponent = () => {
                                             @ {el.placeName}
                                         </h4>
                                         <div className="flex">
-                                            {el.JoinEventUsers?.map(
+                                            {el.JoinEventUsers?.slice(0, 4).map(
                                                 (JoinEventUser, idex) => {
                                                     return (
                                                         <img
